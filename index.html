@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auro Das</title>
+<meta name="description" content="Auro (Arabinda Narayan Das) — product leader and founder building with AI, based in Guwahati.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FBFBF9;
+    --ink: #1A1F1C;
+    --muted: #5E6660;
+    --line: #E2E5E0;
+    --leaf: #2E6A4F;
+    --leaf-soft: #E8F0EB;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #151917;
+      --ink: #ECEFEC;
+      --muted: #9AA39D;
+      --line: #2A302C;
+      --leaf: #7FC2A0;
+      --leaf-soft: #1E2B24;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Hanken Grotesk", system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration-color: var(--leaf); text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+  a:hover { color: var(--leaf); }
+  a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+  header.top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 28px 0;
+    font-size: 0.95rem;
+  }
+  header.top .name { font-weight: 600; text-decoration: none; }
+  header.top nav a { margin-left: 20px; text-decoration: none; color: var(--muted); }
+  header.top nav a:hover { color: var(--ink); }
+
+  .hero { padding: 72px 0 88px; }
+  .hero h1 {
+    font-size: clamp(2.3rem, 6.4vw, 3.9rem);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+    max-width: 17ch;
+    text-wrap: balance;
+  }
+  .hero p {
+    margin-top: 28px;
+    max-width: 52ch;
+    color: var(--muted);
+    font-size: 1.15rem;
+  }
+
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  section h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+  section > .lead { color: var(--muted); max-width: 56ch; margin: -16px 0 28px; }
+
+  /* The proof ledger: the one bold element on the page */
+  .ledger { list-style: none; }
+  .ledger li {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .ledger li:last-child { border-bottom: 0; }
+  .ledger .when {
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--leaf);
+    font-variant-numeric: tabular-nums;
+  }
+  .ledger h3 { font-size: 1.1rem; font-weight: 600; line-height: 1.35; }
+  .ledger .role { color: var(--muted); font-size: 0.97rem; }
+  .ledger p { margin-top: 6px; max-width: 54ch; }
+  .ledger .metric {
+    display: inline-block;
+    margin: 10px 6px 0 0;
+    padding: 2px 10px;
+    background: var(--leaf-soft);
+    color: var(--leaf);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .builds { list-style: none; }
+  .builds li { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .builds li:last-child { border-bottom: 0; }
+  .builds a { font-weight: 600; }
+  .builds p { color: var(--muted); max-width: 58ch; }
+
+  .empty {
+    padding: 20px;
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    color: var(--muted);
+  }
+
+  .about p { max-width: 58ch; }
+  .about p + p { margin-top: 16px; }
+
+  .contact a { font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; }
+  .contact ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 28px; }
+
+  footer { padding: 40px 0 56px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); }
+
+  @media (max-width: 560px) {
+    header.top nav a { margin-left: 14px; }
+    .hero { padding: 40px 0 64px; }
+    .ledger li { grid-template-columns: 1fr; gap: 6px; }
+    .ledger .when { font-size: 1.5rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero h1, .hero p { animation: rise 0.7s ease-out both; }
+    .hero p { animation-delay: 0.12s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <a class="name" href="#">Auro Das</a>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#builds">Builds</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>I build products, and now I build them with AI.</h1>
+    <p>Product leader and founder based in Guwahati. Seven years of shipping consumer and enterprise products, from mobile gaming at MX Player to AI-native platforms today.</p>
+  </div>
+
+  <section id="work">
+    <h2>Proof of work</h2>
+    <p class="lead">No IIT, no IIM. What I have to show is what I've built.</p>
+    <ol class="ledger" reversed>
+      <li>
+        <div class="when">2024</div>
+        <div>
+          <h3>Trumio</h3>
+          <div class="role">Senior Delivery and Product Lead, Apr 2024 to now</div>
+          <p>An AI-powered workforce upskilling platform. I shaped the strategy for AI-automated experiential learning and built Mio, an AI voice agent, from discovery to production.</p>
+          <span class="metric">5,000+ users onboarded</span>
+          <span class="metric">$100K+ revenue managed</span>
+        </div>
+      </li>
+      <li>
+        <div class="when">2022</div>
+        <div>
+          <h3>AdmireAsia</h3>
+          <div class="role">Founding PM, Jan 2022 to Jul 2023</div>
+          <p>Owned the 0 to 1 build of a luxury travel platform, leading a 12-person engineering, design and ops team. Also built an AI workflow tool that cut task time by 90%.</p>
+          <span class="metric">80% organic sign-up growth</span>
+          <span class="metric">30% booking conversion</span>
+        </div>
+      </li>
+      <li>
+        <div class="when">2020</div>
+        <div>
+          <h3>Amazon MX Player</h3>
+          <div class="role">Associate Product Manager, Apr 2020 to Sep 2021</div>
+          <p>Scaled MX Games from zero to 500K daily users in 12 months, across Android and iOS. Named Best Individual Performer, 2020.</p>
+          <span class="metric">0 to 500K DAU in 12 months</span>
+          <span class="metric">145 product launches</span>
+        </div>
+      </li>
+      <li>
+        <div class="when">2019</div>
+        <div>
+          <h3>Times Internet</h3>
+          <div class="role">Product Associate, Apr 2019 to Mar 2020</div>
+          <p>Designed and launched casual, multiplayer and real-time gaming features. Won the Times Internet Hackathon 2018 as an intern.</p>
+          <span class="metric">171% DAU increase</span>
+        </div>
+      </li>
+      <li>
+        <div class="when">At 20</div>
+        <div>
+          <h3>Sin Football</h3>
+          <div class="role">Co-founder</div>
+          <p>My first company, started at 20.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="builds">
+    <h2>Things I've built</h2>
+    <p class="lead">Side projects, mostly built with AI as my engineering team.</p>
+    <ul class="builds">
+      <li>
+        <strong>Invari.ai</strong>
+        <p>Co-founder and CEO. A proxy layer between your AI agent and any API. It repairs malformed requests (wrong types, dates, formats) in under 30ms, with one URL change and no code.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section id="writing">
+    <h2>Notes on building with AI</h2>
+    <div class="empty">Short write-ups of what I build and learn each week. The first one goes up soon.</div>
+  </section>
+
+  <section class="about" id="about">
+    <h2>About</h2>
+    <p>I'm Arabinda Narayan Das; everyone calls me Auro. I live and work in Guwahati, in Northeast India.</p>
+    <p>I've spent my career moving between building companies and building products inside them. These days most of that work runs through AI, and I write about what that actually looks like for a founder who doesn't code.</p>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Get in touch</h2>
+    <ul>
+      <li><a href="mailto:arabindadas214@gmail.com">arabindadas214@gmail.com</a></li>
+      <li><a href="https://www.linkedin.com/in/arabinda-narayan-das">LinkedIn</a></li>
+    </ul>
+  </section>
+
+  <footer>Auro Das, Guwahati</footer>
+
+</div>
+</body>
+</html>
