@@ -348,6 +348,38 @@
   .gap2 .good .big { color: var(--leaf); }
   .gap2 .bad { border-color: var(--ink); }
   .study .gap2 p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+  .frame .bar .band { font-size: 0.8rem; padding: 3px 10px; }
+  .overall { display: grid; gap: 6px; }
+  .ov-head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 0.85rem; color: var(--muted); }
+  .ov-head b { color: var(--ink); font-size: 1.05rem; }
+  .ov-head em { font-style: normal; color: var(--leaf); font-weight: 700; margin-left: 6px; }
+  .ov-track { position: relative; height: 12px; border-radius: 6px; background: var(--line); overflow: hidden; }
+  .ov-track span { position: absolute; top: 0; bottom: 0; }
+  .ov-track .base { left: 0; background: var(--chart-lo); }
+  .ov-track .gain { background: var(--leaf); }
+  .ov-scale { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); }
+  table.lvls { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  table.lvls th { text-align: left; font-size: 0.78rem; color: var(--muted); font-weight: 600; padding: 0 0 6px; }
+  table.lvls td { padding: 7px 0; border-top: 1px solid var(--line); }
+  .lvl { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+  .lvl.l1, .lvl.l2 { background: var(--line); color: var(--ink); }
+  .lvl.l3 { background: var(--leaf-soft); color: var(--leaf); }
+  .lvl.l4, .lvl.l5 { background: var(--leaf); color: var(--paper); }
+  .rec { border-radius: 12px; background: var(--leaf-soft); padding: 12px 14px; font-size: 0.93rem; }
+  .rec .k { display: block; font-size: 0.78rem; font-weight: 700; color: var(--leaf); margin-bottom: 4px; }
+  .ide .code { position: relative; background: #17201B; color: #DDE6E0; padding: 16px 0 18px; overflow-x: auto; }
+  .ide pre { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.82rem; line-height: 1.7; }
+  .ide .ln { display: inline-block; width: 2.6em; padding-right: 1em; text-align: right; color: #6E7C74; user-select: none; }
+  .ide .kw { color: #8FC9A8; }
+  .ide .an { color: #E3B778; }
+  .ide .st { color: #B5D6F2; }
+  .ide .l { display: block; }
+  .ide .ai { display: block; background: rgba(127, 194, 160, 0.14); box-shadow: inset 3px 0 0 #7FC2A0; }
+  .ide .aitag { font-family: "Hanken Grotesk", system-ui, sans-serif; font-size: 0.7rem; font-weight: 700; color: #17201B; background: #7FC2A0; border-radius: 999px; padding: 1px 8px; }
+  .ide .pop { margin: 14px 16px 0 46px; max-width: 420px; background: var(--paper); color: var(--ink); border-radius: 12px; padding: 12px 14px; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3); font-family: "Hanken Grotesk", system-ui, sans-serif; }
+  .ide .pop .k { font-size: 0.78rem; font-weight: 700; color: var(--leaf); }
+  .study .ide .pop p { margin: 4px 0 10px; font-size: 0.92rem; line-height: 1.45; }
+  .ide .ans { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 0.85rem; color: var(--muted); }
   @media (max-width: 560px) {
     .lane { grid-template-columns: 1fr; gap: 6px; }
     .pt b { font-size: 0.68rem; }
@@ -359,6 +391,8 @@
     .cam .tile { grid-row: span 3; }
     .sk { grid-template-columns: 6.5rem 1fr 3.8rem; font-size: 0.82rem; }
     .gap2 { grid-template-columns: 1fr; }
+    .ide .pop { margin-left: 12px; margin-right: 12px; }
+    .ide pre { font-size: 0.72rem; }
     .evidence .row { grid-template-columns: 1fr; gap: 2px; }
     .problem { gap: 12px; }
   }
@@ -432,6 +466,7 @@
       <li><strong>A gap analysis at the start.</strong> Mio interviews each learner on the exact tech stack the program targets, tied to a real outcome. Not "learn Java," but "solve Java problems on your project independently and be interview-ready."</li>
       <li><strong>A path that fits the person.</strong> Based on that interview, each learner starts where they actually are, from complete beginner to partly experienced.</li>
       <li><strong>An interview after every module.</strong> Programs have 10 to 20 modules of lessons, videos and coding. After each one, Mio interviews the learner, checks what they learned and coaches them on the spot. It knows the full context: their gap analysis, past projects, résumé and the whole program.</li>
+      <li><strong>Checks inside the code editor.</strong> While learners build, Mio pauses them with short questions about code they just wrote or accepted from AI, so understanding is tested in the moment, not only afterwards.</li>
       <li><strong>An exit interview and an AI code reviewer.</strong> Coding work is checked against the task brief, and everything feeds one detailed report per learner.</li>
     </ol>
     <figure class="mock" aria-label="Mock-up of a Mio interview after a module">
@@ -453,6 +488,20 @@
         </div>
       </div>
       <figcaption>Mock-up with made-up data. Mio asks about the learner's own code, stays at the program's level, keeps to a time limit, and records every session.</figcaption>
+    </figure>
+    <figure class="mock" aria-label="Mock-up of a Mio checkpoint inside the code editor">
+      <div class="frame ide">
+        <div class="bar"><span><b>OrderController.java</b> · Module 4 project</span><span class="chip">Mio checkpoint</span></div>
+        <div class="code" aria-hidden="true">
+<pre><span class="l"><span class="ln">21</span><span class="an">@GetMapping</span>(<span class="st">"/orders/{id}"</span>)</span><span class="l"><span class="ln">22</span><span class="kw">public</span> ResponseEntity&lt;Order&gt; getOrder(<span class="an">@PathVariable</span> Long id) {</span><span class="l"><span class="ln">23</span>    <span class="kw">return</span> orderRepo.findById(id)</span><span class="ai"><span class="ln">24</span>        .map(ResponseEntity::ok)                          <span class="aitag">Accepted from AI</span></span><span class="ai"><span class="ln">25</span>        .orElse(ResponseEntity.notFound().build());</span><span class="l"><span class="ln">26</span>}</span></pre>
+          <div class="pop">
+            <span class="k">Mio asks</span>
+            <p>Lines 24 and 25 came from the AI. What does a client receive if this order doesn't exist, and why is that better than an empty 200?</p>
+            <div class="ans">Type or say your answer…</div>
+          </div>
+        </div>
+      </div>
+      <figcaption>Mock-up with made-up code. Mio questions learners about AI-written code while they work, not just at the end.</figcaption>
     </figure>
 
     <h2>My part</h2>
@@ -490,29 +539,36 @@
       <div class="problem">
         <h3>Learners used AI to beat the AI</h3>
         <div><span class="k">What happened</span><p>Some learners ran ChatGPT or Claude voice agents alongside the interview and repeated their answers. Cheating was widespread.</p></div>
-        <div class="fix"><span class="k">What we changed</span><p>Proctoring. Every interview is recorded on video and audio, which made cheating easy to spot, and proctoring checks were built into the interviews.</p></div>
+        <div class="fix"><span class="k">What we changed</span><p>Proctoring. Interviews are recorded and checked for webcam, device and full-screen integrity. If a check fails mid-session, the attempt is voided and retaken under clean conditions, so every score comes from a verified session.</p></div>
       </div>
       <div class="problem">
         <h3>Would clients trust an AI's scores?</h3>
         <div><span class="k">The risk</span><p>An AI rating someone's engineers is easy to doubt.</p></div>
-        <div class="fix"><span class="k">How we earned it</span><p>Radical transparency. Every learner gets a 25 to 30 page report: every question, every answer, the expected answer, the scores and the skills found. Clients didn't push back on the scores.</p></div>
+        <div class="fix"><span class="k">How we earned it</span><p>Radical transparency. Every learner gets a detailed report: every question, every answer, the expected answer, the scores and the skills found. Nothing is hand-entered; every number traces back to what Mio recorded. Clients didn't push back on the scores.</p></div>
       </div>
     </div>
     <figure class="mock" aria-label="Mock-up of a page from a Mio learner report">
       <div class="frame">
-        <div class="bar"><span><b>Learner journey report</b> · Learner A · Java and Spring Boot</span><span>Page 3 of 28</span></div>
+        <div class="bar"><span><b>Learner journey report</b> · Learner A · Java and Spring Boot</span><span class="band">Exit band: Progressed</span></div>
         <div class="rep">
-          <div class="rep-top"><div class="legend"><span><i class="a"></i>Level at start</span><span><i class="b"></i>Level at exit</span><span>Scale 1 to 5</span></div><span class="band">Exit band: Progressed</span></div>
-          <div class="skills"><div class="sk"><span>Core Java</span><div class="scale" aria-hidden="true"><span class="span" style="left:25%;width:50%"></span><span class="from" style="left:25%"></span><span class="to" style="left:75%"></span></div><span class="lv">2 → <b>4</b></span></div><div class="sk"><span>Spring Boot</span><div class="scale" aria-hidden="true"><span class="span" style="left:0%;width:50%"></span><span class="from" style="left:0%"></span><span class="to" style="left:50%"></span></div><span class="lv">1 → <b>3</b></span></div><div class="sk"><span>REST APIs</span><div class="scale" aria-hidden="true"><span class="span" style="left:25%;width:50%"></span><span class="from" style="left:25%"></span><span class="to" style="left:75%"></span></div><span class="lv">2 → <b>4</b></span></div><div class="sk"><span>Testing</span><div class="scale" aria-hidden="true"><span class="span" style="left:0%;width:50%"></span><span class="from" style="left:0%"></span><span class="to" style="left:50%"></span></div><span class="lv">1 → <b>3</b></span></div><div class="sk"><span>Debugging</span><div class="scale" aria-hidden="true"><span class="span" style="left:25%;width:25%"></span><span class="from" style="left:25%"></span><span class="to" style="left:50%"></span></div><span class="lv">2 → <b>3</b></span></div></div>
+          <div class="overall">
+            <div class="ov-head"><span>Gap analysis to exit interview, same rubric, 0 to 100</span><span><b>41</b> → <b>68</b> <em>+27 pts</em></span></div>
+            <div class="ov-track" aria-hidden="true"><span class="base" style="width:41%"></span><span class="gain" style="left:41%;width:27%"></span></div>
+            <div class="ov-scale" aria-hidden="true"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+          </div>
+          <table class="lvls">
+            <thead><tr><th>Skill</th><th>At entry</th><th>At exit</th></tr></thead>
+            <tbody><tr><td>SQL</td><td><span class="lvl l2">Basic · 45</span></td><td><span class="lvl l5">Advanced · 86</span></td></tr><tr><td>Spring Boot</td><td><span class="lvl l1">Aware · 30</span></td><td><span class="lvl l3">Working · 62</span></td></tr><tr><td>REST APIs</td><td><span class="lvl l2">Basic · 40</span></td><td><span class="lvl l4">Proficient · 74</span></td></tr><tr><td>Testing</td><td><span class="lvl l1">Aware · 28</span></td><td><span class="lvl l3">Working · 58</span></td></tr></tbody>
+          </table>
           <div class="evidence">
             <div class="row"><span>Question asked</span><span>Why return 404 instead of 200 when an order is missing?</span></div>
             <div class="row"><span>Learner's answer</span><span>"So the client knows the resource doesn't exist and can handle it, instead of reading an empty success."</span></div>
-            <div class="row"><span>Expected answer</span><span>Use status codes to signal outcome; 404 for a missing resource.</span></div>
-            <div class="row"><span>Assessment</span><span>Meets expectation. Evidence for REST APIs, level 4.</span></div>
+            <div class="row"><span>Assessment</span><span>Meets expectation. Counts as evidence for REST APIs.</span></div>
           </div>
+          <div class="rec"><span class="k">AI exit-interview recommendation</span>"Recommend progression. Ready to join a client project, with coaching on testing depth."</div>
         </div>
       </div>
-      <figcaption>Mock-up with made-up data. Every score in a report links back to the questions and answers behind it.</figcaption>
+      <figcaption>Mock-up with made-up data, modelled on the structure of a real Mio report. Every score traces back to recorded questions, answers and code.</figcaption>
     </figure>
 
     <h2>The finding that mattered most</h2>
@@ -521,7 +577,7 @@
       <div class="good"><span class="k">What the code review saw</span><div class="big">High quality</div><p>Clean, working pull requests that passed review.</p></div>
       <div class="bad"><span class="k">What Mio's interview found</span><div class="big">90–100%</div><p>of AI-written code accepted without checking, and little understanding of it.</p></div>
     </div>
-    <p>That changed how I think about assessment. Judging the output misses comprehension. Asking people to explain their own work catches it.</p>
+    <p>It also works the other way. Some engineers accepted AI code without checking it, yet explained it well when Mio asked. That is a different problem: a habit, not a gap in knowledge. One needs teaching; the other needs a review step before accepting AI code. Looking only at the output can't tell them apart. Asking people about their own work can.</p>
 
     <h2>Results</h2>
     <ul>
