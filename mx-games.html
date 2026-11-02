@@ -201,6 +201,19 @@
   .study .lessons p { margin-top: 8px; color: var(--muted); }
   .study .closer { margin-top: 28px; font-size: 1.15rem; font-weight: 600; color: var(--leaf); max-width: 52ch; }
   .photo img { width: 100%; height: auto; border-radius: 14px; display: block; }
+  .listen { margin-top: 24px; display: flex; align-items: center; gap: 14px; padding: 10px 16px 10px 10px; border: 1px solid var(--line); border-radius: 999px; width: fit-content; max-width: 100%; }
+  .listen[hidden] { display: none; }
+  .listen.playing { position: sticky; top: 12px; z-index: 5; background: var(--paper); box-shadow: 0 6px 20px rgba(26, 31, 28, 0.12); }
+  #listen-play { width: 44px; height: 44px; flex: none; border: 0; border-radius: 50%; background: var(--leaf); color: var(--paper); display: grid; place-items: center; cursor: pointer; }
+  #listen-play svg { width: 20px; height: 20px; }
+  #listen-play:focus-visible, .listen-stop:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; }
+  .listen .i-pause, .listen.playing .i-play { display: none; }
+  .listen.playing .i-pause { display: block; }
+  .listen-text { display: flex; flex-direction: column; line-height: 1.3; min-width: 0; }
+  .listen-title { font-weight: 600; font-size: 0.97rem; }
+  .listen-sub { font-size: 0.88rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .listen-stop { margin-left: 4px; border: 1px solid var(--line); background: none; color: var(--ink); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 0.88rem; cursor: pointer; }
+  .reading { background: var(--leaf-soft); box-shadow: 0 0 0 6px var(--leaf-soft); border-radius: 4px; }
   .chats > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
   .chats img { width: 100%; height: auto; border-radius: 12px; display: block; }
   .strip > div { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
@@ -257,6 +270,18 @@
     <a class="back" href="index.html#work">Back to selected work</a>
     <h1>Growing MX Games from zero to 500K daily users in 18 months</h1>
     <p class="standfirst">How an intern doing sports content ended up running the games pipeline, catching a fraud ring through the data, and learning to give users what they actually wanted.</p>
+
+    <div class="listen" id="listen" hidden>
+      <button type="button" id="listen-play" aria-label="Listen to this case study">
+        <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+        <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>
+      </button>
+      <div class="listen-text">
+        <span class="listen-title" id="listen-title">Listen to this case study</span>
+        <span class="listen-sub" id="listen-sub"></span>
+      </div>
+      <button type="button" class="listen-stop" id="listen-stop" hidden>Stop</button>
+    </div>
 
     <dl class="facts">
       <div><dt>Role</dt><dd>Program Executive, promoted to Associate Product Manager</dd></div>
@@ -387,5 +412,96 @@
   <footer>Auro Das</footer>
 
 </div>
+<script>
+(function () {
+  var synth = window.speechSynthesis;
+  if (!synth || !window.SpeechSynthesisUtterance) return;
+  var box = document.getElementById('listen'), play = document.getElementById('listen-play'),
+      stop = document.getElementById('listen-stop'), title = document.getElementById('listen-title'),
+      sub = document.getElementById('listen-sub');
+  var article = document.querySelector('.study');
+  var nodes = Array.prototype.filter.call(
+    article.querySelectorAll('h1, .standfirst, h2, h3, p, li'),
+    function (el) { return !el.closest('figure, .numbers, .facts, .listen') && !el.classList.contains('back') && el.textContent.trim(); }
+  );
+  var words = nodes.reduce(function (n, el) { return n + el.textContent.trim().split(/\s+/).length; }, 0);
+  var mins = Math.max(1, Math.round(words / 160));
+  sub.textContent = 'About ' + mins + ' min, read aloud';
+  box.hidden = false;
+
+  var i = 0, state = 'idle', current = null, section = '', fails = 0;
+  function pickVoice() {
+    var v = synth.getVoices();
+    var pref = ['en-IN', 'en-GB', 'en-US'];
+    for (var k = 0; k < pref.length; k++) {
+      var m = v.filter(function (x) { return x.lang === pref[k]; });
+      var good = m.filter(function (x) { return /natural|google|neural|premium|enhanced/i.test(x.name); });
+      if (good.length) return good[0];
+      if (m.length) return m[0];
+    }
+    return v.filter(function (x) { return /^en/.test(x.lang); })[0] || null;
+  }
+  function mark(el) {
+    if (current) current.classList.remove('reading');
+    current = el;
+    if (el) {
+      el.classList.add('reading');
+      var r = el.getBoundingClientRect();
+      if (r.top < 80 || r.bottom > window.innerHeight - 40) el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+  }
+  function next() {
+    if (state !== 'playing') return;
+    if (i >= nodes.length) { reset(); return; }
+    var el = nodes[i];
+    if (/^H[23]$/.test(el.tagName)) section = el.textContent.trim();
+    title.textContent = section || 'Listening';
+    sub.textContent = 'Part ' + (i + 1) + ' of ' + nodes.length;
+    var u = new SpeechSynthesisUtterance(el.textContent.replace(/\s+/g, ' ').trim());
+    var voice = pickVoice(); if (voice) { u.voice = voice; u.lang = voice.lang; }
+    u.rate = 1;
+    u.onend = function () { fails = 0; if (state === 'playing') { i++; next(); } };
+    u.onerror = function (e) {
+      if (state !== 'playing' || e.error === 'interrupted' || e.error === 'canceled') return;
+      if (++fails >= 3) { unavailable(); return; }
+      i++; next();
+    };
+    mark(el);
+    synth.speak(u);
+  }
+  function unavailable() {
+    reset();
+    title.textContent = 'Audio isn\u2019t available here';
+    sub.textContent = 'Try Chrome, Edge or Safari';
+  }
+  function reset() {
+    synth.cancel(); state = 'idle'; i = 0; section = ''; mark(null);
+    box.classList.remove('playing'); stop.hidden = true;
+    title.textContent = 'Listen to this case study';
+    sub.textContent = 'About ' + mins + ' min, read aloud';
+    play.setAttribute('aria-label', 'Listen to this case study');
+  }
+  play.addEventListener('click', function () {
+    if (state === 'playing') {
+      state = 'paused'; synth.cancel(); box.classList.remove('playing');
+      title.textContent = 'Paused'; play.setAttribute('aria-label', 'Resume');
+    } else {
+      state = 'playing'; box.classList.add('playing'); stop.hidden = false;
+      play.setAttribute('aria-label', 'Pause');
+      if (synth.getVoices().length) { next(); return; }
+      title.textContent = 'Loading voice\u2026';
+      var waited = 0, t = setInterval(function () {
+        waited += 200;
+        if (state !== 'playing') { clearInterval(t); return; }
+        if (synth.getVoices().length) { clearInterval(t); next(); }
+        else if (waited >= 2000) { clearInterval(t); unavailable(); }
+      }, 200);
+    }
+  });
+  stop.addEventListener('click', reset);
+  window.addEventListener('pagehide', function () { synth.cancel(); });
+  if (synth.onvoiceschanged !== undefined) synth.onvoiceschanged = function () {};
+})();
+</script>
 </body>
 </html>
