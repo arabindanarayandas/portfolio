@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MX Games case study, Auro Das</title>
+<meta name="description" content="How MX Games grew from zero to 500K daily users in 12 months: a case study by Auro Das.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FBFBF9;
+    --ink: #1A1F1C;
+    --muted: #5E6660;
+    --line: #E2E5E0;
+    --leaf: #2E6A4F;
+    --leaf-soft: #E8F0EB;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #151917;
+      --ink: #ECEFEC;
+      --muted: #9AA39D;
+      --line: #2A302C;
+      --leaf: #7FC2A0;
+      --leaf-soft: #1E2B24;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Hanken Grotesk", system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration-color: var(--leaf); text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+  a:hover { color: var(--leaf); }
+  a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+  header.top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 28px 0;
+    font-size: 0.95rem;
+  }
+  header.top .name { font-weight: 800; font-size: 1.5rem; letter-spacing: -0.05em; line-height: 1; text-decoration: none; color: var(--ink); }
+  header.top .name .dot { display: inline-block; width: 0.22em; height: 0.22em; margin-left: 0.06em; border-radius: 50%; background: var(--leaf); }
+  header.top nav a { margin-left: 20px; text-decoration: none; color: var(--muted); }
+  header.top nav a:hover { color: var(--ink); }
+
+  .hero { padding: 72px 0 88px; }
+  .hero h1 {
+    font-size: clamp(2.3rem, 6.4vw, 3.9rem);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+    max-width: 17ch;
+    text-wrap: balance;
+  }
+  .hero p {
+    margin-top: 28px;
+    max-width: 52ch;
+    color: var(--muted);
+    font-size: 1.15rem;
+  }
+
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  section h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+  section > .lead { color: var(--muted); max-width: 56ch; margin: -16px 0 28px; }
+
+  /* The proof ledger: the one bold element on the page */
+  .ledger { list-style: none; }
+  .ledger li {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .ledger li:last-child { border-bottom: 0; }
+  .ledger .when {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--leaf);
+    font-variant-numeric: tabular-nums;
+  }
+  .ledger h3 { font-size: 1.1rem; font-weight: 600; line-height: 1.35; }
+  .ledger .co { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
+  .ledger .logo { width: 44px; height: 44px; flex: none; border-radius: 10px; border: 1px solid var(--line); object-fit: cover; }
+  .ledger .logo-text { display: flex; align-items: center; justify-content: center; background: var(--leaf-soft); color: var(--leaf); font-weight: 700; font-size: 0.95rem; }
+  .ledger .role { color: var(--muted); font-size: 0.97rem; }
+  .ledger p { margin-top: 6px; max-width: 54ch; }
+  .ledger .metric {
+    display: inline-block;
+    margin: 10px 6px 0 0;
+    padding: 2px 10px;
+    background: var(--leaf-soft);
+    color: var(--leaf);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .builds { list-style: none; }
+  .builds li { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .builds li:last-child { border-bottom: 0; }
+  .builds a { font-weight: 600; }
+  .builds p { color: var(--muted); max-width: 58ch; }
+
+  .cases { list-style: none; }
+  .cases li { display: grid; grid-template-columns: 9.5rem 1fr; gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .cases li:last-child { border-bottom: 0; }
+  .cases .big { font-size: 2.6rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--leaf); }
+  .cases h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.35; }
+  .cases p { margin-top: 6px; color: var(--muted); max-width: 54ch; }
+  .cases .soon { display: inline-block; margin-top: 10px; font-size: 0.9rem; font-weight: 600; color: var(--leaf); }
+  .career { list-style: none; }
+  .career li { display: grid; grid-template-columns: 36px 1fr auto; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .career li:last-child { border-bottom: 0; }
+  .career .logo { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--line); object-fit: cover; }
+  .career h3 { font-size: 1rem; font-weight: 600; display: inline; }
+  .career .role { color: var(--muted); }
+  .career .role::before { content: ", "; }
+  .career .meta { text-align: right; color: var(--muted); font-size: 0.92rem; line-height: 1.35; font-variant-numeric: tabular-nums; }
+  #building .builds + .empty { margin-top: 16px; }
+
+  .empty {
+    padding: 20px;
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    color: var(--muted);
+  }
+
+  .about p { max-width: 58ch; }
+  .about p + p { margin-top: 16px; }
+
+  .contact a { display: inline-flex; align-items: center; gap: 10px; font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; }
+  .contact .ic { width: 24px; height: 24px; flex: none; color: var(--leaf); }
+  .contact ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 28px; }
+
+  footer { padding: 40px 0 56px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); }
+
+  @media (max-width: 560px) {
+    header.top nav a { margin-left: 14px; }
+    .hero { padding: 40px 0 64px; }
+    .ledger li { grid-template-columns: 1fr; gap: 6px; }
+    .ledger .when { font-size: 1.5rem; }
+    .cases li { grid-template-columns: 1fr; gap: 8px; }
+    .cases .big { font-size: 2rem; }
+    .career .role::before { content: ""; }
+    .career .role { display: block; font-size: 0.92rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero h1, .hero p { animation: rise 0.7s ease-out both; }
+    .hero p { animation-delay: 0.12s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  }
+
+  .study { padding: 24px 0 72px; }
+  .study .back { display: inline-block; font-size: 0.95rem; color: var(--muted); text-decoration: none; }
+  .study .back:hover { color: var(--leaf); }
+  .study h1 { margin-top: 28px; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; letter-spacing: -0.03em; font-weight: 600; max-width: 22ch; text-wrap: balance; }
+  .study .standfirst { margin-top: 20px; font-size: 1.15rem; color: var(--muted); max-width: 56ch; }
+  .facts { margin-top: 36px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .facts dt { font-size: 0.85rem; color: var(--muted); }
+  .facts dd { font-weight: 600; font-size: 0.97rem; line-height: 1.35; }
+  .numbers { list-style: none; padding-left: 0 !important; margin: 36px 0 8px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .numbers strong { display: block; font-size: 2rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; color: var(--leaf); }
+  .numbers span { display: block; margin-top: 4px; font-size: 0.92rem; color: var(--muted); line-height: 1.35; }
+  .study h2 { margin-top: 52px; font-size: 1.45rem; font-weight: 600; letter-spacing: -0.02em; }
+  .study h3 { margin-top: 26px; font-size: 1.08rem; font-weight: 600; }
+  .study p { margin-top: 12px; max-width: 64ch; }
+  .study h3 + p { margin-top: 6px; }
+  .study ol, .study article ul, .study > ul { margin-top: 12px; padding-left: 1.3em; max-width: 62ch; }
+  .study li { margin-top: 8px; }
+  .study li::marker { color: var(--leaf); font-weight: 700; }
+  .study > .back:last-child { margin-top: 56px; }
+  @media (max-width: 560px) {
+    .facts, .numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <a class="name" href="index.html" aria-label="Auro Das, home">auro<span class="dot"></span></a>
+    <nav aria-label="Sections">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <article class="study">
+    <a class="back" href="index.html#work">Back to selected work</a>
+    <h1>Growing MX Games from zero to 500K daily users in 12 months</h1>
+    <p class="standfirst">How an intern doing sports content ended up running the games pipeline, catching a fraud ring through the data, and learning to give users what they actually wanted.</p>
+
+    <dl class="facts">
+      <div><dt>Role</dt><dd>Associate Product Manager</dd></div>
+      <div><dt>Where</dt><dd>Amazon MX Player, Mumbai</dd></div>
+      <div><dt>When</dt><dd>2020 – 2021</dd></div>
+      <div><dt>Team</dt><dd>About 10 people, 3 reporting to me</dd></div>
+    </dl>
+
+    <ul class="numbers">
+      <li><strong>500K</strong><span>daily users in 12 months</span></li>
+      <li><strong>30–45</strong><span>minutes a day, average time spent</span></li>
+      <li><strong>35%</strong><span>of revenue recovered from fraud</span></li>
+      <li><strong>145</strong><span>product launches</span></li>
+    </ul>
+
+    <h2>The bet</h2>
+    <p>MX Player was one of India's biggest streaming apps, with over 200 million monthly users. In early 2020 it bet on hyper-casual games: short, simple games that could raise time spent, improve retention and pull new people into the streaming side. Then COVID hit, and mobile gaming in India exploded.</p>
+    <p>I had joined in 2019 as an intern, programming sports content for the streaming app, and had taken over all of sports streaming on my own. When MX Games launched, the product team asked for me. It was my first time owning a product, working alongside product managers far more experienced than me.</p>
+
+    <h2>Hard part one: getting good games</h2>
+    <p>Building quality games in-house was slow and expensive. So we bought games from small studios, either outright or on revenue share. I ran that pipeline end to end: finding studios, testing every game by hand, picking the best and getting them live. As the catalogue grew, I took on three associates to keep up.</p>
+
+    <h2>Hard part two: a fraud ring on the leaderboards</h2>
+    <p>MX Games ran on rewards. The top ranks on each game's leaderboard won small cash prizes or MX coins, which unlocked ad-free viewing and new series. Then cash-outs started surging, and they didn't match the rise in plays or time spent.</p>
+    <p>I went through the data every day. Some accounts had one or two plays and impossible scores. In one game, Airlift, first place had 10,000 points while second place had about 500. We ruled out bugs, saw bot-like patterns, then went looking where cheaters talk. On YouTube and Telegram we found tutorials showing how to hack MX Games with Android settings and screen-size tricks.</p>
+    <p>We couldn't change the games' code, and the 5 to 10 hackable games out of roughly 100 were also our biggest for plays and ad revenue. So we fixed it in two steps:</p>
+    <ol>
+      <li><strong>Stop the bleeding.</strong> We cut the prize pool roughly in half. Players didn't like it, but the money was going to cheaters.</li>
+      <li><strong>Fix it properly.</strong> I designed a policy around the highest score a real player could reach in each game, and our backend engineers worked out those limits and built the checks. Anyone above the limit was disqualified automatically and warned. A second offence meant a ban.</li>
+    </ol>
+    <p>That recovered 35% of revenue that had been leaking to fraud.</p>
+
+    <h2>What actually drove growth</h2>
+    <h3>Listening to users, not our assumptions</h3>
+    <p>We assumed players wanted polished, graphics-heavy games. Surveys and data said otherwise. Most players were in tier 2 and tier 3 towns across the north, opening a game in a short break from work. They wanted something over in three or four minutes. We shifted almost all our acquisition toward quick hyper-casual games.</p>
+    <h3>Rewards worth coming back for</h3>
+    <p>On top of cash prizes and coins, we partnered with Zomato and Swiggy for coupons, giving players a reason to return daily.</p>
+    <h3>Using the streaming app's reach</h3>
+    <p>MX Player already had 200 million users. I ran our notification journeys on CleverTap, sending targeted messages to specific groups at the right times, with strong thumbnails and copy. That brought in new players and kept existing ones coming back.</p>
+    <h3>Games built around live sport</h3>
+    <p>Two games were my own ideas, built for the IPL season. One was a score-prediction game where players picked a final score on a grid, played for virtual coins rather than cash. The other asked a question every over, updated automatically in real time.</p>
+
+    <h2>What didn't work</h2>
+    <p>With so many people arriving, we tried multiplayer games, starting with Ludo, so two friends in different cities could play together. The infrastructure was far heavier than we expected, and it pulled the team away from the hyper-casual games that were driving growth. We stepped back from it.</p>
+    <p>The lesson I took: when one thing is clearly working, double down until it runs on autopilot. Only then spread out.</p>
+
+    <h2>What I'd take from it</h2>
+    <ul>
+      <li><strong>Read the data yourself, every day.</strong> The fraud showed up as a mismatch between cash-outs and plays long before anyone reported it.</li>
+      <li><strong>Your users are not who you imagine.</strong> The winning games were the simple ones, because of who was actually playing and when.</li>
+      <li><strong>Focus beats breadth.</strong> Multiplayer was a good idea at the wrong time.</li>
+    </ul>
+
+    <a class="back" href="index.html#work">Back to selected work</a>
+  </article>
+
+  <footer>Auro Das</footer>
+
+</div>
+</body>
+</html>
