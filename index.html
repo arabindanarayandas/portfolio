@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Auro Das</title>
 <meta name="description" content="Auro (Arabinda Narayan Das) — product leader and founder building with AI, based in Guwahati.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #FBFBF9;
@@ -47,7 +48,8 @@
     padding: 28px 0;
     font-size: 0.95rem;
   }
-  header.top .name { font-weight: 600; text-decoration: none; }
+  header.top .name { font-weight: 800; font-size: 1.5rem; letter-spacing: -0.05em; line-height: 1; text-decoration: none; color: var(--ink); }
+  header.top .name .dot { display: inline-block; width: 0.22em; height: 0.22em; margin-left: 0.06em; border-radius: 50%; background: var(--leaf); }
   header.top nav a { margin-left: 20px; text-decoration: none; color: var(--muted); }
   header.top nav a:hover { color: var(--ink); }
 
@@ -145,7 +147,7 @@
 <div class="wrap">
 
   <header class="top">
-    <a class="name" href="#">Auro Das</a>
+    <a class="name" href="#" aria-label="Auro Das, home">auro<span class="dot"></span></a>
     <nav aria-label="Sections">
       <a href="#work">Work</a>
       <a href="#builds">Builds</a>
