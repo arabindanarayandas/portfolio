@@ -293,12 +293,73 @@
   .problem .k { font-size: 0.8rem; font-weight: 700; color: var(--muted); display: block; margin-bottom: 4px; }
   .problem .fix .k { color: var(--leaf); }
   .study .problem p { margin: 0; }
+  .mock { margin: 28px 0 8px; }
+  .mock .frame { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--paper); box-shadow: 0 10px 30px rgba(26, 31, 28, 0.08); }
+  .mock .bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); font-size: 0.85rem; color: var(--muted); flex-wrap: wrap; }
+  .mock .bar b { color: var(--ink); font-weight: 600; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); font-size: 0.8rem; color: var(--ink); white-space: nowrap; }
+  .chip.rec::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #C2410C; }
+  .chip.lock::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--leaf); }
+  .iv { display: grid; grid-template-columns: 1fr 1.3fr; }
+  .iv .cam { padding: 18px; border-right: 1px solid var(--line); display: grid; gap: 12px; align-content: start; }
+  .cam .tile { aspect-ratio: 4 / 3; border-radius: 12px; background: var(--leaf-soft); display: grid; place-items: center; position: relative; }
+  .cam .tile svg { width: 38%; color: var(--leaf); opacity: 0.55; }
+  .cam .tile .tag { position: absolute; left: 8px; bottom: 8px; font-size: 0.75rem; background: var(--paper); border-radius: 999px; padding: 2px 8px; }
+  .cam .wave { display: flex; align-items: center; gap: 3px; height: 26px; }
+  .cam .wave i { width: 4px; border-radius: 2px; background: var(--leaf); display: block; }
+  .cam .timer { font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .cam .timer b { color: var(--ink); }
+  .cam .meter { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+  .cam .meter span { display: block; height: 100%; width: 55%; background: var(--leaf); }
+  .iv .talk { padding: 18px; display: grid; gap: 12px; align-content: start; }
+  .msg { border-radius: 12px; padding: 10px 14px; font-size: 0.93rem; line-height: 1.45; }
+  .msg small { display: block; font-size: 0.75rem; font-weight: 700; color: var(--muted); margin-bottom: 3px; }
+  .msg.mio { background: var(--leaf-soft); }
+  .msg.mio small { color: var(--leaf); }
+  .msg.you { border: 1px solid var(--line); }
+  .msg.you em { color: var(--muted); font-style: normal; }
+  .msg.coach { border: 1px dashed var(--leaf); }
+  .mock figcaption { margin-top: 10px; font-size: 0.92rem; color: var(--muted); }
+  .rep { padding: 18px 20px; display: grid; gap: 18px; }
+  .rep-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .band { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: var(--leaf); color: var(--paper); font-weight: 700; font-size: 0.85rem; }
+  .skills { display: grid; gap: 10px; }
+  .sk { display: grid; grid-template-columns: 9rem 1fr 4.5rem; gap: 12px; align-items: center; font-size: 0.9rem; }
+  .sk .scale { position: relative; height: 22px; }
+  .sk .scale::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--line); }
+  .sk .scale .from, .sk .scale .to { position: absolute; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; }
+  .sk .scale .from { background: var(--paper); border: 2px solid var(--muted); }
+  .sk .scale .to { background: var(--leaf); box-shadow: 0 0 0 2px var(--paper); }
+  .sk .scale .span { position: absolute; top: 50%; height: 4px; margin-top: -2px; background: var(--leaf); opacity: 0.35; }
+  .sk .lv { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .sk .lv b { color: var(--ink); }
+  .legend { display: flex; gap: 16px; font-size: 0.8rem; color: var(--muted); flex-wrap: wrap; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .legend .a { background: var(--paper); border: 2px solid var(--muted); }
+  .legend .b { background: var(--leaf); }
+  .evidence { border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 8px; font-size: 0.9rem; }
+  .evidence .row { display: grid; grid-template-columns: 7.5rem 1fr; gap: 10px; }
+  .evidence .row span:first-child { color: var(--muted); font-size: 0.82rem; font-weight: 600; }
+  .gap2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 24px 0 8px; }
+  .gap2 > div { border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .gap2 .k { font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+  .gap2 .big { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; margin: 6px 0 4px; }
+  .gap2 .good .big { color: var(--leaf); }
+  .gap2 .bad { border-color: var(--ink); }
+  .study .gap2 p { margin: 0; color: var(--muted); font-size: 0.92rem; }
   @media (max-width: 560px) {
     .lane { grid-template-columns: 1fr; gap: 6px; }
     .pt b { font-size: 0.68rem; }
     .track { padding: 0 38px; }
     .track::before { left: 38px; right: 38px; }
     .owned, .problem { grid-template-columns: 1fr; }
+    .iv { grid-template-columns: 1fr; }
+    .iv .cam { border-right: 0; border-bottom: 1px solid var(--line); grid-template-columns: 96px 1fr; align-items: center; }
+    .cam .tile { grid-row: span 3; }
+    .sk { grid-template-columns: 6.5rem 1fr 3.8rem; font-size: 0.82rem; }
+    .gap2 { grid-template-columns: 1fr; }
+    .evidence .row { grid-template-columns: 1fr; gap: 2px; }
     .problem { gap: 12px; }
   }
 </style>
@@ -373,6 +434,26 @@
       <li><strong>An interview after every module.</strong> Programs have 10 to 20 modules of lessons, videos and coding. After each one, Mio interviews the learner, checks what they learned and coaches them on the spot. It knows the full context: their gap analysis, past projects, résumé and the whole program.</li>
       <li><strong>An exit interview and an AI code reviewer.</strong> Coding work is checked against the task brief, and everything feeds one detailed report per learner.</li>
     </ol>
+    <figure class="mock" aria-label="Mock-up of a Mio interview after a module">
+      <div class="frame">
+        <div class="bar"><span><b>Mio</b> · Module 4 interview: REST APIs with Spring Boot</span><span style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip lock">Level: Foundations</span><span class="chip rec">Recording</span></span></div>
+        <div class="iv">
+          <div class="cam">
+            <div class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 21c1-4.4 4.2-7 8-7s7 2.6 8 7z" fill="currentColor"/></svg><span class="tag">Learner A</span></div>
+            <div class="wave" aria-hidden="true"><i style="height:8px"></i><i style="height:14px"></i><i style="height:22px"></i><i style="height:12px"></i><i style="height:18px"></i><i style="height:26px"></i><i style="height:10px"></i><i style="height:20px"></i><i style="height:16px"></i><i style="height:24px"></i><i style="height:9px"></i><i style="height:15px"></i><i style="height:21px"></i><i style="height:11px"></i><i style="height:6px"></i></div>
+            <div class="timer"><b>08:12</b> of 15:00</div>
+            <div class="meter" aria-hidden="true"><span></span></div>
+          </div>
+          <div class="talk">
+            <div class="msg mio"><small>Mio</small>In your task, you returned a 200 status when the order wasn't found. Walk me through why.</div>
+            <div class="msg you"><small>Learner A · live transcript</small>I think… the request still worked, so I returned 200? <em>(pause)</em></div>
+            <div class="msg mio"><small>Mio</small>What would a client calling your API expect to see when an order doesn't exist?</div>
+            <div class="msg coach"><small>Coaching note</small>Revisit HTTP status codes: 404 for missing resources. Applying this in Module 5.</div>
+          </div>
+        </div>
+      </div>
+      <figcaption>Mock-up with made-up data. Mio asks about the learner's own code, stays at the program's level, keeps to a time limit, and records every session.</figcaption>
+    </figure>
 
     <h2>My part</h2>
     <p>Mio was a team effort. Here is the honest split.</p>
@@ -417,9 +498,29 @@
         <div class="fix"><span class="k">How we earned it</span><p>Radical transparency. Every learner gets a 25 to 30 page report: every question, every answer, the expected answer, the scores and the skills found. Clients didn't push back on the scores.</p></div>
       </div>
     </div>
+    <figure class="mock" aria-label="Mock-up of a page from a Mio learner report">
+      <div class="frame">
+        <div class="bar"><span><b>Learner journey report</b> · Learner A · Java and Spring Boot</span><span>Page 3 of 28</span></div>
+        <div class="rep">
+          <div class="rep-top"><div class="legend"><span><i class="a"></i>Level at start</span><span><i class="b"></i>Level at exit</span><span>Scale 1 to 5</span></div><span class="band">Exit band: Progressed</span></div>
+          <div class="skills"><div class="sk"><span>Core Java</span><div class="scale" aria-hidden="true"><span class="span" style="left:25%;width:50%"></span><span class="from" style="left:25%"></span><span class="to" style="left:75%"></span></div><span class="lv">2 → <b>4</b></span></div><div class="sk"><span>Spring Boot</span><div class="scale" aria-hidden="true"><span class="span" style="left:0%;width:50%"></span><span class="from" style="left:0%"></span><span class="to" style="left:50%"></span></div><span class="lv">1 → <b>3</b></span></div><div class="sk"><span>REST APIs</span><div class="scale" aria-hidden="true"><span class="span" style="left:25%;width:50%"></span><span class="from" style="left:25%"></span><span class="to" style="left:75%"></span></div><span class="lv">2 → <b>4</b></span></div><div class="sk"><span>Testing</span><div class="scale" aria-hidden="true"><span class="span" style="left:0%;width:50%"></span><span class="from" style="left:0%"></span><span class="to" style="left:50%"></span></div><span class="lv">1 → <b>3</b></span></div><div class="sk"><span>Debugging</span><div class="scale" aria-hidden="true"><span class="span" style="left:25%;width:25%"></span><span class="from" style="left:25%"></span><span class="to" style="left:50%"></span></div><span class="lv">2 → <b>3</b></span></div></div>
+          <div class="evidence">
+            <div class="row"><span>Question asked</span><span>Why return 404 instead of 200 when an order is missing?</span></div>
+            <div class="row"><span>Learner's answer</span><span>"So the client knows the resource doesn't exist and can handle it, instead of reading an empty success."</span></div>
+            <div class="row"><span>Expected answer</span><span>Use status codes to signal outcome; 404 for a missing resource.</span></div>
+            <div class="row"><span>Assessment</span><span>Meets expectation. Evidence for REST APIs, level 4.</span></div>
+          </div>
+        </div>
+      </div>
+      <figcaption>Mock-up with made-up data. Every score in a report links back to the questions and answers behind it.</figcaption>
+    </figure>
 
     <h2>The finding that mattered most</h2>
     <p>In one pilot, engineers scored high on the quality of their code submissions while accepting AI-written code 90 to 100% of the time without checking it. Their work looked good. Mio's interviews showed they didn't understand it.</p>
+    <div class="gap2" role="group" aria-label="What code review saw versus what the interview found">
+      <div class="good"><span class="k">What the code review saw</span><div class="big">High quality</div><p>Clean, working pull requests that passed review.</p></div>
+      <div class="bad"><span class="k">What Mio's interview found</span><div class="big">90–100%</div><p>of AI-written code accepted without checking, and little understanding of it.</p></div>
+    </div>
     <p>That changed how I think about assessment. Judging the output misses comprehension. Asking people to explain their own work catches it.</p>
 
     <h2>Results</h2>
