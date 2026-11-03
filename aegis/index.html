@@ -209,6 +209,10 @@
     <p class="sub">Real UPI data isn't public, so the first job was building a realistic simulation of it. Everything else follows how a fraud team at a payments company would work.</p>
     <ol class="steps" id="steps"></ol>
     <div class="note"><b>What went wrong first</b>The first version scored 99.7% on every metric. That wasn't a win: the simulator made every fraudster's account brand new and every genuine one old, so the model just learned "new account means fraud". I added genuine newcomers and newly opened shops, rented and dormant mule accounts, fake merchant QR codes, an impersonation scam that looks like a normal payment, and unreported fraud. That brought the logistic regression down to the range you'd expect, and showed where gradient boosting really earns its place.</div>
+    <h3 style="margin:34px 0 6px;font:400 1.6rem/1.2 var(--serif)">Checked against a public benchmark</h3>
+    <p class="sub" style="margin-bottom:14px">PaySim is the best-known public dataset for mobile-money fraud: 6.4 million transactions, 8,213 of them fraud. I ran the same pipeline on it, with the same rules: only information known before the payment, trained on earlier days and tested on the last 919 thousand transactions. Fraud caught, while flagging 5 genuine payments in every 1,000 (rules at their own setting):</p>
+    <div class="panel tablewrap"><table><thead><tr><th>Approach</th><th class="n">With balances</th><th class="n">Without balances</th></tr></thead><tbody><tr><td>PaySim's own built-in rule</td><td class="n">0%</td><td class="n">n/a</td></tr><tr><td>One hand-written rule: "the payment empties the account"</td><td class="n">97%</td><td class="n">n/a</td></tr><tr><td>Logistic regression</td><td class="n">99.7%</td><td class="n">35%</td></tr><tr class="best"><td>LightGBM</td><td class="n">99.98%</td><td class="n">55%</td></tr></tbody></table></div>
+    <div class="note"><b>What it showed</b>On PaySim, every fraud empties the victim's account, so a single rule catches 97% of it, and the scores near 100% that many online notebooks report say more about the dataset than the model. With the account balance hidden, the problem becomes real: LightGBM catches 55% of fraud and 90% of the money versus 56% for logistic regression. That is why Aegis uses its own harder simulation, where no single signal gives fraud away.</div>
     <div class="grid3" id="limits"></div>
   </div></section>
 </main>
@@ -464,7 +468,7 @@
   $('limits').innerHTML = [
     ['What this proves', 'The full workflow: problem framing, data design, leakage-safe features, honest evaluation, explainability, and a business trade-off a product team can act on.'],
     ['What it doesn\'t', 'The data is simulated, so absolute numbers are higher than a live system would see. Real fraud is messier and fraudsters adapt; production models are retrained every few weeks and monitored for drift.'],
-    ['What I\'d do next', 'Train on a real or public benchmark dataset, add a graph model of money flowing through mule networks, and run it as a shadow model beside existing rules before letting it decide anything.']
+    ['What I\'d do next', 'Test on real bank data with a payments partner, add a graph model of money flowing through mule networks, and run it as a shadow model beside existing rules before letting it decide anything.']
   ].map(function (b) { return '<div class="panel"><h3>' + esc(b[0]) + '</h3><p>' + esc(b[1]) + '</p></div>'; }).join('');
 })();
 </script>
