@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kavach: UPI fraud detection with explainable AI</title>
+<title>Aegis: UPI fraud detection with explainable AI</title>
 <meta name="description" content="A machine learning model that catches UPI fraud before the money leaves, explains every decision, and lets you tune the trade-off between stopping fraud and annoying customers.">
-<meta property="og:title" content="Kavach: catching UPI fraud before the money leaves">
+<meta property="og:title" content="Aegis: catching UPI fraud before the money leaves">
 <meta property="og:description" content="Gradient-boosted fraud model trained on 2.4 million simulated UPI payments, with plain-language reasons, a business trade-off slider and a scam message checker.">
-<meta property="og:url" content="https://auronara.com/kavach/">
+<meta property="og:url" content="https://auronara.com/aegis/">
 <meta name="theme-color" content="#0E1726">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E1726'/%3E%3Cpath d='M32 12l16 6v12c0 11-7 19-16 22-9-3-16-11-16-22V18z' fill='none' stroke='%23F2B33D' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -149,7 +149,7 @@
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <a class="brand" href="#top"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0E1726"/><path d="M32 12l16 6v12c0 11-7 19-16 22-9-3-16-11-16-22V18z" fill="none" stroke="#F2B33D" stroke-width="5" stroke-linejoin="round"/></svg>Kavach</a>
+  <a class="brand" href="#top"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0E1726"/><path d="M32 12l16 6v12c0 11-7 19-16 22-9-3-16-11-16-22V18z" fill="none" stroke="#F2B33D" stroke-width="5" stroke-linejoin="round"/></svg>Aegis</a>
   <nav aria-label="Sections"><a href="#demo">Try it</a><a href="#tradeoff">Trade-off</a><a href="#results">Results</a><a href="#scam">Scam checker</a><a href="#build">How it's built</a></nav>
 </div></header>
 
@@ -157,7 +157,7 @@
   <section class="hero"><div class="wrap">
     <div class="eyebrow">Machine learning · Payments · India</div>
     <h1>Catching UPI fraud before the money leaves.</h1>
-    <p class="lede">Kavach is a fraud model trained on <span id="nTxn"></span> simulated UPI payments covering six real scam patterns. It scores each payment in milliseconds, explains every decision in plain language, and lets a product team choose how much fraud to stop against how many genuine customers to interrupt.</p>
+    <p class="lede">Aegis is a fraud model trained on <span id="nTxn"></span> simulated UPI payments covering six real scam patterns. It scores each payment in milliseconds, explains every decision in plain language, and lets a product team choose how much fraud to stop against how many genuine customers to interrupt.</p>
     <div class="kpis" id="kpis"></div>
   </div></section>
 
@@ -175,7 +175,7 @@
   <section class="block" id="tradeoff"><div class="wrap">
     <div class="eyebrow">The business decision</div>
     <h2>Stop more fraud, or interrupt fewer customers?</h2>
-    <p class="sub">Every fraud system makes this trade. Move the slider to set how strict Kavach is, and see what it costs on the 15 days of payments the model never saw during training.</p>
+    <p class="sub">Every fraud system makes this trade. Move the slider to set how strict Aegis is, and see what it costs on the 15 days of payments the model never saw during training.</p>
     <div class="trade">
       <div class="panel ctrl" id="tctrl"></div>
       <div class="panel chart" id="tchart"></div>
@@ -369,7 +369,7 @@
   function tUpdate() {
     var c = C[$('tslider').value];
     var net = c.rupees_stopped - c.fp * FRICTION;
-    $('tsum').innerHTML = 'Kavach catches <b>' + pct(c.recall, 0) + '</b> of fraud and interrupts <b>' + (c.genuine_flag_rate * 1000).toFixed(c.genuine_flag_rate < 0.01 ? 1 : 0) + ' in every 1,000</b> genuine payments. When it raises an alert, it is right <b>' + pct(c.precision, 0) + '</b> of the time.';
+    $('tsum').innerHTML = 'Aegis catches <b>' + pct(c.recall, 0) + '</b> of fraud and interrupts <b>' + (c.genuine_flag_rate * 1000).toFixed(c.genuine_flag_rate < 0.01 ? 1 : 0) + ' in every 1,000</b> genuine payments. When it raises an alert, it is right <b>' + pct(c.precision, 0) + '</b> of the time.';
     $('tstats').innerHTML = '<div><b>' + crore(c.rupees_stopped) + '</b><span>fraud stopped</span></div><div><b>' + crore(c.rupees_missed) + '</b><span>fraud missed</span></div><div><b>' + c.fp.toLocaleString('en-IN') + '</b><span>genuine payments interrupted</span></div><div><b>' + crore(net) + '</b><span>net saving after friction</span></div>';
     drawCurve(c);
   }
