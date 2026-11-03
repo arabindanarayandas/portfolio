@@ -210,6 +210,58 @@
   .learned .say { width: 38px; height: 38px; }
   .toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 100px); transform: translateX(-50%); background: var(--ink); color: var(--paper); font-weight: 600; font-size: 0.9rem; padding: 10px 14px; border-radius: 12px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 9; max-width: min(92vw, 420px); text-align: center; }
   .toast.show { opacity: 1; }
+  .tabs div { grid-template-columns: repeat(5, 1fr) !important; gap: 2px !important; }
+  .tabs button { font-size: 0.76rem !important; padding: 7px 2px !important; }
+  .goalcard { margin-top: 16px; display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 12px 14px; width: 100%; text-align: left; }
+  .ring { width: 58px; height: 58px; flex: none; position: relative; }
+  .ring svg { width: 58px; height: 58px; transform: rotate(-90deg); }
+  .ring .bg { stroke: var(--line); } .ring .fg { stroke: var(--leaf); transition: stroke-dashoffset .6s; }
+  .ring.full .fg { stroke: var(--auto); }
+  .ring span { position: absolute; inset: 0; display: grid; place-items: center; font: 800 0.95rem var(--display); padding-top: 3px; }
+  .goalcard .gt { flex: 1; min-width: 0; }
+  .goalcard .gt b { display: block; font-size: 1rem; }
+  .goalcard .gt span { font-size: 0.86rem; color: var(--muted); }
+  .flame { display: inline-flex; align-items: center; gap: 4px; }
+  .flame svg { width: 16px; height: 16px; color: #F08A24; }
+  .chip.off .flame svg { color: var(--muted); }
+  .rankcard { margin-top: 20px; background: var(--ink); color: var(--paper); border-radius: 20px; padding: 18px; }
+  .rankcard small { display: block; font-weight: 700; font-size: 0.78rem; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
+  .rankcard h2 { margin: 2px 0 10px; font: 800 1.7rem/1.1 var(--display); }
+  .rankcard .meter { height: 10px; border-radius: 10px; background: color-mix(in srgb, var(--paper) 25%, transparent); overflow: hidden; }
+  .rankcard .meter b { display: block; height: 100%; background: var(--auto); border-radius: 10px; }
+  .rankcard p { margin: 8px 0 0; font-size: 0.9rem; opacity: .85; }
+  .statgrid { margin-top: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .statgrid div { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 10px; text-align: center; }
+  .statgrid b { display: block; font: 800 1.4rem/1 var(--display); padding-top: 4px; font-variant-numeric: tabular-nums; }
+  .statgrid span { font-size: 0.74rem; color: var(--muted); font-weight: 600; }
+  .sect { margin: 22px 0 8px; font: 800 1.2rem var(--display); }
+  .goalpick { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .goalpick button { border: 2px solid var(--line); background: var(--card); border-radius: 14px; padding: 10px 4px; font-weight: 700; display: flex; flex-direction: column; align-items: center; }
+  .goalpick button small { font-weight: 600; color: var(--muted); font-size: 0.75rem; }
+  .goalpick button[aria-pressed="true"] { border-color: var(--leaf); background: var(--leaf-soft); }
+  .badges { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
+  .badge { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 8px; text-align: center; }
+  .badge i { width: 48px; height: 48px; margin: 0 auto 6px; border-radius: 50%; display: grid; place-items: center; font: 800 1.2rem/1 var(--display); font-style: normal; background: var(--auto); color: var(--auto-ink); padding-top: 3px; }
+  .badge b { display: block; font-size: 0.85rem; line-height: 1.2; }
+  .badge span { display: block; font-size: 0.72rem; color: var(--muted); margin-top: 2px; line-height: 1.25; }
+  .badge.locked i { background: var(--line); color: var(--muted); }
+  .badge.locked b { color: var(--muted); }
+  .pcard { margin-top: 14px; display: flex; gap: 14px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px; width: 100%; text-align: left; }
+  .pcard i { flex: none; width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; font: 800 1.4rem/1 var(--display); font-style: normal; padding-top: 3px; }
+  .pcard .pt { flex: 1; min-width: 0; }
+  .pcard .pt b { display: block; font-size: 1.05rem; }
+  .pcard .pt span { font-size: 0.88rem; color: var(--muted); }
+  .pcard[disabled] { opacity: .55; cursor: default; }
+  .timer { height: 10px; border-radius: 10px; background: var(--line); overflow: hidden; flex: 1; }
+  .timer b { display: block; height: 100%; background: var(--auto); border-radius: 10px; transition: width 1s linear; }
+  .speedhud { display: flex; align-items: center; gap: 12px; }
+  .speedhud .score { font: 800 1.4rem var(--display); min-width: 2.5ch; text-align: right; padding-top: 3px; font-variant-numeric: tabular-nums; }
+  .combo { position: fixed; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 64px); transform: translateX(-50%) scale(.8); background: var(--auto); color: var(--auto-ink); font: 800 1.05rem var(--display); padding: 8px 16px 6px; border-radius: 999px; opacity: 0; transition: opacity .2s, transform .2s; z-index: 8; pointer-events: none; }
+  .combo.show { opacity: 1; transform: translateX(-50%) scale(1); }
+  #confetti { position: fixed; inset: 0; z-index: 7; pointer-events: none; }
+  .newbadges { display: grid; gap: 8px; }
+  .newbadges div { display: flex; align-items: center; gap: 10px; background: color-mix(in srgb, var(--auto) 22%, var(--card)); border-radius: 14px; padding: 10px 12px; text-align: left; }
+  .newbadges i { flex: none; width: 38px; height: 38px; border-radius: 50%; background: var(--auto); color: var(--auto-ink); display: grid; place-items: center; font: 800 1rem/1 var(--display); font-style: normal; padding-top: 3px; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
@@ -217,10 +269,14 @@
 <div class="app" id="app"></div>
 <nav class="tabs" id="tabs" aria-label="Sections"><div>
   <button type="button" data-tab="learn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V6a2 2 0 0 1 2-2h12v13H6a2 2 0 0 0-2 2z"/><path d="M6 21h12"/></svg>Learn</button>
+  <button type="button" data-tab="practise"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Practise</button>
   <button type="button" data-tab="guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.5v.5"/></svg>Guide</button>
   <button type="button" data-tab="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Check</button>
+  <button type="button" data-tab="me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Me</button>
 </div></nav>
 <div class="toast" id="toast" role="status"></div>
+<div class="combo" id="combo" aria-hidden="true"></div>
+<canvas id="confetti" hidden></canvas>
 
 <script>
 (function () {
@@ -241,7 +297,7 @@
 
   /* saved state (this device only) */
   var KEY = 'maatu-v1', mem = null;
-  function load() { var d = { done: {}, xp: 0, streak: 0, last: '', script: true, checked: {} }; try { var v = localStorage.getItem(KEY); if (v) Object.assign(d, JSON.parse(v)); } catch (e) { if (mem) Object.assign(d, mem); } return d; }
+  function load() { var d = { done: {}, xp: 0, streak: 0, last: '', script: true, checked: {}, xpDay: {}, goal: 30, bestSpeed: 0, badges: {}, perfects: 0, mistakes: {}, bestStreak: 0, maxCombo: 0, helped: 0 }; try { var v = localStorage.getItem(KEY); if (v) Object.assign(d, JSON.parse(v)); } catch (e) { if (mem) Object.assign(d, mem); } return d; }
   var S = load();
   function save() { mem = S; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
   function today(o) { var d = new Date(Date.now() + (o || 0)); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
@@ -285,15 +341,71 @@
     else toast(url);
   }
 
+  /* ---------- game layer ---------- */
+  var FLAME = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1 3.5-1.5 5-1.5 7.5 0 1.4 1 2.5 2.3 2.5 1.6 0 2.4-1.4 2.2-3.2C17.6 10.6 19 13 19 15.5 19 19.6 15.9 22 12 22s-7-2.4-7-6.5C5 10.4 10.6 7.6 12 2z"/></svg>';
+  var RANKS = [[0, 'New in Namma Ooru'], [50, 'Auto rider'], [150, 'Darshini regular'], [300, 'Market bargainer'], [500, 'Local'], [800, 'Bengalurean'], [1200, 'Kannada star']];
+  function rankOf(xp) { var r = 0; for (var i = 0; i < RANKS.length; i++) if (xp >= RANKS[i][0]) r = i; return { i: r, name: RANKS[r][1], next: RANKS[r + 1] || null, from: RANKS[r][0] }; }
+  function todayXP() { return S.xpDay[today()] || 0; }
+  function learnedCount() { return LESSONS.reduce(function (a, L) { return a + (S.done[L.id] ? L.items.length : 0); }, 0); }
+  function unitDone(ui) { return LESSONS.filter(function (L) { return L.ui === ui; }).every(function (L) { return S.done[L.id]; }); }
+  var UNIT_BADGES = ['First steps', 'Road ready', 'Food lover', 'Good neighbour', 'Office friend', 'Safe and sound'];
+  var BADGES = [
+    ['first', 'ಮೊ', 'Modalu', 'Finish your first lesson', function () { return Object.keys(S.done).length >= 1; }],
+    ['perfect', '★', 'Tumba chennaagide', 'Get a lesson 100% right', function () { return S.perfects >= 1; }],
+    ['combo5', '5x', 'On fire', '5 right answers in a row', function () { return S.maxCombo >= 5; }],
+    ['goal', '◎', 'Goal getter', 'Reach your daily goal', function () { return Object.keys(S.xpDay).some(function (d) { return S.xpDay[d] >= S.goal; }); }],
+    ['streak3', '3', 'Mooru dina', 'A 3-day streak', function () { return S.bestStreak >= 3; }],
+    ['streak7', '7', 'Ondu vaara', 'A 7-day streak', function () { return S.bestStreak >= 7; }],
+    ['speed10', '⚡', 'Speed star', 'Score 10 in a speed round', function () { return S.bestSpeed >= 10; }],
+    ['p50', '50', 'Fifty phrases', 'Learn 50 phrases', function () { return learnedCount() >= 50; }],
+    ['p100', '100', 'Century', 'Learn 100 phrases', function () { return learnedCount() >= 100; }],
+    ['helper', 'ಕ', 'Kannada guardian', 'Check 10 phrases as a speaker', function () { return S.helped >= 10; }]
+  ].concat(UNIT_BADGES.map(function (n, i) { return ['unit' + (i + 1), String(i + 1), n, 'Finish Unit ' + (i + 1), function () { return unitDone(i); }]; }))
+   .concat([['all', 'ಸ', 'Bengalurean', 'Finish the whole course', function () { return LESSONS.every(function (L) { return S.done[L.id]; }); }]]);
+  var fresh = [];
+  function checkBadges() {
+    BADGES.forEach(function (b) { if (!S.badges[b[0]] && b[4]()) { S.badges[b[0]] = today(); fresh.push(b); track('maatu-badge-' + b[0], 'Maatu badge ' + b[2]); } });
+    save();
+  }
+  function takeFresh() { var f = fresh; fresh = []; return f; }
+  function addXP(n) {
+    var before = todayXP();
+    S.xp += n; S.xpDay[today()] = before + n;
+    if (S.last !== today()) { S.streak = S.last === today(-864e5) ? S.streak + 1 : 1; S.last = today(); }
+    S.bestStreak = Math.max(S.bestStreak, S.streak);
+    save();
+    if (before < S.goal && before + n >= S.goal) { setTimeout(function () { toast('Daily goal reached! ' + S.streak + '-day streak.'); }, 400); }
+    checkBadges();
+  }
+  function streakAlive() { return S.last === today() || S.last === today(-864e5); }
+  function ring(val, max, label) {
+    var c = 2 * Math.PI * 24, f = Math.min(1, max ? val / max : 0);
+    return '<div class="ring' + (f >= 1 ? ' full' : '') + '"><svg viewBox="0 0 58 58" aria-hidden="true"><circle class="bg" cx="29" cy="29" r="24" fill="none" stroke-width="7"/><circle class="fg" cx="29" cy="29" r="24" fill="none" stroke-width="7" stroke-linecap="round" stroke-dasharray="' + c.toFixed(1) + '" stroke-dashoffset="' + (c * (1 - f)).toFixed(1) + '"/></svg><span>' + label + '</span></div>';
+  }
+  var comboT;
+  function comboFlash(m) { var c = document.getElementById('combo'); c.textContent = m; c.classList.add('show'); clearTimeout(comboT); comboT = setTimeout(function () { c.classList.remove('show'); }, 1100); }
+  function confetti() {
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cv = document.getElementById('confetti'); cv.hidden = false;
+    var dpr = Math.min(2, window.devicePixelRatio || 1); cv.width = innerWidth * dpr; cv.height = innerHeight * dpr;
+    var x = cv.getContext('2d'); x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var cols = ['#F6C531', '#1D7A4C', '#CF3F36', '#4DC487', '#F08A24'];
+    var ps = []; for (var i = 0; i < 120; i++) ps.push({ x: innerWidth / 2, y: innerHeight * 0.3, vx: (Math.random() - 0.5) * 11, vy: -Math.random() * 11 - 3, s: 4 + Math.random() * 6, c: cols[i % cols.length], r: Math.random() * 6 });
+    var t0 = performance.now();
+    (function f(t) { x.clearRect(0, 0, innerWidth, innerHeight); ps.forEach(function (p) { p.vy += 0.33; p.x += p.vx; p.y += p.vy; p.r += 0.2; x.save(); x.translate(p.x, p.y); x.rotate(p.r); x.fillStyle = p.c; x.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); x.restore(); }); if (t - t0 < 2400) requestAnimationFrame(f); else cv.hidden = true; })(t0);
+  }
+  function badgeList(list) { var w = h('div', 'newbadges'); list.forEach(function (b) { w.appendChild(h('div', '', '<i>' + esc(b[1]) + '</i><span><b>Badge unlocked: ' + esc(b[2]) + '</b><br><small>' + esc(b[3]) + '</small></span>')); }); return w; }
+
   /* ---------- tabs ---------- */
   var tab = 'learn';
-  function setTab(t) { tab = t; Array.prototype.forEach.call(tabsEl.querySelectorAll('button'), function (b) { b.setAttribute('aria-current', b.dataset.tab === t ? 'page' : 'false'); }); if (t === 'learn') learn(); else if (t === 'guide') guide(); else check(); }
+  function setTab(t) { tab = t; Array.prototype.forEach.call(tabsEl.querySelectorAll('button'), function (b) { b.setAttribute('aria-current', b.dataset.tab === t ? 'page' : 'false'); }); if (t === 'learn') learn(); else if (t === 'guide') guide(); else if (t === 'practise') practise(); else if (t === 'me') me(); else check(); }
   Array.prototype.forEach.call(tabsEl.querySelectorAll('button'), function (b) { b.addEventListener('click', function () { setTab(b.dataset.tab); }); });
   function showTabs(on) { tabsEl.hidden = !on; app.classList.toggle('has-tabs', on); }
   function topbar() {
     var top = h('div', 'top');
     top.appendChild(h('div', 'logo', '<i class="kn">ಮಾ</i>Maatu'));
-    top.appendChild(h('span', 'chip', S.streak ? S.streak + '-day streak' : 'No streak yet'));
+    var alive = streakAlive() && S.streak;
+    top.appendChild(h('span', 'chip' + (alive ? '' : ' off'), '<span class="flame" title="Day streak">' + FLAME + (alive ? S.streak : 0) + '</span>'));
     top.appendChild(h('span', 'chip', S.xp + ' XP'));
     var sb = h('button', 'iconbtn', SHARE); sb.type = 'button'; sb.setAttribute('aria-label', 'Share Maatu'); sb.addEventListener('click', share);
     top.appendChild(sb);
@@ -312,6 +424,12 @@
     sw.addEventListener('click', function () { S.script = !S.script; save(); learn(); toast(S.script ? 'Showing Kannada script under each phrase' : 'Showing English letters only'); });
     course.appendChild(sw);
     app.appendChild(course);
+    var gc = h('button', 'goalcard');
+    gc.type = 'button';
+    var tx = todayXP(), rk = rankOf(S.xp);
+    gc.innerHTML = ring(tx, S.goal, Math.min(tx, S.goal) + '') + '<div class="gt"><b>' + (tx >= S.goal ? 'Daily goal done. Shabash!' : 'Today: ' + tx + ' of ' + S.goal + ' XP') + '</b><span>' + esc(rk.name) + (rk.next ? ' · ' + (rk.next[0] - S.xp) + ' XP to ' + esc(rk.next[1]) : '') + '</span></div>';
+    gc.addEventListener('click', function () { setTab('me'); });
+    app.appendChild(gc);
     var inv = h('button', 'invite', '<i class="kn">ಕ</i><div><b>Speak Kannada? Help us check.</b><span>Tap ✓ or suggest a better way to say any phrase.</span></div>');
     inv.type = 'button'; inv.addEventListener('click', function () { setTab('check'); });
     app.appendChild(inv);
@@ -433,7 +551,9 @@
     var form = null;
     yes.addEventListener('click', function () {
       if (S.checked[it.id] === 'ok') return;
+      var firstTime = !S.checked[it.id];
       S.checked[it.id] = 'ok'; save(); track('maatu-ok-' + it.id, 'Maatu ✓ ' + it.ro);
+      if (firstTime) { S.helped++; addXP(2); var nb = takeFresh(); if (nb.length) setTimeout(function () { toast('Badge unlocked: ' + nb[0][2]); }, 900); }
       yes.setAttribute('aria-pressed', 'true'); fix.setAttribute('aria-pressed', 'false');
       card.className = 'citem ok'; if (form) { form.remove(); form = null; }
       toast('Thanks! Marked as right.');
@@ -451,7 +571,7 @@
           'English: ' + it.en + '\nCurrent Kannada: ' + it.kn + '\nCurrent English letters: ' + it.ro + '\n\n' +
           'Suggested Kannada: ' + form.querySelector('#kn-' + it.id).value + '\nSuggested English letters: ' + form.querySelector('#ro-' + it.id).value + '\nNote: ' + form.querySelector('#nt-' + it.id).value + '\n';
       }
-      function mark() { S.checked[it.id] = 'fix'; save(); card.className = 'citem fixed'; fix.setAttribute('aria-pressed', 'true'); yes.setAttribute('aria-pressed', 'false'); track('maatu-fix-' + it.id, 'Maatu fix ' + it.ro); }
+      function mark() { if (!S.checked[it.id]) { S.helped++; addXP(2); takeFresh(); } S.checked[it.id] = 'fix'; save(); card.className = 'citem fixed'; fix.setAttribute('aria-pressed', 'true'); yes.setAttribute('aria-pressed', 'false'); track('maatu-fix-' + it.id, 'Maatu fix ' + it.ro); }
       form.querySelector('.send').addEventListener('click', function () {
         mark();
         window.location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Maatu fix: ' + it.id + ' "' + it.en + '"') + '&body=' + encodeURIComponent(body());
@@ -480,7 +600,7 @@
     if (knVoice) steps.push({ t: 'listen', i: shuffle(idx)[0] });
     steps.push({ t: 'reverse', i: shuffle(idx)[0] });
     steps.push({ t: 'situation' });
-    R = { gi: gi, L: L, steps: steps, pos: 0, right: 0, asked: 0, retried: {} };
+    R = { mode: 'lesson', gi: gi, L: L, steps: steps, pos: 0, right: 0, asked: 0, retried: {}, combo: 0, bonus: 0 };
     showTabs(false);
     track('maatu-start-' + L.id, 'Maatu start ' + L.title);
     renderStep();
@@ -503,6 +623,8 @@
   function result(f, ok, it) {
     R.asked++; if (ok) R.right++;
     blip(ok ? 'good' : 'bad');
+    if (ok) { R.combo++; if (R.combo > S.maxCombo) { S.maxCombo = R.combo; save(); } if (R.combo >= 3 && R.combo % 3 === 0) { R.bonus += 2; comboFlash(R.combo + ' in a row! +2 XP'); } if (R.mode !== 'lesson') delete S.mistakes[it.id]; }
+    else { R.combo = 0; S.mistakes[it.id] = 1; save(); }
     var st = R.steps[R.pos];
     if (!ok && !R.retried[R.pos] && st.t !== 'situation') { R.retried[R.pos] = 1; R.steps.push(Object.assign({}, st)); R.retried[R.steps.length - 1] = 1; }
     f.foot.className = 'foot ' + (ok ? 'good' : 'bad');
@@ -540,6 +662,7 @@
   }
   function renderStep() {
     var st = R.steps[R.pos], items = R.L.items, f = frame(), it = items[st.i];
+    var pool = R.mode === 'lesson' ? items : (it && it.L ? it.L.items : items);
     if (st.t === 'intro') {
       f.body.appendChild(h('div', 'label', 'New phrase · ' + (st.i + 1) + ' of ' + items.length));
       f.body.appendChild(h('div', 'ask', 'Learn this one'));
@@ -547,15 +670,15 @@
       if (it.tip) f.body.appendChild(h('div', 'tip', '<b>Tip</b><span>' + esc(it.tip) + '</span>'));
       cta(f.foot, 'Got it', next);
     } else if (st.t === 'meaning' || st.t === 'listen') {
-      f.body.appendChild(h('div', 'label', st.t === 'listen' ? 'Listen' : 'Practice'));
+      f.body.appendChild(h('div', 'label', st.t === 'listen' ? 'Listen' : (R.mode === 'lesson' ? 'Practice' : 'Review')));
       if (st.t === 'listen') { f.body.appendChild(h('div', 'ask', 'What do you hear?')); f.body.appendChild(sayBtn(it, true)); setTimeout(function () { speak(it); }, 250); }
       else { f.body.appendChild(h('div', 'ask', 'What does this mean?')); var p = phraseCard(it, false); p.style.marginBottom = '16px'; f.body.appendChild(p); }
-      choiceList(f, shuffle([it].concat(pick(items, 3, [it]))), it, function (o) { return esc(o.en); }, it);
+      choiceList(f, shuffle([it].concat(pick(pool, 3, [it]))), it, function (o) { return esc(o.en); }, it);
       f.foot.innerHTML = '';
     } else if (st.t === 'reverse') {
       f.body.appendChild(h('div', 'label', 'Practice'));
       f.body.appendChild(h('div', 'ask', 'How do you say “' + esc(it.en) + '”?'));
-      choiceList(f, shuffle([it].concat(pick(items, 3, [it]))), it, kdisp, it);
+      choiceList(f, shuffle([it].concat(pick(pool, 3, [it]))), it, kdisp, it);
       f.foot.innerHTML = '';
     } else if (st.t === 'build') {
       f.body.appendChild(h('div', 'label', 'Build it'));
@@ -612,20 +735,27 @@
     }
   }
   function finish() {
+    if (R.mode !== 'lesson') return finishReview();
     blip('win');
     var acc = R.asked ? Math.round(R.right / R.asked * 100) : 100;
-    var xp = 10 + (acc === 100 ? 5 : 0);
     var first = !S.done[R.L.id];
-    S.done[R.L.id] = true; S.xp += xp;
-    if (S.last !== today()) { S.streak = S.last === today(-864e5) ? S.streak + 1 : 1; S.last = today(); }
-    save();
+    var xp = 10 + (acc === 100 ? 5 : 0) + R.bonus;
+    S.done[R.L.id] = true;
+    if (acc === 100) S.perfects++;
+    var rkBefore = rankOf(S.xp).i, goalBefore = todayXP() >= S.goal;
+    addXP(xp);
+    var rk = rankOf(S.xp), nb = takeFresh();
     if (first) track('maatu-done-' + R.L.id, 'Maatu done ' + R.L.title);
+    confetti();
     app.innerHTML = '';
     var w = h('div', 'done-wrap');
     w.appendChild(h('div', 'label', 'Unit ' + (R.L.ui + 1) + ' · Lesson ' + (R.L.li + 1) + ' complete'));
     w.appendChild(h('h2', '', acc === 100 ? 'Tumba chennaagide!' : 'Chennaagide!'));
     w.appendChild(h('p', '', acc === 100 ? 'Perfect score. That means "very good" in Kannada.' : 'That means "good" in Kannada. Keep going.'));
-    w.appendChild(h('div', 'stats', '<div><b>+' + xp + '</b><span>XP earned</span></div><div><b>' + acc + '%</b><span>Accuracy</span></div>'));
+    w.appendChild(h('div', 'stats', '<div><b>+' + xp + '</b><span>XP' + (R.bonus ? ' (incl. +' + R.bonus + ' combo)' : '') + '</span></div><div><b>' + acc + '%</b><span>Accuracy</span></div><div><b>' + todayXP() + '/' + S.goal + '</b><span>Daily goal</span></div><div><b>' + S.streak + '</b><span>Day streak</span></div>'));
+    if (rk.i > rkBefore) w.appendChild(h('div', 'tip', '<b>Rank up</b><span>You\'re now a <strong>' + esc(rk.name) + '</strong>.</span>'));
+    else if (!goalBefore && todayXP() >= S.goal) w.appendChild(h('div', 'tip', '<b>Goal</b><span>Daily goal reached. Come back tomorrow to keep your streak.</span>'));
+    if (nb.length) w.appendChild(badgeList(nb));
     w.appendChild(h('div', 'label', 'Phrases you learned'));
     var lw = h('div', 'learned');
     R.L.items.forEach(function (it) { var d = h('div', ''); d.appendChild(h('span', '', '<b>' + esc(it.ro) + (S.script ? ' <span style="opacity:.6;font-weight:600">' + esc(it.kn) + '</span>' : '') + '</b><small>' + esc(it.en) + '</small>')); d.appendChild(sayBtn(it)); lw.appendChild(d); });
@@ -641,9 +771,139 @@
     if (n >= LESSONS.length) toast('You finished the whole course. Shabash! More units are coming.');
   }
 
+  /* ---------- practise ---------- */
+  function learnedItems() { var a = []; LESSONS.forEach(function (L) { if (S.done[L.id]) a = a.concat(L.items); }); return a; }
+  function practise() {
+    showTabs(true); app.innerHTML = '';
+    app.appendChild(topbar());
+    app.appendChild(h('div', 'pagehead', '<span class="eyebrow">Practise</span><h1>Keep it fresh</h1><p>Short games with the phrases you\'ve already learned. Every right answer earns XP.</p>'));
+    var learnedN = learnedItems().length, mistakesN = Object.keys(S.mistakes).length;
+    var sp = h('button', 'pcard', '<i style="background:var(--auto);color:var(--auto-ink)">⚡</i><div class="pt"><b>Speed round</b><span>' + (learnedN ? 'Answer as many as you can in 60 seconds. Best: ' + S.bestSpeed : 'Finish lesson 1 to unlock') + '</span></div>');
+    sp.type = 'button'; sp.disabled = !learnedN; sp.addEventListener('click', startSpeed);
+    app.appendChild(sp);
+    var rv = h('button', 'pcard', '<i style="background:var(--red-soft);color:var(--red)">' + mistakesN + '</i><div class="pt"><b>Fix my mistakes</b><span>' + (mistakesN ? 'Practise the ' + mistakesN + ' phrase' + (mistakesN === 1 ? '' : 's') + ' you got wrong' : 'No mistakes to fix. Nice work.') + '</span></div>');
+    rv.type = 'button'; rv.disabled = !mistakesN; rv.addEventListener('click', function () { startReview(ALL.filter(function (it) { return S.mistakes[it.id]; }), 'Fix my mistakes'); });
+    app.appendChild(rv);
+    var qr = h('button', 'pcard', '<i style="background:var(--leaf-soft);color:var(--leaf)">ಮ</i><div class="pt"><b>Quick review</b><span>' + (learnedN ? '10 random phrases from what you\'ve learned' : 'Finish lesson 1 to unlock') + '</span></div>');
+    qr.type = 'button'; qr.disabled = !learnedN; qr.addEventListener('click', function () { startReview(shuffle(learnedItems()).slice(0, 10), 'Quick review'); });
+    app.appendChild(qr);
+    app.appendChild(h('p', 'note', learnedN ? 'You know ' + learnedN + ' of ' + ALL.length + ' phrases so far.' : 'Practice games use only phrases you\'ve learned, so start with a lesson.'));
+    window.scrollTo(0, 0);
+  }
+  function startReview(list, title) {
+    var steps = list.map(function (it, i) { return { t: i % 2 ? 'reverse' : 'meaning', i: i }; });
+    R = { mode: 'review', title: title, L: { items: list, title: title }, steps: steps, pos: 0, right: 0, asked: 0, retried: {}, combo: 0, bonus: 0 };
+    showTabs(false); renderStep();
+  }
+  function finishReview() {
+    blip('win');
+    var xp = R.right + R.bonus; addXP(xp); var nb = takeFresh();
+    if (R.right === R.asked) confetti();
+    app.innerHTML = '';
+    var w = h('div', 'done-wrap');
+    w.appendChild(h('div', 'label', R.title));
+    w.appendChild(h('h2', '', R.right === R.asked ? 'Sakkath!' : 'Good practice!'));
+    w.appendChild(h('div', 'stats', '<div><b>+' + xp + '</b><span>XP earned</span></div><div><b>' + R.right + '/' + R.asked + '</b><span>Right</span></div>'));
+    var left = Object.keys(S.mistakes).length;
+    w.appendChild(h('p', '', left ? left + ' phrase' + (left === 1 ? '' : 's') + ' still to fix.' : 'No mistakes left to fix.'));
+    if (nb.length) w.appendChild(badgeList(nb));
+    app.appendChild(w);
+    var foot = h('div', 'foot'); app.appendChild(foot);
+    cta(foot, 'Back to practice', function () { setTab('practise'); });
+  }
+  var SP = null;
+  function startSpeed() {
+    var pool = learnedItems();
+    SP = { pool: pool, score: 0, end: Date.now() + 60000, timer: null, done: false, combo: 0 };
+    showTabs(false); speedQ();
+    SP.timer = setInterval(function () { var left = Math.max(0, SP.end - Date.now()); var b = document.getElementById('spbar'); if (b) b.style.width = (left / 600) + '%'; if (!left) speedEnd(); }, 250);
+  }
+  function speedQ() {
+    if (SP.done) return;
+    var it = SP.pool[Math.floor(Math.random() * SP.pool.length)], rev = Math.random() < 0.5;
+    var src = it.L.items.length >= 4 ? it.L.items : SP.pool;
+    var opts = shuffle([it].concat(pick(src.filter(function (o) { return o.en !== it.en && o.ro !== it.ro; }), 3, [it])));
+    app.innerHTML = '';
+    var hud = h('div', 'speedhud');
+    var x = h('button', 'x', XICON); x.type = 'button'; x.setAttribute('aria-label', 'Stop'); x.addEventListener('click', function () { speedEnd(true); });
+    hud.appendChild(x);
+    hud.appendChild(h('div', 'timer', '<b id="spbar" style="width:' + (Math.max(0, SP.end - Date.now()) / 600) + '%"></b>'));
+    hud.appendChild(h('div', 'score', String(SP.score)));
+    app.appendChild(hud);
+    var body = h('div', 'body');
+    body.appendChild(h('div', 'label', 'Speed round'));
+    body.appendChild(h('div', 'ask', rev ? 'Say “' + esc(it.en) + '”' : 'What does this mean?'));
+    if (!rev) { var p = phraseCard(it, false); p.style.marginBottom = '16px'; body.appendChild(p); }
+    var box = h('div', 'opts');
+    opts.forEach(function (o) {
+      var b = h('button', 'opt', rev ? kdisp(o) : esc(o.en)); b.type = 'button';
+      b.addEventListener('click', function () {
+        if (SP.done) return;
+        Array.prototype.forEach.call(box.children, function (c) { c.disabled = true; });
+        if (o === it) { SP.score++; SP.combo++; b.classList.add('good'); blip('good'); if (SP.combo > S.maxCombo) S.maxCombo = SP.combo; if (SP.combo >= 3 && SP.combo % 3 === 0) comboFlash(SP.combo + ' in a row!'); setTimeout(speedQ, 250); }
+        else { SP.combo = 0; b.classList.add('bad'); box.children[opts.indexOf(it)].classList.add('good'); blip('bad'); S.mistakes[it.id] = 1; setTimeout(speedQ, 900); }
+      });
+      box.appendChild(b);
+    });
+    body.appendChild(box);
+    app.appendChild(body);
+  }
+  function speedEnd(quit) {
+    if (SP.done) return; SP.done = true; clearInterval(SP.timer);
+    var best = SP.score > S.bestSpeed; if (best) S.bestSpeed = SP.score; save();
+    if (SP.score) addXP(SP.score);
+    var nb = takeFresh();
+    track('maatu-speed', 'Maatu speed round');
+    if (best && SP.score) confetti(); blip('win');
+    app.innerHTML = '';
+    var w = h('div', 'done-wrap');
+    w.appendChild(h('div', 'label', quit ? 'Speed round stopped' : 'Time\'s up'));
+    w.appendChild(h('h2', '', SP.score + ' right'));
+    w.appendChild(h('p', '', best && SP.score ? 'New best score!' : 'Your best is ' + S.bestSpeed + '.'));
+    w.appendChild(h('div', 'stats', '<div><b>+' + SP.score + '</b><span>XP earned</span></div><div><b>' + S.bestSpeed + '</b><span>Best score</span></div>'));
+    if (nb.length) w.appendChild(badgeList(nb));
+    app.appendChild(w);
+    var foot = h('div', 'foot'); app.appendChild(foot);
+    cta(foot, 'Play again', startSpeed);
+    var hb = h('button', 'go soft', 'Back to practice'); hb.type = 'button'; hb.style.cssText = 'width:100%;margin-top:10px;min-height:48px'; hb.addEventListener('click', function () { setTab('practise'); }); foot.appendChild(hb);
+  }
+
+  /* ---------- me ---------- */
+  function me() {
+    showTabs(true); app.innerHTML = '';
+    app.appendChild(topbar());
+    var rk = rankOf(S.xp);
+    var pct = rk.next ? Math.round((S.xp - rk.from) / (rk.next[0] - rk.from) * 100) : 100;
+    app.appendChild(h('section', 'rankcard', '<small>Rank ' + (rk.i + 1) + ' of ' + RANKS.length + '</small><h2>' + esc(rk.name) + '</h2><div class="meter"><b style="width:' + pct + '%"></b></div><p>' + (rk.next ? S.xp + ' XP · ' + (rk.next[0] - S.xp) + ' more to become a ' + esc(rk.next[1]) : S.xp + ' XP · Top rank. Namma Bengaluru is proud.') + '</p>'));
+    app.appendChild(h('div', 'statgrid', '<div><b>' + (streakAlive() ? S.streak : 0) + '</b><span>Day streak</span></div><div><b>' + S.bestStreak + '</b><span>Best streak</span></div><div><b>' + learnedCount() + '</b><span>Phrases learned</span></div><div><b>' + Object.keys(S.done).length + '/' + LESSONS.length + '</b><span>Lessons</span></div><div><b>' + S.perfects + '</b><span>Perfect lessons</span></div><div><b>' + S.bestSpeed + '</b><span>Speed best</span></div>'));
+    app.appendChild(h('div', 'sect', 'Daily goal'));
+    var gp = h('div', 'goalpick');
+    [[10, 'Casual'], [20, 'Regular'], [30, 'Serious'], [50, 'Intense']].forEach(function (g) {
+      var b = h('button', '', g[0] + ' XP<small>' + g[1] + '</small>'); b.type = 'button'; b.setAttribute('aria-pressed', S.goal === g[0] ? 'true' : 'false');
+      b.addEventListener('click', function () { S.goal = g[0]; save(); checkBadges(); takeFresh(); me(); toast('Daily goal set to ' + g[0] + ' XP'); });
+      gp.appendChild(b);
+    });
+    app.appendChild(gp);
+    var got = BADGES.filter(function (b) { return S.badges[b[0]]; }).length;
+    app.appendChild(h('div', 'sect', 'Badges · ' + got + ' of ' + BADGES.length));
+    var bg = h('div', 'badges');
+    BADGES.forEach(function (b) { bg.appendChild(h('div', 'badge' + (S.badges[b[0]] ? '' : ' locked'), '<i>' + esc(b[1]) + '</i><b>' + esc(b[2]) + '</b><span>' + esc(b[3]) + '</span>')); });
+    app.appendChild(bg);
+    var sh = h('button', 'main', 'Share my progress'); sh.type = 'button'; sh.style.marginTop = '20px';
+    sh.addEventListener('click', function () {
+      var text = 'I\'m a "' + rk.name + '" on Maatu: ' + learnedCount() + ' Kannada phrases learned, ' + S.bestStreak + '-day best streak. Learn everyday Bengaluru Kannada free:';
+      var url = 'https://auronara.com/maatu/';
+      if (navigator.share) navigator.share({ title: 'Maatu', text: text, url: url }).catch(function () {});
+      else if (navigator.clipboard) navigator.clipboard.writeText(text + ' ' + url).then(function () { toast('Copied. Paste it anywhere.'); }, function () { toast(url); });
+    });
+    app.appendChild(sh);
+    app.appendChild(h('p', 'note', 'Progress is saved on this device only.'));
+    window.scrollTo(0, 0);
+  }
+
   window.__maatu = { get R() { return R; }, setTab: setTab };
   var start = (location.hash || '').replace('#', '');
-  setTab(start === 'check' || start === 'guide' ? start : 'learn');
+  setTab(['check', 'guide', 'practise', 'me'].indexOf(start) >= 0 ? start : 'learn');
   if ('serviceWorker' in navigator) window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
 })();
 </script>
