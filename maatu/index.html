@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maatu: speak Bengaluru Kannada</title>
+<meta name="description" content="Learn everyday Bengaluru Kannada from English: 213 phrases for autos, markets, home, work and emergencies, with word-by-word breakdowns. Free, no sign-up.">
+<meta name="theme-color" content="#1D7A4C">
+<meta property="og:title" content="Maatu: speak Bengaluru Kannada">
+<meta property="og:description" content="213 everyday Kannada phrases for people new to Bengaluru. Native speakers: help us check them.">
+<meta property="og:url" content="https://auronara.com/maatu/">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Maatu">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Layout: one phone-width column. Home has three tabs (Learn, Guide, Check); lessons run one card at a time with a bottom action bar. */
+  :root {
+    --paper: #F6F8F5; --card: #FFFFFF; --ink: #14221B; --muted: #5A6B61; --line: #DCE4DE;
+    --auto: #F6C531; --auto-ink: #2A2100; --leaf: #1D7A4C; --leaf-soft: #E2F2E9; --red: #CF3F36; --red-soft: #FBE7E5;
+    --display: "Baloo Tamma 2", "Noto Sans Kannada", system-ui, sans-serif;
+    --body: "Figtree", system-ui, -apple-system, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper: #0F1813; --card: #17231C; --ink: #E9F1EB; --muted: #9DB1A5; --line: #27372E; --leaf: #4DC487; --leaf-soft: #173A28; --red: #FF7A70; --red-soft: #3D1E1B; color-scheme: dark; }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  [hidden] { display: none !important; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.5 var(--body); }
+  button, input, textarea { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  button:focus-visible, [tabindex]:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--leaf); outline-offset: 2px; }
+  .app { max-width: 540px; margin: 0 auto; min-height: 100%; display: flex; flex-direction: column; padding: calc(env(safe-area-inset-top, 0px) + 14px) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px)); }
+  .app.has-tabs { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 80px); }
+  .kn { font-family: var(--display); }
+
+  .top { display: flex; align-items: center; gap: 8px; }
+  .logo { display: flex; align-items: center; gap: 8px; flex: 1; font: 800 1.6rem/1 var(--display); letter-spacing: -0.01em; }
+  .logo i { width: 30px; height: 30px; border-radius: 9px; background: var(--auto); color: var(--auto-ink); display: grid; place-items: center; font: 800 1.05rem/1 var(--display); font-style: normal; padding-top: 3px; }
+  .chip { font-weight: 600; font-size: 0.82rem; padding: 6px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .iconbtn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); display: grid; place-items: center; padding: 0; flex: none; }
+  .iconbtn svg { width: 18px; height: 18px; }
+  .course { margin-top: 20px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .eyebrow { display: block; font-weight: 700; font-size: 0.78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .course h1, .pagehead h1 { margin: 2px 0 0; font: 800 2rem/1.05 var(--display); text-wrap: balance; }
+  .switch { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 600; color: var(--muted); background: none; border: 0; padding: 6px 0; }
+  .switch span.t { width: 40px; height: 24px; border-radius: 999px; background: var(--line); position: relative; transition: background .2s; flex: none; }
+  .switch span.t::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--card); transition: transform .2s; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+  .switch[aria-checked="true"] span.t { background: var(--leaf); }
+  .switch[aria-checked="true"] span.t::after { transform: translateX(16px); }
+  .invite { margin-top: 16px; display: flex; gap: 12px; align-items: center; background: color-mix(in srgb, var(--auto) 24%, var(--card)); border-radius: 16px; padding: 12px 14px; border: 0; width: 100%; text-align: left; }
+  .invite b { display: block; }
+  .invite span { font-size: 0.88rem; color: var(--muted); }
+  .invite i { flex: none; width: 36px; height: 36px; border-radius: 10px; background: var(--auto); color: var(--auto-ink); display: grid; place-items: center; font: 800 1.1rem/1 var(--display); font-style: normal; padding-top: 3px; }
+  .unit { margin-top: 22px; background: var(--leaf); color: #fff; border-radius: 20px; padding: 16px 18px 14px; position: relative; overflow: hidden; }
+  .unit.later { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+  .unit .no { font-weight: 700; font-size: 0.78rem; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+  .unit h2 { margin: 2px 0 2px; font: 800 1.45rem/1.1 var(--display); }
+  .unit p { margin: 0; opacity: .9; font-size: 0.92rem; max-width: 32ch; }
+  .unit .meter { margin-top: 12px; height: 8px; border-radius: 8px; background: rgba(255,255,255,.25); overflow: hidden; }
+  .unit.later .meter { background: var(--line); }
+  .unit .meter b { display: block; height: 100%; background: var(--auto); border-radius: 8px; transition: width .4s; }
+  .unit .art { position: absolute; right: 4px; top: 6px; font: 800 4.2rem/1 var(--display); opacity: .14; pointer-events: none; }
+  .trail { list-style: none; margin: 10px 0 0; padding: 0; position: relative; }
+  .trail::before { content: ""; position: absolute; left: 25px; top: 26px; bottom: 26px; width: 3px; background: var(--line); border-radius: 3px; }
+  .trail li { position: relative; display: flex; align-items: center; gap: 14px; padding: 7px 0; }
+  .dot { width: 52px; height: 52px; border-radius: 50%; flex: none; display: grid; place-items: center; font: 800 1.2rem var(--display); background: var(--card); border: 3px solid var(--line); color: var(--muted); position: relative; z-index: 1; padding-top: 3px; }
+  .dot svg { width: 20px; height: 20px; }
+  li.done .dot { background: var(--leaf); border-color: var(--leaf); color: #fff; padding-top: 0; }
+  li.cur .dot { background: var(--auto); border-color: var(--auto); color: var(--auto-ink); box-shadow: 0 0 0 6px color-mix(in srgb, var(--auto) 30%, transparent); }
+  li.locked .dot { padding-top: 0; }
+  .lt { flex: 1; min-width: 0; }
+  .lt b { display: block; font-size: 1.02rem; }
+  .lt span { display: block; font-size: 0.86rem; color: var(--muted); }
+  li.locked .lt { opacity: .6; }
+  .go { flex: none; border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 700; background: var(--ink); color: var(--paper); }
+  .go.soft { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+  .note { margin: 22px 0 8px; font-size: 0.85rem; color: var(--muted); }
+
+  .tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 4; background: var(--card); border-top: 1px solid var(--line); padding: 6px max(10px, env(safe-area-inset-left, 0px)) calc(env(safe-area-inset-bottom, 0px) + 6px); display: flex; justify-content: center; }
+  .tabs div { width: 100%; max-width: 540px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .tabs button { border: 0; background: none; border-radius: 12px; padding: 8px 4px; font-weight: 700; font-size: 0.85rem; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .tabs button svg { width: 22px; height: 22px; }
+  .tabs button[aria-current="page"] { color: var(--leaf); background: var(--leaf-soft); }
+
+  /* guide */
+  .pagehead { margin-top: 20px; }
+  .pagehead p { margin: 6px 0 0; color: var(--muted); }
+  .gsec { margin-top: 22px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px; }
+  .gsec h2 { margin: 0 0 8px; font: 800 1.3rem/1.15 var(--display); }
+  .gsec p { margin: 0 0 10px; }
+  .gsec p:last-child { margin-bottom: 0; }
+  .tablewrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 0.78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  td.k { font: 700 1.15rem/1.2 var(--display); white-space: nowrap; }
+  td.r { font-weight: 600; white-space: nowrap; }
+  .pattern { border-top: 1px solid var(--line); padding: 12px 0; }
+  .pattern:first-of-type { border-top: 0; padding-top: 0; }
+  .pattern b { display: block; }
+  .pattern .ex { margin-top: 4px; font-size: 0.95rem; }
+  .pattern .ex span { font-family: var(--display); font-weight: 700; }
+  .letters { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 8px; }
+  .letters div { background: var(--paper); border-radius: 12px; padding: 8px 4px; text-align: center; }
+  .letters b { display: block; font: 700 1.6rem/1.1 var(--display); padding-top: 4px; }
+  .letters span { font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+
+  /* check */
+  .filters { display: flex; gap: 8px; overflow-x: auto; padding: 14px 0 4px; margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); scrollbar-width: none; }
+  .filters button { flex: none; border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 7px 12px; font-weight: 600; font-size: 0.88rem; white-space: nowrap; }
+  .filters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .progressline { font-size: 0.9rem; color: var(--muted); margin-top: 10px; }
+  .citems { display: grid; gap: 10px; margin-top: 10px; }
+  .citem { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .citem.ok { border-color: var(--leaf); }
+  .citem.fixed { border-color: var(--auto); }
+  .citem .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .citem .kn-big { font: 700 1.35rem/1.25 var(--display); }
+  .citem .ro { font-weight: 600; color: var(--muted); }
+  .citem .en { margin-top: 4px; font-weight: 600; }
+  .citem .where { font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+  .citem .acts { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .citem .acts button { border-radius: 12px; padding: 9px 14px; font-weight: 700; border: 2px solid var(--line); background: var(--card); }
+  .citem .acts .yes[aria-pressed="true"] { border-color: var(--leaf); background: var(--leaf-soft); color: var(--leaf); }
+  .citem .acts .fix[aria-pressed="true"] { border-color: var(--auto); background: color-mix(in srgb, var(--auto) 25%, var(--card)); }
+  .fixform { margin-top: 12px; display: grid; gap: 8px; }
+  .fixform label { font-size: 0.82rem; font-weight: 700; color: var(--muted); }
+  .fixform input, .fixform textarea { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: var(--paper); }
+  .fixform input.knin { font-family: var(--display); font-size: 1.1rem; }
+  .fixform .row2 { display: flex; gap: 8px; flex-wrap: wrap; }
+  .fixform .row2 button { flex: 1; min-height: 46px; border-radius: 12px; border: 0; font-weight: 700; background: var(--leaf); color: #fff; }
+  .fixform .row2 button.alt { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+  .fixform small { color: var(--muted); }
+
+  /* lesson */
+  .lhead { display: flex; align-items: center; gap: 12px; padding-bottom: 6px; }
+  .x { border: 0; background: none; padding: 6px; color: var(--muted); flex: none; }
+  .x svg { width: 24px; height: 24px; display: block; }
+  .bar { flex: 1; height: 12px; border-radius: 12px; background: var(--line); overflow: hidden; }
+  .bar b { display: block; height: 100%; width: 0; background: var(--leaf); border-radius: 12px; transition: width .3s; }
+  .body { flex: 1; display: flex; flex-direction: column; padding: 20px 0 18px; min-height: 0; }
+  .label { font-weight: 700; font-size: 0.8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--leaf); }
+  .ask { font: 700 1.3rem/1.3 var(--body); margin: 6px 0 16px; text-wrap: balance; }
+  .phrase { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 20px; display: grid; gap: 6px; }
+  .phrase .row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .phrase .ro { font: 800 clamp(1.6rem, 7.5vw, 2.1rem)/1.15 var(--display); overflow-wrap: anywhere; }
+  .phrase .script { font: 600 1.3rem/1.3 var(--display); color: var(--muted); }
+  .phrase .en { font-size: 1.12rem; font-weight: 600; margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .bd { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .bd span { background: var(--paper); border-radius: 10px; padding: 5px 9px; font-size: 0.88rem; }
+  .bd span b { font-family: var(--display); font-weight: 700; }
+  .tip { margin-top: 12px; display: flex; gap: 10px; align-items: flex-start; font-size: 0.95rem; background: color-mix(in srgb, var(--auto) 22%, var(--card)); border-radius: 14px; padding: 12px 14px; }
+  .tip b { flex: none; color: var(--auto-ink); background: var(--auto); border-radius: 8px; font-size: 0.75rem; padding: 2px 8px; margin-top: 1px; }
+  .say { flex: none; width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--leaf-soft); color: var(--leaf); display: grid; place-items: center; padding: 0; }
+  .say svg { width: 22px; height: 22px; }
+  .say.big { width: 88px; height: 88px; margin: 6px auto 18px; }
+  .say.big svg { width: 38px; height: 38px; }
+  .opts { display: grid; gap: 10px; }
+  .opt { text-align: left; display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; border-radius: 16px; border: 2px solid var(--line); background: var(--card); font-size: 1.05rem; font-weight: 600; transition: border-color .15s, background .15s; }
+  .opt .s { font: 600 0.95rem var(--display); color: var(--muted); }
+  .opt .r { font: 700 1.2rem/1.2 var(--display); }
+  .opt:hover:not([disabled]) { border-color: var(--leaf); }
+  .opt.good { border-color: var(--leaf); background: var(--leaf-soft); }
+  .opt.bad { border-color: var(--red); background: var(--red-soft); }
+  .opt.dim { opacity: .5; }
+  .opt[disabled] { cursor: default; }
+  .slots { min-height: 64px; border-bottom: 2px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; padding: 8px 0 12px; margin-bottom: 18px; align-content: flex-start; }
+  .tiles { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .tile { border: 2px solid var(--line); border-bottom-width: 4px; background: var(--card); border-radius: 12px; padding: 8px 14px; font: 700 1.15rem var(--display); }
+  .tile.used { visibility: hidden; }
+  .pairs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pairs .col { display: grid; gap: 10px; align-content: start; }
+  .pairs button { min-height: 62px; border-radius: 14px; border: 2px solid var(--line); border-bottom-width: 4px; background: var(--card); font-weight: 600; padding: 8px 10px; line-height: 1.2; }
+  .pairs button.kn-btn { font: 700 1.08rem/1.15 var(--display); }
+  .pairs button.sel { border-color: var(--leaf); background: var(--leaf-soft); }
+  .pairs button.ok { opacity: .35; border-color: var(--leaf); }
+  .pairs button.no { border-color: var(--red); background: var(--red-soft); }
+  .scene { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px; margin-bottom: 16px; font-size: 1.05rem; display: flex; gap: 12px; align-items: flex-start; }
+  .scene i { flex: none; width: 36px; height: 36px; border-radius: 10px; background: var(--auto); color: var(--auto-ink); display: grid; place-items: center; font-style: normal; font-weight: 800; }
+  .foot { position: sticky; bottom: 0; margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 14px max(16px, env(safe-area-inset-left, 0px)) calc(env(safe-area-inset-bottom, 0px) + 16px); background: var(--paper); border-top: 1px solid var(--line); }
+  .foot.good { background: var(--leaf-soft); border-color: transparent; }
+  .foot.bad { background: var(--red-soft); border-color: transparent; }
+  .foot h3 { margin: 0 0 2px; font: 800 1.25rem var(--display); }
+  .foot.good h3 { color: var(--leaf); } .foot.bad h3 { color: var(--red); }
+  .foot p { margin: 0 0 12px; }
+  .main { width: 100%; min-height: 54px; border: 0; border-radius: 16px; font-weight: 700; font-size: 1.05rem; background: var(--leaf); color: #fff; box-shadow: 0 4px 0 color-mix(in srgb, var(--leaf) 60%, #000); }
+  .main:active { transform: translateY(2px); box-shadow: 0 2px 0 color-mix(in srgb, var(--leaf) 60%, #000); }
+  .main[disabled] { background: var(--line); color: var(--muted); box-shadow: none; cursor: default; }
+  .foot.bad .main { background: var(--red); box-shadow: 0 4px 0 color-mix(in srgb, var(--red) 60%, #000); }
+  .done-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px; text-align: center; padding: 20px 0; }
+  .done-wrap h2 { margin: 0; font: 800 2.2rem/1.05 var(--display); }
+  .done-wrap p { margin: 0; color: var(--muted); }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stats div { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px; }
+  .stats b { display: block; font: 800 1.7rem/1 var(--display); font-variant-numeric: tabular-nums; padding-top: 4px; }
+  .stats span { font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+  .learned { text-align: left; display: grid; gap: 8px; }
+  .learned div { display: flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 8px 10px 8px 14px; }
+  .learned div span { flex: 1; min-width: 0; }
+  .learned b { display: block; font: 700 1.05rem/1.2 var(--display); }
+  .learned small { color: var(--muted); }
+  .learned .say { width: 38px; height: 38px; }
+  .toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 100px); transform: translateX(-50%); background: var(--ink); color: var(--paper); font-weight: 600; font-size: 0.9rem; padding: 10px 14px; border-radius: 12px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 9; max-width: min(92vw, 420px); text-align: center; }
+  .toast.show { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<nav class="tabs" id="tabs" aria-label="Sections"><div>
+  <button type="button" data-tab="learn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V6a2 2 0 0 1 2-2h12v13H6a2 2 0 0 0-2 2z"/><path d="M6 21h12"/></svg>Learn</button>
+  <button type="button" data-tab="guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.5v.5"/></svg>Guide</button>
+  <button type="button" data-tab="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Check</button>
+</div></nav>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function () {
+  'use strict';
+  var C = {"units":[{"title":"First steps","sub":"Greetings, manners and the words you need on day one","lessons":[{"title":"First words","goal":"Greet people and say you're learning","situation":{"q":"A shopkeeper speaks to you quickly in Kannada. You want to say you only know a little.","a":6},"items":[{"kn":"ನಮಸ್ಕಾರ","ro":"namaskaara","en":"Hello","tip":"Works at any time of day, with anyone.","id":"u1l1p1"},{"kn":"ಹೇಗಿದ್ದೀರಾ?","ro":"hegiddeeraa?","en":"How are you?","bd":[["hege","how"],["iddeeraa","are you (polite)"]],"tip":"The polite form. Use it with elders and strangers.","id":"u1l1p2"},{"kn":"ಚೆನ್ನಾಗಿದ್ದೀನಿ","ro":"chennaagiddeeni","en":"I'm fine","bd":[["chennaagi","well"],["iddeeni","I am"]],"id":"u1l1p3"},{"kn":"ಧನ್ಯವಾದಗಳು","ro":"dhanyavaadagalu","en":"Thank you","bd":[["dhanyavaada","thanks"],["-galu","many (adds warmth)"]],"id":"u1l1p4"},{"kn":"ಹೌದು","ro":"houdu","en":"Yes","id":"u1l1p5"},{"kn":"ಇಲ್ಲ","ro":"illa","en":"No","tip":"Also means \"there isn't\". You'll hear it everywhere.","id":"u1l1p6"},{"kn":"ಸ್ವಲ್ಪ ಸ್ವಲ್ಪ ಕನ್ನಡ ಬರುತ್ತೆ","ro":"swalpa swalpa Kannada barutte","en":"I know a little Kannada","bd":[["swalpa","a little"],["Kannada","Kannada"],["barutte","comes (to me)"]],"tip":"Locals love hearing this. Say it with a smile.","id":"u1l1p7"}]},{"title":"Meeting people","goal":"Introduce yourself and say goodbye","situation":{"q":"A friend is leaving your house. What do you say as they go?","a":6},"items":[{"kn":"ನಿಮ್ಮ ಹೆಸರು ಏನು?","ro":"nimma hesaru enu?","en":"What is your name?","bd":[["nimma","your"],["hesaru","name"],["enu","what"]],"id":"u1l2p1"},{"kn":"ನನ್ನ ಹೆಸರು ಅರುಣ್","ro":"nanna hesaru Arun","en":"My name is Arun","bd":[["nanna","my"],["hesaru","name"]],"tip":"Swap in your own name.","id":"u1l2p2"},{"kn":"ನೀವು ಎಲ್ಲಿಯವರು?","ro":"neevu elliyavaru?","en":"Where are you from?","bd":[["neevu","you (polite)"],["elliyavaru","from where"]],"id":"u1l2p3"},{"kn":"ನಾನು ಇಲ್ಲಿ ಕೆಲಸ ಮಾಡ್ತೀನಿ","ro":"naanu illi kelasa maadteeni","en":"I work here","bd":[["naanu","I"],["illi","here"],["kelasa","work"],["maadteeni","I do"]],"tip":"Kannada puts the verb at the end: \"I here work do\".","id":"u1l2p4"},{"kn":"ಗೊತ್ತಿಲ್ಲ","ro":"gottilla","en":"I don't know","bd":[["gottu","known"],["illa","not"]],"id":"u1l2p5"},{"kn":"ಮತ್ತೆ ಸಿಗೋಣ","ro":"matte sigona","en":"See you again","bd":[["matte","again"],["sigona","let's meet"]],"id":"u1l2p6"},{"kn":"ಹೋಗಿ ಬನ್ನಿ","ro":"hogi banni","en":"Goodbye","bd":[["hogi","go"],["banni","come"]],"tip":"Literally \"go and come back\". The polite way to see someone off.","id":"u1l2p7"}]},{"title":"Polite basics","goal":"Please, sorry and asking people to slow down","situation":{"q":"Someone is talking too fast for you. You ask them to slow down.","a":5},"items":[{"kn":"ದಯವಿಟ್ಟು","ro":"dayavittu","en":"Please","tip":"Used in writing and formal talk. In speech, a polite verb ending (-i) often does the job.","id":"u1l3p1"},{"kn":"ಕ್ಷಮಿಸಿ","ro":"kshamisi","en":"Sorry / Excuse me","tip":"Use it to get attention, too.","id":"u1l3p2"},{"kn":"ಪರವಾಗಿಲ್ಲ","ro":"paravaagilla","en":"It's okay / No problem","id":"u1l3p3"},{"kn":"ಸ್ವಲ್ಪ ಇರಿ","ro":"swalpa iri","en":"Wait a moment","bd":[["swalpa","a little"],["iri","stay (polite)"]],"id":"u1l3p4"},{"kn":"ಸರಿ","ro":"sari","en":"Okay / Right","id":"u1l3p5"},{"kn":"ನಿಧಾನವಾಗಿ ಹೇಳಿ","ro":"nidhaanavaagi heli","en":"Please say it slowly","bd":[["nidhaanavaagi","slowly"],["heli","say (polite)"]],"id":"u1l3p6"},{"kn":"ಇನ್ನೊಂದು ಸಲ ಹೇಳಿ","ro":"innondu sala heli","en":"Please say it again","bd":[["innondu","one more"],["sala","time"],["heli","say (polite)"]],"id":"u1l3p7"}]},{"title":"Question words","goal":"Ask what, where, when and how much","situation":{"q":"You want to ask where something is. Which word do you start with?","a":1},"items":[{"kn":"ಏನು?","ro":"enu?","en":"What?","id":"u1l4p1"},{"kn":"ಎಲ್ಲಿ?","ro":"elli?","en":"Where?","id":"u1l4p2"},{"kn":"ಯಾವಾಗ?","ro":"yaavaaga?","en":"When?","id":"u1l4p3"},{"kn":"ಯಾಕೆ?","ro":"yaake?","en":"Why?","id":"u1l4p4"},{"kn":"ಯಾರು?","ro":"yaaru?","en":"Who?","id":"u1l4p5"},{"kn":"ಹೇಗೆ?","ro":"hege?","en":"How?","id":"u1l4p6"},{"kn":"ಎಷ್ಟು?","ro":"eshtu?","en":"How much? / How many?","tip":"The most useful word in any market.","id":"u1l4p7"}]},{"title":"Numbers 1 to 10","goal":"Count, pay and understand prices","situation":{"q":"The shopkeeper says it costs \"hattu\" rupees. How much is that?","a":9,"mode":"meaning"},"items":[{"kn":"ಒಂದು","ro":"ondu","en":"One","id":"u1l5p1"},{"kn":"ಎರಡು","ro":"eradu","en":"Two","id":"u1l5p2"},{"kn":"ಮೂರು","ro":"mooru","en":"Three","id":"u1l5p3"},{"kn":"ನಾಲ್ಕು","ro":"naalku","en":"Four","id":"u1l5p4"},{"kn":"ಐದು","ro":"aidu","en":"Five","id":"u1l5p5"},{"kn":"ಆರು","ro":"aaru","en":"Six","id":"u1l5p6"},{"kn":"ಏಳು","ro":"elu","en":"Seven","id":"u1l5p7"},{"kn":"ಎಂಟು","ro":"entu","en":"Eight","id":"u1l5p8"},{"kn":"ಒಂಬತ್ತು","ro":"ombattu","en":"Nine","id":"u1l5p9"},{"kn":"ಹತ್ತು","ro":"hattu","en":"Ten","id":"u1l5p10"}]}]},{"title":"Getting around","sub":"Autos, buses, the metro and finding your way","lessons":[{"title":"Auto ride","goal":"Get an auto and give directions","situation":{"q":"The driver asks for ₹300 for a short ride. You want him to use the meter.","a":2},"items":[{"kn":"ಎಂ.ಜಿ. ರೋಡ್‌ಗೆ ಬರ್ತೀರಾ?","ro":"MG Road-ge bartheeraa?","en":"Will you come to MG Road?","bd":[["MG Road-ge","to MG Road"],["bartheeraa","will you come"]],"tip":"Add -ge to any place: Indiranagar-ge, Koramangala-ge.","id":"u2l1p1"},{"kn":"ಎಷ್ಟು ಆಗುತ್ತೆ?","ro":"eshtu aagutte?","en":"How much will it be?","bd":[["eshtu","how much"],["aagutte","will it become"]],"id":"u2l1p2"},{"kn":"ಮೀಟರ್ ಹಾಕಿ","ro":"meter haaki","en":"Please put the meter on","bd":[["meter","meter"],["haaki","put (polite)"]],"tip":"Ending a request with -i makes it polite.","id":"u2l1p3"},{"kn":"ಬಲಕ್ಕೆ ಹೋಗಿ","ro":"balakke hogi","en":"Go right","bd":[["balakke","to the right"],["hogi","go (polite)"]],"id":"u2l1p4"},{"kn":"ಎಡಕ್ಕೆ ಹೋಗಿ","ro":"edakke hogi","en":"Go left","bd":[["edakke","to the left"],["hogi","go (polite)"]],"id":"u2l1p5"},{"kn":"ನೇರವಾಗಿ ಹೋಗಿ","ro":"neravaagi hogi","en":"Go straight","bd":[["neravaagi","straight"],["hogi","go (polite)"]],"tip":"Many people simply say \"straight hogi\".","id":"u2l1p6"},{"kn":"ಇಲ್ಲಿ ನಿಲ್ಲಿಸಿ","ro":"illi nillisi","en":"Stop here","bd":[["illi","here"],["nillisi","stop (polite)"]],"id":"u2l1p7"}]},{"title":"Asking the way","goal":"Find places and understand directions","situation":{"q":"You are lost and want to find the metro station.","a":1},"items":[{"kn":"ಎಲ್ಲಿದೆ?","ro":"ellide?","en":"Where is it?","bd":[["elli","where"],["ide","is"]],"id":"u2l2p1"},{"kn":"ಮೆಟ್ರೋ ಸ್ಟೇಷನ್ ಎಲ್ಲಿದೆ?","ro":"metro station ellide?","en":"Where is the metro station?","bd":[["metro station","metro station"],["ellide","where is it"]],"tip":"Put any place before \"ellide\".","id":"u2l2p2"},{"kn":"ಹತ್ತಿರ","ro":"hattira","en":"Near","tip":"In quick speech it becomes \"hatra\".","id":"u2l2p3"},{"kn":"ದೂರ","ro":"doora","en":"Far","id":"u2l2p4"},{"kn":"ಮುಂದೆ","ro":"munde","en":"Ahead / In front","id":"u2l2p5"},{"kn":"ಹಿಂದೆ","ro":"hinde","en":"Behind","id":"u2l2p6"},{"kn":"ಸಿಗ್ನಲ್ ಹತ್ರ ತಿರುಗಿ","ro":"signal hatra tirugi","en":"Turn at the signal","bd":[["signal hatra","near the signal"],["tirugi","turn (polite)"]],"id":"u2l2p7"}]},{"title":"Bus and metro","goal":"Catch the right bus and get off at your stop","situation":{"q":"Your stop is coming up. You tell the conductor you need to get off here.","a":3},"items":[{"kn":"ಈ ಬಸ್ ಮೆಜೆಸ್ಟಿಕ್‌ಗೆ ಹೋಗುತ್ತಾ?","ro":"ee bus Majestic-ge hogutta?","en":"Does this bus go to Majestic?","bd":[["ee","this"],["bus","bus"],["Majestic-ge","to Majestic"],["hogutta","does it go"]],"tip":"Majestic is the city's main bus station.","id":"u2l3p1"},{"kn":"ಒಂದು ಟಿಕೆಟ್ ಕೊಡಿ","ro":"ondu ticket kodi","en":"One ticket, please","bd":[["ondu","one"],["ticket","ticket"],["kodi","give (polite)"]],"id":"u2l3p2"},{"kn":"ಮುಂದಿನ ಸ್ಟಾಪ್ ಯಾವುದು?","ro":"mundina stop yaavudu?","en":"What's the next stop?","bd":[["mundina","next"],["stop","stop"],["yaavudu","which one"]],"id":"u2l3p3"},{"kn":"ಇಲ್ಲಿ ಇಳಿಯಬೇಕು","ro":"illi iliyabeku","en":"I need to get off here","bd":[["illi","here"],["iliyabeku","must get off"]],"tip":"-beku at the end means \"need to\".","id":"u2l3p4"},{"kn":"ಸೀಟ್ ಇದೆಯಾ?","ro":"seat ideyaa?","en":"Is there a seat?","bd":[["seat","seat"],["ideyaa","is there"]],"tip":"Adding -aa turns a sentence into a question.","id":"u2l3p5"},{"kn":"ಬಾಗಿಲು","ro":"baagilu","en":"Door","id":"u2l3p6"},{"kn":"ತುಂಬಾ ರಶ್ ಇದೆ","ro":"tumba rush ide","en":"It's very crowded","bd":[["tumba","very"],["rush","crowd"],["ide","is"]],"id":"u2l3p7"}]},{"title":"Time and days","goal":"Talk about today, tomorrow and the time","situation":{"q":"A friend asks when you'll come. You'll come tomorrow.","a":2},"items":[{"kn":"ಈಗ","ro":"eega","en":"Now","id":"u2l4p1"},{"kn":"ಇವತ್ತು","ro":"ivattu","en":"Today","id":"u2l4p2"},{"kn":"ನಾಳೆ","ro":"naale","en":"Tomorrow","id":"u2l4p3"},{"kn":"ನಿನ್ನೆ","ro":"ninne","en":"Yesterday","id":"u2l4p4"},{"kn":"ಬೆಳಿಗ್ಗೆ","ro":"beligge","en":"Morning","id":"u2l4p5"},{"kn":"ಸಂಜೆ","ro":"sanje","en":"Evening","id":"u2l4p6"},{"kn":"ಟೈಮ್ ಎಷ್ಟು?","ro":"time eshtu?","en":"What time is it?","bd":[["time","time"],["eshtu","how much"]],"id":"u2l4p7"}]},{"title":"On the phone with a driver","goal":"Guide a cab or delivery driver to you","situation":{"q":"The driver calls and can't find you. You're standing at the gate.","a":0},"items":[{"kn":"ನಾನು ಗೇಟ್ ಹತ್ರ ಇದ್ದೀನಿ","ro":"naanu gate hatra iddeeni","en":"I'm near the gate","bd":[["naanu","I"],["gate hatra","near the gate"],["iddeeni","am"]],"id":"u2l5p1"},{"kn":"ಎಷ್ಟು ಹೊತ್ತು ಆಗುತ್ತೆ?","ro":"eshtu hottu aagutte?","en":"How long will it take?","bd":[["eshtu","how much"],["hottu","time"],["aagutte","will it take"]],"id":"u2l5p2"},{"kn":"ಬೇಗ ಬನ್ನಿ","ro":"bega banni","en":"Please come quickly","bd":[["bega","quickly"],["banni","come (polite)"]],"id":"u2l5p3"},{"kn":"ಐದು ನಿಮಿಷ","ro":"aidu nimisha","en":"Five minutes","bd":[["aidu","five"],["nimisha","minutes"]],"id":"u2l5p4"},{"kn":"ಲೊಕೇಶನ್ ಕಳಿಸ್ತೀನಿ","ro":"location kalisteeni","en":"I'll send the location","bd":[["location","location"],["kalisteeni","I'll send"]],"id":"u2l5p5"},{"kn":"ಎಲ್ಲಿದ್ದೀರಾ?","ro":"elliddeeraa?","en":"Where are you?","bd":[["elli","where"],["iddeeraa","are you (polite)"]],"id":"u2l5p6"},{"kn":"ಬಂದೆ","ro":"bande","en":"I'm coming","bd":[["bande","I came"]],"tip":"Literally \"I came\". People say it when they're on their way.","id":"u2l5p7"}]}]},{"title":"Food and shopping","sub":"Markets, darshinis and paying the bill","lessons":[{"title":"At the market","goal":"Ask prices and bargain politely","situation":{"q":"The vendor asks ₹80 for tomatoes. You think that's too much.","a":1},"items":[{"kn":"ಇದು ಎಷ್ಟು?","ro":"idu eshtu?","en":"How much is this?","bd":[["idu","this"],["eshtu","how much"]],"id":"u3l1p1"},{"kn":"ಜಾಸ್ತಿ ಆಯ್ತು","ro":"jaasti aaytu","en":"That's too much","bd":[["jaasti","too much"],["aaytu","it became"]],"id":"u3l1p2"},{"kn":"ಕಡಿಮೆ ಮಾಡಿ","ro":"kadime maadi","en":"Please lower the price","bd":[["kadime","less"],["maadi","make (polite)"]],"id":"u3l1p3"},{"kn":"ಬೇಕು","ro":"beku","en":"I want it","id":"u3l1p4"},{"kn":"ಬೇಡ","ro":"beda","en":"I don't want it","tip":"Also a polite \"no thanks\".","id":"u3l1p5"},{"kn":"ಅರ್ಧ ಕಿಲೋ ಕೊಡಿ","ro":"ardha kilo kodi","en":"Give me half a kilo","bd":[["ardha","half"],["kilo","kilo"],["kodi","give (polite)"]],"tip":"\"Kodi\" means \"please give\". Use it everywhere.","id":"u3l1p6"},{"kn":"ಚಿಲ್ಲರೆ ಇದೆಯಾ?","ro":"chillare ideyaa?","en":"Do you have change?","bd":[["chillare","small change"],["ideyaa","is there"]],"id":"u3l1p7"}]},{"title":"Darshini breakfast","goal":"Order food and pay","situation":{"q":"Your neighbour smiles and asks \"oota aaytaa?\" What are they asking?","a":6,"mode":"meaning"},"items":[{"kn":"ಒಂದು ಕಾಫಿ ಕೊಡಿ","ro":"ondu coffee kodi","en":"One coffee, please","bd":[["ondu","one"],["coffee","coffee"],["kodi","give (polite)"]],"id":"u3l2p1"},{"kn":"ನೀರು","ro":"neeru","en":"Water","id":"u3l2p2"},{"kn":"ಖಾರ ಕಡಿಮೆ","ro":"khaara kadime","en":"Less spicy","bd":[["khaara","spicy"],["kadime","less"]],"id":"u3l2p3"},{"kn":"ತುಂಬಾ ಚೆನ್ನಾಗಿದೆ","ro":"tumba chennaagide","en":"It's very good","bd":[["tumba","very"],["chennaagide","is good"]],"id":"u3l2p4"},{"kn":"ಬಿಲ್ ಕೊಡಿ","ro":"bill kodi","en":"The bill, please","bd":[["bill","bill"],["kodi","give (polite)"]],"id":"u3l2p5"},{"kn":"ಊಟ","ro":"oota","en":"Meal","id":"u3l2p6"},{"kn":"ಊಟ ಆಯ್ತಾ?","ro":"oota aaytaa?","en":"Have you eaten?","bd":[["oota","meal"],["aaytaa","is it done"]],"tip":"A warm everyday greeting, like asking how someone is.","id":"u3l2p7"}]},{"title":"Ordering more","goal":"Ask for more, less, or a parcel","situation":{"q":"The server keeps adding rice to your plate. You've had enough.","a":6},"items":[{"kn":"ಮೆನು ಕೊಡಿ","ro":"menu kodi","en":"The menu, please","bd":[["menu","menu"],["kodi","give (polite)"]],"id":"u3l3p1"},{"kn":"ಇನ್ನೊಂದು ಕೊಡಿ","ro":"innondu kodi","en":"One more, please","bd":[["innondu","one more"],["kodi","give (polite)"]],"id":"u3l3p2"},{"kn":"ಪಾರ್ಸೆಲ್ ಬೇಕು","ro":"parcel beku","en":"I want it packed","bd":[["parcel","takeaway"],["beku","want"]],"id":"u3l3p3"},{"kn":"ಸ್ವಲ್ಪ ಸಕ್ಕರೆ ಕಡಿಮೆ","ro":"swalpa sakkare kadime","en":"A little less sugar","bd":[["swalpa","a little"],["sakkare","sugar"],["kadime","less"]],"id":"u3l3p4"},{"kn":"ಊಟ ರೆಡಿ ಇದೆಯಾ?","ro":"oota ready ideyaa?","en":"Are meals ready?","bd":[["oota","meal"],["ready","ready"],["ideyaa","is it"]],"id":"u3l3p5"},{"kn":"ಇವತ್ತು ಏನು ಸ್ಪೆಷಲ್?","ro":"ivattu enu special?","en":"What's special today?","bd":[["ivattu","today"],["enu","what"],["special","special"]],"id":"u3l3p6"},{"kn":"ಸಾಕು","ro":"saaku","en":"That's enough","id":"u3l3p7"}]},{"title":"Food words","goal":"Name what's on the plate","situation":{"q":"You want curd with your rice. Which word do you need?","a":2},"items":[{"kn":"ಅನ್ನ","ro":"anna","en":"Cooked rice","id":"u3l4p1"},{"kn":"ಸಾರು","ro":"saaru","en":"Thin lentil soup","tip":"Rasam is called saaru in most Kannada homes.","id":"u3l4p2"},{"kn":"ಮೊಸರು","ro":"mosaru","en":"Curd","id":"u3l4p3"},{"kn":"ಹಾಲು","ro":"haalu","en":"Milk","id":"u3l4p4"},{"kn":"ಹಣ್ಣು","ro":"hannu","en":"Fruit","id":"u3l4p5"},{"kn":"ತರಕಾರಿ","ro":"tarakaari","en":"Vegetables","id":"u3l4p6"},{"kn":"ಸಿಹಿ","ro":"sihi","en":"Sweet","id":"u3l4p7"}]},{"title":"Paying","goal":"Pay by UPI or cash and check it went through","situation":{"q":"You've just paid by UPI. You want to check the shopkeeper received it.","a":4},"items":[{"kn":"ಯುಪಿಐ ಆಗುತ್ತಾ?","ro":"UPI aagutta?","en":"Can I pay by UPI?","bd":[["UPI","UPI"],["aagutta","does it work"]],"id":"u3l5p1"},{"kn":"ಕ್ಯಾಶ್ ಇಲ್ಲ","ro":"cash illa","en":"I don't have cash","bd":[["cash","cash"],["illa","there isn't"]],"id":"u3l5p2"},{"kn":"ಸ್ಕ್ಯಾನ್ ಮಾಡ್ತೀನಿ","ro":"scan maadteeni","en":"I'll scan","bd":[["scan","scan"],["maadteeni","I'll do"]],"id":"u3l5p3"},{"kn":"ಹಣ ಕಳಿಸಿದೆ","ro":"hana kaliside","en":"I've sent the money","bd":[["hana","money"],["kaliside","I sent"]],"id":"u3l5p4"},{"kn":"ಬಂತಾ?","ro":"bantaa?","en":"Did it come through?","bd":[["banta","it came"],["-aa","question"]],"id":"u3l5p5"},{"kn":"ಎಷ್ಟು ಆಯ್ತು?","ro":"eshtu aaytu?","en":"How much did it come to?","bd":[["eshtu","how much"],["aaytu","it became"]],"id":"u3l5p6"},{"kn":"ರಸೀದಿ ಕೊಡಿ","ro":"raseedi kodi","en":"Please give me a receipt","bd":[["raseedi","receipt"],["kodi","give (polite)"]],"id":"u3l5p7"}]}]},{"title":"Home and neighbourhood","sub":"Rent, house help, deliveries and neighbours","lessons":[{"title":"Finding a house","goal":"Ask about rent, deposit and water","situation":{"q":"You like the flat and want to know the rent.","a":1},"items":[{"kn":"ಮನೆ ಬಾಡಿಗೆಗೆ ಇದೆಯಾ?","ro":"mane baadigege ideyaa?","en":"Is a house available for rent?","bd":[["mane","house"],["baadigege","for rent"],["ideyaa","is there"]],"id":"u4l1p1"},{"kn":"ಬಾಡಿಗೆ ಎಷ್ಟು?","ro":"baadige eshtu?","en":"How much is the rent?","bd":[["baadige","rent"],["eshtu","how much"]],"id":"u4l1p2"},{"kn":"ಅಡ್ವಾನ್ಸ್ ಎಷ್ಟು?","ro":"advance eshtu?","en":"How much is the deposit?","bd":[["advance","deposit"],["eshtu","how much"]],"tip":"In Bengaluru the deposit is called the \"advance\".","id":"u4l1p3"},{"kn":"ನೀರು ಬರುತ್ತಾ?","ro":"neeru barutta?","en":"Is there water supply?","bd":[["neeru","water"],["barutta","does it come"]],"id":"u4l1p4"},{"kn":"ಕರೆಂಟ್ ಹೋಗಿದೆ","ro":"current hogide","en":"The power is out","bd":[["current","electricity"],["hogide","has gone"]],"id":"u4l1p5"},{"kn":"ಮನೆ","ro":"mane","en":"House / Home","id":"u4l1p6"},{"kn":"ಕೀ ಕೊಡಿ","ro":"key kodi","en":"Please give me the key","bd":[["key","key"],["kodi","give (polite)"]],"id":"u4l1p7"}]},{"title":"House help and cook","goal":"Plan the day with the people who help at home","situation":{"q":"You need your cook to come early tomorrow.","a":0},"items":[{"kn":"ನಾಳೆ ಬೇಗ ಬನ್ನಿ","ro":"naale bega banni","en":"Please come early tomorrow","bd":[["naale","tomorrow"],["bega","early"],["banni","come (polite)"]],"id":"u4l2p1"},{"kn":"ಇವತ್ತು ರಜೆ","ro":"ivattu raje","en":"Today is a day off","bd":[["ivattu","today"],["raje","holiday"]],"id":"u4l2p2"},{"kn":"ಪಾತ್ರೆ ತೊಳೆಯಿರಿ","ro":"paatre toleyiri","en":"Please wash the dishes","bd":[["paatre","vessels"],["toleyiri","wash (polite)"]],"id":"u4l2p3"},{"kn":"ನೆಲ ಒರೆಸಿ","ro":"nela oresi","en":"Please mop the floor","bd":[["nela","floor"],["oresi","wipe (polite)"]],"id":"u4l2p4"},{"kn":"ಅಡುಗೆ ಮಾಡಿ","ro":"aduge maadi","en":"Please cook","bd":[["aduge","cooking"],["maadi","do (polite)"]],"id":"u4l2p5"},{"kn":"ಎಷ್ಟು ಹೊತ್ತಿಗೆ ಬರ್ತೀರಾ?","ro":"eshtu hottige bartheeraa?","en":"What time will you come?","bd":[["eshtu hottige","at what time"],["bartheeraa","will you come"]],"id":"u4l2p6"},{"kn":"ಚೆನ್ನಾಗಿ ಮಾಡಿದ್ದೀರಿ","ro":"chennaagi maadiddeeri","en":"You've done it well","bd":[["chennaagi","well"],["maadiddeeri","you have done"]],"tip":"A little praise goes a long way.","id":"u4l2p7"}]},{"title":"Deliveries and the gate","goal":"Talk to delivery staff and the security guard","situation":{"q":"A delivery partner calls. You want the parcel left at your door.","a":5},"items":[{"kn":"ಪಾರ್ಸೆಲ್ ಬಂದಿದೆಯಾ?","ro":"parcel bandideyaa?","en":"Has a parcel come?","bd":[["parcel","parcel"],["bandideyaa","has it come"]],"id":"u4l3p1"},{"kn":"ಗೇಟ್ ತೆಗೆಯಿರಿ","ro":"gate tegeyiri","en":"Please open the gate","bd":[["gate","gate"],["tegeyiri","open (polite)"]],"id":"u4l3p2"},{"kn":"ಮೂರನೇ ಮಹಡಿ","ro":"moorane mahadi","en":"Third floor","bd":[["moorane","third"],["mahadi","floor"]],"id":"u4l3p3"},{"kn":"ಮೇಲೆ ಬನ್ನಿ","ro":"mele banni","en":"Please come up","bd":[["mele","up"],["banni","come (polite)"]],"id":"u4l3p4"},{"kn":"ಕೆಳಗೆ ಇಡಿ","ro":"kelage idi","en":"Please leave it downstairs","bd":[["kelage","down"],["idi","keep (polite)"]],"id":"u4l3p5"},{"kn":"ಬಾಗಿಲ ಹತ್ರ ಇಡಿ","ro":"baagila hatra idi","en":"Please leave it at the door","bd":[["baagila hatra","near the door"],["idi","keep (polite)"]],"id":"u4l3p6"},{"kn":"ಯಾರು ಬೇಕು?","ro":"yaaru beku?","en":"Who do you want?","bd":[["yaaru","who"],["beku","want"]],"tip":"The guard may ask you this at the gate.","id":"u4l3p7"}]},{"title":"Repairs","goal":"Report a problem and get it fixed","situation":{"q":"Water is dripping from your kitchen tap. You tell the plumber.","a":0},"items":[{"kn":"ನಲ್ಲಿ ಸೋರುತ್ತಿದೆ","ro":"nalli sorutide","en":"The tap is leaking","bd":[["nalli","tap"],["sorutide","is leaking"]],"id":"u4l4p1"},{"kn":"ಫ್ಯಾನ್ ಕೆಲಸ ಮಾಡ್ತಿಲ್ಲ","ro":"fan kelasa maadtilla","en":"The fan isn't working","bd":[["fan","fan"],["kelasa","work"],["maadtilla","isn't doing"]],"id":"u4l4p2"},{"kn":"ಲೈಟ್ ಹೋಗಿದೆ","ro":"light hogide","en":"The light has gone","bd":[["light","light"],["hogide","has gone"]],"id":"u4l4p3"},{"kn":"ಯಾವಾಗ ಬರ್ತೀರಾ?","ro":"yaavaaga bartheeraa?","en":"When will you come?","bd":[["yaavaaga","when"],["bartheeraa","will you come"]],"id":"u4l4p4"},{"kn":"ಎಷ್ಟು ಚಾರ್ಜ್?","ro":"eshtu charge?","en":"How much do you charge?","bd":[["eshtu","how much"],["charge","charge"]],"id":"u4l4p5"},{"kn":"ಇವತ್ತೇ ಆಗಬೇಕು","ro":"ivatte aagabeku","en":"It must be done today","bd":[["ivatte","today itself"],["aagabeku","must happen"]],"id":"u4l4p6"},{"kn":"ಸರಿ ಆಯ್ತಾ?","ro":"sari aaytaa?","en":"Is it fixed?","bd":[["sari","right"],["aaytaa","has it become"]],"id":"u4l4p7"}]},{"title":"Neighbours","goal":"Make friends on your street","situation":{"q":"Your neighbour drops by. You invite them in to sit.","a":4},"items":[{"kn":"ನಾವು ಹೊಸದಾಗಿ ಬಂದಿದ್ದೀವಿ","ro":"naavu hosadaagi bandiddeevi","en":"We've just moved in","bd":[["naavu","we"],["hosadaagi","newly"],["bandiddeevi","have come"]],"id":"u4l5p1"},{"kn":"ನಿಮ್ಮ ಮನೆ ಎಲ್ಲಿ?","ro":"nimma mane elli?","en":"Where is your house?","bd":[["nimma","your"],["mane","house"],["elli","where"]],"id":"u4l5p2"},{"kn":"ಪಕ್ಕದ ಮನೆ","ro":"pakkada mane","en":"The house next door","bd":[["pakkada","next"],["mane","house"]],"id":"u4l5p3"},{"kn":"ಏನು ಸಮಾಚಾರ?","ro":"enu samaachaara?","en":"What's the news?","bd":[["enu","what"],["samaachaara","news"]],"tip":"A friendly \"what's up?\"","id":"u4l5p4"},{"kn":"ಬನ್ನಿ, ಕೂತ್ಕೊಳ್ಳಿ","ro":"banni, kootkolli","en":"Come in, sit down","bd":[["banni","come (polite)"],["kootkolli","sit (polite)"]],"id":"u4l5p5"},{"kn":"ಟೀ ಕುಡೀತೀರಾ?","ro":"tea kudeeteeraa?","en":"Will you have tea?","bd":[["tea","tea"],["kudeeteeraa","will you drink"]],"id":"u4l5p6"},{"kn":"ಹಬ್ಬದ ಶುಭಾಶಯಗಳು","ro":"habbada shubhaashayagalu","en":"Happy festival","bd":[["habbada","of the festival"],["shubhaashayagalu","good wishes"]],"tip":"Works for Ugadi, Diwali, Dasara, any festival.","id":"u4l5p7"}]}]},{"title":"Work and friends","sub":"Office small talk, feelings, family and plans","lessons":[{"title":"At the office","goal":"Small talk with colleagues","situation":{"q":"It's lunchtime and you want to invite a colleague.","a":1},"items":[{"kn":"ಶುಭೋದಯ","ro":"shubhodaya","en":"Good morning","tip":"Formal. Many colleagues just say \"good morning\".","id":"u5l1p1"},{"kn":"ಊಟಕ್ಕೆ ಹೋಗೋಣ","ro":"ootakke hogona","en":"Let's go for lunch","bd":[["ootakke","for a meal"],["hogona","let's go"]],"id":"u5l1p2"},{"kn":"ಮೀಟಿಂಗ್ ಎಷ್ಟು ಹೊತ್ತಿಗೆ?","ro":"meeting eshtu hottige?","en":"What time is the meeting?","bd":[["meeting","meeting"],["eshtu hottige","at what time"]],"id":"u5l1p3"},{"kn":"ತುಂಬಾ ಕೆಲಸ ಇದೆ","ro":"tumba kelasa ide","en":"There's a lot of work","bd":[["tumba","a lot"],["kelasa","work"],["ide","there is"]],"id":"u5l1p4"},{"kn":"ಸ್ವಲ್ಪ ಸಹಾಯ ಮಾಡ್ತೀರಾ?","ro":"swalpa sahaaya maadteeraa?","en":"Can you help a little?","bd":[["swalpa","a little"],["sahaaya","help"],["maadteeraa","will you do"]],"id":"u5l1p5"},{"kn":"ಆಯ್ತು","ro":"aaytu","en":"Done / Okay","tip":"Literally \"it happened\". Used to agree to something.","id":"u5l1p6"},{"kn":"ಸೂಪರ್ ಆಗಿದೆ","ro":"super aagide","en":"It's super","bd":[["super","super"],["aagide","has become"]],"id":"u5l1p7"}]},{"title":"Feelings","goal":"Say how you feel","situation":{"q":"You skipped lunch and your stomach is rumbling.","a":3},"items":[{"kn":"ಖುಷಿ ಆಯ್ತು","ro":"khushi aaytu","en":"I'm happy","bd":[["khushi","happiness"],["aaytu","it happened"]],"id":"u5l2p1"},{"kn":"ಬೇಜಾರಾಗಿದೆ","ro":"bejaaraagide","en":"I'm bored / upset","id":"u5l2p2"},{"kn":"ಸುಸ್ತಾಗಿದೆ","ro":"sustaagide","en":"I'm tired","id":"u5l2p3"},{"kn":"ಹಸಿವಾಗಿದೆ","ro":"hasivaagide","en":"I'm hungry","id":"u5l2p4"},{"kn":"ಬಾಯಾರಿಕೆ ಆಗಿದೆ","ro":"baayaarike aagide","en":"I'm thirsty","bd":[["baayaarike","thirst"],["aagide","has happened"]],"id":"u5l2p5"},{"kn":"ಚಿಂತೆ ಮಾಡಬೇಡಿ","ro":"chinte maadabedi","en":"Don't worry","bd":[["chinte","worry"],["maadabedi","don't do (polite)"]],"id":"u5l2p6"},{"kn":"ಎಲ್ಲಾ ಸರಿ ಇದೆ","ro":"ellaa sari ide","en":"Everything is fine","bd":[["ellaa","everything"],["sari","right"],["ide","is"]],"id":"u5l2p7"}]},{"title":"Family","goal":"Talk about the people in your life","situation":{"q":"Your auto driver calls you \"akka\". What does it mean?","a":3,"mode":"meaning"},"items":[{"kn":"ಅಮ್ಮ","ro":"amma","en":"Mother","id":"u5l3p1"},{"kn":"ಅಪ್ಪ","ro":"appa","en":"Father","id":"u5l3p2"},{"kn":"ಅಣ್ಣ","ro":"anna","en":"Older brother","tip":"The n is said with the tongue curled back, unlike \"anna\" (rice).","id":"u5l3p3"},{"kn":"ಅಕ್ಕ","ro":"akka","en":"Older sister","tip":"People call strangers \"anna\" and \"akka\" to be friendly.","id":"u5l3p4"},{"kn":"ತಂಗಿ","ro":"tangi","en":"Younger sister","id":"u5l3p5"},{"kn":"ಮಕ್ಕಳು","ro":"makkalu","en":"Children","id":"u5l3p6"},{"kn":"ಮದುವೆ ಆಗಿದೆಯಾ?","ro":"maduve aagideyaa?","en":"Are you married?","bd":[["maduve","wedding"],["aagideyaa","has it happened"]],"tip":"You'll be asked this a lot. A smile is a fine answer.","id":"u5l3p7"}]},{"title":"Making plans","goal":"Make and accept weekend plans","situation":{"q":"A friend invites you to a movie. You happily say you'll come too.","a":2},"items":[{"kn":"ಈ ವೀಕೆಂಡ್ ಏನು ಪ್ಲಾನ್?","ro":"ee weekend enu plan?","en":"What's the plan this weekend?","bd":[["ee","this"],["weekend","weekend"],["enu","what"],["plan","plan"]],"id":"u5l4p1"},{"kn":"ಸಿನಿಮಾಗೆ ಹೋಗೋಣ","ro":"cinema-ge hogona","en":"Let's go to a movie","bd":[["cinema-ge","to a movie"],["hogona","let's go"]],"id":"u5l4p2"},{"kn":"ನಾನೂ ಬರ್ತೀನಿ","ro":"naanoo bartheeni","en":"I'll come too","bd":[["naanoo","me too"],["bartheeni","I'll come"]],"id":"u5l4p3"},{"kn":"ಯಾವಾಗ ಸಿಗೋಣ?","ro":"yaavaaga sigona?","en":"When shall we meet?","bd":[["yaavaaga","when"],["sigona","let's meet"]],"id":"u5l4p4"},{"kn":"ಆಗಲ್ಲ","ro":"aagalla","en":"I can't make it","tip":"Literally \"it won't happen\".","id":"u5l4p5"},{"kn":"ಖಂಡಿತ","ro":"khanditha","en":"Definitely","id":"u5l4p6"},{"kn":"ಫೋನ್ ಮಾಡಿ","ro":"phone maadi","en":"Call me","bd":[["phone","phone"],["maadi","do (polite)"]],"id":"u5l4p7"}]},{"title":"Bengaluru slang","goal":"Sound like a local with friends","situation":{"q":"A friend shows you their amazing trip photos. You say:","a":1},"items":[{"kn":"ಏನ್ ಗುರು?","ro":"en guru?","en":"What's up, buddy?","bd":[["en","what"],["guru","buddy"]],"tip":"\"Guru\" is classic Bengaluru slang for a friend.","id":"u5l5p1"},{"kn":"ಸಕ್ಕತ್","ro":"sakkath","en":"Awesome","id":"u5l5p2"},{"kn":"ಮಸ್ತ್","ro":"masth","en":"Great","id":"u5l5p3"},{"kn":"ಹೌದಾ?","ro":"houdaa?","en":"Really?","bd":[["houdu","yes"],["-aa","question"]],"id":"u5l5p4"},{"kn":"ಹಾಗೇ ಸುಮ್ಮನೆ","ro":"haage summane","en":"Just like that","bd":[["haage","like that"],["summane","for no reason"]],"id":"u5l5p5"},{"kn":"ಬಿಡಿ","ro":"bidi","en":"Leave it / Forget it","id":"u5l5p6"},{"kn":"ತುಂಬಾ ಚೆನ್ನಾಗಿ ಮಾತಾಡ್ತೀರಾ","ro":"tumba chennaagi maataadteeraa","en":"You speak very well","bd":[["tumba","very"],["chennaagi","well"],["maataadteeraa","you speak"]],"tip":"Say this back when someone praises your Kannada.","id":"u5l5p7"}]}]},{"title":"Help and health","sub":"Doctors, pharmacies, emergencies and getting unstuck","lessons":[{"title":"At the doctor","goal":"Describe how you feel","situation":{"q":"You tell the doctor you have a fever.","a":1},"items":[{"kn":"ಹುಷಾರಿಲ್ಲ","ro":"hushaarilla","en":"I'm not well","bd":[["hushaaru","well"],["illa","not"]],"id":"u6l1p1"},{"kn":"ಜ್ವರ ಇದೆ","ro":"jwara ide","en":"I have a fever","bd":[["jwara","fever"],["ide","there is"]],"id":"u6l1p2"},{"kn":"ತಲೆ ನೋವು","ro":"tale novu","en":"Headache","bd":[["tale","head"],["novu","pain"]],"id":"u6l1p3"},{"kn":"ಹೊಟ್ಟೆ ನೋವು","ro":"hotte novu","en":"Stomach ache","bd":[["hotte","stomach"],["novu","pain"]],"id":"u6l1p4"},{"kn":"ಕೆಮ್ಮು","ro":"kemmu","en":"Cough","id":"u6l1p5"},{"kn":"ಡಾಕ್ಟರ್ ಎಲ್ಲಿದ್ದಾರೆ?","ro":"doctor elliddaare?","en":"Where is the doctor?","bd":[["doctor","doctor"],["elliddaare","where are they"]],"id":"u6l1p6"},{"kn":"ಎರಡು ದಿನದಿಂದ","ro":"eradu dinadinda","en":"For two days","bd":[["eradu","two"],["dinadinda","since days"]],"id":"u6l1p7"}]},{"title":"At the pharmacy","goal":"Buy medicine and understand the dose","situation":{"q":"The pharmacist says \"ootada nantara\". When do you take it?","a":3,"mode":"meaning"},"items":[{"kn":"ಈ ಮಾತ್ರೆ ಇದೆಯಾ?","ro":"ee maatre ideyaa?","en":"Do you have this tablet?","bd":[["ee","this"],["maatre","tablet"],["ideyaa","is there"]],"id":"u6l2p1"},{"kn":"ದಿನಕ್ಕೆ ಎಷ್ಟು ಸಲ?","ro":"dinakke eshtu sala?","en":"How many times a day?","bd":[["dinakke","per day"],["eshtu","how many"],["sala","times"]],"id":"u6l2p2"},{"kn":"ಊಟದ ಮುಂಚೆ","ro":"ootada munche","en":"Before food","bd":[["ootada","of the meal"],["munche","before"]],"id":"u6l2p3"},{"kn":"ಊಟದ ನಂತರ","ro":"ootada nantara","en":"After food","bd":[["ootada","of the meal"],["nantara","after"]],"id":"u6l2p4"},{"kn":"ಔಷಧಿ","ro":"aushadhi","en":"Medicine","id":"u6l2p5"},{"kn":"ಎರಡು ಸ್ಟ್ರಿಪ್ ಕೊಡಿ","ro":"eradu strip kodi","en":"Two strips, please","bd":[["eradu","two"],["strip","strip"],["kodi","give (polite)"]],"id":"u6l2p6"},{"kn":"ನೋವಿಗೆ ಏನಾದ್ರೂ ಕೊಡಿ","ro":"novige enaadru kodi","en":"Give me something for pain","bd":[["novige","for pain"],["enaadru","something"],["kodi","give (polite)"]],"id":"u6l2p7"}]},{"title":"Emergencies","goal":"Get help fast","situation":{"q":"Someone has fallen and is hurt. You shout to people nearby.","a":2},"items":[{"kn":"ಸಹಾಯ ಮಾಡಿ!","ro":"sahaaya maadi!","en":"Help!","bd":[["sahaaya","help"],["maadi","do (polite)"]],"id":"u6l3p1"},{"kn":"ಬೇಗ!","ro":"bega!","en":"Quickly!","id":"u6l3p2"},{"kn":"ಆಂಬುಲೆನ್ಸ್ ಕರೆಯಿರಿ","ro":"ambulance kareyiri","en":"Call an ambulance","bd":[["ambulance","ambulance"],["kareyiri","call (polite)"]],"tip":"In India, dial 108 for an ambulance or 112 for any emergency.","id":"u6l3p3"},{"kn":"ಪೊಲೀಸ್ ಸ್ಟೇಷನ್ ಎಲ್ಲಿದೆ?","ro":"police station ellide?","en":"Where is the police station?","bd":[["police station","police station"],["ellide","where is it"]],"id":"u6l3p4"},{"kn":"ಅಪಘಾತ ಆಗಿದೆ","ro":"apaghaata aagide","en":"There's been an accident","bd":[["apaghaata","accident"],["aagide","has happened"]],"id":"u6l3p5"},{"kn":"ನನ್ನ ಫೋನ್ ಕಳೆದುಹೋಗಿದೆ","ro":"nanna phone kaleduhogide","en":"I've lost my phone","bd":[["nanna","my"],["phone","phone"],["kaleduhogide","has got lost"]],"id":"u6l3p6"},{"kn":"ಹುಷಾರು!","ro":"hushaaru!","en":"Careful!","id":"u6l3p7"}]},{"title":"When you don't understand","goal":"Keep a conversation going while you learn","situation":{"q":"You didn't catch what someone said. You tell them.","a":0},"items":[{"kn":"ಅರ್ಥ ಆಗಲಿಲ್ಲ","ro":"artha aagalilla","en":"I didn't understand","bd":[["artha","meaning"],["aagalilla","didn't happen"]],"id":"u6l4p1"},{"kn":"ಇದನ್ನು ಕನ್ನಡದಲ್ಲಿ ಏನು ಅಂತಾರೆ?","ro":"idannu Kannadadalli enu antaare?","en":"What is this called in Kannada?","bd":[["idannu","this"],["Kannadadalli","in Kannada"],["enu","what"],["antaare","do they call"]],"tip":"Point at anything and ask. People love teaching.","id":"u6l4p2"},{"kn":"ಇಂಗ್ಲಿಷ್ ಬರುತ್ತಾ?","ro":"English barutta?","en":"Do you know English?","bd":[["English","English"],["barutta","does it come (to you)"]],"id":"u6l4p3"},{"kn":"ಹಿಂದಿ ಬರುತ್ತಾ?","ro":"Hindi barutta?","en":"Do you know Hindi?","bd":[["Hindi","Hindi"],["barutta","does it come (to you)"]],"id":"u6l4p4"},{"kn":"ಬರೆದು ತೋರಿಸಿ","ro":"baredu torisi","en":"Please write it down for me","bd":[["baredu","having written"],["torisi","show (polite)"]],"id":"u6l4p5"},{"kn":"ಕಲೀತಾ ಇದ್ದೀನಿ","ro":"kaleetaa iddeeni","en":"I'm learning","bd":[["kaleetaa","learning"],["iddeeni","I am"]],"id":"u6l4p6"},{"kn":"ಸರಿಯಾಗಿ ಹೇಳಿದ್ನಾ?","ro":"sariyaagi helidnaa?","en":"Did I say it right?","bd":[["sariyaagi","correctly"],["helidnaa","did I say"]],"id":"u6l4p7"}]},{"title":"Thank you and goodbye","goal":"End every conversation warmly","situation":{"q":"A shopkeeper went out of their way to help you. You thank them.","a":0},"items":[{"kn":"ನಿಮ್ಮ ಸಹಾಯಕ್ಕೆ ಧನ್ಯವಾದಗಳು","ro":"nimma sahaayakke dhanyavaadagalu","en":"Thank you for your help","bd":[["nimma","your"],["sahaayakke","for help"],["dhanyavaadagalu","thank you"]],"id":"u6l5p1"},{"kn":"ತೊಂದರೆ ಆಯ್ತಾ?","ro":"tondare aaytaa?","en":"Did I trouble you?","bd":[["tondare","trouble"],["aaytaa","did it happen"]],"id":"u6l5p2"},{"kn":"ಏನೂ ತೊಂದರೆ ಇಲ್ಲ","ro":"enoo tondare illa","en":"No trouble at all","bd":[["enoo","any"],["tondare","trouble"],["illa","there isn't"]],"id":"u6l5p3"},{"kn":"ಒಳ್ಳೆಯ ದಿನ","ro":"olleya dina","en":"Have a good day","bd":[["olleya","good"],["dina","day"]],"id":"u6l5p4"},{"kn":"ಕನ್ನಡ ಕಲಿಯೋಕೆ ಇಷ್ಟ","ro":"Kannada kaliyoke ishta","en":"I like learning Kannada","bd":[["Kannada","Kannada"],["kaliyoke","to learn"],["ishta","liking"]],"id":"u6l5p5"},{"kn":"ನೀವು ತುಂಬಾ ಒಳ್ಳೆಯವರು","ro":"neevu tumba olleyavaru","en":"You're very kind","bd":[["neevu","you (polite)"],["tumba","very"],["olleyavaru","good person"]],"id":"u6l5p6"},{"kn":"ಶುಭ ರಾತ್ರಿ","ro":"shubha raatri","en":"Good night","bd":[["shubha","good"],["raatri","night"]],"id":"u6l5p7"}]}]}]};
+  var EMAIL = 'arabindadas214@gmail.com';
+  var app = document.getElementById('app'), tabsEl = document.getElementById('tabs');
+  var SPK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+  var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  var LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+  var XICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+  var SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>';
+
+  /* flatten lessons */
+  var LESSONS = [];
+  C.units.forEach(function (U, ui) { U.lessons.forEach(function (L, li) { L.ui = ui; L.li = li; L.gi = LESSONS.length; L.id = 'u' + (ui + 1) + 'l' + (li + 1); LESSONS.push(L); }); });
+  var ALL = []; LESSONS.forEach(function (L) { L.items.forEach(function (it) { it.L = L; ALL.push(it); }); });
+
+  /* saved state (this device only) */
+  var KEY = 'maatu-v1', mem = null;
+  function load() { var d = { done: {}, xp: 0, streak: 0, last: '', script: true, checked: {} }; try { var v = localStorage.getItem(KEY); if (v) Object.assign(d, JSON.parse(v)); } catch (e) { if (mem) Object.assign(d, mem); } return d; }
+  var S = load();
+  function save() { mem = S; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  function today(o) { var d = new Date(Date.now() + (o || 0)); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+
+  /* helpers */
+  function h(tag, cls, html) { var n = document.createElement(tag); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pick(a, n, not) { return shuffle(a.filter(function (x) { return not.indexOf(x) < 0; })).slice(0, n); }
+  var tt; function toast(m) { var t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(function () { t.classList.remove('show'); }, 2800); }
+  function phraseText(it) { return '<span class="kn" style="font-weight:700">' + esc(it.ro) + '</span>' + (S.script ? ' <span class="kn" style="opacity:.7">' + esc(it.kn) + '</span>' : ''); }
+  function track(path, title) { try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title || path, event: true }); } catch (e) {} }
+
+  /* audio: the device's Kannada voice, when it has one */
+  var knVoice = null;
+  function findVoice() { try { var vs = speechSynthesis.getVoices(); knVoice = vs.find(function (v) { return /^kn/i.test(v.lang); }) || null; } catch (e) { knVoice = null; } }
+  if ('speechSynthesis' in window) { findVoice(); speechSynthesis.onvoiceschanged = findVoice; }
+  function speak(it) {
+    if (!('speechSynthesis' in window) || !knVoice) { toast('This device has no Kannada voice yet. Native recordings are coming.'); return; }
+    try { speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(it.kn); u.voice = knVoice; u.lang = knVoice.lang; u.rate = 0.8; speechSynthesis.speak(u); } catch (e) {}
+  }
+  function sayBtn(it, big) { var b = h('button', 'say' + (big ? ' big' : ''), SPK); b.type = 'button'; b.setAttribute('aria-label', 'Listen to ' + it.ro); b.addEventListener('click', function () { speak(it); }); return b; }
+
+  /* sounds */
+  var ac = null;
+  function blip(kind) {
+    try {
+      if (!ac) { var A = window.AudioContext || window.webkitAudioContext; if (!A) return; ac = new A(); }
+      if (ac.state === 'suspended') ac.resume();
+      var t = ac.currentTime + 0.01;
+      var notes = kind === 'good' ? [[660, 0], [990, 0.09]] : kind === 'bad' ? [[240, 0], [190, 0.12]] : [[523, 0], [659, 0.1], [784, 0.2], [1046, 0.3]];
+      notes.forEach(function (n) { var o = ac.createOscillator(), g = ac.createGain(); o.type = 'triangle'; o.frequency.value = n[0]; g.gain.setValueAtTime(0.0001, t + n[1]); g.gain.exponentialRampToValueAtTime(0.18, t + n[1] + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + n[1] + 0.3); o.connect(g); g.connect(ac.destination); o.start(t + n[1]); o.stop(t + n[1] + 0.35); });
+    } catch (e) {}
+  }
+
+  /* share */
+  function share() {
+    var url = 'https://auronara.com/maatu/', text = 'Maatu: learn everyday Bengaluru Kannada from English. 213 phrases for autos, markets, home and work. If you speak Kannada, help check them.';
+    if (navigator.share) { navigator.share({ title: 'Maatu', text: text, url: url }).catch(function () {}); return; }
+    if (navigator.clipboard) navigator.clipboard.writeText(text + ' ' + url).then(function () { toast('Link copied. Paste it anywhere.'); }, function () { toast(url); });
+    else toast(url);
+  }
+
+  /* ---------- tabs ---------- */
+  var tab = 'learn';
+  function setTab(t) { tab = t; Array.prototype.forEach.call(tabsEl.querySelectorAll('button'), function (b) { b.setAttribute('aria-current', b.dataset.tab === t ? 'page' : 'false'); }); if (t === 'learn') learn(); else if (t === 'guide') guide(); else check(); }
+  Array.prototype.forEach.call(tabsEl.querySelectorAll('button'), function (b) { b.addEventListener('click', function () { setTab(b.dataset.tab); }); });
+  function showTabs(on) { tabsEl.hidden = !on; app.classList.toggle('has-tabs', on); }
+  function topbar() {
+    var top = h('div', 'top');
+    top.appendChild(h('div', 'logo', '<i class="kn">ಮಾ</i>Maatu'));
+    top.appendChild(h('span', 'chip', S.streak ? S.streak + '-day streak' : 'No streak yet'));
+    top.appendChild(h('span', 'chip', S.xp + ' XP'));
+    var sb = h('button', 'iconbtn', SHARE); sb.type = 'button'; sb.setAttribute('aria-label', 'Share Maatu'); sb.addEventListener('click', share);
+    top.appendChild(sb);
+    return top;
+  }
+
+  /* ---------- learn ---------- */
+  function nextLesson() { for (var i = 0; i < LESSONS.length; i++) if (!S.done[LESSONS[i].id]) return i; return LESSONS.length; }
+  function learn() {
+    showTabs(true); app.innerHTML = '';
+    app.appendChild(topbar());
+    var course = h('div', 'course');
+    course.appendChild(h('div', '', '<span class="eyebrow">English to Kannada</span><h1>Speak Bengaluru Kannada</h1>'));
+    var sw = h('button', 'switch', '<span class="t"></span>Kannada script');
+    sw.type = 'button'; sw.setAttribute('role', 'switch'); sw.setAttribute('aria-checked', S.script ? 'true' : 'false');
+    sw.addEventListener('click', function () { S.script = !S.script; save(); learn(); toast(S.script ? 'Showing Kannada script under each phrase' : 'Showing English letters only'); });
+    course.appendChild(sw);
+    app.appendChild(course);
+    var inv = h('button', 'invite', '<i class="kn">ಕ</i><div><b>Speak Kannada? Help us check.</b><span>Tap ✓ or suggest a better way to say any phrase.</span></div>');
+    inv.type = 'button'; inv.addEventListener('click', function () { setTab('check'); });
+    app.appendChild(inv);
+    var n = nextLesson();
+    C.units.forEach(function (U, ui) {
+      var ls = LESSONS.filter(function (L) { return L.ui === ui; });
+      var done = ls.filter(function (L) { return S.done[L.id]; }).length;
+      var reached = ls[0].gi <= n;
+      var unit = h('section', 'unit' + (reached ? '' : ' later'));
+      unit.innerHTML = '<div class="art kn">' + ['ಕ', 'ದಾ', 'ಊ', 'ಮ', 'ಸ್ನೇ', 'ಸ'][ui] + '</div><div class="no">Unit ' + (ui + 1) + ' · ' + ls.reduce(function (a, L) { return a + L.items.length; }, 0) + ' phrases</div><h2>' + esc(U.title) + '</h2><p>' + esc(U.sub) + '</p><div class="meter"><b style="width:' + Math.round(done / ls.length * 100) + '%"></b></div>';
+      app.appendChild(unit);
+      var ul = h('ul', 'trail');
+      ls.forEach(function (L) {
+        var st = S.done[L.id] ? 'done' : L.gi === n ? 'cur' : 'locked';
+        var li = h('li', st);
+        li.appendChild(h('div', 'dot', st === 'done' ? CHECK : st === 'locked' ? LOCK : String(L.li + 1)));
+        li.appendChild(h('div', 'lt', '<b>' + esc(L.title) + '</b><span>' + esc(L.goal) + '</span>'));
+        if (st !== 'locked') {
+          var b = h('button', 'go' + (st === 'done' ? ' soft' : ''), st === 'done' ? 'Practise' : (L.gi === 0 ? 'Start' : 'Continue'));
+          b.type = 'button'; b.addEventListener('click', function () { startLesson(L.gi); });
+          li.appendChild(b);
+        } else {
+          li.addEventListener('click', function () { toast('Finish the lessons before this one to unlock it. Every phrase is also open in the Check tab.'); });
+        }
+        ul.appendChild(li);
+      });
+      app.appendChild(ul);
+    });
+    app.appendChild(h('p', 'note', 'Maatu is an early version by <a href="/" style="color:inherit">Arabinda Narayan Das</a>. Native Kannada speakers are still checking these phrases. Your progress is saved on this device only.'));
+    var cur = app.querySelector('.trail li.cur');
+    if (cur && n > 0) setTimeout(function () { cur.scrollIntoView({ block: 'center' }); }, 30); else window.scrollTo(0, 0);
+  }
+
+  /* ---------- guide ---------- */
+  function guide() {
+    showTabs(true); app.innerHTML = '';
+    app.appendChild(topbar());
+    app.appendChild(h('div', 'pagehead', '<span class="eyebrow">Guide</span><h1>Kannada in ten minutes</h1><p>Read this once. It explains how the phrases work, so you can make your own.</p>'));
+    var g1 = h('section', 'gsec');
+    g1.innerHTML = '<h2>How to read our English letters</h2>' +
+      '<p>Kannada sounds are written here in plain English letters. A few rules make them easy to say.</p>' +
+      '<div class="tablewrap"><table><thead><tr><th>Letters</th><th>Say it like</th><th>Example</th></tr></thead><tbody>' +
+      '<tr><td class="r">a</td><td>the u in "cup"</td><td class="r">anna</td></tr>' +
+      '<tr><td class="r">aa</td><td>the a in "father", held longer</td><td class="r">baa</td></tr>' +
+      '<tr><td class="r">i / ee</td><td>"sit" / "seed"</td><td class="r">illi, neeru</td></tr>' +
+      '<tr><td class="r">u / oo</td><td>"put" / "pool"</td><td class="r">ondu, mooru</td></tr>' +
+      '<tr><td class="r">e</td><td>the e in "they"</td><td class="r">beku</td></tr>' +
+      '<tr><td class="r">o</td><td>the o in "go"</td><td class="r">hogi</td></tr>' +
+      '<tr><td class="r">double letters</td><td>hold the sound a beat longer</td><td class="r">illa, akka</td></tr>' +
+      '</tbody></table></div>' +
+      '<p style="margin-top:10px">Long and short vowels change meaning, so hold the doubled ones. Kannada also has sounds made with the tongue curled back (like the d in ಡ). Our letters don\'t mark these yet, so the listen button and native speakers are your best guide.</p>';
+    app.appendChild(g1);
+    var g2 = h('section', 'gsec');
+    var pats = [
+      ['The verb goes last', 'English says "I work here". Kannada says "I here work do".', 'naanu illi kelasa maadteeni', 'I work here'],
+      ['End requests with -i to be polite', 'hogu means "go" to a friend. hogi is the polite form for anyone else.', 'illi nillisi', 'Stop here (polite)'],
+      ['Add -aa to ask a question', 'Turn any statement into a yes or no question.', 'seat ide → seat ideyaa?', 'There is a seat → Is there a seat?'],
+      ['-ge means "to"', 'Add it to any place you want to go.', 'Indiranagar-ge', 'to Indiranagar'],
+      ['-alli means "in" or "at"', 'Add it to a place to say where something is.', 'Bengaloorinalli', 'in Bengaluru'],
+      ['beku and beda', 'beku means "I want / I need". beda means "I don\'t want". Put them after the thing.', 'parcel beku · khaara beda', 'I want it packed · No spice']
+    ];
+    g2.innerHTML = '<h2>Six patterns that unlock most sentences</h2>' + pats.map(function (p) { return '<div class="pattern"><b>' + esc(p[0]) + '</b>' + esc(p[1]) + '<div class="ex"><span>' + esc(p[2]) + '</span> = ' + esc(p[3]) + '</div></div>'; }).join('');
+    app.appendChild(g2);
+    var nums = [['1', 'ಒಂದು', 'ondu'], ['2', 'ಎರಡು', 'eradu'], ['3', 'ಮೂರು', 'mooru'], ['4', 'ನಾಲ್ಕು', 'naalku'], ['5', 'ಐದು', 'aidu'], ['6', 'ಆರು', 'aaru'], ['7', 'ಏಳು', 'elu'], ['8', 'ಎಂಟು', 'entu'], ['9', 'ಒಂಬತ್ತು', 'ombattu'], ['10', 'ಹತ್ತು', 'hattu'], ['20', 'ಇಪ್ಪತ್ತು', 'ippattu'], ['50', 'ಐವತ್ತು', 'aivattu'], ['100', 'ನೂರು', 'nooru'], ['1,000', 'ಸಾವಿರ', 'saavira']];
+    var g3 = h('section', 'gsec');
+    g3.innerHTML = '<h2>Numbers</h2><div class="tablewrap"><table><thead><tr><th>Number</th><th>Kannada</th><th>Say</th></tr></thead><tbody>' + nums.map(function (r) { return '<tr><td>' + r[0] + '</td><td class="k">' + r[1] + '</td><td class="r">' + r[2] + '</td></tr>'; }).join('') + '</tbody></table></div><p style="margin-top:10px">Prices are usually said with these numbers, but many people mix in English numbers too. Both are fine.</p>';
+    app.appendChild(g3);
+    var days = [['Sunday', 'ಭಾನುವಾರ', 'bhaanuvaara'], ['Monday', 'ಸೋಮವಾರ', 'somavaara'], ['Tuesday', 'ಮಂಗಳವಾರ', 'mangalavaara'], ['Wednesday', 'ಬುಧವಾರ', 'budhavaara'], ['Thursday', 'ಗುರುವಾರ', 'guruvaara'], ['Friday', 'ಶುಕ್ರವಾರ', 'shukravaara'], ['Saturday', 'ಶನಿವಾರ', 'shanivaara']];
+    var g4 = h('section', 'gsec');
+    g4.innerHTML = '<h2>Days of the week</h2><div class="tablewrap"><table><thead><tr><th>Day</th><th>Kannada</th><th>Say</th></tr></thead><tbody>' + days.map(function (r) { return '<tr><td>' + r[0] + '</td><td class="k">' + r[1] + '</td><td class="r">' + r[2] + '</td></tr>'; }).join('') + '</tbody></table></div><p style="margin-top:10px">Every day ends in -vaara, which means "day of the week".</p>';
+    app.appendChild(g4);
+    var vow = [['ಅ', 'a'], ['ಆ', 'aa'], ['ಇ', 'i'], ['ಈ', 'ee'], ['ಉ', 'u'], ['ಊ', 'oo'], ['ಎ', 'e (short)'], ['ಏ', 'e (long)'], ['ಐ', 'ai'], ['ಒ', 'o (short)'], ['ಓ', 'o (long)'], ['ಔ', 'au']];
+    var g5 = h('section', 'gsec');
+    g5.innerHTML = '<h2>The script, when you\'re ready</h2><p>You can learn every phrase in English letters first. When you want to read signs and bus boards, start with these vowels.</p><div class="letters">' + vow.map(function (v) { return '<div><b>' + v[0] + '</b><span>' + v[1] + '</span></div>'; }).join('') + '</div><p style="margin-top:12px">Kannada is written left to right. Each consonant carries a vowel sound, and small marks around it change that vowel. Turn on "Kannada script" in the Learn tab to see it under every phrase.</p>';
+    app.appendChild(g5);
+    app.appendChild(h('p', 'note', 'Spotted something off? Use the Check tab to tell us.'));
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- check (for native speakers) ---------- */
+  var filter = 'all';
+  function check() {
+    showTabs(true); app.innerHTML = '';
+    app.appendChild(topbar());
+    app.appendChild(h('div', 'pagehead', '<span class="eyebrow">For Kannada speakers</span><h1>Check our Kannada</h1><p>We want every phrase to sound like a real Bengalurean, not a textbook. Tap ✓ if a phrase is right. If there\'s a better or more natural way to say it, suggest a fix and it will come to us by email.</p>'));
+    var f = h('div', 'filters');
+    var opts = [['all', 'All ' + ALL.length]].concat(C.units.map(function (U, i) { return ['u' + i, (i + 1) + '. ' + U.title]; })).concat([['todo', 'Not checked yet']]);
+    opts.forEach(function (o) {
+      var b = h('button', '', esc(o[1])); b.type = 'button'; b.setAttribute('aria-pressed', filter === o[0] ? 'true' : 'false');
+      b.addEventListener('click', function () { filter = o[0]; check(); });
+      f.appendChild(b);
+    });
+    app.appendChild(f);
+    var checkedN = Object.keys(S.checked).length;
+    app.appendChild(h('div', 'progressline', 'You\'ve checked <b>' + checkedN + '</b> of ' + ALL.length + ' phrases. Thank you.'));
+    var list = h('div', 'citems');
+    ALL.filter(function (it) {
+      if (filter === 'all') return true;
+      if (filter === 'todo') return !S.checked[it.id];
+      return it.L.ui === +filter.slice(1);
+    }).forEach(function (it) { list.appendChild(checkItem(it)); });
+    if (!list.children.length) list.appendChild(h('p', 'note', 'Nothing left here. You\'ve checked every phrase in this list.'));
+    app.appendChild(list);
+    app.appendChild(h('p', 'note', 'Fixes open your email app with the details filled in. Nothing is sent until you press send. ✓ taps are counted anonymously.'));
+    window.scrollTo(0, 0);
+  }
+  function checkItem(it) {
+    var st = S.checked[it.id];
+    var card = h('div', 'citem' + (st === 'ok' ? ' ok' : st === 'fix' ? ' fixed' : ''));
+    var head = h('div', 'head');
+    head.appendChild(h('div', '', '<div class="kn-big">' + esc(it.kn) + '</div><div class="ro">' + esc(it.ro) + '</div><div class="en">' + esc(it.en) + '</div>'));
+    head.appendChild(sayBtn(it));
+    card.appendChild(head);
+    card.appendChild(h('div', 'where', 'Unit ' + (it.L.ui + 1) + ' · ' + esc(it.L.title) + ' · ' + it.id));
+    var acts = h('div', 'acts');
+    var yes = h('button', 'yes', '✓ Sounds right'); yes.type = 'button'; yes.setAttribute('aria-pressed', st === 'ok' ? 'true' : 'false');
+    var fix = h('button', 'fix', '✎ Suggest a fix'); fix.type = 'button'; fix.setAttribute('aria-pressed', st === 'fix' ? 'true' : 'false');
+    acts.appendChild(yes); acts.appendChild(fix); card.appendChild(acts);
+    var form = null;
+    yes.addEventListener('click', function () {
+      if (S.checked[it.id] === 'ok') return;
+      S.checked[it.id] = 'ok'; save(); track('maatu-ok-' + it.id, 'Maatu ✓ ' + it.ro);
+      yes.setAttribute('aria-pressed', 'true'); fix.setAttribute('aria-pressed', 'false');
+      card.className = 'citem ok'; if (form) { form.remove(); form = null; }
+      toast('Thanks! Marked as right.');
+    });
+    fix.addEventListener('click', function () {
+      if (form) { form.remove(); form = null; return; }
+      form = h('div', 'fixform');
+      form.innerHTML = '<label for="kn-' + it.id + '">Better Kannada</label><input class="knin" id="kn-' + it.id + '" value="' + esc(it.kn) + '">' +
+        '<label for="ro-' + it.id + '">How it sounds in English letters (optional)</label><input id="ro-' + it.id + '" value="' + esc(it.ro) + '">' +
+        '<label for="nt-' + it.id + '">What should change, and why? (optional)</label><textarea id="nt-' + it.id + '" rows="3" placeholder="For example: people in Bengaluru usually say ... instead"></textarea>' +
+        '<div class="row2"><button type="button" class="send">Send by email</button><button type="button" class="alt copy">Copy text</button></div><small>Your email app opens with this filled in. If it doesn\'t, copy the text and send it to ' + EMAIL + '.</small>';
+      card.appendChild(form);
+      function body() {
+        return 'Phrase: ' + it.id + ' (Unit ' + (it.L.ui + 1) + ', ' + it.L.title + ')\n' +
+          'English: ' + it.en + '\nCurrent Kannada: ' + it.kn + '\nCurrent English letters: ' + it.ro + '\n\n' +
+          'Suggested Kannada: ' + form.querySelector('#kn-' + it.id).value + '\nSuggested English letters: ' + form.querySelector('#ro-' + it.id).value + '\nNote: ' + form.querySelector('#nt-' + it.id).value + '\n';
+      }
+      function mark() { S.checked[it.id] = 'fix'; save(); card.className = 'citem fixed'; fix.setAttribute('aria-pressed', 'true'); yes.setAttribute('aria-pressed', 'false'); track('maatu-fix-' + it.id, 'Maatu fix ' + it.ro); }
+      form.querySelector('.send').addEventListener('click', function () {
+        mark();
+        window.location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Maatu fix: ' + it.id + ' "' + it.en + '"') + '&body=' + encodeURIComponent(body());
+      });
+      form.querySelector('.copy').addEventListener('click', function () {
+        var txt = 'Maatu fix\n' + body();
+        if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function () { mark(); toast('Copied. Paste it into an email to ' + EMAIL); }, function () { toast('Could not copy. Please email ' + EMAIL); });
+        else toast('Please email ' + EMAIL);
+      });
+      form.querySelector('#kn-' + it.id).focus();
+    });
+    return card;
+  }
+
+  /* ---------- lesson ---------- */
+  var R = null;
+  function startLesson(gi) {
+    var L = LESSONS[gi], items = L.items, idx = items.map(function (_, i) { return i; }), steps = [];
+    items.forEach(function (_, i) {
+      steps.push({ t: 'intro', i: i });
+      if (i % 2 === 1) steps.push({ t: i % 4 === 1 ? 'meaning' : 'reverse', i: i - Math.floor(Math.random() * 2) });
+    });
+    steps.push({ t: 'match', set: shuffle(idx).slice(0, 4) });
+    var multi = shuffle(idx.filter(function (i) { return items[i].ro.split(' ').length >= 2; }));
+    multi.slice(0, 2).forEach(function (i) { steps.push({ t: 'build', i: i }); });
+    if (knVoice) steps.push({ t: 'listen', i: shuffle(idx)[0] });
+    steps.push({ t: 'reverse', i: shuffle(idx)[0] });
+    steps.push({ t: 'situation' });
+    R = { gi: gi, L: L, steps: steps, pos: 0, right: 0, asked: 0, retried: {} };
+    showTabs(false);
+    track('maatu-start-' + L.id, 'Maatu start ' + L.title);
+    renderStep();
+  }
+  function frame() {
+    app.innerHTML = '';
+    var head = h('div', 'lhead');
+    var x = h('button', 'x', XICON); x.type = 'button'; x.setAttribute('aria-label', 'Leave lesson');
+    x.addEventListener('click', function () { setTab('learn'); });
+    head.appendChild(x);
+    head.appendChild(h('div', 'bar', '<b style="width:' + Math.round(R.pos / R.steps.length * 100) + '%"></b>'));
+    app.appendChild(head);
+    var body = h('div', 'body'); app.appendChild(body);
+    var foot = h('div', 'foot'); app.appendChild(foot);
+    window.scrollTo(0, 0);
+    return { body: body, foot: foot };
+  }
+  function cta(foot, label, fn, disabled) { foot.innerHTML = ''; var b = h('button', 'main', esc(label)); b.type = 'button'; b.disabled = !!disabled; b.addEventListener('click', fn); foot.appendChild(b); return b; }
+  function next() { R.pos++; if (R.pos < R.steps.length) renderStep(); else finish(); }
+  function result(f, ok, it) {
+    R.asked++; if (ok) R.right++;
+    blip(ok ? 'good' : 'bad');
+    var st = R.steps[R.pos];
+    if (!ok && !R.retried[R.pos] && st.t !== 'situation') { R.retried[R.pos] = 1; R.steps.push(Object.assign({}, st)); R.retried[R.steps.length - 1] = 1; }
+    f.foot.className = 'foot ' + (ok ? 'good' : 'bad');
+    f.foot.innerHTML = '<h3>' + (ok ? ['Correct!', 'Nice!', 'Sari!', 'Super!', 'Sakkath!'][Math.floor(Math.random() * 5)] : 'Not quite') + '</h3><p>' + phraseText(it) + ' means <b>' + esc(it.en) + '</b>.' + (ok ? '' : ' We\'ll ask again at the end.') + '</p>';
+    var b = h('button', 'main', 'Continue'); b.type = 'button'; b.addEventListener('click', next); f.foot.appendChild(b);
+    b.focus({ preventScroll: true });
+  }
+  function choiceList(f, opts, correct, render, it) {
+    var box = h('div', 'opts');
+    opts.forEach(function (o) {
+      var b = h('button', 'opt', render(o)); b.type = 'button';
+      b.addEventListener('click', function () {
+        Array.prototype.forEach.call(box.children, function (c) { c.disabled = true; c.classList.add('dim'); });
+        b.classList.remove('dim');
+        var ok = o === correct;
+        b.classList.add(ok ? 'good' : 'bad');
+        if (!ok) { var r = box.children[opts.indexOf(correct)]; r.classList.remove('dim'); r.classList.add('good'); }
+        result(f, ok, it);
+      });
+      box.appendChild(b);
+    });
+    f.body.appendChild(box);
+  }
+  function kdisp(it) { return '<span class="r">' + esc(it.ro) + '</span>' + (S.script ? '<span class="s">' + esc(it.kn) + '</span>' : ''); }
+  function phraseCard(it, withEn) {
+    var card = h('div', 'phrase');
+    var row = h('div', 'row'); var t = h('div', '');
+    t.innerHTML = '<div class="ro">' + esc(it.ro) + '</div>' + (S.script ? '<div class="script">' + esc(it.kn) + '</div>' : '');
+    row.appendChild(t); row.appendChild(sayBtn(it)); card.appendChild(row);
+    if (withEn) {
+      card.appendChild(h('div', 'en', esc(it.en)));
+      if (it.bd) card.appendChild(h('div', 'bd', it.bd.map(function (p) { return '<span><b>' + esc(p[0]) + '</b> · ' + esc(p[1]) + '</span>'; }).join('')));
+    }
+    return card;
+  }
+  function renderStep() {
+    var st = R.steps[R.pos], items = R.L.items, f = frame(), it = items[st.i];
+    if (st.t === 'intro') {
+      f.body.appendChild(h('div', 'label', 'New phrase · ' + (st.i + 1) + ' of ' + items.length));
+      f.body.appendChild(h('div', 'ask', 'Learn this one'));
+      f.body.appendChild(phraseCard(it, true));
+      if (it.tip) f.body.appendChild(h('div', 'tip', '<b>Tip</b><span>' + esc(it.tip) + '</span>'));
+      cta(f.foot, 'Got it', next);
+    } else if (st.t === 'meaning' || st.t === 'listen') {
+      f.body.appendChild(h('div', 'label', st.t === 'listen' ? 'Listen' : 'Practice'));
+      if (st.t === 'listen') { f.body.appendChild(h('div', 'ask', 'What do you hear?')); f.body.appendChild(sayBtn(it, true)); setTimeout(function () { speak(it); }, 250); }
+      else { f.body.appendChild(h('div', 'ask', 'What does this mean?')); var p = phraseCard(it, false); p.style.marginBottom = '16px'; f.body.appendChild(p); }
+      choiceList(f, shuffle([it].concat(pick(items, 3, [it]))), it, function (o) { return esc(o.en); }, it);
+      f.foot.innerHTML = '';
+    } else if (st.t === 'reverse') {
+      f.body.appendChild(h('div', 'label', 'Practice'));
+      f.body.appendChild(h('div', 'ask', 'How do you say “' + esc(it.en) + '”?'));
+      choiceList(f, shuffle([it].concat(pick(items, 3, [it]))), it, kdisp, it);
+      f.foot.innerHTML = '';
+    } else if (st.t === 'build') {
+      f.body.appendChild(h('div', 'label', 'Build it'));
+      f.body.appendChild(h('div', 'ask', 'Say “' + esc(it.en) + '” in Kannada'));
+      var answer = it.ro.split(' ');
+      var others = []; items.forEach(function (o) { if (o !== it) o.ro.split(' ').forEach(function (w) { if (answer.indexOf(w) < 0 && others.indexOf(w) < 0) others.push(w); }); });
+      var tiles = shuffle(answer.concat(shuffle(others).slice(0, 2)));
+      var slots = h('div', 'slots'), pool = h('div', 'tiles'), chosen = [], checkBtn;
+      f.body.appendChild(slots); f.body.appendChild(pool);
+      tiles.forEach(function (w) {
+        var b = h('button', 'tile', esc(w)); b.type = 'button';
+        b.addEventListener('click', function () {
+          if (b.classList.contains('used')) return;
+          b.classList.add('used');
+          var s = h('button', 'tile', esc(w)); s.type = 'button';
+          var entry = { w: w }; chosen.push(entry);
+          s.addEventListener('click', function () { chosen.splice(chosen.indexOf(entry), 1); s.remove(); b.classList.remove('used'); checkBtn.disabled = !chosen.length; });
+          slots.appendChild(s); checkBtn.disabled = false;
+        });
+        pool.appendChild(b);
+      });
+      checkBtn = cta(f.foot, 'Check', function () {
+        var ok = chosen.map(function (c) { return c.w; }).join(' ') === it.ro;
+        Array.prototype.forEach.call(pool.children, function (b) { b.disabled = true; });
+        Array.prototype.forEach.call(slots.children, function (b) { b.disabled = true; });
+        result(f, ok, it);
+      }, true);
+    } else if (st.t === 'match') {
+      f.body.appendChild(h('div', 'label', 'Match'));
+      f.body.appendChild(h('div', 'ask', 'Tap the matching pairs'));
+      var set = st.set.map(function (i) { return items[i]; });
+      var grid = h('div', 'pairs'), lc = h('div', 'col'), rc = h('div', 'col');
+      grid.appendChild(lc); grid.appendChild(rc); f.body.appendChild(grid);
+      var selL = null, selR = null, matched = 0, misses = 0;
+      function tryPair() {
+        if (!selL || !selR) return;
+        var a = selL, b = selR; selL = selR = null;
+        if (a._it === b._it) { a.classList.remove('sel'); b.classList.remove('sel'); a.classList.add('ok'); b.classList.add('ok'); a.disabled = b.disabled = true; matched++; blip('good');
+          if (matched === set.length) { R.asked++; if (!misses) R.right++; cta(f.foot, 'Continue', next); } }
+        else { misses++; blip('bad'); a.classList.add('no'); b.classList.add('no'); setTimeout(function () { a.classList.remove('no', 'sel'); b.classList.remove('no', 'sel'); }, 450); }
+      }
+      shuffle(set).forEach(function (x) { var b = h('button', 'kn-btn', esc(x.ro) + (S.script ? '<br><span style="font-size:.85em;opacity:.7">' + esc(x.kn) + '</span>' : '')); b.type = 'button'; b._it = x; b.addEventListener('click', function () { if (selL) selL.classList.remove('sel'); selL = b; b.classList.add('sel'); if (knVoice) speak(x); tryPair(); }); lc.appendChild(b); });
+      shuffle(set).forEach(function (x) { var b = h('button', '', esc(x.en)); b.type = 'button'; b._it = x; b.addEventListener('click', function () { if (selR) selR.classList.remove('sel'); selR = b; b.classList.add('sel'); tryPair(); }); rc.appendChild(b); });
+      cta(f.foot, 'Continue', next, true);
+    } else if (st.t === 'situation') {
+      var s = R.L.situation, ans = items[s.a];
+      f.body.appendChild(h('div', 'label', 'Real life'));
+      f.body.appendChild(h('div', 'ask', s.mode === 'meaning' ? 'What does it mean?' : 'What would you say?'));
+      f.body.appendChild(h('div', 'scene', '<i>?</i><span>' + esc(s.q) + '</span>'));
+      var opts3 = shuffle([ans].concat(pick(items, 3, [ans])));
+      if (s.mode === 'meaning') choiceList(f, opts3, ans, function (o) { return esc(o.en); }, ans);
+      else choiceList(f, opts3, ans, kdisp, ans);
+      f.foot.innerHTML = '';
+    }
+  }
+  function finish() {
+    blip('win');
+    var acc = R.asked ? Math.round(R.right / R.asked * 100) : 100;
+    var xp = 10 + (acc === 100 ? 5 : 0);
+    var first = !S.done[R.L.id];
+    S.done[R.L.id] = true; S.xp += xp;
+    if (S.last !== today()) { S.streak = S.last === today(-864e5) ? S.streak + 1 : 1; S.last = today(); }
+    save();
+    if (first) track('maatu-done-' + R.L.id, 'Maatu done ' + R.L.title);
+    app.innerHTML = '';
+    var w = h('div', 'done-wrap');
+    w.appendChild(h('div', 'label', 'Unit ' + (R.L.ui + 1) + ' · Lesson ' + (R.L.li + 1) + ' complete'));
+    w.appendChild(h('h2', '', acc === 100 ? 'Tumba chennaagide!' : 'Chennaagide!'));
+    w.appendChild(h('p', '', acc === 100 ? 'Perfect score. That means "very good" in Kannada.' : 'That means "good" in Kannada. Keep going.'));
+    w.appendChild(h('div', 'stats', '<div><b>+' + xp + '</b><span>XP earned</span></div><div><b>' + acc + '%</b><span>Accuracy</span></div>'));
+    w.appendChild(h('div', 'label', 'Phrases you learned'));
+    var lw = h('div', 'learned');
+    R.L.items.forEach(function (it) { var d = h('div', ''); d.appendChild(h('span', '', '<b>' + esc(it.ro) + (S.script ? ' <span style="opacity:.6;font-weight:600">' + esc(it.kn) + '</span>' : '') + '</b><small>' + esc(it.en) + '</small>')); d.appendChild(sayBtn(it)); lw.appendChild(d); });
+    w.appendChild(lw);
+    app.appendChild(w);
+    var foot = h('div', 'foot'); app.appendChild(foot);
+    var n = nextLesson();
+    var b = h('button', 'main', n < LESSONS.length ? 'Next: ' + esc(LESSONS[n].title) : 'Back to the course');
+    b.type = 'button'; b.addEventListener('click', function () { if (n < LESSONS.length) startLesson(n); else setTab('learn'); });
+    foot.appendChild(b);
+    if (n < LESSONS.length) { var hb = h('button', 'go soft', 'Back to the course'); hb.type = 'button'; hb.style.cssText = 'width:100%;margin-top:10px;min-height:48px'; hb.addEventListener('click', function () { setTab('learn'); }); foot.appendChild(hb); }
+    window.scrollTo(0, 0);
+    if (n >= LESSONS.length) toast('You finished the whole course. Shabash! More units are coming.');
+  }
+
+  window.__maatu = { get R() { return R; }, setTab: setTab };
+  var start = (location.hash || '').replace('#', '');
+  setTab(start === 'check' || start === 'guide' ? start : 'learn');
+  if ('serviceWorker' in navigator) window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+})();
+</script>
+<script data-goatcounter="https://auro.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
