@@ -30,6 +30,11 @@
   #app { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
   .stage { position: relative; width: min(100%, calc((100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)) * 360 / 560)); aspect-ratio: 360 / 560; background: var(--card); overflow: hidden; user-select: none; -webkit-user-select: none; }
   @media (min-width: 500px) { .stage { border: 3px solid var(--ink); border-radius: 22px; box-shadow: 0 8px 0 var(--ink); max-height: calc(100dvh - 40px); } }
+  .mute { position: absolute; top: 10px; right: 10px; z-index: 5; width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--line); background: rgba(255,255,255,0.92); color: var(--ink); display: flex; align-items: center; justify-content: center; padding: 0; cursor: pointer; }
+  .mute svg { width: 20px; height: 20px; }
+  .mute .off { display: none; }
+  .mute.is-off .on { display: none; }
+  .mute.is-off .off { display: block; }
   canvas { display: block; width: 100%; height: 100%; touch-action: none; }
   .ov { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 20px; background: rgba(232,241,255,0.93); overflow-y: auto; }
   .ov h2 { font: 400 2.4rem/1.1 var(--display); margin: 0; }
@@ -54,6 +59,10 @@
 <div id="app">
   <div class="stage">
     <canvas id="cv" width="360" height="560" aria-label="Game area"></canvas>
+    <button type="button" class="mute" id="mute" aria-label="Music on" title="Music">
+      <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+      <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M22 9l-6 6"/><path d="M16 9l6 6"/></svg>
+    </button>
     <div class="ov" id="ov">
       <h2 id="ovt">Stack Tap</h2>
       <p id="ovp"></p>
@@ -110,6 +119,74 @@
     return { x: (e.clientX - r.left) * W / r.width, y: (e.clientY - r.top) * H / r.height };
   }
   function buzz(ms) { try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) {} }
+
+  // Original background music, generated live with the Web Audio API (no audio files, so nothing to license).
+  var music = (function () {
+    var KEY = 'stack-tap-music', ac = null, master = null, timer = null, nextT = 0, step = 0, want = false;
+    var on = true;
+    try { on = localStorage.getItem(KEY) !== 'off'; } catch (e) {}
+    var BPM = 100, EIGHTH = 60 / BPM / 2;
+    var CH = [[261.63, 329.63, 392.0], [220.0, 261.63, 329.63], [174.61, 220.0, 261.63], [196.0, 246.94, 293.66]];
+    var BASS = [130.81, 110.0, 87.31, 98.0];
+    var MEL = [
+      [[659.25,0,783.99,0,659.25,0,587.33,0],[523.25,0,659.25,0,440,0,523.25,0],[440,0,523.25,0,659.25,0,523.25,0],[587.33,0,493.88,0,783.99,0,587.33,0]],
+      [[783.99,0,659.25,0,523.25,0,659.25,0],[659.25,0,523.25,0,440,0,523.25,0],[523.25,0,440,0,523.25,0,659.25,0],[493.88,0,587.33,0,587.33,0,392,0]]
+    ];
+    var ARP = [0, 1, 2, 1, 0, 1, 2, 1];
+    function tone(f, t, dur, type, vol) {
+      var o = ac.createOscillator(), g = ac.createGain();
+      o.type = type; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(master);
+      o.start(t); o.stop(t + dur + 0.05);
+    }
+    function schedule() {
+      while (nextT < ac.currentTime + 0.35) {
+        var bar = Math.floor(step / 8) % 8, i = step % 8, chord = bar % 4, phrase = bar < 4 ? 0 : 1;
+        tone(CH[chord][ARP[i]], nextT, EIGHTH * 1.6, 'triangle', 0.10);
+        if (i === 0 || i === 4) tone(BASS[chord], nextT, EIGHTH * 3.6, 'sine', 0.22);
+        var m = MEL[phrase][chord][i];
+        if (m) tone(m, nextT, EIGHTH * 2.4, 'sine', 0.09);
+        nextT += EIGHTH; step++;
+      }
+    }
+    function run() {
+      if (!want || !on) return;
+      try {
+        if (!ac) {
+          var AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          ac = new AC();
+          master = ac.createGain(); master.gain.value = 0.0001;
+          var lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2200;
+          master.connect(lp); lp.connect(ac.destination);
+        }
+        if (ac.state === 'suspended') ac.resume();
+        master.gain.cancelScheduledValues(ac.currentTime);
+        master.gain.setTargetAtTime(0.55, ac.currentTime, 0.25);
+        if (!timer) { nextT = ac.currentTime + 0.08; timer = setInterval(schedule, 100); }
+      } catch (e) {}
+    }
+    function halt(fade) {
+      if (timer) { clearInterval(timer); timer = null; }
+      if (ac && master) { try { master.gain.cancelScheduledValues(ac.currentTime); master.gain.setTargetAtTime(0.0001, ac.currentTime, fade ? 0.3 : 0.02); } catch (e) {} }
+    }
+    return {
+      play: function () { want = true; run(); },
+      stop: function () { want = false; halt(true); },
+      pause: function () { halt(false); if (ac && ac.state === 'running') ac.suspend().catch(function () {}); },
+      resume: function () { run(); },
+      isOn: function () { return on; },
+      toggle: function () {
+        on = !on;
+        try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+        if (on) run(); else halt(true);
+        return on;
+      }
+    };
+  })();
 
   var bestStore = {};
   function getBest(k) {
@@ -234,7 +311,7 @@
     },
     update: function (dt) {
       var c = this.cur;
-      var speed = 150 + Math.min(this.score, 45) * 7;
+      var speed = 120 + Math.min(this.score, 45) * 5.5;
       c.x += c.dir * speed * dt;
       if (c.x < 0) { c.x = 0; c.dir = 1; }
       if (c.x > W - c.w) { c.x = W - c.w; c.dir = -1; }
@@ -343,9 +420,10 @@
     g.renderMeta(metaEl, over, themesEl);
     if (over) { instBtn.hidden = true; hintEl.hidden = true; } else installUi();
   }
-  function start() { g.gift = null; g.reset(); state = 'play'; ov.hidden = true; }
+  function start() { g.gift = null; g.reset(); state = 'play'; ov.hidden = true; music.play(); }
   function end() {
     state = 'over';
+    music.stop();
     g.onEnd();
     if (g.score > getBest(g.name)) setBest(g.name, g.score);
     showOverlay(true);
@@ -357,7 +435,7 @@
     (function tick() {
       n--;
       if (n > 0) { revBtn.textContent = 'Ad would play here… ' + n; adTimer = setTimeout(tick, 1000); return; }
-      g.revive(); state = 'play'; ov.hidden = true;
+      g.revive(); state = 'play'; ov.hidden = true; music.play();
     })();
   });
   cv.addEventListener('pointerdown', function (e) {
@@ -369,7 +447,11 @@
     if (state !== 'play') return;
     if (g.key(e.key)) e.preventDefault();
   });
-  document.addEventListener('visibilitychange', function () { last = 0; });
+  var muteBtn = document.getElementById('mute');
+  function paintMute() { var on = music.isOn(); muteBtn.classList.toggle('is-off', !on); muteBtn.setAttribute('aria-label', on ? 'Music on' : 'Music off'); }
+  muteBtn.addEventListener('click', function () { music.toggle(); paintMute(); });
+  paintMute();
+  document.addEventListener('visibilitychange', function () { last = 0; if (document.hidden) music.pause(); else if (state === 'play') music.resume(); });
   document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
 
   function frame(t) {
