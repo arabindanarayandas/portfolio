@@ -268,6 +268,14 @@
   .stackart i:nth-child(4) { bottom: 80px; background: #6FB6FF; width: 84px; margin-left: -42px; }
   .stackart i:nth-child(5) { bottom: 102px; background: #B79BFF; width: 76px; margin-left: -38px; animation: sway 1.6s ease-in-out infinite alternate; }
   @keyframes sway { from { transform: translateX(-48px); } to { transform: translateX(48px); } }
+  .fitart { display: grid; grid-template-columns: repeat(3, 34px); gap: 6px; justify-content: center; align-content: center; }
+  .fitart i { height: 34px; border-radius: 8px; background: #C9D9F2; }
+  .fitart i.a { background: #FF5E5B; } .fitart i.b { background: #FFC53D; } .fitart i.c { background: #1FB89A; } .fitart i.d { background: #6B4EFF; } .fitart i.e { background: #2E9BFF; }
+  .fitart i.pop { animation: pop 1.8s ease-in-out infinite; }
+  @keyframes pop { 0%, 55% { background: #C9D9F2; transform: scale(.85); } 70%, 100% { background: #FF8A3D; transform: scale(1); } }
+  .games li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .games li:last-child:nth-child(odd) .game.next { min-height: 110px; }
+  @media (prefers-reduced-motion: reduce) { .fitart i.pop { animation: none; background: #FF8A3D; } }
   @media (prefers-reduced-motion: reduce) { .stackart i:nth-child(5) { animation: none; } a.game { transition: none; } }
   @media (max-width: 560px) { .games { grid-template-columns: 1fr; } .game.next { min-height: 120px; } }
 </style>
@@ -373,7 +381,11 @@
         <div class="art stackart" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
         <div class="info"><b>Stack Tap</b><span>Tap to drop the block. Land it clean and the tower keeps growing.</span><span class="cta">Play now →</span></div>
       </a></li>
-      <li><div class="game next"><div class="q">?</div><b>Next game</b><span>Block Fit and Lane Dash are in the works.</span></div></li>
+      <li><a class="game" href="/games/block-fit/">
+        <div class="art fitart" aria-hidden="true"><i class="a"></i><i class="b"></i><i class="c"></i><i class="a"></i><i class="d"></i><i class="c"></i><i class="e"></i><i class="e"></i><i class="pop"></i></div>
+        <div class="info"><b>Block Fit</b><span>Drag pieces onto the grid. Fill a row or column to clear it.</span><span class="cta">Play now →</span></div>
+      </a></li>
+      <li><div class="game next"><div class="q">?</div><b>Next game</b><span>Lane Dash is on the way.</span></div></li>
     </ul>
   </section>
 
