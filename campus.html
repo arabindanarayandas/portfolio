@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus case study, Auro Das</title>
+<meta name="description" content="How Auro Das signed seven institutions, including four IITs, by going through student leaders first: a case study.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FBFBF9;
+    --ink: #1A1F1C;
+    --muted: #5E6660;
+    --line: #E2E5E0;
+    --leaf: #2E6A4F;
+    --leaf-soft: #E8F0EB;
+    --chart-lo: #A7B1AA;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #151917;
+      --ink: #ECEFEC;
+      --muted: #9AA39D;
+      --line: #2A302C;
+      --leaf: #7FC2A0;
+      --leaf-soft: #1E2B24;
+      --chart-lo: #4A544E;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Hanken Grotesk", system-ui, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  a { color: inherit; text-decoration-color: var(--leaf); text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+  a:hover { color: var(--leaf); }
+  a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+  header.top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 28px 0;
+    font-size: 0.95rem;
+  }
+  header.top .name { font-weight: 800; font-size: 1.5rem; letter-spacing: -0.05em; line-height: 1; text-decoration: none; color: var(--ink); }
+  header.top .name .dot { display: inline-block; width: 0.22em; height: 0.22em; margin-left: 0.06em; border-radius: 50%; background: var(--leaf); }
+  header.top nav a { margin-left: 20px; text-decoration: none; color: var(--muted); }
+  header.top nav a:hover { color: var(--ink); }
+
+  .hero { padding: 72px 0 88px; }
+  .hero h1 {
+    font-size: clamp(2.3rem, 6.4vw, 3.9rem);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+    max-width: 17ch;
+    text-wrap: balance;
+  }
+  .hero p {
+    margin-top: 28px;
+    max-width: 52ch;
+    color: var(--muted);
+    font-size: 1.15rem;
+  }
+
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  section h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+  section > .lead { color: var(--muted); max-width: 56ch; margin: -16px 0 28px; }
+
+  /* The proof ledger: the one bold element on the page */
+  .ledger { list-style: none; }
+  .ledger li {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .ledger li:last-child { border-bottom: 0; }
+  .ledger .when {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--leaf);
+    font-variant-numeric: tabular-nums;
+  }
+  .ledger h3 { font-size: 1.1rem; font-weight: 600; line-height: 1.35; }
+  .ledger .co { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
+  .ledger .logo { width: 44px; height: 44px; flex: none; border-radius: 10px; border: 1px solid var(--line); object-fit: cover; }
+  .ledger .logo-text { display: flex; align-items: center; justify-content: center; background: var(--leaf-soft); color: var(--leaf); font-weight: 700; font-size: 0.95rem; }
+  .ledger .role { color: var(--muted); font-size: 0.97rem; }
+  .ledger p { margin-top: 6px; max-width: 54ch; }
+  .ledger .metric {
+    display: inline-block;
+    margin: 10px 6px 0 0;
+    padding: 2px 10px;
+    background: var(--leaf-soft);
+    color: var(--leaf);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .builds { list-style: none; }
+  .builds li { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .builds li:last-child { border-bottom: 0; }
+  .builds a { font-weight: 600; }
+  .builds p { color: var(--muted); max-width: 58ch; }
+
+  .cases { list-style: none; }
+  .cases li { display: grid; grid-template-columns: 9.5rem 1fr; gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .cases li:last-child { border-bottom: 0; }
+  .cases .big { font-size: 2.6rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--leaf); }
+  .cases h3 { font-size: 1.2rem; font-weight: 600; line-height: 1.35; }
+  .cases p { margin-top: 6px; color: var(--muted); max-width: 54ch; }
+  .cases .soon { display: inline-block; margin-top: 10px; font-size: 0.9rem; font-weight: 600; color: var(--leaf); }
+  .career { list-style: none; }
+  .career li { display: grid; grid-template-columns: 36px 1fr auto; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .career li:last-child { border-bottom: 0; }
+  .career .logo { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--line); object-fit: cover; }
+  .career h3 { font-size: 1rem; font-weight: 600; display: inline; }
+  .career .role { color: var(--muted); }
+  .career .role::before { content: ", "; }
+  .career .meta { text-align: right; color: var(--muted); font-size: 0.92rem; line-height: 1.35; font-variant-numeric: tabular-nums; }
+  #building .builds + .empty { margin-top: 16px; }
+
+  .empty {
+    padding: 20px;
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    color: var(--muted);
+  }
+
+  .about p { max-width: 58ch; }
+  .about p + p { margin-top: 16px; }
+
+  .contact a { display: inline-flex; align-items: center; gap: 10px; font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; }
+  .contact .ic { width: 24px; height: 24px; flex: none; color: var(--leaf); }
+  .contact ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 28px; }
+
+  footer { padding: 40px 0 56px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); }
+
+  @media (max-width: 560px) {
+    header.top nav a { margin-left: 14px; }
+    .hero { padding: 40px 0 64px; }
+    .ledger li { grid-template-columns: 1fr; gap: 6px; }
+    .ledger .when { font-size: 1.5rem; }
+    .cases li { grid-template-columns: 1fr; gap: 8px; }
+    .cases .big { font-size: 2rem; }
+    .career .role::before { content: ""; }
+    .career .role { display: block; font-size: 0.92rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero h1, .hero p { animation: rise 0.7s ease-out both; }
+    .hero p { animation-delay: 0.12s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  }
+
+  .study { padding: 24px 0 72px; }
+  .study .back { display: inline-block; font-size: 0.95rem; color: var(--muted); text-decoration: none; }
+  .study .back:hover { color: var(--leaf); }
+  .study h1 { margin-top: 28px; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; letter-spacing: -0.03em; font-weight: 600; max-width: 22ch; text-wrap: balance; }
+  .study .standfirst { margin-top: 20px; font-size: 1.15rem; color: var(--muted); max-width: 56ch; }
+  .facts { margin-top: 36px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .facts dt { font-size: 0.85rem; color: var(--muted); }
+  .facts dd { font-weight: 600; font-size: 0.97rem; line-height: 1.35; }
+  .numbers { list-style: none; padding-left: 0 !important; margin: 36px 0 8px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .numbers strong { display: block; font-size: 2rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; color: var(--leaf); }
+  .numbers span { display: block; margin-top: 4px; font-size: 0.92rem; color: var(--muted); line-height: 1.35; }
+  .study h2 { margin-top: 52px; font-size: 1.45rem; font-weight: 600; letter-spacing: -0.02em; }
+  .study h3 { margin-top: 26px; font-size: 1.08rem; font-weight: 600; }
+  .study p { margin-top: 12px; max-width: 64ch; }
+  .study h3 + p { margin-top: 6px; }
+  .study ol, .study article ul, .study > ul { margin-top: 12px; padding-left: 1.3em; max-width: 62ch; }
+  .study li { margin-top: 8px; }
+  .study li::marker { color: var(--leaf); font-weight: 700; }
+  .study > .back:last-child { margin-top: 56px; }
+  .study figure { margin: 28px 0 8px; }
+  .study figcaption { margin-top: 10px; font-size: 0.92rem; color: var(--muted); }
+  .catalogue > div { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+  .catalogue img { width: 100%; height: auto; aspect-ratio: 1; border-radius: 10px; display: block; }
+  .shots > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 520px; }
+  .shots.single > div { grid-template-columns: 1fr; max-width: 240px; }
+  .shots img { width: 100%; height: auto; border-radius: 12px; display: block; border: 1px solid var(--line); }
+  .lessons { margin-top: 20px; border-top: 1px solid var(--line); }
+  .lessons > div { padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .study .lessons h3 { margin: 0; font-size: 1.3rem; line-height: 1.3; letter-spacing: -0.015em; color: var(--ink); }
+  .study .lessons p { margin-top: 8px; color: var(--muted); }
+  .study .closer { margin-top: 28px; font-size: 1.15rem; font-weight: 600; color: var(--leaf); max-width: 52ch; }
+  .photo img { width: 100%; height: auto; border-radius: 14px; display: block; }
+  .listen { margin-top: 24px; display: flex; align-items: center; gap: 14px; padding: 12px 16px 12px 12px; border: 1px solid var(--line); border-radius: 18px; max-width: 520px; background: var(--paper); }
+  .listen.playing { position: sticky; top: 12px; z-index: 5; box-shadow: 0 6px 20px rgba(26, 31, 28, 0.12); }
+  #listen-play { width: 48px; height: 48px; flex: none; border: 0; border-radius: 50%; background: var(--leaf); color: var(--paper); display: grid; place-items: center; cursor: pointer; }
+  #listen-play svg { width: 22px; height: 22px; }
+  .listen .i-pause, .listen.playing .i-play { display: none; }
+  .listen.playing .i-pause { display: block; }
+  .listen-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  .listen-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .listen-title { font-weight: 600; font-size: 0.97rem; }
+  .listen-time { font-size: 0.88rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  #listen-seek { width: 100%; height: 20px; margin: 0; accent-color: var(--leaf); cursor: pointer; }
+  .listen-speed { flex: none; min-width: 48px; height: 36px; border: 1px solid var(--line); background: none; color: var(--ink); border-radius: 999px; font: inherit; font-size: 0.88rem; font-weight: 600; cursor: pointer; }
+  #listen-play:focus-visible, .listen-speed:focus-visible, #listen-seek:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; }
+  .voices { margin: 32px 0 8px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .study .quote { margin: 0; padding: 20px 22px; border: 1px solid var(--line); border-radius: 14px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
+  .quote blockquote { margin: 0; }
+  .study .quote blockquote p { margin: 0; font-size: 1.02rem; line-height: 1.55; color: var(--ink); }
+  .study .quote blockquote p + p { margin-top: 10px; }
+  .quote figcaption { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--muted); line-height: 1.35; }
+  .quote figcaption strong { display: block; color: var(--ink); font-size: 0.97rem; }
+  .quote .mono { width: 48px; height: 48px; flex: none; border-radius: 50%; object-fit: cover; display: block; }
+  .study .voices-src { grid-column: 1 / -1; margin: 0; font-size: 0.9rem; color: var(--muted); }
+  .chats > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .chats img { width: 100%; height: auto; border-radius: 12px; display: block; }
+  .strip > div { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .strip img { width: 100%; height: auto; aspect-ratio: 1248 / 1744; object-fit: cover; border-radius: 10px; display: block; }
+  .shots.single > div { position: relative; }
+  .badge { position: absolute; top: 12px; left: 12px; padding: 5px 12px; border-radius: 999px; background: var(--ink); color: var(--paper); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.01em; box-shadow: 0 0 0 2px var(--paper); }
+  .chart { max-width: 560px; }
+  .chart .ct { margin: 0 0 10px; font-size: 0.97rem; font-weight: 600; color: var(--ink); }
+  .chart svg { width: 100%; height: auto; display: block; overflow: visible; font-family: inherit; }
+  .chart .ax { font-size: 13px; fill: var(--muted); }
+  .chart .val { font-size: 13px; font-weight: 600; fill: var(--ink); }
+  .chart .hi { fill: var(--leaf); }
+  .chart .lo { fill: var(--chart-lo); }
+  .chart .grid { stroke: var(--line); stroke-width: 1; }
+  .chart .line { fill: none; stroke: var(--leaf); stroke-width: 2; }
+  .chart .dot { fill: var(--leaf); stroke: var(--paper); stroke-width: 2; }
+  .chart .whisk { stroke: var(--leaf); stroke-width: 2; stroke-linecap: round; opacity: 0.45; }
+  .chart g:hover .dot, .chart g:hover rect { filter: brightness(1.15); }
+  .flow ol { list-style: none; padding: 0 !important; display: grid; grid-template-columns: auto auto minmax(0, 1fr); align-items: center; gap: 0; max-width: none !important; }
+  .flow li { margin: 0; display: flex; align-items: center; }
+  .flow li:not(:last-child)::after { content: "→"; color: var(--muted); font-size: 1.2rem; padding: 0 12px; }
+  .flow li > span, .flow .split > div { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; background: var(--paper); font-size: 0.95rem; line-height: 1.35; }
+  .flow li.q > span { border-color: var(--leaf); font-weight: 600; max-width: 15ch; }
+  .flow .split { display: grid; gap: 8px; }
+  .flow .split > div { display: flex; flex-direction: column; gap: 2px; }
+  .flow .split b { font-size: 0.85rem; color: var(--muted); }
+  .flow .bad { border-color: var(--ink) !important; }
+  .flow .bad b { color: var(--ink); }
+  .flow .then { font-size: 0.88rem; color: var(--muted); }
+  @media (max-width: 560px) {
+    .facts, .numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .catalogue > div { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .strip > div { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .voices { grid-template-columns: 1fr; }
+    .listen-speed { min-width: 44px; }
+    .listen-title { font-size: 0.92rem; }
+    .listen { gap: 10px; padding-right: 10px; }
+    .chats > div { grid-template-columns: 1fr; max-width: 320px; }
+    .flow ol { grid-template-columns: 1fr; }
+    .flow li { flex-direction: column; align-items: stretch; }
+    .flow li:not(:last-child)::after { content: "↓"; padding: 6px 0 6px 16px; }
+    .flow li.q > span { max-width: none; }
+  }
+  .match { margin: 28px 0 8px; display: grid; gap: 22px; }
+  .study .numbers strong { font-size: 1.7rem; white-space: nowrap; }
+  .lane { display: grid; grid-template-columns: 8.5rem 1fr; gap: 16px; align-items: center; }
+  .lane-name { font-size: 0.92rem; font-weight: 600; line-height: 1.3; }
+  .lane-name span { display: block; font-weight: 400; color: var(--muted); font-size: 0.85rem; }
+  .track { position: relative; display: flex; justify-content: space-between; align-items: center; min-height: 76px; padding: 0 40px; }
+  .track::before { content: ""; position: absolute; left: 40px; right: 40px; top: 50%; height: 2px; margin-top: -1px; background: var(--line); }
+  .track.old::after { content: "Nothing measured in between"; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -150%); font-size: 0.85rem; color: var(--muted); white-space: nowrap; }
+  .pt { position: relative; z-index: 1; width: 0; height: 14px; display: flex; justify-content: center; }
+  .pt i { width: 14px; height: 14px; border-radius: 50%; background: var(--paper); border: 2px solid var(--muted); display: block; }
+  .pt i { flex: none; }
+  .pt b { position: absolute; top: 22px; left: 50%; transform: translateX(-50%); font-size: 0.78rem; font-weight: 600; white-space: nowrap; color: var(--muted); }
+  .track.new .pt i { background: var(--leaf); border-color: var(--paper); box-shadow: 0 0 0 2px var(--leaf); }
+  .track.new .pt b { color: var(--ink); }
+  .pt.top b { top: auto; bottom: 22px; }
+  .owned { margin-top: 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .owned > div { border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .owned > div.mine { border-color: var(--leaf); }
+  .study .owned h3 { margin: 0 0 8px; font-size: 1rem; }
+  .study .owned ul { margin: 0; padding-left: 1.1em; }
+  .study .owned li { margin-top: 6px; }
+  .problems { margin-top: 18px; display: grid; gap: 14px; }
+  .problem { border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .study .problem h3 { margin: 0 0 6px; grid-column: 1 / -1; font-size: 1.08rem; }
+  .problem .k { font-size: 0.8rem; font-weight: 700; color: var(--muted); display: block; margin-bottom: 4px; }
+  .problem .fix .k { color: var(--leaf); }
+  .study .problem p { margin: 0; }
+  .mock { margin: 28px 0 8px; }
+  .mock .frame { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--paper); box-shadow: 0 10px 30px rgba(26, 31, 28, 0.08); }
+  .mock .bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); font-size: 0.85rem; color: var(--muted); flex-wrap: wrap; }
+  .mock .bar b { color: var(--ink); font-weight: 600; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); font-size: 0.8rem; color: var(--ink); white-space: nowrap; }
+  .chip.rec::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #C2410C; }
+  .chip.lock::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--leaf); }
+  .iv { display: grid; grid-template-columns: 1fr 1.3fr; }
+  .iv .cam { padding: 18px; border-right: 1px solid var(--line); display: grid; gap: 12px; align-content: start; }
+  .cam .tile { aspect-ratio: 4 / 3; border-radius: 12px; background: var(--leaf-soft); display: grid; place-items: center; position: relative; }
+  .cam .tile svg { width: 38%; color: var(--leaf); opacity: 0.55; }
+  .cam .tile .tag { position: absolute; left: 8px; bottom: 8px; font-size: 0.75rem; background: var(--paper); border-radius: 999px; padding: 2px 8px; }
+  .cam .wave { display: flex; align-items: center; gap: 3px; height: 26px; }
+  .cam .wave i { width: 4px; border-radius: 2px; background: var(--leaf); display: block; }
+  .cam .timer { font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .cam .timer b { color: var(--ink); }
+  .cam .meter { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+  .cam .meter span { display: block; height: 100%; width: 55%; background: var(--leaf); }
+  .iv .talk { padding: 18px; display: grid; gap: 12px; align-content: start; }
+  .msg { border-radius: 12px; padding: 10px 14px; font-size: 0.93rem; line-height: 1.45; }
+  .msg small { display: block; font-size: 0.75rem; font-weight: 700; color: var(--muted); margin-bottom: 3px; }
+  .msg.mio { background: var(--leaf-soft); }
+  .msg.mio small { color: var(--leaf); }
+  .msg.you { border: 1px solid var(--line); }
+  .msg.you em { color: var(--muted); font-style: normal; }
+  .msg.coach { border: 1px dashed var(--leaf); }
+  .mock figcaption { margin-top: 10px; font-size: 0.92rem; color: var(--muted); }
+  .rep { padding: 18px 20px; display: grid; gap: 18px; }
+  .rep-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .band { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: var(--leaf); color: var(--paper); font-weight: 700; font-size: 0.85rem; }
+  .skills { display: grid; gap: 10px; }
+  .sk { display: grid; grid-template-columns: 9rem 1fr 4.5rem; gap: 12px; align-items: center; font-size: 0.9rem; }
+  .sk .scale { position: relative; height: 22px; }
+  .sk .scale::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--line); }
+  .sk .scale .from, .sk .scale .to { position: absolute; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; }
+  .sk .scale .from { background: var(--paper); border: 2px solid var(--muted); }
+  .sk .scale .to { background: var(--leaf); box-shadow: 0 0 0 2px var(--paper); }
+  .sk .scale .span { position: absolute; top: 50%; height: 4px; margin-top: -2px; background: var(--leaf); opacity: 0.35; }
+  .sk .lv { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .sk .lv b { color: var(--ink); }
+  .legend { display: flex; gap: 16px; font-size: 0.8rem; color: var(--muted); flex-wrap: wrap; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .legend .a { background: var(--paper); border: 2px solid var(--muted); }
+  .legend .b { background: var(--leaf); }
+  .evidence { border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 8px; font-size: 0.9rem; }
+  .evidence .row { display: grid; grid-template-columns: 7.5rem 1fr; gap: 10px; }
+  .evidence .row span:first-child { color: var(--muted); font-size: 0.82rem; font-weight: 600; }
+  .gap2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 24px 0 8px; }
+  .gap2 > div { border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .gap2 .k { font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+  .gap2 .big { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; margin: 6px 0 4px; }
+  .gap2 .good .big { color: var(--leaf); }
+  .gap2 .bad { border-color: var(--ink); }
+  .study .gap2 p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+  .frame .bar .band { font-size: 0.8rem; padding: 3px 10px; }
+  .overall { display: grid; gap: 6px; }
+  .ov-head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 0.85rem; color: var(--muted); }
+  .ov-head b { color: var(--ink); font-size: 1.05rem; }
+  .ov-head em { font-style: normal; color: var(--leaf); font-weight: 700; margin-left: 6px; }
+  .ov-track { position: relative; height: 12px; border-radius: 6px; background: var(--line); overflow: hidden; }
+  .ov-track span { position: absolute; top: 0; bottom: 0; }
+  .ov-track .base { left: 0; background: var(--chart-lo); }
+  .ov-track .gain { background: var(--leaf); }
+  .ov-scale { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); }
+  table.lvls { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  table.lvls th { text-align: left; font-size: 0.78rem; color: var(--muted); font-weight: 600; padding: 0 0 6px; }
+  table.lvls td { padding: 7px 0; border-top: 1px solid var(--line); }
+  .lvl { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+  .lvl.l1, .lvl.l2 { background: var(--line); color: var(--ink); }
+  .lvl.l3 { background: var(--leaf-soft); color: var(--leaf); }
+  .lvl.l4, .lvl.l5 { background: var(--leaf); color: var(--paper); }
+  .rec { border-radius: 12px; background: var(--leaf-soft); padding: 12px 14px; font-size: 0.93rem; }
+  .rec .k { display: block; font-size: 0.78rem; font-weight: 700; color: var(--leaf); margin-bottom: 4px; }
+  .ide .code { position: relative; background: #17201B; color: #DDE6E0; padding: 16px 0 18px; overflow-x: auto; }
+  .ide pre { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.82rem; line-height: 1.7; }
+  .ide .ln { display: inline-block; width: 2.6em; padding-right: 1em; text-align: right; color: #6E7C74; user-select: none; }
+  .ide .kw { color: #8FC9A8; }
+  .ide .an { color: #E3B778; }
+  .ide .st { color: #B5D6F2; }
+  .ide .l { display: block; }
+  .ide .ai { display: block; background: rgba(127, 194, 160, 0.14); box-shadow: inset 3px 0 0 #7FC2A0; }
+  .ide .aitag { font-family: "Hanken Grotesk", system-ui, sans-serif; font-size: 0.7rem; font-weight: 700; color: #17201B; background: #7FC2A0; border-radius: 999px; padding: 1px 8px; }
+  .ide .pop { margin: 14px 16px 0 46px; max-width: 420px; background: var(--paper); color: var(--ink); border-radius: 12px; padding: 12px 14px; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3); font-family: "Hanken Grotesk", system-ui, sans-serif; }
+  .ide .pop .k { font-size: 0.78rem; font-weight: 700; color: var(--leaf); }
+  .study .ide .pop p { margin: 4px 0 10px; font-size: 0.92rem; line-height: 1.45; }
+  .ide .ans { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 0.85rem; color: var(--muted); }
+  @media (max-width: 560px) {
+    .lane { grid-template-columns: 1fr; gap: 6px; }
+    .pt b { font-size: 0.68rem; }
+    .track { padding: 0 38px; }
+    .track::before { left: 38px; right: 38px; }
+    .owned, .problem { grid-template-columns: 1fr; }
+    .iv { grid-template-columns: 1fr; }
+    .iv .cam { border-right: 0; border-bottom: 1px solid var(--line); grid-template-columns: 96px 1fr; align-items: center; }
+    .cam .tile { grid-row: span 3; }
+    .sk { grid-template-columns: 6.5rem 1fr 3.8rem; font-size: 0.82rem; }
+    .gap2 { grid-template-columns: 1fr; }
+    .ide .pop { margin-left: 12px; margin-right: 12px; }
+    .ide pre { font-size: 0.72rem; }
+    .evidence .row { grid-template-columns: 1fr; gap: 2px; }
+    .problem { gap: 12px; }
+  }
+  .funnel { margin: 28px 0 8px; display: grid; gap: 10px; }
+  .fstep { display: grid; grid-template-columns: 10rem 1fr; gap: 16px; align-items: center; }
+  .fstep .lab { font-size: 0.92rem; line-height: 1.3; }
+  .fstep .lab b { display: block; font-size: 1.5rem; letter-spacing: -0.03em; color: var(--leaf); }
+  .fbar { height: 40px; border-radius: 8px; background: var(--leaf); }
+  .fbar.s2 { opacity: 0.75; }
+  .fbar.s3 { opacity: 0.5; }
+  .drop { font-size: 0.85rem; color: var(--muted); padding-left: calc(10rem + 16px); }
+  .playbook { margin: 20px 0 8px; list-style: none; padding: 0 !important; counter-reset: step; display: grid; gap: 0; max-width: none !important; }
+  .playbook li { counter-increment: step; position: relative; margin: 0 !important; padding: 0 0 22px 52px; }
+  .playbook li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 34px; height: 34px; border-radius: 50%; background: var(--leaf); color: var(--paper); display: grid; place-items: center; font-weight: 700; font-size: 0.95rem; }
+  .playbook li:not(:last-child)::after { content: ""; position: absolute; left: 16px; top: 38px; bottom: 4px; width: 2px; background: var(--line); }
+  .playbook li b { display: block; font-size: 1.02rem; }
+  .playbook li span { display: block; color: var(--muted); margin-top: 2px; }
+  .playbook li .t { display: inline-block; margin-top: 6px; font-size: 0.8rem; font-weight: 600; color: var(--leaf); }
+  .mous { margin: 20px 0 8px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .mous span { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); font-size: 0.93rem; font-weight: 600; }
+  .mous span.iit { border-color: var(--leaf); color: var(--leaf); background: var(--leaf-soft); }
+  .pitch { margin: 24px 0 8px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .pitch > div { border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .pitch > div.after { border-color: var(--leaf); }
+  .pitch .k { font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+  .pitch .after .k { color: var(--leaf); }
+  .study .pitch p { margin: 6px 0 0; }
+  .drops { margin: 18px 0 8px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .drops > div { border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .study .drops h3 { margin: 0 0 6px; font-size: 1rem; }
+  .study .drops p { margin: 0; font-size: 0.93rem; color: var(--muted); }
+  @media (max-width: 560px) {
+    .fstep { grid-template-columns: 7.5rem 1fr; gap: 10px; }
+    .fstep .lab b { font-size: 1.25rem; }
+    .drop { padding-left: calc(7.5rem + 10px); }
+    .pitch, .drops { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <a class="name" href="index.html" aria-label="Auro Das, home">auro<span class="dot"></span></a>
+    <nav aria-label="Sections">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <article class="study">
+    <a class="back" href="index.html#work">Back to selected work</a>
+    <h1>Signing seven institutions, including four IITs, by going through students first</h1>
+    <p class="standfirst">Most startups email the director and wait. I started with the student leaders who actually run campus life, and let them open the doors.</p>
+
+    <dl class="facts">
+      <div><dt>Role</dt><dd>Owned the student side of the marketplace</dd></div>
+      <div><dt>Where</dt><dd>Trumio</dd></div>
+      <div><dt>When</dt><dd>2024</dd></div>
+      <div><dt>Worked with</dt><dd>CEO, CTO and student bodies</dd></div>
+    </dl>
+
+    <ul class="numbers">
+      <li><strong>5,000+</strong><span>students spoken with</span></li>
+      <li><strong>~2,000</strong><span>students onboarded</span></li>
+      <li><strong>7</strong><span>institution agreements, 4 of them IITs</span></li>
+      <li><strong>100–200</strong><span>real projects delivered</span></li>
+    </ul>
+
+    <h2>The setup</h2>
+    <p>Trumio's first product was a marketplace. Companies posted small, real projects. Students bid to do them, and the winning bid did the work. Companies got work done quickly and affordably. Students got paid, and got real projects for their résumés.</p>
+    <p>Our sales leaders handled the companies. I owned the other side: getting strong engineering students onto the platform, starting with India's top engineering institutes, the IITs and NITs.</p>
+
+    <h2>The approach: bottom up, not top down</h2>
+    <p>The obvious route is to email the director and wait for a reply that never comes. But IITs have a strong culture of student-led administration. General secretaries, Gymkhana presidents and club heads run much of campus life, and they have the ear of the deans. I didn't need everyone. I needed one or two of them to trust us.</p>
+    <ol class="playbook">
+      <li><b>Start with the leverage we already had</b><span>Our CEO and CTO are both IIT Kharagpur alumni. Students want to hear from alumni and experienced people, so I led with that.</span></li>
+      <li><b>Find the people who run the campus</b><span>I went through each institute's website to find the current general secretaries and club leaders, then reached out on LinkedIn and email.</span></li>
+      <li><b>Ask for five minutes, not a partnership</b><span>A short intro: who I am, what we're building. Most students happily took the call. In those five minutes I was direct about what we wanted, and asked for a half-hour.</span></li>
+      <li><b>Bring in the founders</b><span>That half-hour was with our CEO or CTO and the student body. Alumni talking to students is a conversation IITians welcome.</span></li>
+      <li><b>Pay to get in the room when needed</b><span>Where the no-cost route stalled, we sponsored a student festival, and asked in return for a meeting with the dean responsible, such as the Dean of Academic Affairs.</span></li>
+      <li><b>Sign the agreement</b><span>A non-monetary agreement: the institute lets students work on real projects through Trumio, and we bring them opportunities through our clients.</span><span class="t">1 to 3 months per institute</span></li>
+    </ol>
+
+    <h2>What students actually needed</h2>
+    <p>Talking to thousands of students, especially third- and fourth-years, changed our pitch. With placements this competitive, they needed real projects, and most didn't have them.</p>
+    <div class="pitch">
+      <div><span class="k">What they had</span><p>Projects recycled from their seniors, repeated year after year. Nothing live, nothing a company could see working in the real world.</p></div>
+      <div class="after"><span class="k">What we pitched</span><p>Real work for real companies. Earn money, see where your skills actually stand, build a portfolio, and build relationships with the companies themselves.</p></div>
+    </div>
+    <p>That reframing is what got them to sign up.</p>
+
+    <h2>The results</h2>
+    <figure class="funnel" aria-label="Funnel: 5,000+ students spoken with, about 2,000 onboarded, 100 to 200 projects delivered">
+      <div class="fstep"><div class="lab"><b>5,000+</b>spoken with</div><div class="fbar" style="width:100%"></div></div>
+      <div class="fstep"><div class="lab"><b>~2,000</b>onboarded</div><div class="fbar s2" style="width:40%"></div></div>
+      <div class="fstep"><div class="lab"><b>100–200</b>projects delivered</div><div class="fbar s3" style="width:4%"></div></div>
+      <figcaption>About 10 IITs visited. Teams that delivered well were often hired again by the same client, giving students repeat work, income and relationships.</figcaption>
+    </figure>
+    <p>Signed agreements with seven institutions:</p>
+    <div class="mous" role="list" aria-label="Institutions with signed agreements">
+      <span class="iit" role="listitem">IIT Kharagpur</span>
+      <span class="iit" role="listitem">IIT Kanpur</span>
+      <span class="iit" role="listitem">IIT BHU</span>
+      <span class="iit" role="listitem">IIT Bhubaneswar</span>
+      <span role="listitem">KIIT</span>
+      <span role="listitem">Manipal Institute of Technology</span>
+      <span role="listitem">SRCC</span>
+    </div>
+
+    <h2>What didn't work</h2>
+    <h3>Where students dropped off</h3>
+    <div class="drops">
+      <div><h3>Waiting for a first project</h3><p>Many expected work straight after signing up. Matching took time.</p></div>
+      <div><h3>Bids not accepted</h3><p>Some bids were priced too high, or companies didn't see the right fit for the project.</p></div>
+      <div><h3>No time to commit</h3><p>A project took four to five weeks, and these students are busy all year.</p></div>
+    </div>
+    <p>Those who did win projects usually saw them through end to end.</p>
+    <h3>The campus that said no</h3>
+    <p>One top IIT turned us down. It was confident in its own ways of sourcing projects and its own industry relationships. Our playbook didn't work there either: student leaders couldn't reach the academic leadership the way they could at, say, IIT Kanpur. We tried going straight to the top, and that didn't work either. Not every door opens the same way, and a channel that works on ten campuses can fail on the eleventh.</p>
+
+    <h2>Where it led</h2>
+    <p>The marketplace was later shut down when Trumio pivoted, but this work shaped what came next. If students at the IITs, the best in the country, were struggling to find real projects, while hiring slowed and company expectations rose, then students at tier 2 and tier 3 colleges were in a far harder spot. And the large IT services firms that hire them by the tens of thousands needed those engineers to arrive with real, practical experience.</p>
+    <p>That gap became the opportunity behind Trumio Enterprise and Trumio Pro, and eventually <a href="mio.html">Mio</a>.</p>
+
+    <h2>What I'd take from it</h2>
+    <div class="lessons">
+      <div>
+        <h3>Start with the leverage you already have.</h3>
+        <p>Two IIT Kharagpur alumni on the founding team opened more doors than any cold email could.</p>
+      </div>
+      <div>
+        <h3>Go where decisions start, not where they end.</h3>
+        <p>Deans signed the agreements, but student leaders decided whether we'd get the meeting.</p>
+      </div>
+      <div>
+        <h3>Ask for five minutes, not a partnership.</h3>
+        <p>A small, specific ask gets a yes. The bigger conversation follows.</p>
+      </div>
+      <div>
+        <h3>Sell what people are missing.</h3>
+        <p>Students didn't want "a marketplace." They wanted to stop recycling their seniors' projects.</p>
+      </div>
+      <div>
+        <h3>The hardest customers tell you where the market is.</h3>
+        <p>If the best students were struggling, everyone else was too. That insight shaped Trumio's pivot.</p>
+      </div>
+    </div>
+    <p class="closer">Relationships, built one conversation at a time, opened doors that a budget alone couldn't.</p>
+
+    <a class="back" href="index.html#work">Back to selected work</a>
+  </article>
+
+  <footer>Auro Das</footer>
+
+</div>
+</body>
+</html>
