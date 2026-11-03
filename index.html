@@ -248,6 +248,28 @@
     .hero p { animation-delay: 0.12s; }
     @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
   }
+
+  /* Play: tiny games */
+  #play .sub { color: var(--muted); max-width: 52ch; margin-bottom: 18px; }
+  .games { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .game { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; text-decoration: none; background: var(--paper); transition: transform .18s ease, box-shadow .18s ease; }
+  a.game:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.10); color: inherit; }
+  .game .art { position: relative; height: 150px; background: #E8F1FF; overflow: hidden; }
+  .game .info { padding: 14px 16px 16px; }
+  .game .info b { display: block; font-size: 1.05rem; }
+  .game .info span { display: block; color: var(--muted); font-size: .92rem; line-height: 1.4; margin-top: 2px; }
+  .game .cta { display: inline-block; margin-top: 10px; font-size: .9rem; font-weight: 700; color: var(--leaf) !important; }
+  .game.next { border-style: dashed; justify-content: center; align-items: center; text-align: center; min-height: 250px; color: var(--muted); padding: 20px; }
+  .game.next .q { font-size: 2.4rem; font-weight: 800; color: var(--leaf); line-height: 1; margin-bottom: 8px; }
+  .stackart i { position: absolute; left: 50%; height: 22px; border-radius: 6px; box-shadow: 0 2px 0 rgba(0,0,0,.12); }
+  .stackart i:nth-child(1) { bottom: 14px; background: #FF8FB1; width: 110px; margin-left: -55px; }
+  .stackart i:nth-child(2) { bottom: 36px; background: #FFB86B; width: 100px; margin-left: -50px; }
+  .stackart i:nth-child(3) { bottom: 58px; background: #7AD7A5; width: 92px; margin-left: -46px; }
+  .stackart i:nth-child(4) { bottom: 80px; background: #6FB6FF; width: 84px; margin-left: -42px; }
+  .stackart i:nth-child(5) { bottom: 102px; background: #B79BFF; width: 76px; margin-left: -38px; animation: sway 1.6s ease-in-out infinite alternate; }
+  @keyframes sway { from { transform: translateX(-48px); } to { transform: translateX(48px); } }
+  @media (prefers-reduced-motion: reduce) { .stackart i:nth-child(5) { animation: none; } a.game { transition: none; } }
+  @media (max-width: 560px) { .games { grid-template-columns: 1fr; } .game.next { min-height: 120px; } }
 </style>
 </head>
 <body id="top">
@@ -258,6 +280,7 @@
     <nav aria-label="Sections">
       <a href="#work">Work</a>
       <a href="#building">Building</a>
+      <a href="#play">Play</a>
       <a href="#contact">Contact</a>
       <a class="nav-resume" href="/Arabinda-Narayan-Das-Resume.pdf" download>Resume</a>
       <span class="nav-icons"><a class="nav-ic" href="https://www.linkedin.com/in/arabinda-narayan-das" aria-label="LinkedIn" title="LinkedIn"><span class="brand li" aria-hidden="true"></span></a><a class="nav-ic" href="https://github.com/arabindanarayandas" aria-label="GitHub" title="GitHub"><span class="brand gh" aria-hidden="true"></span></a></span>
@@ -339,6 +362,18 @@
         <p>Built end to end with AI, without writing a line of code. The decisions, the mistakes I caught, and the technical details.</p>
         <a class="soon" href="/work/this-site">How I built it</a>
       </li>
+    </ul>
+  </section>
+
+  <section id="play">
+    <h2>Play</h2>
+    <p class="sub">Tiny games I'm building under AuroStudios. Free to play, and they install on your phone like an app.</p>
+    <ul class="games">
+      <li><a class="game" href="/games/stack-tap/">
+        <div class="art stackart" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="info"><b>Stack Tap</b><span>Tap to drop the block. Land it clean and the tower keeps growing.</span><span class="cta">Play now →</span></div>
+      </a></li>
+      <li><div class="game next"><div class="q">?</div><b>Next game</b><span>Block Fit and Lane Dash are in the works.</span></div></li>
     </ul>
   </section>
 
