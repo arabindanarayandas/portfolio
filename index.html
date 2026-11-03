@@ -273,6 +273,16 @@
   .fitart i.a { background: #FF5E5B; } .fitart i.b { background: #FFC53D; } .fitart i.c { background: #1FB89A; } .fitart i.d { background: #6B4EFF; } .fitart i.e { background: #2E9BFF; }
   .fitart i.pop { animation: pop 1.8s ease-in-out infinite; }
   @keyframes pop { 0%, 55% { background: #C9D9F2; transform: scale(.85); } 70%, 100% { background: #FF8A3D; transform: scale(1); } }
+  .dashart { background: #5E7098 !important; }
+  .dashart::before, .dashart::after { content: ""; position: absolute; top: 0; bottom: 0; width: 5px; background: repeating-linear-gradient(#F4F9FF 0 18px, transparent 18px 36px); animation: road .7s linear infinite; }
+  .dashart::before { left: 35%; } .dashart::after { left: 65%; }
+  .dashart i { position: absolute; border-radius: 9px; }
+  .dashart .car { width: 34px; height: 34px; left: 50%; margin-left: -17px; bottom: 14px; background: #1FB89A; }
+  .dashart .ob { width: 44px; height: 26px; left: 17%; margin-left: -22px; top: 22px; background: #FF5E5B; animation: fall 1.6s linear infinite; }
+  .dashart .co { width: 22px; height: 22px; border-radius: 50% !important; left: 82%; margin-left: -11px; top: 60px; background: #FFC53D; border: 3px solid #B8860B; }
+  @keyframes road { from { background-position-y: 0; } to { background-position-y: 36px; } }
+  @keyframes fall { from { transform: translateY(-30px); } to { transform: translateY(150px); } }
+  @media (prefers-reduced-motion: reduce) { .dashart::before, .dashart::after, .dashart .ob { animation: none; } }
   .games li:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .games li:last-child:nth-child(odd) .game.next { min-height: 110px; }
   @media (prefers-reduced-motion: reduce) { .fitart i.pop { animation: none; background: #FF8A3D; } }
@@ -385,7 +395,11 @@
         <div class="art fitart" aria-hidden="true"><i class="a"></i><i class="b"></i><i class="c"></i><i class="a"></i><i class="d"></i><i class="c"></i><i class="e"></i><i class="e"></i><i class="pop"></i></div>
         <div class="info"><b>Block Fit</b><span>Drag pieces onto the grid. Fill a row or column to clear it.</span><span class="cta">Play now →</span></div>
       </a></li>
-      <li><div class="game next"><div class="q">?</div><b>Next game</b><span>Lane Dash is on the way.</span></div></li>
+      <li><a class="game" href="/games/lane-dash/">
+        <div class="art dashart" aria-hidden="true"><i class="ob"></i><i class="co"></i><i class="car"></i></div>
+        <div class="info"><b>Lane Dash</b><span>Switch lanes, dodge the blocks and grab the coins.</span><span class="cta">Play now →</span></div>
+      </a></li>
+      <li><div class="game next"><div class="q">?</div><b>Next game</b><span>More coming. Check back soon.</span></div></li>
     </ul>
   </section>
 
