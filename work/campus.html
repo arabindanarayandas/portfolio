@@ -168,6 +168,12 @@
   .foot-bottom { margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 0.86rem; color: #8FA399; }
   .foot-bottom a { color: #8FA399; text-decoration: none; }
   .site-foot a:focus-visible { outline: 2px solid #7FC2A0; outline-offset: 3px; }
+  header.top nav { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; row-gap: 6px; }
+  header.top .nav-icons { display: inline-flex; gap: 2px; margin-left: 14px; padding-left: 12px; border-left: 1px solid var(--line); }
+  header.top nav a.nav-ic { margin-left: 0; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; color: var(--muted); }
+  header.top nav a.nav-ic:hover { color: var(--leaf); background: var(--leaf-soft); }
+  header.top nav a.nav-ic svg { width: 20px; height: 20px; }
+  @media (max-width: 560px) { header.top nav a[href$="#building"] { display: none; } header.top .nav-icons { margin-left: 8px; padding-left: 6px; } header.top nav a.nav-ic { width: 32px; height: 32px; } }
   header.top nav a.nav-resume { color: var(--leaf); font-weight: 600; }
   @media (max-width: 560px) { .foot-cols { grid-template-columns: 1fr 1fr; } .foot-cols > div:last-child { grid-column: 1 / -1; } .site-foot { padding-top: 56px; } }
 
@@ -467,6 +473,7 @@
       <a href="/#work">Work</a>
       <a href="/#contact">Contact</a>
       <a class="nav-resume" href="/Arabinda-Narayan-Das-Resume.pdf" download>Resume</a>
+      <span class="nav-icons"><a class="nav-ic" href="https://www.linkedin.com/in/arabinda-narayan-das" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-3.6 3.8-5.5 7-5.5s6 1.9 7 5.5"/></svg></a><a class="nav-ic" href="https://github.com/arabindanarayandas" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7 3 12l5 5M16 7l5 5-5 5M13.5 5l-3 14"/></svg></a></span>
     </nav>
   </header>
 
