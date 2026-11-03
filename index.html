@@ -283,6 +283,14 @@
   @keyframes road { from { background-position-y: 0; } to { background-position-y: 36px; } }
   @keyframes fall { from { transform: translateY(-30px); } to { transform: translateY(150px); } }
   @media (prefers-reduced-motion: reduce) { .dashart::before, .dashart::after, .dashart .ob { animation: none; } }
+  .cwart { display: grid; place-items: center; }
+  .cwart .g { display: grid; grid-template-columns: repeat(5, 22px); gap: 3px; background: #1D2B53; padding: 3px; border-radius: 8px; }
+  .cwart .g i { width: 22px; height: 22px; background: #fff; border-radius: 3px; display: grid; place-items: center; font: 900 13px/1 system-ui, sans-serif; font-style: normal; color: #1D2B53; }
+  .cwart .g i.b { background: #1D2B53; }
+  .cwart .g i.y { background: #CFE3FF; }
+  .cwart .g i.s { background: #FFC53D; animation: caret 1.2s steps(2) infinite; }
+  @keyframes caret { 50% { background: #FFE39A; } }
+  @media (prefers-reduced-motion: reduce) { .cwart .g i.s { animation: none; } }
   .games li:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .games li:last-child:nth-child(odd) .game.next { min-height: 110px; }
   @media (prefers-reduced-motion: reduce) { .fitart i.pop { animation: none; background: #FF8A3D; } }
@@ -399,7 +407,10 @@
         <div class="art dashart" aria-hidden="true"><i class="ob"></i><i class="co"></i><i class="car"></i></div>
         <div class="info"><b>Lane Dash</b><span>Switch lanes, dodge the blocks and grab the coins.</span><span class="cta">Play now →</span></div>
       </a></li>
-      <li><div class="game next"><div class="q">?</div><b>Next game</b><span>More coming. Check back soon.</span></div></li>
+      <li><a class="game" href="/games/crossword/">
+        <div class="art cwart" aria-hidden="true"><div class="g"><i class="y">C</i><i class="y">H</i><i class="y">A</i><i class="s"></i><i class="b"></i><i>U</i><i class="b"></i><i>N</i><i class="b"></i><i class="b"></i><i>R</i><i>A</i><i>G</i><i>A</i><i class="b"></i><i>R</i><i class="b"></i><i>L</i><i class="b"></i><i class="b"></i><i>Y</i><i class="b"></i><i>E</i><i class="b"></i><i class="b"></i></div></div>
+        <div class="info"><b>Desi Crossword</b><span>Classic 13 by 13 puzzles about chai, cricket, cinema and more. New one daily.</span><span class="cta">Play now →</span></div>
+      </a></li>
     </ul>
     <p class="sub" style="margin: 18px 0 0;"><a href="/games/"><strong>See all games and how to install them →</strong></a></p>
   </section>

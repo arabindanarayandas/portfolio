@@ -38,7 +38,7 @@
   .lead { margin-top: 16px; color: var(--muted); max-width: 52ch; font-size: 1.15rem; }
   .pills { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
   .pills span { font-size: 0.88rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; background: var(--leaf-soft); color: var(--leaf); }
-  .games { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 8px 0 0; }
+  .games { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin: 8px 0 0; }
   .game { display: flex; flex-direction: column; height: 100%; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; text-decoration: none; background: var(--paper); transition: transform .18s ease, box-shadow .18s ease; }
   a.game:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,.12); color: inherit; }
   .art { position: relative; height: 210px; background: #E8F1FF; overflow: hidden; }
@@ -69,6 +69,14 @@
   @keyframes road { from { background-position-y: 0; } to { background-position-y: 44px; } }
   @keyframes fall { from { transform: translateY(-40px); } to { transform: translateY(190px); } }
   @media (prefers-reduced-motion: reduce) { .stackart i:nth-child(5), .fitart i.pop, .dashart::before, .dashart::after, .dashart .ob { animation: none; } .fitart i.pop { background: #FF8A3D; } a.game { transition: none; } }
+  .cwart { display: grid; place-items: center; }
+  .cwart .g { display: grid; grid-template-columns: repeat(5, 30px); gap: 3px; background: #1D2B53; padding: 3px; border-radius: 8px; }
+  .cwart .g i { width: 30px; height: 30px; background: #fff; border-radius: 3px; display: grid; place-items: center; font: 900 17px/1 system-ui, sans-serif; font-style: normal; color: #1D2B53; }
+  .cwart .g i.b { background: #1D2B53; }
+  .cwart .g i.y { background: #CFE3FF; }
+  .cwart .g i.s { background: #FFC53D; animation: caret 1.2s steps(2) infinite; }
+  @keyframes caret { 50% { background: #FFE39A; } }
+  @media (prefers-reduced-motion: reduce) { .cwart .g i.s { animation: none; } }
   section.install { margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--line); }
   section.install h2 { font-size: 1.4rem; letter-spacing: -0.02em; }
   .steps { margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
@@ -92,7 +100,7 @@
   <section class="hero">
     <div class="kicker">AuroStudios</div>
     <h1>Tiny games, five seconds to learn.</h1>
-    <p class="lead">Three small games that open instantly, play in a minute and install on your phone like an app.</p>
+    <p class="lead">Small games that open instantly and install on your phone like an app, from one-minute tappers to a daily crossword.</p>
     <div class="pills"><span>Free to play</span><span>No sign-up</span><span>Works offline</span></div>
   </section>
 
@@ -104,6 +112,10 @@
     <li><a class="game" href="/games/block-fit/">
       <div class="art fitart" aria-hidden="true"><i class="a"></i><i class="b"></i><i class="c"></i><i class="a"></i><i class="d"></i><i class="c"></i><i class="e"></i><i class="e"></i><i class="pop"></i></div>
       <div class="info"><h2>Block Fit</h2><p>Drag pieces onto the grid. Fill a whole row or column to clear it, and chain clears for combos.</p><div class="meta">Drag and drop · about 3 minutes</div><div class="cta">Play now →</div></div>
+    </a></li>
+    <li><a class="game" href="/games/crossword/">
+      <div class="art cwart" aria-hidden="true"><div class="g"><i class="y">C</i><i class="y">H</i><i class="y">A</i><i class="s"></i><i class="b"></i><i>U</i><i class="b"></i><i>N</i><i class="b"></i><i class="b"></i><i>R</i><i>A</i><i>G</i><i>A</i><i class="b"></i><i>R</i><i class="b"></i><i>L</i><i class="b"></i><i class="b"></i><i>Y</i><i class="b"></i><i>E</i><i class="b"></i><i class="b"></i></div></div>
+      <div class="info"><h2>Desi Crossword</h2><p>Classic 13 by 13 crosswords packed with chai, cricket, cinema, festivals and places. A new puzzle of the day, every day.</p><div class="meta">Thinking game · 10 to 20 minutes</div><div class="cta">Play now →</div></div>
     </a></li>
     <li><a class="game" href="/games/lane-dash/">
       <div class="art dashart" aria-hidden="true"><i class="ob"></i><i class="co"></i><i class="car"></i></div>
@@ -117,7 +129,7 @@
       <div><b>iPhone</b><p>Open a game in Safari, tap the Share button, then "Add to Home Screen".</p></div>
       <div><b>Android</b><p>Open a game in Chrome and tap "Install", or use the browser menu and choose "Install app".</p></div>
     </div>
-    <p class="about">Every game keeps its own best score, and one daily streak and coin balance are shared across all three. Everything is saved on your phone.</p>
+    <p class="about">Every game keeps its own best score, and one daily streak and coin balance are shared across all of them. Everything is saved on your phone.</p>
   </section>
 
   <footer><span>AuroStudios, a project by <a href="/">Arabinda Narayan Das</a></span><a href="/">auronara.com</a></footer>

@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Desi Crossword</title>
+<meta name="theme-color" content="#E8F1FF">
+<meta name="description" content="A fresh India-flavoured crossword every day: chai, cricket, cinema, festivals and more. Free, no sign-up, works offline.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Crossword">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito+Sans:wght@400;700;800;900&display=swap">
+<style>
+  :root {
+    --bg: #E8F1FF; --ink: #1D2B53; --muted: #4A5A85; --card: #FFFFFF; --line: #C3D3F0;
+    --coral: #FF5E5B; --sun: #FFC53D; --mint: #1FB89A; --violet: #6B4EFF; --word: #CFE3FF;
+    --display: "Lilita One", "Arial Rounded MT Bold", system-ui, sans-serif;
+    --body: "Nunito Sans", system-ui, sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  [hidden] { display: none !important; }
+  html, body { height: 100%; margin: 0; overflow: hidden; overscroll-behavior: none; background: var(--bg); color: var(--ink); font: 16px/1.4 var(--body); }
+  button { font: inherit; color: inherit; }
+  button:focus-visible { outline: 3px solid var(--violet); outline-offset: 2px; }
+  #app { position: fixed; inset: 0; display: flex; flex-direction: column; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
+  .bar { flex: none; display: flex; align-items: center; gap: 8px; padding: 8px 10px; }
+  .bar .title { flex: 1; min-width: 0; }
+  .bar .title b { display: block; font: 400 1.15rem/1.1 var(--display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar .title span { font-size: 0.78rem; color: var(--muted); font-weight: 700; }
+  .ib { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--line); background: var(--card); display: grid; place-items: center; padding: 0; cursor: pointer; }
+  .ib svg { width: 20px; height: 20px; }
+  .ib .off { display: none; } .ib.is-off .on { display: none; } .ib.is-off .off { display: block; }
+  .timer { font: 800 0.95rem var(--body); font-variant-numeric: tabular-nums; padding: 6px 10px; border-radius: 999px; background: var(--card); border: 2px solid var(--line); }
+  .coins { font: 800 0.85rem var(--body); padding: 6px 10px; border-radius: 999px; background: #FFF4D6; border: 2px solid var(--sun); white-space: nowrap; }
+  main { flex: 1; min-height: 0; display: flex; gap: 18px; justify-content: center; padding: 0 10px; }
+  .play { flex: 1; min-width: 0; max-width: 560px; display: flex; flex-direction: column; min-height: 0; }
+  .gridwrap { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+  .grid { display: grid; grid-template-columns: repeat(13, 1fr); gap: 2px; background: var(--ink); border: 3px solid var(--ink); border-radius: 10px; overflow: hidden; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+  .cell { position: relative; background: var(--card); display: grid; place-items: center; font-weight: 900; text-transform: uppercase; cursor: pointer; transition: background .12s; }
+  .cell.blk { background: var(--ink); cursor: default; }
+  .cell.inword { background: var(--word); }
+  .cell.sel { background: var(--sun); }
+  .cell .n { position: absolute; top: 1px; left: 2px; font-size: 0.5em; font-weight: 800; line-height: 1; color: var(--muted); }
+  .cell .l { line-height: 1; }
+  .cell.bad .l { color: var(--coral); }
+  .cell.rev::after { content: ""; position: absolute; right: 0; top: 0; border-style: solid; border-width: 0 7px 7px 0; border-color: transparent var(--violet) transparent transparent; }
+  .cell.good { animation: pulse .5s ease; }
+  @keyframes pulse { 40% { background: #D8F5EC; transform: scale(1.06); } }
+  .cluebar { flex: none; margin-top: 8px; display: flex; align-items: stretch; gap: 6px; background: var(--card); border: 2px solid var(--line); border-radius: 14px; min-height: 58px; }
+  .cluebar button.arrow { flex: none; width: 40px; border: 0; background: none; cursor: pointer; font: 900 1.3rem var(--body); color: var(--muted); }
+  .cluebar .ct { flex: 1; display: flex; align-items: center; gap: 8px; padding: 6px 2px; cursor: pointer; font-weight: 700; line-height: 1.25; font-size: 0.98rem; }
+  .cluebar .ct .tag { flex: none; font: 900 0.8rem var(--body); background: var(--ink); color: #fff; padding: 3px 7px; border-radius: 8px; }
+  .tools { flex: none; display: flex; gap: 6px; margin-top: 8px; }
+  .tool { flex: 1; min-height: 40px; border-radius: 12px; border: 2px solid var(--ink); background: var(--card); font: 800 0.85rem var(--body); cursor: pointer; box-shadow: 0 3px 0 var(--ink); padding: 4px 6px; }
+  .tool:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+  .tool small { display: block; font-weight: 700; color: var(--muted); font-size: 0.72rem; }
+  .kb { flex: none; margin: 8px 0 6px; display: flex; flex-direction: column; gap: 6px; user-select: none; -webkit-user-select: none; }
+  .kb .row { display: flex; gap: 5px; justify-content: center; }
+  .kb button { flex: 1; max-width: 44px; height: 46px; border: 0; border-radius: 8px; background: var(--card); box-shadow: 0 2px 0 var(--line); font: 900 1.05rem var(--body); cursor: pointer; padding: 0; touch-action: manipulation; }
+  .kb button:active { background: var(--sun); }
+  .kb button.wide { max-width: 68px; flex: 1.5; font-size: 0.8rem; }
+  .side { display: none; width: 340px; flex: none; overflow-y: auto; padding-bottom: 16px; }
+  .side h3 { font: 400 1.1rem var(--display); margin: 10px 0 6px; }
+  .cl { list-style: none; margin: 0; padding: 0; }
+  .cl li { display: flex; gap: 8px; padding: 6px 8px; border-radius: 10px; cursor: pointer; font-size: 0.92rem; line-height: 1.3; }
+  .cl li b { flex: none; width: 1.8em; text-align: right; }
+  .cl li.cur { background: var(--word); }
+  .cl li.done { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(74,90,133,.5); }
+  @media (min-width: 900px) and (min-height: 600px) { .side { display: block; } .kb { display: none; } .cluesbtn { display: none; } }
+  .ov { position: fixed; inset: 0; z-index: 20; background: rgba(232,241,255,0.97); overflow-y: auto; display: flex; justify-content: center; padding: calc(env(safe-area-inset-top, 0px) + 20px) 16px calc(env(safe-area-inset-bottom, 0px) + 24px); }
+  .ov .box { width: 100%; max-width: 460px; display: flex; flex-direction: column; gap: 12px; }
+  .ov h1 { font: 400 2.3rem/1.05 var(--display); margin: 6px 0 0; }
+  .ov h2 { font: 400 1.6rem/1.1 var(--display); margin: 0; }
+  .ov p { margin: 0; color: var(--muted); }
+  .kick { font: 900 0.8rem var(--body); color: var(--violet); letter-spacing: .02em; text-transform: uppercase; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font: 800 0.8rem var(--body); padding: 4px 10px; border-radius: 999px; background: var(--card); border: 2px solid var(--line); }
+  .chip.good { background: #D8F5EC; border-color: var(--mint); }
+  .big { font: 400 1.3rem var(--display); background: var(--coral); color: #fff; border: 3px solid var(--ink); border-radius: 16px; padding: 12px 20px; cursor: pointer; box-shadow: 0 4px 0 var(--ink); min-height: 52px; }
+  .big:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--ink); }
+  .big.alt { background: var(--card); color: var(--ink); font-size: 1.05rem; }
+  .today { background: var(--card); border: 3px solid var(--ink); border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 5px 0 var(--ink); }
+  .plist { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .plist button { width: 100%; text-align: left; display: flex; align-items: center; gap: 10px; background: var(--card); border: 2px solid var(--line); border-radius: 14px; padding: 10px 12px; cursor: pointer; }
+  .plist .num { flex: none; width: 34px; height: 34px; border-radius: 10px; background: var(--word); display: grid; place-items: center; font: 900 0.9rem var(--body); }
+  .plist .num.solved { background: var(--mint); color: #fff; }
+  .plist .t { flex: 1; min-width: 0; } .plist .t b { display: block; } .plist .t span { font-size: 0.8rem; color: var(--muted); }
+  .plist .badge { font: 900 0.7rem var(--body); color: var(--violet); }
+  .hint { font-size: 0.85rem; color: var(--muted); }
+  .sheet { position: fixed; inset: auto 0 0 0; z-index: 15; max-height: 72vh; background: var(--card); border-radius: 20px 20px 0 0; box-shadow: 0 -8px 30px rgba(29,43,83,.25); overflow-y: auto; padding: 12px 14px calc(env(safe-area-inset-bottom, 0px) + 16px); }
+  .sheet .hd { display: flex; justify-content: space-between; align-items: center; position: sticky; top: -12px; background: var(--card); padding: 8px 0; }
+  .sheet h3 { font: 400 1.1rem var(--display); margin: 8px 0 4px; }
+  .toast { position: fixed; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 64px); transform: translateX(-50%); z-index: 30; background: var(--ink); color: #fff; font-weight: 800; padding: 8px 14px; border-radius: 999px; font-size: 0.9rem; pointer-events: none; opacity: 0; transition: opacity .2s; }
+  .toast.show { opacity: 1; }
+  #confetti { position: fixed; inset: 0; z-index: 25; pointer-events: none; }
+  .how { background: var(--card); border: 2px solid var(--line); border-radius: 14px; padding: 12px 14px; font-size: 0.9rem; color: var(--muted); }
+  .how b { color: var(--ink); }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="bar">
+    <button class="ib" id="menuBtn" aria-label="All puzzles" title="All puzzles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div class="title"><b id="pTitle">Desi Crossword</b><span id="pSub"></span></div>
+    <div class="coins" id="coinBox" title="Coins">0</div>
+    <div class="timer" id="timer" aria-label="Time">0:00</div>
+    <button class="ib" id="mute" aria-label="Sound on" title="Sound"><svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg><svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M22 9l-6 6"/><path d="M16 9l6 6"/></svg></button>
+  </div>
+  <main>
+    <div class="play">
+      <div class="gridwrap" id="gridwrap"><div class="grid" id="grid" role="grid" aria-label="Crossword grid"></div></div>
+      <div class="cluebar">
+        <button class="arrow" id="prevClue" aria-label="Previous clue">‹</button>
+        <div class="ct" id="clueText" role="button" tabindex="0" aria-live="polite"></div>
+        <button class="arrow" id="nextClue" aria-label="Next clue">›</button>
+      </div>
+      <div class="tools">
+        <button class="tool cluesbtn" id="cluesBtn">Clues<small>See all</small></button>
+        <button class="tool" id="checkBtn">Check<small>Free</small></button>
+        <button class="tool" id="hintBtn">Letter<small>10 coins</small></button>
+        <button class="tool" id="revealBtn">Word<small>30 coins</small></button>
+      </div>
+      <div class="kb" id="kb"></div>
+    </div>
+    <aside class="side" id="side">
+      <h3>Across</h3><ul class="cl" id="listA"></ul>
+      <h3>Down</h3><ul class="cl" id="listD"></ul>
+    </aside>
+  </main>
+</div>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="hd"><b style="font:400 1.2rem var(--display)">Clues</b><button class="ib" id="sheetClose" aria-label="Close clues">✕</button></div>
+  <h3>Across</h3><ul class="cl" id="sheetA"></ul>
+  <h3>Down</h3><ul class="cl" id="sheetD"></ul>
+</div>
+
+<div class="ov" id="home">
+  <div class="box">
+    <div class="kick">AuroStudios</div>
+    <h1>Desi Crossword</h1>
+    <p>Classic 13 by 13 puzzles packed with chai, cricket, cinema and everything India.</p>
+    <div class="chips" id="homeChips"></div>
+    <div class="today">
+      <div class="kick" style="color:var(--coral)">Puzzle of the day</div>
+      <h2 id="todayTitle"></h2>
+      <p id="todayInfo"></p>
+      <button class="big" id="todayBtn">Play today's puzzle</button>
+    </div>
+    <h2 style="font-size:1.2rem;margin-top:6px">All puzzles</h2>
+    <ul class="plist" id="plist"></ul>
+    <div class="how"><b>How to play.</b> Tap a square and type. Tap the same square again, or the clue bar, to switch between across and down. Half the letters cross another word, as in newspaper crosswords. Stuck? Check marks wrong letters for free, or spend coins to reveal a letter or a word.</div>
+    <button class="big alt" id="inst" hidden>Add to home screen</button>
+    <p class="hint" id="instHint" hidden></p>
+  </div>
+</div>
+
+<div class="ov" id="win" hidden>
+  <div class="box" style="text-align:center;align-items:center;justify-content:center;min-height:80%">
+    <div class="kick">Solved!</div>
+    <h1 id="winTitle">Shabash!</h1>
+    <p id="winInfo"></p>
+    <div class="chips" id="winChips" style="justify-content:center"></div>
+    <button class="big" id="shareBtn" style="width:100%;max-width:320px">Share your time</button>
+    <button class="big alt" id="nextBtn" style="width:100%;max-width:320px">Next puzzle</button>
+    <button class="big alt" id="homeBtn" style="width:100%;max-width:320px">All puzzles</button>
+  </div>
+</div>
+<canvas id="confetti" hidden></canvas>
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  'use strict';
+  var PUZZLES = [{"id":"chai","title":"Chai Time","grid":["#KULFI#COACH#","L#N#U#J#D#O#S","INCONVENIENCE","G#O#D#E#A#T#V","HING#RRR#ARRE","T#D#S#A#I#O#N","#TIKKA#CLOVE#","S#T#I#K#L#E#R","PAID#SHY#URDU","I#O#Z#E#G#S#I","CONSIDERATION","E#A#N#R#L#E#S","#PLACE#FIRST#"],"across":[{"n":1,"r":0,"c":1,"len":5,"ans":"KULFI","clue":"Dense, creamy frozen dessert, cousin of ice cream"},{"n":4,"r":0,"c":7,"len":5,"ans":"COACH","clue":"Team trainer, or a train carriage"},{"n":10,"r":2,"c":0,"len":13,"ans":"INCONVENIENCE","clue":"Bother or trouble"},{"n":11,"r":4,"c":0,"len":4,"ans":"HING","clue":"Pungent resin, also called asafoetida"},{"n":12,"r":4,"c":5,"len":3,"ans":"RRR","clue":"Telugu epic whose \"Naatu Naatu\" won an Oscar"},{"n":13,"r":4,"c":9,"len":4,"ans":"ARRE","clue":"Hindi cry of surprise"},{"n":16,"r":6,"c":1,"len":5,"ans":"TIKKA","clue":"Marinated chunks grilled on skewers"},{"n":17,"r":6,"c":7,"len":5,"ans":"CLOVE","clue":"Dried flower bud used as a spice"},{"n":21,"r":8,"c":0,"len":4,"ans":"PAID","clue":"Settled the bill"},{"n":22,"r":8,"c":5,"len":3,"ans":"SHY","clue":"Bashful"},{"n":23,"r":8,"c":9,"len":4,"ans":"URDU","clue":"Language of ghazals"},{"n":26,"r":10,"c":0,"len":13,"ans":"CONSIDERATION","clue":"Careful thought"},{"n":27,"r":12,"c":1,"len":5,"ans":"PLACE","clue":"Location"},{"n":28,"r":12,"c":7,"len":5,"ans":"FIRST","clue":"Number one in a race"}],"down":[{"n":2,"r":0,"c":2,"len":13,"ans":"UNCONDITIONAL","clue":"Without any strings attached"},{"n":3,"r":0,"c":4,"len":4,"ans":"FUND","clue":"Pool of money"},{"n":5,"r":0,"c":8,"len":4,"ans":"ODIA","clue":"Language of Odisha"},{"n":6,"r":0,"c":10,"len":13,"ans":"CONTROVERSIES","clue":"Heated public disputes"},{"n":7,"r":1,"c":0,"len":5,"ans":"LIGHT","clue":"Not heavy"},{"n":8,"r":1,"c":6,"len":5,"ans":"JEERA","clue":"Cumin seeds"},{"n":9,"r":1,"c":12,"len":5,"ans":"SEVEN","clue":"Days in a week"},{"n":14,"r":5,"c":4,"len":3,"ans":"SKI","clue":"Glide on snow"},{"n":15,"r":5,"c":8,"len":3,"ans":"ILL","clue":"Unwell"},{"n":18,"r":7,"c":0,"len":5,"ans":"SPICE","clue":"Seasoning from a masala box"},{"n":19,"r":7,"c":6,"len":5,"ans":"KHEER","clue":"Rice pudding scented with cardamom"},{"n":20,"r":7,"c":12,"len":5,"ans":"RUINS","clue":"Remains of old buildings, like Hampi's"},{"n":24,"r":9,"c":4,"len":4,"ans":"ZINC","clue":"Metal used to galvanise iron"},{"n":25,"r":9,"c":8,"len":4,"ans":"GALI","clue":"Narrow lane"}]},{"id":"howzat","title":"Howzat!","grid":["#VIRAT#GREAT#","A#N#D#C#A#U#T","GRANDDAUGHTER","E#P#S#T#A#H#A","NAPS#ICY#HOLI","T#R#A#H#G#R#N","#KOHLI#ROHIT#","P#P#L#K#A#T#D","ISRO#BAT#LAKH","T#I#B#P#V#T#O","CLARIFICATION","H#T#H#L#D#V#I","#DEBUT#PACER#"],"across":[{"n":1,"r":0,"c":1,"len":5,"ans":"VIRAT","clue":"First name of Kohli"},{"n":4,"r":0,"c":7,"len":5,"ans":"GREAT","clue":"Excellent"},{"n":10,"r":2,"c":0,"len":13,"ans":"GRANDDAUGHTER","clue":"A child's girl, to her grandparents"},{"n":11,"r":4,"c":0,"len":4,"ans":"NAPS","clue":"Afternoon snoozes"},{"n":12,"r":4,"c":5,"len":3,"ans":"ICY","clue":"Freezing"},{"n":13,"r":4,"c":9,"len":4,"ans":"HOLI","clue":"Festival of colours"},{"n":16,"r":6,"c":1,"len":5,"ans":"KOHLI","clue":"Virat, a run-chase specialist"},{"n":17,"r":6,"c":7,"len":5,"ans":"ROHIT","clue":"Sharma, nicknamed \"Hitman\""},{"n":21,"r":8,"c":0,"len":4,"ans":"ISRO","clue":"India's space agency"},{"n":22,"r":8,"c":5,"len":3,"ans":"BAT","clue":"Willow swung by a striker"},{"n":23,"r":8,"c":9,"len":4,"ans":"LAKH","clue":"One hundred thousand"},{"n":26,"r":10,"c":0,"len":13,"ans":"CLARIFICATION","clue":"Explanation that clears up confusion"},{"n":27,"r":12,"c":1,"len":5,"ans":"DEBUT","clue":"First appearance for the team"},{"n":28,"r":12,"c":7,"len":5,"ans":"PACER","clue":"Fast bowler"}],"down":[{"n":2,"r":0,"c":2,"len":13,"ans":"INAPPROPRIATE","clue":"Not suitable for the occasion"},{"n":3,"r":0,"c":4,"len":4,"ans":"ADDS","clue":"Totals up"},{"n":5,"r":0,"c":8,"len":4,"ans":"RAGA","clue":"Melodic framework in classical music"},{"n":6,"r":0,"c":10,"len":13,"ans":"AUTHORITATIVE","clue":"Commanding and reliable"},{"n":7,"r":1,"c":0,"len":5,"ans":"AGENT","clue":"Spy, or a representative"},{"n":8,"r":1,"c":6,"len":5,"ans":"CATCH","clue":"Fielder's dismissal off the bat"},{"n":9,"r":1,"c":12,"len":5,"ans":"TRAIN","clue":"Runs on Indian Railways"},{"n":14,"r":5,"c":4,"len":3,"ans":"ALL","clue":"Every single one"},{"n":15,"r":5,"c":8,"len":3,"ans":"GOA","clue":"Beach state once ruled by Portugal"},{"n":18,"r":7,"c":0,"len":5,"ans":"PITCH","clue":"Strip between the wickets"},{"n":19,"r":7,"c":6,"len":5,"ans":"KAPIL","clue":"Dev, who lifted the 1983 World Cup"},{"n":20,"r":7,"c":12,"len":5,"ans":"DHONI","clue":"\"Captain Cool\" who led India to the 2011 World Cup"},{"n":24,"r":9,"c":4,"len":4,"ans":"BIHU","clue":"Assam's festival of the new year"},{"n":25,"r":9,"c":8,"len":4,"ans":"VADA","clue":"Fried lentil doughnut, a southern snack"}]},{"id":"screen","title":"Lights, Camera, Raga","grid":["#DANCE#ADAPT#","I#N#A#A#R#R#A","MANUFACTURERS","A#O#E#T#M#S#S","GAUR#LOW#VEDA","E#N#T#R#S#N#M","#ACTED#NAATU#","G#E#A#G#L#A#C","RAMA#RAY#STAR","A#E#A#R#I#I#A","CONTRIBUTIONS","E#T#E#A#E#N#H","#OSCAR#SMASH#"],"across":[{"n":1,"r":0,"c":1,"len":5,"ans":"DANCE","clue":"Footwork in a film number"},{"n":4,"r":0,"c":7,"len":5,"ans":"ADAPT","clue":"Adjust to new surroundings"},{"n":10,"r":2,"c":0,"len":13,"ans":"MANUFACTURERS","clue":"Makers of goods in factories"},{"n":11,"r":4,"c":0,"len":4,"ans":"GAUR","clue":"Indian bison"},{"n":12,"r":4,"c":5,"len":3,"ans":"LOW","clue":"Not high"},{"n":13,"r":4,"c":9,"len":4,"ans":"VEDA","clue":"Ancient sacred text"},{"n":16,"r":6,"c":1,"len":5,"ans":"ACTED","clue":"Played a part on stage"},{"n":17,"r":6,"c":7,"len":5,"ans":"NAATU","clue":"Telugu for \"rustic\"; said twice, an Oscar-winning song"},{"n":21,"r":8,"c":0,"len":4,"ans":"RAMA","clue":"Prince of Ayodhya, hero of an ancient epic"},{"n":22,"r":8,"c":5,"len":3,"ans":"RAY","clue":"Satyajit, director of Pather Panchali"},{"n":23,"r":8,"c":9,"len":4,"ans":"STAR","clue":"Big name on a poster"},{"n":26,"r":10,"c":0,"len":13,"ans":"CONTRIBUTIONS","clue":"Donations to a common pool"},{"n":27,"r":12,"c":1,"len":5,"ans":"OSCAR","clue":"Golden statuette"},{"n":28,"r":12,"c":7,"len":5,"ans":"SMASH","clue":"Hard overhead shot in badminton"}],"down":[{"n":2,"r":0,"c":2,"len":13,"ans":"ANNOUNCEMENTS","clue":"Platform messages before a train arrives"},{"n":3,"r":0,"c":4,"len":4,"ans":"CAFE","clue":"Coffee shop"},{"n":5,"r":0,"c":8,"len":4,"ans":"DRUM","clue":"Percussion instrument"},{"n":6,"r":0,"c":10,"len":13,"ans":"PRESENTATIONS","clue":"Slide shows at work"},{"n":7,"r":1,"c":0,"len":5,"ans":"IMAGE","clue":"Picture"},{"n":8,"r":1,"c":6,"len":5,"ans":"ACTOR","clue":"One who plays a role"},{"n":9,"r":1,"c":12,"len":5,"ans":"ASSAM","clue":"Land of tea and the one-horned rhino"},{"n":14,"r":5,"c":4,"len":3,"ans":"TEA","clue":"Darjeeling's famous export"},{"n":15,"r":5,"c":8,"len":3,"ans":"SAL","clue":"Hardwood tree of eastern forests"},{"n":18,"r":7,"c":0,"len":5,"ans":"GRACE","clue":"Elegance of movement"},{"n":19,"r":7,"c":6,"len":5,"ans":"GARBA","clue":"Circular dance of Gujarat's Navratri"},{"n":20,"r":7,"c":12,"len":5,"ans":"CRASH","clue":"Collision, or a computer's sudden freeze"},{"n":24,"r":9,"c":4,"len":4,"ans":"AREA","clue":"Length times breadth"},{"n":25,"r":9,"c":8,"len":4,"ans":"ITEM","clue":"Single thing on a list"}]},{"id":"india","title":"Incredible India","grid":["#BIHAR#DHABA#","S#N#G#D#A#I#I","INTERVENTIONS","E#E#A#L#S#T#S","GURU#ETA#MENU","E#N#I#A#G#C#E","#HAMPI#DELHI#","P#T#L#T#T#N#P","UNIT#RUN#YOGA","N#O#Z#L#S#L#I","CONVERSATIONS","H#A#R#I#I#G#A","#FLOOR#TRAYS#"],"across":[{"n":1,"r":0,"c":1,"len":5,"ans":"BIHAR","clue":"Home of the ancient Nalanda"},{"n":4,"r":0,"c":7,"len":5,"ans":"DHABA","clue":"Roadside eatery serving truckers"},{"n":10,"r":2,"c":0,"len":13,"ans":"INTERVENTIONS","clue":"Steps taken to change an outcome"},{"n":11,"r":4,"c":0,"len":4,"ans":"GURU","clue":"Teacher or guide"},{"n":12,"r":4,"c":5,"len":3,"ans":"ETA","clue":"Expected arrival time, briefly"},{"n":13,"r":4,"c":9,"len":4,"ans":"MENU","clue":"List of dishes at a restaurant"},{"n":16,"r":6,"c":1,"len":5,"ans":"HAMPI","clue":"Ruined Vijayanagara capital in Karnataka"},{"n":17,"r":6,"c":7,"len":5,"ans":"DELHI","clue":"Capital city on the Yamuna"},{"n":21,"r":8,"c":0,"len":4,"ans":"UNIT","clue":"Single measure"},{"n":22,"r":8,"c":5,"len":3,"ans":"RUN","clue":"Single scored between the wickets"},{"n":23,"r":8,"c":9,"len":4,"ans":"YOGA","clue":"Postures and breathing practised worldwide"},{"n":26,"r":10,"c":0,"len":13,"ans":"CONVERSATIONS","clue":"Chats over chai, say"},{"n":27,"r":12,"c":1,"len":5,"ans":"FLOOR","clue":"What you stand on indoors"},{"n":28,"r":12,"c":7,"len":5,"ans":"TRAYS","clue":"Flat carriers for cups"}],"down":[{"n":2,"r":0,"c":2,"len":13,"ans":"INTERNATIONAL","clue":"Spanning many nations"},{"n":3,"r":0,"c":4,"len":4,"ans":"AGRA","clue":"Home of the Taj Mahal"},{"n":5,"r":0,"c":8,"len":4,"ans":"HATS","clue":"Caps and topis"},{"n":6,"r":0,"c":10,"len":13,"ans":"BIOTECHNOLOGY","clue":"Science that puts living cells to work in industry"},{"n":7,"r":1,"c":0,"len":5,"ans":"SIEGE","clue":"Prolonged blockade of a fort"},{"n":8,"r":1,"c":6,"len":5,"ans":"DELTA","clue":"Fan-shaped land where a river meets the sea"},{"n":9,"r":1,"c":12,"len":5,"ans":"ISSUE","clue":"Edition of a magazine"},{"n":14,"r":5,"c":4,"len":3,"ans":"IPL","clue":"Franchise T20 league held each spring"},{"n":15,"r":5,"c":8,"len":3,"ans":"GET","clue":"Receive"},{"n":18,"r":7,"c":0,"len":5,"ans":"PUNCH","clue":"Blow with a fist"},{"n":19,"r":7,"c":6,"len":5,"ans":"TULSI","clue":"Holy basil"},{"n":20,"r":7,"c":12,"len":5,"ans":"PAISA","clue":"One hundredth of a rupee"},{"n":24,"r":9,"c":4,"len":4,"ans":"ZERO","clue":"Digit Indian mathematicians helped bring to the world"},{"n":25,"r":9,"c":8,"len":4,"ans":"STIR","clue":"Mix a pot"}]},{"id":"festival","title":"Festival Season","grid":["#AGAIN#TRACKS","A#R#R#R#A#O#A","GRAVITATIONAL","R#N#S#K#N#T#W","ENDS#WHY#ARIA","E#C#O#I#E#A#R","#SHAWL#BINDI#","G#I#N#K#D#I#M","ONLY#BUT#ACHA","S#D#A#R#M#T#N","STRENGTHENING","I#E#N#A#O#O#O","PONGAL#SWING#"],"across":[{"n":1,"r":0,"c":1,"len":5,"ans":"AGAIN","clue":"Once more"},{"n":4,"r":0,"c":7,"len":6,"ans":"TRACKS","clue":"Railway lines"},{"n":10,"r":2,"c":0,"len":13,"ans":"GRAVITATIONAL","clue":"Like the pull that keeps the moon in orbit"},{"n":11,"r":4,"c":0,"len":4,"ans":"ENDS","clue":"Finishes"},{"n":12,"r":4,"c":5,"len":3,"ans":"WHY","clue":"Question asking for a reason"},{"n":13,"r":4,"c":9,"len":4,"ans":"ARIA","clue":"Solo song in an opera"},{"n":16,"r":6,"c":1,"len":5,"ans":"SHAWL","clue":"Wrap for the shoulders"},{"n":17,"r":6,"c":7,"len":5,"ans":"BINDI","clue":"Dot worn on the forehead"},{"n":21,"r":8,"c":0,"len":4,"ans":"ONLY","clue":"Sole"},{"n":22,"r":8,"c":5,"len":3,"ans":"BUT","clue":"However"},{"n":23,"r":8,"c":9,"len":4,"ans":"ACHA","clue":"Hindi for \"okay\" or \"I see\""},{"n":26,"r":10,"c":0,"len":13,"ans":"STRENGTHENING","clue":"Making sturdier"},{"n":27,"r":12,"c":0,"len":6,"ans":"PONGAL","clue":"Tamil harvest festival named for a rice dish"},{"n":28,"r":12,"c":7,"len":5,"ans":"SWING","clue":"Late curve through the air"}],"down":[{"n":2,"r":0,"c":2,"len":13,"ans":"GRANDCHILDREN","clue":"Kids' kids"},{"n":3,"r":0,"c":4,"len":4,"ans":"IRIS","clue":"Coloured part of the eye"},{"n":5,"r":0,"c":8,"len":4,"ans":"RAIN","clue":"Monsoon downpour"},{"n":6,"r":0,"c":10,"len":13,"ans":"CONTRADICTION","clue":"Statement that clashes with another"},{"n":7,"r":0,"c":12,"len":6,"ans":"SALWAR","clue":"Loose trousers worn with a kameez"},{"n":8,"r":1,"c":0,"len":5,"ans":"AGREE","clue":"Say yes to a plan"},{"n":9,"r":1,"c":6,"len":5,"ans":"RAKHI","clue":"Thread tied on a brother's wrist"},{"n":14,"r":5,"c":4,"len":3,"ans":"OWN","clue":"Possess"},{"n":15,"r":5,"c":8,"len":3,"ans":"EID","clue":"Festival ending Ramadan, ___ al-Fitr"},{"n":18,"r":7,"c":0,"len":6,"ans":"GOSSIP","clue":"Idle chatter about others"},{"n":19,"r":7,"c":6,"len":5,"ans":"KURTA","clue":"Long, loose shirt"},{"n":20,"r":7,"c":12,"len":5,"ans":"MANGO","clue":"Summer's king of fruits"},{"n":24,"r":9,"c":4,"len":4,"ans":"ANNA","clue":"Old coin worth a sixteenth of a rupee"},{"n":25,"r":9,"c":8,"len":4,"ans":"MEOW","clue":"Cat's call"}]},{"id":"epics","title":"Epics and Empires","grid":["#LEAST#DROPS#","N#N#L#N#O#E#C","ARCHITECTURAL","W#O#P#H#I#S#A","AQUA#TRY#YOGI","B#R#O#U#N#N#M","#BABUR#VEDAS#","T#G#T#I#W#L#V","EDEN#ONE#WIDE","M#M#F#D#R#T#E","PRECIPITATION","T#N#L#A#J#E#A","#STUMP#LASSI#"],"across":[{"n":1,"r":0,"c":1,"len":5,"ans":"LEAST","clue":"Smallest amount"},{"n":4,"r":0,"c":7,"len":5,"ans":"DROPS","clue":"Tiny amounts of liquid"},{"n":10,"r":2,"c":0,"len":13,"ans":"ARCHITECTURAL","clue":"Relating to building design"},{"n":11,"r":4,"c":0,"len":4,"ans":"AQUA","clue":"Blue-green shade"},{"n":12,"r":4,"c":5,"len":3,"ans":"TRY","clue":"Attempt"},{"n":13,"r":4,"c":9,"len":4,"ans":"YOGI","clue":"Practitioner of yoga"},{"n":16,"r":6,"c":1,"len":5,"ans":"BABUR","clue":"First Mughal emperor"},{"n":17,"r":6,"c":7,"len":5,"ans":"VEDAS","clue":"Oldest Hindu scriptures"},{"n":21,"r":8,"c":0,"len":4,"ans":"EDEN","clue":"___ Gardens, Kolkata's famous ground"},{"n":22,"r":8,"c":5,"len":3,"ans":"ONE","clue":"Single digit before two"},{"n":23,"r":8,"c":9,"len":4,"ans":"WIDE","clue":"Delivery too far from the batter, worth an extra run"},{"n":26,"r":10,"c":0,"len":13,"ans":"PRECIPITATION","clue":"Rain, snow or hail"},{"n":27,"r":12,"c":1,"len":5,"ans":"STUMP","clue":"Wooden post behind the batter"},{"n":28,"r":12,"c":7,"len":5,"ans":"LASSI","clue":"Chilled yogurt drink, sweet or salted"}],"down":[{"n":2,"r":0,"c":2,"len":13,"ans":"ENCOURAGEMENT","clue":"Words that boost confidence"},{"n":3,"r":0,"c":4,"len":4,"ans":"SLIP","clue":"Fielder crouched behind the batter's edge"},{"n":5,"r":0,"c":8,"len":4,"ans":"ROTI","clue":"Flatbread puffed on a hot tawa"},{"n":6,"r":0,"c":10,"len":13,"ans":"PERSONALITIES","clue":"Celebrities, or characters"},{"n":7,"r":1,"c":0,"len":5,"ans":"NAWAB","clue":"Muslim ruler or noble"},{"n":8,"r":1,"c":6,"len":5,"ans":"NEHRU","clue":"India's first prime minister"},{"n":9,"r":1,"c":12,"len":5,"ans":"CLAIM","clue":"Assert without proof"},{"n":14,"r":5,"c":4,"len":3,"ans":"OUT","clue":"Not in, like a dismissed batter"},{"n":15,"r":5,"c":8,"len":3,"ans":"NEW","clue":"Not old"},{"n":18,"r":7,"c":0,"len":5,"ans":"TEMPT","clue":"Lure"},{"n":19,"r":7,"c":6,"len":5,"ans":"INDIA","clue":"Land of a billion-plus people"},{"n":20,"r":7,"c":12,"len":5,"ans":"VEENA","clue":"Ancient plucked string instrument"},{"n":24,"r":9,"c":4,"len":4,"ans":"FILM","clue":"Reel or digital feature"},{"n":25,"r":9,"c":8,"len":4,"ans":"RAJA","clue":"King"}]},{"id":"desi","title":"Desi Life","grid":["#HALWA#TAMIL#","A#P#A#O#R#N#A","SOPHISTICATED","I#R#T#H#H#E#D","DHOL#YES#URGE","E#X#B#R#R#R#D","#PIPAL#SAROD#","C#M#D#M#J#G#C","HEAR#DUE#YAAR","E#T#K#S#E#T#A","SPECIFICATION","S#L#T#C#C#O#E","#TYPES#RHINO#"],"across":[{"n":1,"r":0,"c":1,"len":5,"ans":"HALWA","clue":"Sweet pudding of semolina or carrot"},{"n":4,"r":0,"c":7,"len":5,"ans":"TAMIL","clue":"Classical language of the Tirukkural"},{"n":10,"r":2,"c":0,"len":13,"ans":"SOPHISTICATED","clue":"Refined and worldly"},{"n":11,"r":4,"c":0,"len":4,"ans":"DHOL","clue":"Barrel drum beaten at weddings and bhangra"},{"n":12,"r":4,"c":5,"len":3,"ans":"YES","clue":"Haan, in English"},{"n":13,"r":4,"c":9,"len":4,"ans":"URGE","clue":"Strong desire"},{"n":16,"r":6,"c":1,"len":5,"ans":"PIPAL","clue":"Sacred fig tree"},{"n":17,"r":6,"c":7,"len":5,"ans":"SAROD","clue":"Fretless lute of Hindustani music"},{"n":21,"r":8,"c":0,"len":4,"ans":"HEAR","clue":"Catch a sound"},{"n":22,"r":8,"c":5,"len":3,"ans":"DUE","clue":"Owed, or expected"},{"n":23,"r":8,"c":9,"len":4,"ans":"YAAR","clue":"Hindi word for a friend"},{"n":26,"r":10,"c":0,"len":13,"ans":"SPECIFICATION","clue":"Detailed technical requirement"},{"n":27,"r":12,"c":1,"len":5,"ans":"TYPES","clue":"Kinds"},{"n":28,"r":12,"c":7,"len":5,"ans":"RHINO","clue":"One-horned giant of Kaziranga"}],"down":[{"n":2,"r":0,"c":2,"len":13,"ans":"APPROXIMATELY","clue":"Roughly, give or take"},{"n":3,"r":0,"c":4,"len":4,"ans":"WAIT","clue":"Hang on"},{"n":5,"r":0,"c":8,"len":4,"ans":"ARCH","clue":"Curved gateway"},{"n":6,"r":0,"c":10,"len":13,"ans":"INTERROGATION","clue":"Intense questioning"},{"n":7,"r":1,"c":0,"len":5,"ans":"ASIDE","clue":"Remark whispered to the audience"},{"n":8,"r":1,"c":6,"len":5,"ans":"OTHER","clue":"Different one"},{"n":9,"r":1,"c":12,"len":5,"ans":"ADDED","clue":"Put in extra, like salt to dal"},{"n":14,"r":5,"c":4,"len":3,"ans":"BAD","clue":"Not good"},{"n":15,"r":5,"c":8,"len":3,"ans":"RAJ","clue":"British rule in India"},{"n":18,"r":7,"c":0,"len":5,"ans":"CHESS","clue":"Game that began in India as chaturanga"},{"n":19,"r":7,"c":6,"len":5,"ans":"MUSIC","clue":"Melodies and rhythms"},{"n":20,"r":7,"c":12,"len":5,"ans":"CRANE","clue":"Tall wading bird, like the sarus"},{"n":24,"r":9,"c":4,"len":4,"ans":"KITE","clue":"Flown on Makar Sankranti"},{"n":25,"r":9,"c":8,"len":4,"ans":"EACH","clue":"Every one, separately"}]}];
+  var N = 13;
+  var SAVE = 'desi-crossword-v1';
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---------- storage ---------- */
+  var mem = {};
+  function load(k, d) { try { var v = localStorage.getItem(k); if (v) return Object.assign(d, JSON.parse(v)); } catch (e) { if (mem[k]) return Object.assign(d, mem[k]); } return d; }
+  function save(k, v) { mem[k] = v; try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function localDay(d) { d = d || new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  var GIFTS = [10, 15, 20, 25, 35, 45, 100];
+  var studio = load('proto-studio', { coins: 0, streak: 0, lastDay: '' });
+  var gift = null;
+  (function dailyGift() {
+    var today = localDay();
+    if (studio.lastDay !== today) {
+      var yest = localDay(new Date(Date.now() - 864e5));
+      studio.streak = studio.lastDay === yest ? studio.streak + 1 : 1;
+      var r = GIFTS[(studio.streak - 1) % 7];
+      studio.coins += r; studio.lastDay = today; gift = { streak: studio.streak, reward: r };
+      save('proto-studio', studio);
+    }
+  })();
+  var progress = load(SAVE, { p: {} });
+  function pstate(id) {
+    if (!progress.p[id]) progress.p[id] = { fill: '', time: 0, hints: 0, done: false, best: 0 };
+    return progress.p[id];
+  }
+  function persist() { save(SAVE, progress); }
+
+  /* ---------- daily puzzle ---------- */
+  function dayIndex() {
+    var a = new Date(2026, 10, 1), b = new Date(); b.setHours(0, 0, 0, 0);
+    return Math.floor((b - a) / 864e5);
+  }
+  function todayIdx() { return ((dayIndex() % PUZZLES.length) + PUZZLES.length) % PUZZLES.length; }
+
+  /* ---------- sound ---------- */
+  var sound = (function () {
+    var KEY = 'stack-tap-music', on = true, ac = null, out = null;
+    try { on = localStorage.getItem(KEY) !== 'off'; } catch (e) {}
+    function ctx() {
+      if (!ac) { var A = window.AudioContext || window.webkitAudioContext; if (!A) return null; ac = new A(); out = ac.createGain(); out.gain.value = 0.7; out.connect(ac.destination); }
+      if (ac.state === 'suspended') ac.resume();
+      return ac;
+    }
+    function blip(f0, f1, t, dur, type, vol) {
+      var o = ac.createOscillator(), g = ac.createGain();
+      o.type = type; o.frequency.setValueAtTime(f0, t); if (f1 !== f0) o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(out); o.start(t); o.stop(t + dur + 0.05);
+    }
+    function play(kind) {
+      if (!on) return;
+      try {
+        if (!ctx()) return;
+        var t = ac.currentTime + 0.005;
+        if (kind === 'key') blip(660, 620, t, 0.05, 'sine', 0.08);
+        else if (kind === 'word') { blip(784, 784, t, 0.18, 'triangle', 0.18); blip(1175, 1175, t + 0.08, 0.25, 'sine', 0.12); }
+        else if (kind === 'bad') { blip(220, 180, t, 0.18, 'square', 0.06); }
+        else if (kind === 'reveal') { blip(520, 880, t, 0.16, 'sine', 0.14); }
+        else if (kind === 'win') { [523.25, 659.25, 783.99, 1046.5, 1318.5].forEach(function (f, i) { blip(f, f, t + i * 0.11, 0.4, 'triangle', 0.2); }); }
+      } catch (e) {}
+    }
+    return { play: play, isOn: function () { return on; }, toggle: function () { on = !on; try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {} return on; } };
+  })();
+  function paintMute() { var b = $('mute'); b.classList.toggle('is-off', !sound.isOn()); b.setAttribute('aria-label', sound.isOn() ? 'Sound on' : 'Sound off'); }
+  $('mute').addEventListener('click', function () { sound.toggle(); paintMute(); });
+  paintMute();
+
+  /* ---------- game state ---------- */
+  var P = null, pi = 0, st = null, cells = [], entries = [], cellEntries = {}, cur = { r: 0, c: 0, dir: 'A' }, fill = [], revealed = {}, wrong = {}, timer = null, running = false;
+
+  function buildEntries(p) {
+    entries = []; cellEntries = {};
+    [['A', p.across], ['D', p.down]].forEach(function (pair) {
+      pair[1].forEach(function (e) {
+        var cs = [];
+        for (var i = 0; i < e.len; i++) cs.push(pair[0] === 'A' ? [e.r, e.c + i] : [e.r + i, e.c]);
+        var en = { dir: pair[0], n: e.n, clue: e.clue, ans: e.ans, cells: cs, id: e.n + pair[0] };
+        entries.push(en);
+        cs.forEach(function (x) { var k = x[0] * N + x[1]; (cellEntries[k] = cellEntries[k] || {})[pair[0]] = en; });
+      });
+    });
+  }
+  function isBlock(r, c) { return P.grid[r][c] === '#'; }
+  function entryAt(r, c, dir) { var m = cellEntries[r * N + c]; return m ? (m[dir] || m[dir === 'A' ? 'D' : 'A']) : null; }
+  function curEntry() { return entryAt(cur.r, cur.c, cur.dir); }
+  function ordered() { return entries.filter(function (e) { return e.dir === 'A'; }).concat(entries.filter(function (e) { return e.dir === 'D'; })); }
+
+  function startPuzzle(i) {
+    pi = i; P = PUZZLES[i]; st = pstate(P.id);
+    buildEntries(P);
+    fill = []; revealed = st.rev || {}; wrong = {};
+    for (var k = 0; k < N * N; k++) fill.push(st.fill && st.fill[k] && st.fill[k] !== '.' ? st.fill[k] : '');
+    $('pTitle').textContent = P.title;
+    $('pSub').textContent = 'Puzzle ' + (i + 1) + ' of ' + PUZZLES.length + (i === todayIdx() ? ' · Today' : '');
+    renderGrid(); renderLists();
+    var first = ordered().find(function (e) { return e.cells.some(function (x) { return !fill[x[0] * N + x[1]]; }); }) || ordered()[0];
+    cur = { r: first.cells[0][0], c: first.cells[0][1], dir: first.dir };
+    jumpToEmptyIn(first);
+    update();
+    $('home').hidden = true; $('win').hidden = true;
+    if (!st.done) startTimer(); else { stopTimer(); showTime(); }
+    sizeGrid();
+  }
+
+  function renderGrid() {
+    var g = $('grid'); g.innerHTML = ''; cells = [];
+    var nums = {};
+    entries.forEach(function (e) { nums[e.cells[0][0] * N + e.cells[0][1]] = e.n; });
+    for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) {
+      var d = document.createElement('div');
+      d.className = 'cell' + (isBlock(r, c) ? ' blk' : '');
+      if (!isBlock(r, c)) {
+        var k = r * N + c;
+        if (nums[k]) { var n = document.createElement('span'); n.className = 'n'; n.textContent = nums[k]; d.appendChild(n); }
+        var l = document.createElement('span'); l.className = 'l'; d.appendChild(l);
+        d.dataset.k = k;
+      }
+      g.appendChild(d); cells.push(d);
+    }
+  }
+  function sizeGrid() {
+    var w = $('gridwrap'), g = $('grid');
+    var s = Math.floor(Math.min(w.clientWidth, w.clientHeight) - 2);
+    s = Math.max(200, Math.min(s, 560));
+    g.style.width = s + 'px'; g.style.height = s + 'px';
+    g.style.fontSize = Math.max(11, Math.floor(s / 13 * 0.55)) + 'px';
+  }
+  window.addEventListener('resize', sizeGrid);
+  if (window.ResizeObserver) new ResizeObserver(sizeGrid).observe($('gridwrap'));
+
+  function update() {
+    var e = curEntry(); if (e) cur.dir = e.dir;
+    var inw = {}; if (e) e.cells.forEach(function (x) { inw[x[0] * N + x[1]] = 1; });
+    for (var k = 0; k < N * N; k++) {
+      var d = cells[k]; if (!d || d.classList.contains('blk')) continue;
+      d.classList.toggle('sel', k === cur.r * N + cur.c);
+      d.classList.toggle('inword', !!inw[k] && k !== cur.r * N + cur.c);
+      d.classList.toggle('bad', !!wrong[k]);
+      d.classList.toggle('rev', !!revealed[k]);
+      d.querySelector('.l').textContent = fill[k];
+    }
+    if (e) {
+      $('clueText').innerHTML = '';
+      var t = document.createElement('span'); t.className = 'tag'; t.textContent = e.n + (e.dir === 'A' ? ' Across' : ' Down');
+      var s = document.createElement('span'); s.textContent = e.clue + ' (' + e.cells.length + ')';
+      $('clueText').appendChild(t); $('clueText').appendChild(s);
+    }
+    ['listA', 'listD', 'sheetA', 'sheetD'].forEach(function (id) {
+      Array.prototype.forEach.call($(id).children, function (li) {
+        li.classList.toggle('cur', e && li.dataset.id === e.id);
+        var en = entries.find(function (x) { return x.id === li.dataset.id; });
+        li.classList.toggle('done', !!en && en.cells.every(function (x) { return fill[x[0] * N + x[1]]; }));
+      });
+    });
+    var curLi = document.querySelector('#side li.cur'); if (curLi && $('side').offsetParent) curLi.scrollIntoView({ block: 'nearest' });
+  }
+  function renderLists() {
+    [['listA', 'A'], ['listD', 'D'], ['sheetA', 'A'], ['sheetD', 'D']].forEach(function (p) {
+      var ul = $(p[0]); ul.innerHTML = '';
+      entries.filter(function (e) { return e.dir === p[1]; }).forEach(function (e) {
+        var li = document.createElement('li'); li.dataset.id = e.id;
+        var b = document.createElement('b'); b.textContent = e.n;
+        var s = document.createElement('span'); s.textContent = e.clue + ' (' + e.cells.length + ')';
+        li.appendChild(b); li.appendChild(s);
+        li.addEventListener('click', function () { select(e); $('sheet').hidden = true; });
+        ul.appendChild(li);
+      });
+    });
+  }
+  function select(e) { cur.dir = e.dir; cur.r = e.cells[0][0]; cur.c = e.cells[0][1]; jumpToEmptyIn(e); update(); }
+  function jumpToEmptyIn(e) {
+    for (var i = 0; i < e.cells.length; i++) { var x = e.cells[i]; if (!fill[x[0] * N + x[1]]) { cur.r = x[0]; cur.c = x[1]; return; } }
+  }
+
+  /* ---------- input ---------- */
+  $('grid').addEventListener('click', function (ev) {
+    var t = ev.target.closest('.cell'); if (!t || t.classList.contains('blk')) return;
+    var k = +t.dataset.k, r = Math.floor(k / N), c = k % N;
+    var m = cellEntries[k];
+    if (r === cur.r && c === cur.c && m && m.A && m.D) cur.dir = cur.dir === 'A' ? 'D' : 'A';
+    else if (m && !m[cur.dir]) cur.dir = m.A ? 'A' : 'D';
+    cur.r = r; cur.c = c; update();
+  });
+  function toggleDir() { var m = cellEntries[cur.r * N + cur.c]; if (m && m.A && m.D) { cur.dir = cur.dir === 'A' ? 'D' : 'A'; update(); } }
+  $('clueText').addEventListener('click', toggleDir);
+  function step(delta) {
+    var list = ordered(), e = curEntry(), i = list.indexOf(e);
+    for (var n = 1; n <= list.length; n++) {
+      var x = list[(i + delta * n + list.length * 2) % list.length];
+      if (x.cells.some(function (q) { return !fill[q[0] * N + q[1]]; }) || n === list.length) { select(x); return; }
+    }
+  }
+  $('prevClue').addEventListener('click', function () { var list = ordered(); select(list[(list.indexOf(curEntry()) - 1 + list.length) % list.length]); });
+  $('nextClue').addEventListener('click', function () { var list = ordered(); select(list[(list.indexOf(curEntry()) + 1) % list.length]); });
+
+  function typeLetter(ch) {
+    if (!P || st.done) return;
+    var k = cur.r * N + cur.c, e = curEntry();
+    if (revealed[k]) { advance(e); update(); return; }
+    fill[k] = ch; delete wrong[k];
+    sound.play('key');
+    var done = e.cells.every(function (x) { return fill[x[0] * N + x[1]]; });
+    if (done) checkWordComplete(e);
+    if (allFilled()) { saveFill(); update(); checkWin(); return; }
+    if (done) { step(1); } else advance(e);
+    saveFill(); update();
+  }
+  function advance(e) {
+    var idx = e.cells.findIndex(function (x) { return x[0] === cur.r && x[1] === cur.c; });
+    for (var i = idx + 1; i < e.cells.length; i++) { var x = e.cells[i]; if (!fill[x[0] * N + x[1]]) { cur.r = x[0]; cur.c = x[1]; return; } }
+    if (idx + 1 < e.cells.length) { cur.r = e.cells[idx + 1][0]; cur.c = e.cells[idx + 1][1]; }
+  }
+  function backspace() {
+    if (!P || st.done) return;
+    var k = cur.r * N + cur.c, e = curEntry();
+    if (fill[k] && !revealed[k]) { fill[k] = ''; delete wrong[k]; }
+    else {
+      var idx = e.cells.findIndex(function (x) { return x[0] === cur.r && x[1] === cur.c; });
+      if (idx > 0) { cur.r = e.cells[idx - 1][0]; cur.c = e.cells[idx - 1][1]; var k2 = cur.r * N + cur.c; if (!revealed[k2]) { fill[k2] = ''; delete wrong[k2]; } }
+    }
+    saveFill(); update();
+  }
+  function move(dr, dc) {
+    var r = cur.r, c = cur.c;
+    for (var i = 0; i < N; i++) {
+      r += dr; c += dc; if (r < 0 || r >= N || c < 0 || c >= N) return;
+      if (!isBlock(r, c) && cellEntries[r * N + c]) { cur.r = r; cur.c = c; var m = cellEntries[r * N + c]; if (!m[cur.dir]) cur.dir = m.A ? 'A' : 'D'; update(); return; }
+    }
+  }
+  window.addEventListener('keydown', function (ev) {
+    if (!$('home').hidden || !$('win').hidden || ev.metaKey || ev.ctrlKey || ev.altKey) return;
+    var k = ev.key;
+    if (/^[a-zA-Z]$/.test(k)) { typeLetter(k.toUpperCase()); ev.preventDefault(); }
+    else if (k === 'Backspace' || k === 'Delete') { backspace(); ev.preventDefault(); }
+    else if (k === 'ArrowLeft') { if (cur.dir === 'D') toggleDir(); else move(0, -1); ev.preventDefault(); }
+    else if (k === 'ArrowRight') { if (cur.dir === 'D') toggleDir(); else move(0, 1); ev.preventDefault(); }
+    else if (k === 'ArrowUp') { if (cur.dir === 'A') toggleDir(); else move(-1, 0); ev.preventDefault(); }
+    else if (k === 'ArrowDown') { if (cur.dir === 'A') toggleDir(); else move(1, 0); ev.preventDefault(); }
+    else if (k === 'Tab' || k === 'Enter') { step(ev.shiftKey ? -1 : 1); ev.preventDefault(); }
+    else if (k === ' ') { toggleDir(); ev.preventDefault(); }
+  });
+  (function buildKb() {
+    var rows = ['QWERTYUIOP', 'ASDFGHJKL', 'ZXCVBNM'];
+    rows.forEach(function (row, ri) {
+      var d = document.createElement('div'); d.className = 'row';
+      if (ri === 2) { var sw = document.createElement('button'); sw.className = 'wide'; sw.textContent = '⇄'; sw.setAttribute('aria-label', 'Switch direction'); sw.addEventListener('click', toggleDir); d.appendChild(sw); }
+      row.split('').forEach(function (ch) {
+        var b = document.createElement('button'); b.textContent = ch; b.setAttribute('aria-label', ch);
+        b.addEventListener('click', function () { typeLetter(ch); });
+        d.appendChild(b);
+      });
+      if (ri === 2) { var bs = document.createElement('button'); bs.className = 'wide'; bs.textContent = '⌫'; bs.setAttribute('aria-label', 'Delete'); bs.addEventListener('click', backspace); d.appendChild(bs); }
+      $('kb').appendChild(d);
+    });
+  })();
+
+  /* ---------- checking, hints ---------- */
+  function saveFill() {
+    st.fill = fill.map(function (x) { return x || '.'; }).join(''); st.rev = revealed; persist();
+  }
+  function allFilled() { for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) if (!isBlock(r, c) && cellEntries[r * N + c] && !fill[r * N + c]) return false; return true; }
+  function correct(k) { return fill[k] === P.grid[Math.floor(k / N)][k % N]; }
+  function checkWordComplete(e) {
+    if (e.cells.every(function (x) { return correct(x[0] * N + x[1]); })) {
+      sound.play('word');
+      e.cells.forEach(function (x) { var d = cells[x[0] * N + x[1]]; d.classList.remove('good'); void d.offsetWidth; d.classList.add('good'); });
+    }
+  }
+  function checkWin() {
+    for (var k = 0; k < N * N; k++) if (cells[k] && !cells[k].classList.contains('blk') && cellEntries[k] && !correct(k)) {
+      toast('Grid full, but something is off. Try Check.'); return false;
+    }
+    win(); return true;
+  }
+  $('checkBtn').addEventListener('click', function () {
+    if (!P || st.done) return;
+    var e = curEntry(), bad = 0;
+    e.cells.forEach(function (x) { var k = x[0] * N + x[1]; if (fill[k] && !correct(k)) { wrong[k] = 1; bad++; } });
+    if (bad) { sound.play('bad'); toast(bad + (bad === 1 ? ' letter is' : ' letters are') + ' wrong'); }
+    else if (e.cells.every(function (x) { return fill[x[0] * N + x[1]]; })) { sound.play('word'); toast('All correct!'); }
+    else toast('No mistakes so far');
+    update();
+  });
+  function spend(n) {
+    if (studio.coins < n) { toast('You need ' + (n - studio.coins) + ' more coins'); return false; }
+    studio.coins -= n; save('proto-studio', studio); paintCoins(); return true;
+  }
+  function revealCell(k) { fill[k] = P.grid[Math.floor(k / N)][k % N]; revealed[k] = 1; delete wrong[k]; }
+  $('hintBtn').addEventListener('click', function () {
+    if (!P || st.done) return;
+    var k = cur.r * N + cur.c, e = curEntry();
+    if (correct(k)) { var t = e.cells.find(function (x) { return !correct(x[0] * N + x[1]); }); if (!t) { toast('This word is already right'); return; } k = t[0] * N + t[1]; cur.r = t[0]; cur.c = t[1]; }
+    if (!spend(10)) return;
+    revealCell(k); st.hints++; sound.play('reveal');
+    if (e.cells.every(function (x) { return fill[x[0] * N + x[1]]; })) checkWordComplete(e);
+    saveFill(); update(); if (allFilled()) checkWin();
+  });
+  $('revealBtn').addEventListener('click', function () {
+    if (!P || st.done) return;
+    var e = curEntry();
+    if (e.cells.every(function (x) { return correct(x[0] * N + x[1]); })) { toast('This word is already right'); return; }
+    if (!spend(30)) return;
+    e.cells.forEach(function (x) { var k = x[0] * N + x[1]; if (!correct(k)) revealCell(k); });
+    st.hints += 3; sound.play('reveal'); checkWordComplete(e);
+    saveFill(); update(); if (allFilled()) checkWin(); else step(1);
+  });
+
+  /* ---------- timer ---------- */
+  function fmt(s) { var m = Math.floor(s / 60), x = s % 60; return m + ':' + String(x).padStart(2, '0'); }
+  function showTime() { $('timer').textContent = fmt(st ? st.time : 0); }
+  function startTimer() { stopTimer(); running = true; timer = setInterval(function () { if (document.hidden || !running) return; st.time++; showTime(); if (st.time % 5 === 0) persist(); }, 1000); showTime(); }
+  function stopTimer() { running = false; if (timer) clearInterval(timer); timer = null; }
+  document.addEventListener('visibilitychange', function () { if (document.hidden) persist(); });
+
+  /* ---------- win ---------- */
+  function win() {
+    stopTimer(); st.done = true;
+    var isToday = pi === todayIdx();
+    var earned = 50 + (st.hints === 0 ? 25 : 0) + (isToday ? 25 : 0);
+    if (!st.paid) { studio.coins += earned; st.paid = earned; save('proto-studio', studio); }
+    if (!st.best || st.time < st.best) st.best = st.time;
+    persist(); paintCoins(); sound.play('win'); confetti();
+    var lines = ['Shabash!', 'Kya baat hai!', 'Wah, wah!', 'Too good!', 'Champion!'];
+    $('winTitle').textContent = lines[pi % lines.length];
+    $('winInfo').textContent = P.title + ' solved in ' + fmt(st.time) + (st.hints ? ' with ' + st.hints + ' hint' + (st.hints === 1 ? '' : 's') : ' with no hints') + '.';
+    var ch = $('winChips'); ch.innerHTML = '';
+    addChip(ch, '+' + st.paid + ' coins', true);
+    if (st.hints === 0) addChip(ch, 'No-hint bonus', true);
+    if (isToday) addChip(ch, 'Daily bonus', true);
+    addChip(ch, 'Streak ' + studio.streak + (studio.streak === 1 ? ' day' : ' days'));
+    setTimeout(function () { $('win').hidden = false; }, 900);
+  }
+  function addChip(box, text, good) { var s = document.createElement('span'); s.className = 'chip' + (good ? ' good' : ''); s.textContent = text; box.appendChild(s); }
+  $('shareBtn').addEventListener('click', function () {
+    var text = 'I solved "' + P.title + '" on Desi Crossword in ' + fmt(st.time) + (st.hints ? ' (' + st.hints + ' hints)' : ' with no hints') + '. Can you beat me?';
+    var url = 'https://auronara.com/games/crossword/';
+    if (navigator.share) { navigator.share({ title: 'Desi Crossword', text: text, url: url }).catch(function () {}); return; }
+    var full = text + ' ' + url;
+    if (navigator.clipboard) navigator.clipboard.writeText(full).then(function () { toast('Copied. Paste it anywhere.'); }, function () { toast(full); });
+    else toast(full);
+  });
+  $('nextBtn').addEventListener('click', function () {
+    for (var n = 1; n <= PUZZLES.length; n++) { var j = (pi + n) % PUZZLES.length; if (!pstate(PUZZLES[j].id).done) { startPuzzle(j); return; } }
+    showHome();
+  });
+  $('homeBtn').addEventListener('click', showHome);
+  function confetti() {
+    var cv = $('confetti'); cv.hidden = false;
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = innerWidth * dpr; cv.height = innerHeight * dpr;
+    var x = cv.getContext('2d'); x.scale(dpr, dpr);
+    var cols = ['#FF5E5B', '#FFC53D', '#1FB89A', '#6B4EFF', '#2E9BFF', '#FF8A3D'];
+    var ps = []; for (var i = 0; i < 140; i++) ps.push({ x: innerWidth / 2, y: innerHeight * 0.35, vx: (Math.random() - 0.5) * 12, vy: -Math.random() * 12 - 4, s: 4 + Math.random() * 6, c: cols[i % cols.length], r: Math.random() * 6 });
+    var t0 = performance.now();
+    (function f(t) {
+      x.clearRect(0, 0, innerWidth, innerHeight);
+      ps.forEach(function (p) { p.vy += 0.35; p.x += p.vx; p.y += p.vy; p.r += 0.2; x.save(); x.translate(p.x, p.y); x.rotate(p.r); x.fillStyle = p.c; x.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); x.restore(); });
+      if (t - t0 < 2600) requestAnimationFrame(f); else cv.hidden = true;
+    })(t0);
+  }
+
+  /* ---------- home ---------- */
+  function paintCoins() { $('coinBox').textContent = '🪙 ' + studio.coins; }
+  function showHome() {
+    stopTimer(); if (st) persist();
+    $('win').hidden = true; $('home').hidden = false;
+    var hc = $('homeChips'); hc.innerHTML = '';
+    if (gift) addChip(hc, 'Day ' + gift.streak + ' gift: +' + gift.reward + ' coins', true);
+    addChip(hc, 'Streak ' + studio.streak + (studio.streak === 1 ? ' day' : ' days'));
+    addChip(hc, 'Coins ' + studio.coins);
+    var solved = PUZZLES.filter(function (p) { return pstate(p.id).done; }).length;
+    addChip(hc, solved + ' of ' + PUZZLES.length + ' solved');
+    var ti = todayIdx(), tp = PUZZLES[ti], ts = pstate(tp.id);
+    $('todayTitle').textContent = tp.title;
+    $('todayInfo').textContent = ts.done ? 'Solved in ' + fmt(ts.best || ts.time) + '. A new one tomorrow.' : (ts.fill && ts.fill.replace(/\./g, '').length ? 'In progress, ' + fmt(ts.time) + ' so far.' : 'Solve it today for 25 bonus coins.');
+    $('todayBtn').textContent = ts.done ? 'View solved grid' : (ts.fill && ts.fill.replace(/\./g, '').length ? 'Continue' : "Play today's puzzle");
+    var ul = $('plist'); ul.innerHTML = '';
+    PUZZLES.forEach(function (p, i) {
+      var s = pstate(p.id);
+      var li = document.createElement('li'), b = document.createElement('button');
+      var num = document.createElement('span'); num.className = 'num' + (s.done ? ' solved' : ''); num.textContent = s.done ? '✓' : (i + 1);
+      var t = document.createElement('span'); t.className = 't';
+      var tb = document.createElement('b'); tb.textContent = p.title;
+      var ts2 = document.createElement('span'); ts2.textContent = s.done ? 'Best ' + fmt(s.best || s.time) + (s.hints ? '' : ' · no hints') : (s.fill && s.fill.replace(/\./g, '').length ? 'In progress · ' + fmt(s.time) : 'Not started');
+      t.appendChild(tb); t.appendChild(ts2);
+      b.appendChild(num); b.appendChild(t);
+      if (i === ti) { var bd = document.createElement('span'); bd.className = 'badge'; bd.textContent = 'TODAY'; b.appendChild(bd); }
+      b.addEventListener('click', function () { startPuzzle(i); });
+      li.appendChild(b); ul.appendChild(li);
+    });
+    installUi();
+  }
+  $('todayBtn').addEventListener('click', function () { startPuzzle(todayIdx()); });
+  $('menuBtn').addEventListener('click', showHome);
+  $('cluesBtn').addEventListener('click', function () { $('sheet').hidden = false; var c = document.querySelector('#sheet li.cur'); if (c) c.scrollIntoView({ block: 'center' }); });
+  $('sheetClose').addEventListener('click', function () { $('sheet').hidden = true; });
+  var toastT = null;
+  function toast(msg) { var t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('show'); }, 2200); }
+
+  /* ---------- install ---------- */
+  var deferred = null;
+  function standalone() { return (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true; }
+  function installUi() {
+    var b = $('inst'), h = $('instHint');
+    if (standalone()) { b.hidden = true; h.hidden = true; return; }
+    if (deferred) { b.hidden = false; h.hidden = true; return; }
+    b.hidden = true; h.hidden = false;
+    h.textContent = /iphone|ipad|ipod/i.test(navigator.userAgent) ? 'Install it: tap Share, then "Add to Home Screen".' : 'Install it: open your browser menu and choose "Install app".';
+  }
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; installUi(); });
+  $('inst').addEventListener('click', function () { if (!deferred) return; deferred.prompt(); deferred.userChoice.then(function () { deferred = null; installUi(); }); });
+
+  // test hook (harmless): exposes state for automated checks
+  window.__cw = { get P() { return P; }, type: typeLetter, get cur() { return cur; }, entries: function () { return entries; }, select: select };
+
+  paintCoins();
+  startPuzzle(todayIdx());
+  showHome();
+  if ('serviceWorker' in navigator) window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+})();
+</script>
+<script data-goatcounter="https://auro.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
