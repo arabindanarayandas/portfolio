@@ -39,17 +39,11 @@
   d.innerHTML = '<div class="ci"><button type="button" class="cx" aria-label="Close">×</button>' +
     '<h2 id="cdlg-t">What would you like to talk about?</h2>' +
     '<p class="cs">Pick one and your email opens with a short draft ready to fill in.</p>' +
-    '<ul class="co">' + items + '</ul>' +
-    '<div class="cf"><span>' + EMAIL + '</span><button type="button" class="cc">Copy email</button></div></div>';
+    '<ul class="co">' + items + '</ul></div>';
   document.body.appendChild(d);
-  var copyBtn = d.querySelector('.cc');
   d.querySelector('.cx').addEventListener('click', function () { d.close(); });
   d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
   d.querySelectorAll('.co a').forEach(function (a) { a.addEventListener('click', function () { setTimeout(function () { d.close(); }, 150); }); });
-  copyBtn.addEventListener('click', function () {
-    var done = function () { copyBtn.textContent = 'Copied'; setTimeout(function () { copyBtn.textContent = 'Copy email'; }, 1800); };
-    if (navigator.clipboard) navigator.clipboard.writeText(EMAIL).then(done, function () {}); else done();
-  });
   document.querySelectorAll('a[data-contact]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       if (typeof d.showModal !== 'function') return;
