@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Invari, a side project by Auro Das</title>
-<meta name="description" content="Invari repairs malformed API requests from AI agents in under 30ms. A side project by Auro Das.">
+<title>Invari, a side project by Arabinda Narayan Das</title>
+<meta name="description" content="Invari repairs malformed API requests from AI agents in under 30ms. A side project by Arabinda Narayan Das.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -151,7 +151,25 @@
   .contact .ic { width: 24px; height: 24px; flex: none; color: var(--leaf); }
   .contact ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 28px; }
 
-  footer { padding: 40px 0 56px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); }
+  .site-foot { margin-top: 24px; background: #16201B; color: #DCE5DF; padding: 72px 0 28px; }
+  .site-foot a { color: #F4F7F5; text-decoration-color: rgba(127,194,160,0.6); }
+  .site-foot a:hover { color: #7FC2A0; }
+  .foot-kicker { font-size: 0.9rem; font-weight: 600; color: #7FC2A0; }
+  .foot-big { margin-top: 10px; font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.08; letter-spacing: -0.03em; font-weight: 600; color: #F4F7F5; max-width: 16ch; }
+  .foot-btns { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .fb { display: inline-flex; align-items: center; min-height: 46px; padding: 0 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.25); font-weight: 700; text-decoration: none; }
+  .fb.primary { background: #7FC2A0; border-color: #7FC2A0; color: #16201B; }
+  .site-foot .fb.primary:hover { color: #16201B; filter: brightness(1.08); }
+  .foot-cols { margin-top: 56px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.12); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+  .foot-cols h3 { font-size: 0.82rem; font-weight: 600; color: #8FA399; margin-bottom: 10px; }
+  .foot-cols ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 0.96rem; }
+  .foot-cols a { text-decoration: none; }
+  .foot-cols .dim { color: #8FA399; font-size: 0.9rem; }
+  .foot-bottom { margin-top: 48px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 0.86rem; color: #8FA399; }
+  .foot-bottom a { color: #8FA399; text-decoration: none; }
+  .site-foot a:focus-visible { outline: 2px solid #7FC2A0; outline-offset: 3px; }
+  header.top nav a.nav-resume { color: var(--leaf); font-weight: 600; }
+  @media (max-width: 560px) { .foot-cols { grid-template-columns: 1fr 1fr; } .foot-cols > div:last-child { grid-column: 1 / -1; } .site-foot { padding-top: 56px; } }
 
   @media (max-width: 560px) {
     header.top nav a { margin-left: 14px; }
@@ -499,14 +517,15 @@
   }
 </style>
 </head>
-<body>
+<body id="top">
 <div class="wrap">
 
   <header class="top">
-    <a class="name" href="/" aria-label="Auro Das, home">auro<span class="dot"></span></a>
+    <a class="name" href="/" aria-label="Arabinda Narayan Das, home">auro<span class="dot"></span></a>
     <nav aria-label="Sections">
       <a href="/#work">Work</a>
       <a href="/#contact">Contact</a>
+      <a class="nav-resume" href="/Arabinda-Narayan-Das-Resume.pdf" download>Resume</a>
     </nav>
   </header>
 
@@ -696,9 +715,49 @@
     <a class="back" href="/#building" style="margin-top: 40px;">Back to the homepage</a>
   </article>
 
-  <footer>Auro Das</footer>
-
 </div>
+<footer class="site-foot" id="contact">
+  <div class="wrap">
+    <div class="foot-cta">
+      <p class="foot-kicker">Get in touch</p>
+      <h2 class="foot-big">Building something with AI? Let's talk.</h2>
+      <div class="foot-btns">
+        <a class="fb primary" href="mailto:arabindadas214@gmail.com">Email me</a>
+        <a class="fb" href="/Arabinda-Narayan-Das-Resume.pdf" download>Download resume</a>
+      </div>
+    </div>
+    <div class="foot-cols">
+      <div>
+        <h3>Work</h3>
+        <ul>
+          <li><a href="/work/mx-games">MX Games</a></li>
+          <li><a href="/work/mio">Mio</a></li>
+          <li><a href="/work/campus">Campus partnerships</a></li>
+          <li><a href="/work/invari">Invari</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Connect</h3>
+        <ul>
+          <li><a href="mailto:arabindadas214@gmail.com">arabindadas214@gmail.com</a></li>
+          <li><a href="https://www.linkedin.com/in/arabinda-narayan-das">LinkedIn</a></li>
+          <li><a href="https://github.com/arabindanarayandas">GitHub</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Based in</h3>
+        <ul>
+          <li>Guwahati, India</li>
+          <li class="dim">Worked in Mumbai, Bangalore and Delhi</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Arabinda Narayan Das</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
 <script>
 (function () {
   var D = {
