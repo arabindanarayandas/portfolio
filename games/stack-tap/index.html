@@ -142,6 +142,36 @@
       o.connect(g); g.connect(master);
       o.start(t); o.stop(t + dur + 0.05);
     }
+    var sfxG = null, SCALE = [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.51];
+    function blip(f0, f1, t, dur, type, vol) {
+      var o = ac.createOscillator(), g = ac.createGain();
+      o.type = type; o.frequency.setValueAtTime(f0, t);
+      if (f1 !== f0) o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol, t + 0.008);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(sfxG);
+      o.start(t); o.stop(t + dur + 0.05);
+    }
+    function sfx(kind, n) {
+      if (!on || !ac) return;
+      try {
+        if (ac.state === 'suspended') ac.resume();
+        if (!sfxG) { sfxG = ac.createGain(); sfxG.gain.value = 0.8; sfxG.connect(ac.destination); }
+        var t = ac.currentTime + 0.005;
+        if (kind === 'land') {
+          blip(220, 70, t, 0.14, 'sine', 0.5);
+        } else if (kind === 'perfect') {
+          var f = SCALE[Math.min((n || 1) - 1, SCALE.length - 1)];
+          blip(220, 70, t, 0.12, 'sine', 0.35);
+          blip(f, f, t, 0.35, 'triangle', 0.28);
+          blip(f * 2, f * 2, t + 0.07, 0.3, 'sine', 0.16);
+        } else if (kind === 'over') {
+          [392, 329.63, 261.63, 196].forEach(function (hz, i) { blip(hz, hz * 0.98, t + i * 0.15, 0.32, 'triangle', 0.26); });
+          blip(150, 40, t, 0.35, 'sine', 0.5);
+        }
+      } catch (e) {}
+    }
     function schedule() {
       while (nextT < ac.currentTime + 0.35) {
         var bar = Math.floor(step / 8) % 8, i = step % 8, chord = bar % 4, phrase = bar < 4 ? 0 : 1;
@@ -178,6 +208,7 @@
       stop: function () { want = false; halt(true); },
       pause: function () { halt(false); if (ac && ac.state === 'running') ac.suspend().catch(function () {}); },
       resume: function () { run(); },
+      sfx: sfx,
       isOn: function () { return on; },
       toggle: function () {
         on = !on;
@@ -323,12 +354,12 @@
       var ow = right - left;
       if (ow <= 0) {
         this.pieces.push({ x: c.x, w: c.w, y: this.yOf(this.blocks.length), vy: 0, n: c.n, last: true });
-        this.dead = true; buzz(80); return;
+        this.dead = true; buzz(80); music.sfx('over'); return;
       }
       var nb;
       if (Math.abs(c.x - top.x) < 5) {
         nb = { x: top.x, w: c.w, n: c.n };
-        this.perfect++; this.perfects++; this.msg = 0.7;
+        this.perfect++; this.perfects++; this.msg = 0.7; music.sfx('perfect', this.perfect);
         if (this.perfect >= 3 && nb.w < 220) { nb.w = Math.min(220, nb.w + 8); nb.x = Math.max(0, Math.min(W - nb.w, nb.x - 4)); }
       } else {
         nb = { x: left, w: ow, n: c.n };
@@ -336,6 +367,7 @@
         var cutX = c.x < top.x ? c.x : right, cutW = c.w - ow;
         this.pieces.push({ x: cutX, w: cutW, y: this.yOf(this.blocks.length), vy: 0, n: c.n });
       }
+      if (!(Math.abs(c.x - top.x) < 5)) music.sfx('land');
       this.blocks.push(nb); this.score++; buzz(12);
       this.spawn();
     },
