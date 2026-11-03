@@ -396,6 +396,10 @@
     .evidence .row { grid-template-columns: 1fr; gap: 2px; }
     .problem { gap: 12px; }
   }
+  .film { margin: 28px 0 8px; }
+  .film video { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid var(--line); background: #FAFAF8; }
+  .film .film-tall { display: none; }
+  .film figcaption { margin-top: 10px; font-size: 0.92rem; color: var(--muted); }
   .three { margin: 24px 0 8px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
   .three > div { border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
   .three .who { font-size: 0.8rem; font-weight: 700; color: var(--muted); }
@@ -452,6 +456,8 @@
   .cta a.primary { background: var(--leaf); color: var(--paper); border-color: var(--leaf); }
   @media (max-width: 560px) {
     .three, .panes, .codepair, .thresh, .gallery { grid-template-columns: 1fr; }
+    .film .film-wide { display: none; }
+    .film .film-tall { display: block; max-width: 340px; }
   }
 </style>
 </head>
@@ -470,6 +476,16 @@
     <a class="back" href="index.html#building">Back to the homepage</a>
     <h1>Invari: fixing the gap between what AI agents send and what APIs expect</h1>
     <p class="standfirst">An AI assistant told a customer their table was booked. When they arrived, there was no table. Invari is a side project built to stop that kind of silent failure.</p>
+
+    <figure class="film">
+      <video class="film-wide" controls preload="none" playsinline poster="video/invari-16x9.jpg" width="1920" height="1080">
+        <source src="video/invari-16x9.mp4" type="video/mp4">
+      </video>
+      <video class="film-tall" controls preload="none" playsinline poster="video/invari-9x16.jpg" width="1080" height="1920">
+        <source src="video/invari-9x16.mp4" type="video/mp4">
+      </video>
+      <figcaption>The Invari story as a short film. I wrote the story and the voiceover.</figcaption>
+    </figure>
 
     <dl class="facts">
       <div><dt>My role</dt><dd>The product: idea, design and story</dd></div>
