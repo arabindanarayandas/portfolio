@@ -123,7 +123,9 @@
   }
 
   .builds { list-style: none; }
-  .builds li { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .builds li { padding: 16px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 48px minmax(0, 1fr); column-gap: 14px; align-items: start; }
+  .builds li > * { grid-column: 2; }
+  .builds li > .bicon { grid-column: 1; grid-row: 1 / span 3; width: 48px; height: 48px; border-radius: 12px; border: 1px solid var(--line); object-fit: cover; margin-top: 2px; }
   .builds li:last-child { border-bottom: 0; }
   .builds a { font-weight: 600; }
   .builds p { color: var(--muted); max-width: 58ch; }
@@ -385,16 +387,19 @@
     <h2>Building now</h2>
     <ul class="builds">
       <li>
+        <img class="bicon" src="/logos/invari.svg" alt="" width="48" height="48">
         <a class="case-link" href="/work/invari" target="_blank" rel="noopener"><strong>Invari.ai</strong></a>
         <p>A side project I'm building. A proxy layer between your AI agent and any API. It repairs malformed requests (wrong types, dates, formats) in under 30ms, with one URL change and no code.</p>
         <a class="soon" href="/work/invari" target="_blank" rel="noopener">See the project and try the demo</a>
       </li>
       <li>
+        <img class="bicon" src="/maatu/icon-192.png" alt="" width="48" height="48">
         <a class="case-link" href="/maatu/" target="_blank" rel="noopener"><strong>Maatu</strong></a>
         <p>A free app for learning everyday Bengaluru Kannada from English. 213 phrases for autos, markets, home and work, each broken down word by word, plus a mode where Kannada speakers check every phrase.</p>
         <a class="soon" href="/maatu/" target="_blank" rel="noopener">Try it, or help check the Kannada</a>
       </li>
       <li>
+        <img class="bicon" src="/favicon.svg" alt="" width="48" height="48">
         <a class="case-link" href="/work/this-site"><strong>This website</strong></a>
         <p>Built end to end with AI, without writing a line of code. The decisions, the mistakes I caught, and the technical details.</p>
         <a class="soon" href="/work/this-site">How I built it</a>
