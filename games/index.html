@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AuroStudios: tiny games you can play in five seconds</title>
+<meta name="description" content="AuroStudios makes small free-to-play games that load instantly and install to your phone like an app. Play Stack Tap, Block Fit and Lane Dash.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Arabinda Narayan Das">
+<meta property="og:title" content="AuroStudios: tiny games you can play in five seconds">
+<meta property="og:description" content="Three small games, free to play, installable on your phone. No sign-up.">
+<meta property="og:url" content="https://auronara.com/games/">
+<meta property="og:image" content="https://auronara.com/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://auronara.com/games/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --paper: #FBFBF9; --ink: #1A1F1C; --muted: #5E6660; --line: #E2E5E0; --leaf: #2E6A4F; --leaf-soft: #E8F0EB; }
+  @media (prefers-color-scheme: dark) { :root { --paper: #151917; --ink: #ECEFEC; --muted: #9AA39D; --line: #2A302C; --leaf: #7FC2A0; --leaf-soft: #1E2B24; } }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { background: var(--paper); color: var(--ink); font-family: "Hanken Grotesk", system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.6; }
+  a { color: inherit; text-decoration-color: var(--leaf); text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+  a:hover { color: var(--leaf); }
+  a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  header.top { display: flex; justify-content: space-between; align-items: baseline; padding: 28px 0; font-size: 0.95rem; }
+  header.top .name { font-weight: 800; font-size: 1.15rem; text-decoration: none; letter-spacing: -0.02em; }
+  header.top .name .dot { display: inline-block; width: 0.22em; height: 0.22em; margin-left: 0.06em; border-radius: 50%; background: var(--leaf); }
+  header.top a.back { color: var(--muted); text-decoration: none; }
+  header.top a.back:hover { color: var(--leaf); }
+  .hero { padding: 36px 0 36px; }
+  .kicker { font-size: 0.9rem; font-weight: 700; color: var(--leaf); letter-spacing: 0.01em; }
+  h1 { margin-top: 8px; font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1.04; letter-spacing: -0.035em; font-weight: 800; max-width: 14ch; }
+  .lead { margin-top: 16px; color: var(--muted); max-width: 52ch; font-size: 1.15rem; }
+  .pills { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .pills span { font-size: 0.88rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; background: var(--leaf-soft); color: var(--leaf); }
+  .games { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 8px 0 0; }
+  .game { display: flex; flex-direction: column; height: 100%; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; text-decoration: none; background: var(--paper); transition: transform .18s ease, box-shadow .18s ease; }
+  a.game:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,.12); color: inherit; }
+  .art { position: relative; height: 210px; background: #E8F1FF; overflow: hidden; }
+  .info { padding: 18px 18px 20px; display: flex; flex-direction: column; flex: 1; }
+  .info h2 { font-size: 1.35rem; letter-spacing: -0.02em; }
+  .info p { margin-top: 6px; color: var(--muted); font-size: 0.98rem; line-height: 1.5; }
+  .info .meta { margin-top: 10px; font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+  .cta { margin-top: auto; padding-top: 14px; font-weight: 800; color: var(--leaf); }
+  .stackart i { position: absolute; left: 50%; height: 28px; border-radius: 8px; box-shadow: 0 2px 0 rgba(0,0,0,.12); }
+  .stackart i:nth-child(1) { bottom: 18px; background: #FF8FB1; width: 140px; margin-left: -70px; }
+  .stackart i:nth-child(2) { bottom: 48px; background: #FFB86B; width: 126px; margin-left: -63px; }
+  .stackart i:nth-child(3) { bottom: 78px; background: #7AD7A5; width: 116px; margin-left: -58px; }
+  .stackart i:nth-child(4) { bottom: 108px; background: #6FB6FF; width: 106px; margin-left: -53px; }
+  .stackart i:nth-child(5) { bottom: 138px; background: #B79BFF; width: 96px; margin-left: -48px; animation: sway 1.6s ease-in-out infinite alternate; }
+  @keyframes sway { from { transform: translateX(-60px); } to { transform: translateX(60px); } }
+  .fitart { display: grid; grid-template-columns: repeat(3, 46px); gap: 8px; justify-content: center; align-content: center; }
+  .fitart i { height: 46px; border-radius: 10px; background: #C9D9F2; }
+  .fitart i.a { background: #FF5E5B; } .fitart i.b { background: #FFC53D; } .fitart i.c { background: #1FB89A; } .fitart i.d { background: #6B4EFF; } .fitart i.e { background: #2E9BFF; }
+  .fitart i.pop { animation: pop 1.8s ease-in-out infinite; }
+  @keyframes pop { 0%, 55% { background: #C9D9F2; transform: scale(.85); } 70%, 100% { background: #FF8A3D; transform: scale(1); } }
+  .dashart { background: #5E7098; }
+  .dashart::before, .dashart::after { content: ""; position: absolute; top: 0; bottom: 0; width: 6px; background: repeating-linear-gradient(#F4F9FF 0 22px, transparent 22px 44px); animation: road .7s linear infinite; }
+  .dashart::before { left: 35%; } .dashart::after { left: 65%; }
+  .dashart i { position: absolute; border-radius: 10px; }
+  .dashart .car { width: 44px; height: 44px; left: 50%; margin-left: -22px; bottom: 18px; background: #1FB89A; }
+  .dashart .ob { width: 56px; height: 34px; left: 17%; margin-left: -28px; top: 26px; background: #FF5E5B; animation: fall 1.6s linear infinite; }
+  .dashart .co { width: 28px; height: 28px; border-radius: 50% !important; left: 82%; margin-left: -14px; top: 80px; background: #FFC53D; border: 4px solid #B8860B; }
+  @keyframes road { from { background-position-y: 0; } to { background-position-y: 44px; } }
+  @keyframes fall { from { transform: translateY(-40px); } to { transform: translateY(190px); } }
+  @media (prefers-reduced-motion: reduce) { .stackart i:nth-child(5), .fitart i.pop, .dashart::before, .dashart::after, .dashart .ob { animation: none; } .fitart i.pop { background: #FF8A3D; } a.game { transition: none; } }
+  section.install { margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--line); }
+  section.install h2 { font-size: 1.4rem; letter-spacing: -0.02em; }
+  .steps { margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .steps div { border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .steps b { display: block; margin-bottom: 4px; }
+  .steps p { color: var(--muted); font-size: 0.98rem; }
+  .about { margin-top: 40px; color: var(--muted); max-width: 60ch; }
+  footer { margin: 56px 0 40px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 0.9rem; color: var(--muted); }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--leaf); }
+  @media (max-width: 820px) { .games { grid-template-columns: 1fr; } .art { height: 180px; } .steps { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="name" href="/" aria-label="Arabinda Narayan Das, home">auro<span class="dot"></span></a>
+    <a class="back" href="/">← Back to site</a>
+  </header>
+
+  <section class="hero">
+    <div class="kicker">AuroStudios</div>
+    <h1>Tiny games, five seconds to learn.</h1>
+    <p class="lead">Three small games that open instantly, play in a minute and install on your phone like an app.</p>
+    <div class="pills"><span>Free to play</span><span>No sign-up</span><span>Works offline</span></div>
+  </section>
+
+  <ul class="games">
+    <li><a class="game" href="/games/stack-tap/">
+      <div class="art stackart" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="info"><h2>Stack Tap</h2><p>Tap to drop the sliding block. Land it exactly and the tower keeps its width. Miss and it gets thinner.</p><div class="meta">One finger · about 1 minute</div><div class="cta">Play now →</div></div>
+    </a></li>
+    <li><a class="game" href="/games/block-fit/">
+      <div class="art fitart" aria-hidden="true"><i class="a"></i><i class="b"></i><i class="c"></i><i class="a"></i><i class="d"></i><i class="c"></i><i class="e"></i><i class="e"></i><i class="pop"></i></div>
+      <div class="info"><h2>Block Fit</h2><p>Drag pieces onto the grid. Fill a whole row or column to clear it, and chain clears for combos.</p><div class="meta">Drag and drop · about 3 minutes</div><div class="cta">Play now →</div></div>
+    </a></li>
+    <li><a class="game" href="/games/lane-dash/">
+      <div class="art dashart" aria-hidden="true"><i class="ob"></i><i class="co"></i><i class="car"></i></div>
+      <div class="info"><h2>Lane Dash</h2><p>Tap left or right to switch lanes. Dodge the red blocks, grab the coins, and survive as the road speeds up.</p><div class="meta">Two taps · about 1 minute</div><div class="cta">Play now →</div></div>
+    </a></li>
+  </ul>
+
+  <section class="install">
+    <h2>Put them on your phone</h2>
+    <div class="steps">
+      <div><b>iPhone</b><p>Open a game in Safari, tap the Share button, then "Add to Home Screen".</p></div>
+      <div><b>Android</b><p>Open a game in Chrome and tap "Install", or use the browser menu and choose "Install app".</p></div>
+    </div>
+    <p class="about">Every game keeps its own best score, and one daily streak and coin balance are shared across all three. Everything is saved on your phone.</p>
+  </section>
+
+  <footer><span>AuroStudios, a project by <a href="/">Arabinda Narayan Das</a></span><a href="/">auronara.com</a></footer>
+</div>
+<script data-goatcounter="https://auro.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
