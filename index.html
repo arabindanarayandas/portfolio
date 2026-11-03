@@ -127,6 +127,9 @@
   .cases .case-link { text-decoration: none; }
   .cases .case-link:hover { color: var(--leaf); }
   a.soon { text-decoration: underline; }
+  .builds .case-link { text-decoration: none; }
+  .builds .case-link:hover { color: var(--leaf); }
+  .builds .soon { display: inline-block; margin-top: 8px; font-size: 0.9rem; font-weight: 600; color: var(--leaf); }
   .cases .soon { display: inline-block; margin-top: 10px; font-size: 0.9rem; font-weight: 600; color: var(--leaf); }
   .career { list-style: none; }
   .career li { display: grid; grid-template-columns: 36px 1fr auto; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
@@ -248,8 +251,9 @@
     <h2>Building now</h2>
     <ul class="builds">
       <li>
-        <strong>Invari.ai</strong>
+        <a class="case-link" href="invari.html"><strong>Invari.ai</strong></a>
         <p>A side project I'm building. A proxy layer between your AI agent and any API. It repairs malformed requests (wrong types, dates, formats) in under 30ms, with one URL change and no code.</p>
+        <a class="soon" href="invari.html">See the project and try the demo</a>
       </li>
     </ul>
     <div class="empty">More builds are on the way. Check back soon.</div>
