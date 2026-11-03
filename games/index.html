@@ -77,6 +77,12 @@
   .cwart .g i.s { background: #FFC53D; animation: caret 1.2s steps(2) infinite; }
   @keyframes caret { 50% { background: #FFE39A; } }
   @media (prefers-reduced-motion: reduce) { .cwart .g i.s { animation: none; } }
+  .wwart { background: #4F46E5 !important; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; gap: 4px; }
+  .wwart b { font: 700 38px/1 Georgia, serif; letter-spacing: -0.01em; }
+  .wwart span { font-size: 15px; opacity: .85; font-style: italic; }
+  .wwart i { display: block; width: 46px; height: 5px; border-radius: 3px; background: #F5A524; margin-top: 6px; animation: grow 2.4s ease-in-out infinite; }
+  @keyframes grow { 0%, 100% { width: 18px; } 50% { width: 64px; } }
+  @media (prefers-reduced-motion: reduce) { .wwart i { animation: none; } }
   section.install { margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--line); }
   section.install h2 { font-size: 1.4rem; letter-spacing: -0.02em; }
   .steps { margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
@@ -100,7 +106,7 @@
   <section class="hero">
     <div class="kicker">AuroStudios</div>
     <h1>Tiny games, five seconds to learn.</h1>
-    <p class="lead">Small games that open instantly and install on your phone like an app, from one-minute tappers to a daily crossword.</p>
+    <p class="lead">Small games that open instantly and install on your phone like an app, from one-minute tappers to a daily crossword and a vocabulary builder.</p>
     <div class="pills"><span>Free to play</span><span>No sign-up</span><span>Works offline</span></div>
   </section>
 
@@ -116,6 +122,10 @@
     <li><a class="game" href="/games/crossword/">
       <div class="art cwart" aria-hidden="true"><div class="g"><i class="y">C</i><i class="y">H</i><i class="y">A</i><i class="s"></i><i class="b"></i><i>U</i><i class="b"></i><i>N</i><i class="b"></i><i class="b"></i><i>R</i><i>A</i><i>G</i><i>A</i><i class="b"></i><i>R</i><i class="b"></i><i>L</i><i class="b"></i><i class="b"></i><i>Y</i><i class="b"></i><i>E</i><i class="b"></i><i class="b"></i></div></div>
       <div class="info"><h2>Desi Crossword</h2><p>Classic 13 by 13 crosswords packed with chai, cricket, cinema, festivals and places. A new puzzle of the day, every day.</p><div class="meta">Thinking game · 10 to 20 minutes</div><div class="cta">Play now →</div></div>
+    </a></li>
+    <li><a class="game" href="/games/word-wise/">
+      <div class="art wwart" aria-hidden="true"><b>Serendipity</b><span>finding something good by chance</span><i></i></div>
+      <div class="info"><h2>Word Wise</h2><p>Learn five new English words per level with meanings, example sentences and a listen button, then practise them. 30 levels from everyday to advanced.</p><div class="meta">Learning game · about 3 minutes a level</div><div class="cta">Play now →</div></div>
     </a></li>
     <li><a class="game" href="/games/lane-dash/">
       <div class="art dashart" aria-hidden="true"><i class="ob"></i><i class="co"></i><i class="car"></i></div>

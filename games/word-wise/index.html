@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Word Wise</title>
+<meta name="theme-color" content="#FFFFFF">
+<meta name="description" content="Learn five new English words a day. Short levels, simple questions, real example sentences. Free and works offline.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Word Wise">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --bg: #FFFFFF; --soft: #F4F5F7; --ink: #16181D; --muted: #6B7280; --line: #E5E7EB;
+    --accent: #4F46E5; --accent-soft: #EEF0FF; --good: #0F9D76; --good-soft: #E3F6EF; --bad: #E5484D; --bad-soft: #FDECEC; --gold: #F5A524;
+    --serif: "Fraunces", Georgia, serif; --sans: "Inter", system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #111317; --soft: #1B1E24; --ink: #F2F3F5; --muted: #9AA1AC; --line: #2A2E36; --accent: #8B85FF; --accent-soft: #23234A; --good: #34C79A; --good-soft: #13332A; --bad: #FF6B6F; --bad-soft: #3A1C1E; }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font: 17px/1.5 var(--sans); }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .screen { position: fixed; inset: 0; display: flex; flex-direction: column; padding: calc(env(safe-area-inset-top, 0px) + 12px) 20px calc(env(safe-area-inset-bottom, 0px) + 16px); max-width: 560px; margin: 0 auto; overflow-y: auto; }
+  .top { display: flex; align-items: center; gap: 10px; }
+  .brand { flex: 1; font: 700 1.5rem/1 var(--serif); letter-spacing: -0.01em; }
+  .pill { display: inline-flex; align-items: center; gap: 5px; font-weight: 600; font-size: 0.9rem; padding: 6px 11px; border-radius: 999px; background: var(--soft); }
+  .icon { width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--soft); display: grid; place-items: center; padding: 0; flex: none; }
+  .icon svg { width: 20px; height: 20px; }
+  .icon .off { display: none; } .icon.is-off .on { display: none; } .icon.is-off .off { display: block; }
+
+  /* home: level path */
+  .hello { margin: 26px 0 8px; }
+  .hello h1 { font: 700 1.9rem/1.15 var(--serif); margin: 0; letter-spacing: -0.01em; }
+  .hello p { margin: 6px 0 0; color: var(--muted); }
+  .bar { height: 8px; border-radius: 8px; background: var(--soft); overflow: hidden; margin-top: 14px; }
+  .bar i { display: block; height: 100%; background: var(--accent); border-radius: 8px; transition: width .4s; }
+  .tier { margin: 26px 0 0; font-weight: 700; font-size: 0.8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-align: center; }
+  .path { display: flex; flex-direction: column; align-items: center; gap: 48px; padding: 48px 0 30px; }
+  .node { position: relative; width: 74px; height: 74px; border-radius: 50%; border: 0; display: grid; place-items: center; font: 700 1.35rem var(--sans); background: var(--soft); color: var(--muted); }
+  .node.done { background: var(--accent); color: #fff; }
+  .node.cur { background: var(--accent); color: #fff; box-shadow: 0 0 0 6px var(--accent-soft); animation: bob 2s ease-in-out infinite; }
+  .node.locked { cursor: default; }
+  .node svg { width: 22px; height: 22px; }
+  .stars { position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 0.8rem; letter-spacing: 1px; color: var(--gold); white-space: nowrap; }
+  .stars .e { color: var(--line); }
+  .start-tag { position: absolute; top: -34px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--bg); font-size: 0.78rem; font-weight: 700; padding: 4px 10px; border-radius: 8px; white-space: nowrap; }
+  .start-tag::after { content: ""; position: absolute; left: 50%; bottom: -5px; margin-left: -5px; border: 5px solid transparent; border-bottom: 0; border-top-color: var(--ink); }
+  @keyframes bob { 50% { transform: translateY(-4px); } }
+  @media (prefers-reduced-motion: reduce) { .node.cur { animation: none; } }
+  .foot { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 10px 0 20px; }
+  .foot button { border: 0; background: none; color: var(--accent); font-weight: 600; text-decoration: underline; padding: 4px; }
+
+  /* lesson */
+  .lesson-top { display: flex; align-items: center; gap: 14px; }
+  .close { border: 0; background: none; padding: 6px; color: var(--muted); }
+  .close svg { width: 24px; height: 24px; display: block; }
+  .progress { flex: 1; height: 10px; border-radius: 10px; background: var(--soft); overflow: hidden; }
+  .progress i { display: block; height: 100%; width: 0; background: var(--good); border-radius: 10px; transition: width .3s; }
+  .stage { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; padding: 32px 0 24px; }
+  .kicker { font-weight: 700; font-size: 0.8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+  .word { font: 700 clamp(2.3rem, 11vw, 3.2rem)/1.05 var(--serif); margin: 8px 0 4px; letter-spacing: -0.01em; word-break: break-word; }
+  .wordrow { display: flex; align-items: center; gap: 12px; }
+  .say { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; flex: none; padding: 0; }
+  .say svg { width: 22px; height: 22px; }
+  .pos { color: var(--muted); font-style: italic; }
+  .meaning { font-size: 1.3rem; line-height: 1.4; margin: 18px 0 0; font-weight: 500; }
+  .example { margin: 18px 0 0; padding: 14px 16px; border-radius: 14px; background: var(--soft); color: var(--ink); line-height: 1.5; }
+  .example b { color: var(--accent); }
+  .syn { margin-top: 14px; color: var(--muted); font-size: 0.95rem; }
+  .syn span { font-weight: 600; color: var(--ink); }
+  .prompt { font-size: 1.2rem; font-weight: 600; line-height: 1.4; margin: 10px 0 22px; }
+  .prompt .q { font: 700 2rem/1.15 var(--serif); display: block; margin-top: 6px; }
+  .prompt .sent { font: 500 1.25rem/1.5 var(--sans); display: block; margin-top: 8px; }
+  .blank { display: inline-block; min-width: 90px; border-bottom: 3px solid var(--accent); }
+  .opts { display: grid; gap: 10px; }
+  .opt { text-align: left; padding: 15px 16px; border-radius: 14px; border: 2px solid var(--line); background: var(--bg); font-size: 1.02rem; line-height: 1.35; transition: border-color .15s, background .15s; }
+  .opt:hover { border-color: var(--accent); }
+  .opt.good { border-color: var(--good); background: var(--good-soft); }
+  .opt.bad { border-color: var(--bad); background: var(--bad-soft); }
+  .opt[disabled] { cursor: default; }
+  .opt.dim { opacity: .55; }
+  .main { width: 100%; border: 0; border-radius: 14px; padding: 16px; font-weight: 700; font-size: 1.05rem; background: var(--accent); color: #fff; min-height: 56px; }
+  .main:active { transform: translateY(1px); }
+  .main.ghost { background: var(--soft); color: var(--ink); }
+  .dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 14px; }
+  .dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+  .dots i.on { background: var(--accent); width: 22px; border-radius: 8px; }
+  .feedback { margin: 0 -20px calc(-16px - env(safe-area-inset-bottom, 0px)); padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 16px); border-radius: 22px 22px 0 0; }
+  .feedback.good { background: var(--good-soft); }
+  .feedback.bad { background: var(--bad-soft); }
+  .feedback h3 { margin: 0 0 4px; font-size: 1.15rem; }
+  .feedback.good h3 { color: var(--good); } .feedback.bad h3 { color: var(--bad); }
+  .feedback p { margin: 0 0 14px; }
+  .feedback.good .main { background: var(--good); } .feedback.bad .main { background: var(--bad); }
+
+  /* result */
+  .result { text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+  .bigstars { font-size: 3rem; letter-spacing: 6px; color: var(--gold); }
+  .bigstars .e { color: var(--line); }
+  .result h2 { font: 700 2rem/1.1 var(--serif); margin: 0; }
+  .result p { color: var(--muted); margin: 0; }
+  .learned { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 10px 0 14px; }
+  .learned span { padding: 6px 12px; border-radius: 999px; background: var(--soft); font-weight: 600; font-size: 0.9rem; }
+  .btns { display: grid; gap: 10px; margin-top: 8px; }
+  .toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 12px; font-weight: 600; font-size: 0.92rem; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 9; text-align: center; max-width: 90vw; }
+  .toast.show { opacity: 1; }
+  .install { margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<section class="screen" id="home">
+  <div class="top">
+    <div class="brand">Word Wise</div>
+    <span class="pill" title="Daily streak">🔥 <span id="streak">0</span></span>
+    <span class="pill" title="Coins">🪙 <span id="coins">0</span></span>
+    <button class="icon" id="mute" aria-label="Sound on"><svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg><svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M22 9l-6 6"/><path d="M16 9l6 6"/></svg></button>
+  </div>
+  <div class="hello">
+    <h1 id="helloTitle">Learn 5 new words a day</h1>
+    <p id="helloSub"></p>
+    <div class="bar"><i id="homeBar" style="width:0"></i></div>
+  </div>
+  <div id="path"></div>
+  <div class="foot">
+    <div id="giftNote"></div>
+    <button id="installBtn" hidden>Add Word Wise to your home screen</button>
+    <div id="installHint" hidden></div>
+    <div style="margin-top:8px">An <a href="/games/" style="color:inherit">AuroStudios</a> game</div>
+  </div>
+</section>
+
+<section class="screen" id="lesson" hidden>
+  <div class="lesson-top">
+    <button class="close" id="quit" aria-label="Leave lesson"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="progress"><i id="prog"></i></div>
+  </div>
+  <div class="stage" id="stage"></div>
+  <div id="bottom"></div>
+</section>
+
+<section class="screen" id="result" hidden>
+  <div class="result">
+    <div class="bigstars" id="rStars"></div>
+    <h2 id="rTitle"></h2>
+    <p id="rInfo"></p>
+    <div class="learned" id="rWords"></div>
+    <div class="btns">
+      <button class="main" id="rNext">Next level</button>
+      <button class="main ghost" id="rAgain">Practise again</button>
+      <button class="main ghost" id="rHome">Back to levels</button>
+    </div>
+  </div>
+</section>
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  'use strict';
+  var DATA = {"words":[{"w":"TINY","p":"adjective","m":"Very small","e":"An ant is a tiny insect.","s":"small"},{"w":"ANCIENT","p":"adjective","m":"Very old, from long ago","e":"We visited an ancient temple in Hampi.","s":"old"},{"w":"CALM","p":"adjective","m":"Peaceful and not worried or excited","e":"The sea was calm in the morning.","s":"peaceful"},{"w":"DELICIOUS","p":"adjective","m":"Tasting very good","e":"Mother's biryani is delicious.","s":"tasty"},{"w":"CROWDED","p":"adjective","m":"Full of people","e":"The local train was crowded in the morning.","s":"packed"},{"w":"BRAVE","p":"adjective","m":"Ready to face danger without fear","e":"The brave firefighter ran into the burning building.","s":"courageous"},{"w":"CAREFUL","p":"adjective","m":"Paying attention so you do not make mistakes","e":"Be careful when you cross the road.","s":"cautious"},{"w":"CHEERFUL","p":"adjective","m":"Happy and positive","e":"Her cheerful smile made everyone feel better.","s":"happy"},{"w":"CLEVER","p":"adjective","m":"Quick to learn and understand","e":"The clever student solved the puzzle first.","s":"smart"},{"w":"EMPTY","p":"adjective","m":"Having nothing inside","e":"The water bottle is empty.","s":"bare"},{"w":"ENORMOUS","p":"adjective","m":"Extremely large","e":"An elephant is an enormous animal.","s":"huge"},{"w":"FAMOUS","p":"adjective","m":"Known by many people","e":"Lata Mangeshkar was a famous singer.","s":"well-known"},{"w":"GENTLE","p":"adjective","m":"Kind, soft and careful","e":"Be gentle with the puppy.","s":"tender"},{"w":"GRATEFUL","p":"adjective","m":"Feeling thankful","e":"I am grateful for your help.","s":"thankful"},{"w":"HONEST","p":"adjective","m":"Telling the truth","e":"The honest shopkeeper returned the extra money.","s":"truthful"},{"w":"CURIOUS","p":"adjective","m":"Eager to know or learn something","e":"The curious child asked many questions.","s":"inquisitive"},{"w":"COMFORTABLE","p":"adjective","m":"Relaxing and pleasant to use","e":"This sofa is very comfortable.","s":"cosy"},{"w":"LAZY","p":"adjective","m":"Not wanting to work or be active","e":"The lazy cat slept all day.","s":"idle"},{"w":"LOYAL","p":"adjective","m":"Always supporting a person or group","e":"A dog is a loyal friend.","s":"faithful"},{"w":"MESSY","p":"adjective","m":"Untidy","e":"His room was messy after the party.","s":"untidy"},{"w":"NARROW","p":"adjective","m":"Small from one side to the other","e":"We walked down a narrow lane.","s":"slim"},{"w":"NERVOUS","p":"adjective","m":"Worried and a little afraid","e":"She felt nervous before her exam.","s":"jittery"},{"w":"POLITE","p":"adjective","m":"Having good manners","e":"It is polite to say thank you.","s":"courteous"},{"w":"PROUD","p":"adjective","m":"Pleased about something you or others did","e":"My parents were proud of my results.","s":"pleased"},{"w":"QUIET","p":"adjective","m":"Making little or no noise","e":"The library is a quiet place.","s":"silent"},{"w":"RARE","p":"adjective","m":"Not found or seen often","e":"The snow leopard is a rare animal.","s":"uncommon"},{"w":"RAPID","p":"adjective","m":"Very fast","e":"The rapid current carried the boat away.","s":"swift"},{"w":"SCARED","p":"adjective","m":"Afraid","e":"The child was scared of the dark.","s":"frightened"},{"w":"SHINY","p":"adjective","m":"Bright and reflecting light","e":"She wore a shiny new watch.","s":"glossy"},{"w":"SILLY","p":"adjective","m":"Foolish in a funny way","e":"He made a silly face to make the baby laugh.","s":"foolish"},{"w":"STRICT","p":"adjective","m":"Making people follow rules exactly","e":"Our maths teacher is very strict.","s":"firm"},{"w":"SUDDEN","p":"adjective","m":"Happening quickly and without warning","e":"There was a sudden power cut.","s":"unexpected"},{"w":"TIRED","p":"adjective","m":"Needing rest or sleep","e":"After the match, the players were tired.","s":"exhausted"},{"w":"WEALTHY","p":"adjective","m":"Having a lot of money","e":"The wealthy merchant built a large haveli.","s":"rich"},{"w":"WISE","p":"adjective","m":"Having good judgement from experience","e":"My grandmother gives wise advice.","s":"sensible"},{"w":"HUMBLE","p":"adjective","m":"Not proud; not thinking you are better than others","e":"Despite his success, he stayed humble.","s":"down-to-earth"},{"w":"FRAGILE","p":"adjective","m":"Easily broken","e":"Handle the glass bowl carefully because it is fragile.","s":"delicate"},{"w":"JOURNEY","p":"noun","m":"A trip from one place to another","e":"The train journey to Goa took twelve hours.","s":"trip"},{"w":"BORROW","p":"verb","m":"To take something and promise to give it back","e":"Can I borrow your pen?","s":"take on loan"},{"w":"CELEBRATE","p":"verb","m":"To do something special for a happy event","e":"We celebrate Diwali with lamps and sweets.","s":"mark"},{"w":"COLLECT","p":"verb","m":"To gather things together","e":"She likes to collect old coins.","s":"gather"},{"w":"DECIDE","p":"verb","m":"To choose after thinking","e":"I cannot decide what to eat.","s":"choose"},{"w":"DESCRIBE","p":"verb","m":"To say what something is like","e":"Can you describe the place you visited?","s":"portray"},{"w":"ESCAPE","p":"verb","m":"To get away from a place or danger","e":"The parrot tried to escape from its cage.","s":"flee"},{"w":"EXPLORE","p":"verb","m":"To travel around a place to learn about it","e":"We want to explore the hills of Meghalaya.","s":"discover"},{"w":"FORGIVE","p":"verb","m":"To stop being angry with someone","e":"Please forgive me for being late.","s":"pardon"},{"w":"INVITE","p":"verb","m":"To ask someone to come to an event","e":"Let us invite our neighbours to dinner.","s":"ask over"},{"w":"PREPARE","p":"verb","m":"To get ready for something","e":"We must prepare for the exam.","s":"get ready"},{"w":"PROTECT","p":"verb","m":"To keep safe from harm","e":"A helmet will protect your head.","s":"guard"},{"w":"REPAIR","p":"verb","m":"To fix something that is broken","e":"The mechanic will repair my scooter.","s":"fix"},{"w":"ABUNDANT","p":"adjective","m":"Existing in large amounts; more than enough","e":"Kerala gets abundant rainfall.","s":"plentiful"},{"w":"ACCURATE","p":"adjective","m":"Correct in every detail","e":"The weather report was accurate.","s":"exact"},{"w":"ADEQUATE","p":"adjective","m":"Enough for a need","e":"Make sure you get adequate sleep.","s":"sufficient"},{"w":"ANXIOUS","p":"adjective","m":"Worried and uneasy","e":"He was anxious about the interview.","s":"uneasy"},{"w":"BRIEF","p":"adjective","m":"Lasting a short time","e":"The principal gave a brief speech.","s":"short"},{"w":"CAUTIOUS","p":"adjective","m":"Careful to avoid risks","e":"Be cautious when driving in the rain.","s":"wary"},{"w":"CONFIDENT","p":"adjective","m":"Sure of yourself and your abilities","e":"She felt confident before her presentation.","s":"self-assured"},{"w":"CONVENIENT","p":"adjective","m":"Easy to use or suiting your plans","e":"The metro is a convenient way to travel.","s":"handy"},{"w":"DILIGENT","p":"adjective","m":"Working hard and carefully","e":"A diligent student revises every day.","s":"hard-working"},{"w":"DURABLE","p":"adjective","m":"Able to last a long time","e":"These steel utensils are durable.","s":"long-lasting"},{"w":"ELEGANT","p":"adjective","m":"Graceful and stylish","e":"She wore an elegant silk sari.","s":"graceful"},{"w":"ESSENTIAL","p":"adjective","m":"Absolutely necessary","e":"Water is essential for life.","s":"vital"},{"w":"EVIDENT","p":"adjective","m":"Easy to see or understand","e":"It was evident that he was tired.","s":"obvious"},{"w":"FLEXIBLE","p":"adjective","m":"Able to bend or change easily","e":"Yoga keeps your body flexible.","s":"supple"},{"w":"FREQUENT","p":"adjective","m":"Happening often","e":"There are frequent buses to the airport.","s":"regular"},{"w":"GENUINE","p":"adjective","m":"Real and not fake","e":"This is a genuine leather bag.","s":"authentic"},{"w":"HOSTILE","p":"adjective","m":"Unfriendly and ready to fight","e":"The stray dog looked hostile.","s":"unfriendly"},{"w":"IMMENSE","p":"adjective","m":"Extremely large or great","e":"The Himalayas are immense.","s":"vast"},{"w":"INEVITABLE","p":"adjective","m":"Certain to happen; cannot be avoided","e":"Traffic jams are inevitable during festivals.","s":"unavoidable"},{"w":"MODEST","p":"adjective","m":"Not talking much about your own achievements","e":"He was modest about winning the prize.","s":"unassuming"},{"w":"OPTIMISTIC","p":"adjective","m":"Hopeful that good things will happen","e":"She is optimistic about the future.","s":"hopeful"},{"w":"PERMANENT","p":"adjective","m":"Lasting forever or for a very long time","e":"He found a permanent job in Pune.","s":"lasting"},{"w":"RELUCTANT","p":"adjective","m":"Not willing to do something","e":"He was reluctant to share his notes.","s":"unwilling"},{"w":"RELIABLE","p":"adjective","m":"Can be trusted to work well","e":"Our old car is still reliable.","s":"dependable"},{"w":"SINCERE","p":"adjective","m":"Honest and meaning what you say","e":"Please accept my sincere apologies.","s":"heartfelt"},{"w":"SPONTANEOUS","p":"adjective","m":"Done without planning","e":"We took a spontaneous trip to the beach.","s":"impulsive"},{"w":"TEDIOUS","p":"adjective","m":"Long, slow and boring","e":"Filling in forms is tedious work.","s":"boring"},{"w":"VAGUE","p":"adjective","m":"Not clear or exact","e":"His directions were vague, so we got lost.","s":"unclear"},{"w":"VIVID","p":"adjective","m":"Very bright, clear and strong","e":"Holi fills the streets with vivid colours.","s":"bright"},{"w":"ACHIEVE","p":"verb","m":"To succeed in doing something after effort","e":"You can achieve your goals with practice.","s":"accomplish"},{"w":"ADMIRE","p":"verb","m":"To respect and look up to someone","e":"I admire my teacher's patience.","s":"look up to"},{"w":"ANTICIPATE","p":"verb","m":"To expect something and prepare for it","e":"We anticipate heavy rain tomorrow.","s":"expect"},{"w":"COMPROMISE","p":"verb","m":"To accept less than you want to reach an agreement","e":"Both sides agreed to compromise on the price.","s":"meet halfway"},{"w":"CONSUME","p":"verb","m":"To use up or eat","e":"Large cars consume more fuel.","s":"use up"},{"w":"DECLINE","p":"verb","m":"To politely refuse","e":"She had to decline the invitation.","s":"refuse"},{"w":"ELIMINATE","p":"verb","m":"To remove completely","e":"Regular exercise can eliminate stiffness.","s":"remove"},{"w":"EMPHASISE","p":"verb","m":"To give special importance to something","e":"Teachers emphasise the value of reading.","s":"stress"},{"w":"ENCOURAGE","p":"verb","m":"To give someone support and confidence","e":"My parents encourage me to read.","s":"support"},{"w":"HESITATE","p":"verb","m":"To pause because you are unsure","e":"Do not hesitate to ask for help.","s":"waver"},{"w":"IMPROVISE","p":"verb","m":"To make do with what you have, without planning","e":"When the power went out, we had to improvise with candles.","s":"make do"},{"w":"PERSUADE","p":"verb","m":"To make someone agree by giving reasons","e":"She tried to persuade her father to buy a dog.","s":"convince"},{"w":"POSTPONE","p":"verb","m":"To move an event to a later time","e":"They had to postpone the match because of rain.","s":"put off"},{"w":"PRESERVE","p":"verb","m":"To keep something in good condition","e":"Salt helps preserve pickles.","s":"conserve"},{"w":"RESOLVE","p":"verb","m":"To find an answer to a problem","e":"They met to resolve the dispute.","s":"settle"},{"w":"WITHDRAW","p":"verb","m":"To take money out of an account","e":"I need to withdraw money from the ATM.","s":"take out"},{"w":"AMBITION","p":"noun","m":"A strong wish to achieve something","e":"Her ambition is to become a pilot.","s":"aspiration"},{"w":"CONSEQUENCE","p":"noun","m":"A result of an action","e":"Being late to class had a consequence: I missed the test.","s":"result"},{"w":"OPPORTUNITY","p":"noun","m":"A chance to do something","e":"This internship is a great opportunity.","s":"chance"},{"w":"PATIENCE","p":"noun","m":"The ability to wait calmly","e":"Learning a language takes patience.","s":"tolerance"},{"w":"AMBIGUOUS","p":"adjective","m":"Having more than one possible meaning","e":"The message was ambiguous, so I asked again.","s":"open to interpretation"},{"w":"BENEVOLENT","p":"adjective","m":"Kind and wanting to help others","e":"The benevolent landlord lowered the rent.","s":"kind-hearted"},{"w":"CANDID","p":"adjective","m":"Honest and direct, even when it is uncomfortable","e":"She gave a candid answer about her mistakes.","s":"frank"},{"w":"COMPLACENT","p":"adjective","m":"Too satisfied with yourself to keep trying","e":"Do not become complacent after one win.","s":"self-satisfied"},{"w":"CONSCIENTIOUS","p":"adjective","m":"Careful to do your work well and correctly","e":"A conscientious doctor checks every detail.","s":"thorough"},{"w":"EPHEMERAL","p":"adjective","m":"Lasting a very short time","e":"The beauty of a rangoli is ephemeral.","s":"fleeting"},{"w":"ELOQUENT","p":"adjective","m":"Speaking or writing well and persuasively","e":"The eloquent speaker moved the audience.","s":"articulate"},{"w":"FRUGAL","p":"adjective","m":"Careful not to spend more money than needed","e":"My frugal uncle reuses every plastic bag.","s":"thrifty"},{"w":"GREGARIOUS","p":"adjective","m":"Enjoying the company of other people","e":"He is gregarious and loves big parties.","s":"sociable"},{"w":"IMPECCABLE","p":"adjective","m":"Without any fault","e":"Her pronunciation is impeccable.","s":"flawless"},{"w":"INDIFFERENT","p":"adjective","m":"Not interested or caring","e":"He seemed indifferent to the result.","s":"unconcerned"},{"w":"LETHARGIC","p":"adjective","m":"Lacking energy","e":"The heat made everyone lethargic.","s":"sluggish"},{"w":"LUCID","p":"adjective","m":"Clear and easy to understand","e":"She gave a lucid explanation of the theory.","s":"clear"},{"w":"METICULOUS","p":"adjective","m":"Paying great attention to every detail","e":"The meticulous artist painted each petal.","s":"precise"},{"w":"OBSTINATE","p":"adjective","m":"Refusing to change your mind","e":"The obstinate child would not eat his vegetables.","s":"stubborn"},{"w":"PRAGMATIC","p":"adjective","m":"Dealing with problems in a practical way","e":"We need a pragmatic solution, not a perfect one.","s":"practical"},{"w":"PRUDENT","p":"adjective","m":"Sensible and careful about the future","e":"It is prudent to save some money each month.","s":"wise"},{"w":"RESILIENT","p":"adjective","m":"Able to recover quickly from difficulty","e":"The resilient farmers replanted after the flood.","s":"tough"},{"w":"SCRUPULOUS","p":"adjective","m":"Very careful to be honest and do what is right","e":"A scrupulous accountant checks every rupee.","s":"principled"},{"w":"SUBTLE","p":"adjective","m":"Delicate and not obvious","e":"There was a subtle hint of cardamom in the tea.","s":"faint"},{"w":"TENACIOUS","p":"adjective","m":"Not giving up easily","e":"The tenacious batter fought for every run.","s":"persistent"},{"w":"TRANQUIL","p":"adjective","m":"Calm and peaceful","e":"The tranquil lake reflected the mountains.","s":"serene"},{"w":"UBIQUITOUS","p":"adjective","m":"Seeming to be everywhere","e":"Mobile phones are ubiquitous today.","s":"everywhere"},{"w":"VERSATILE","p":"adjective","m":"Able to do many different things well","e":"Paneer is a versatile ingredient.","s":"all-round"},{"w":"ZEALOUS","p":"adjective","m":"Full of energy and enthusiasm for a cause","e":"The zealous volunteers cleaned the whole beach.","s":"passionate"},{"w":"ALLEVIATE","p":"verb","m":"To make pain or a problem less severe","e":"A cup of ginger tea can alleviate a sore throat.","s":"ease"},{"w":"CORROBORATE","p":"verb","m":"To support a claim with evidence","e":"Two witnesses corroborate her story.","s":"confirm"},{"w":"DELIBERATE","p":"verb","m":"To think carefully before deciding","e":"The judges will deliberate before announcing the winner.","s":"consider"},{"w":"DISCERN","p":"verb","m":"To notice something that is not obvious","e":"It was hard to discern the path in the fog.","s":"make out"},{"w":"EXACERBATE","p":"verb","m":"To make a bad situation worse","e":"Shouting will only exacerbate the problem.","s":"worsen"},{"w":"FABRICATE","p":"verb","m":"To invent something false in order to deceive","e":"He tried to fabricate an excuse.","s":"make up"},{"w":"PROCRASTINATE","p":"verb","m":"To keep delaying something you should do","e":"Do not procrastinate; start your project today.","s":"dawdle"},{"w":"RECONCILE","p":"verb","m":"To become friends again after a disagreement","e":"It took years for the two friends to reconcile.","s":"make peace"},{"w":"SCRUTINISE","p":"verb","m":"To examine very carefully","e":"The examiner will scrutinise every answer.","s":"inspect"},{"w":"UNDERMINE","p":"verb","m":"To weaken something gradually","e":"Rumours can undermine trust in a team.","s":"weaken"},{"w":"VINDICATE","p":"verb","m":"To prove someone right or not guilty","e":"The new evidence will vindicate him.","s":"clear of blame"},{"w":"ADVERSITY","p":"noun","m":"Difficulty or misfortune","e":"She showed courage in the face of adversity.","s":"hardship"},{"w":"ANECDOTE","p":"noun","m":"A short, interesting story about a real event","e":"Grandpa shared an anecdote about his school days.","s":"story"},{"w":"CATALYST","p":"noun","m":"Something that causes an important change","e":"The new coach was a catalyst for the team's success.","s":"trigger"},{"w":"DILEMMA","p":"noun","m":"A situation where you must choose between two difficult options","e":"I faced a dilemma: study or go to the wedding.","s":"predicament"},{"w":"EUPHORIA","p":"noun","m":"A feeling of intense happiness","e":"There was euphoria in the stadium after the win.","s":"elation"},{"w":"NOSTALGIA","p":"noun","m":"A happy-sad feeling when you remember the past","e":"Old songs fill me with nostalgia.","s":"longing"},{"w":"PARADOX","p":"noun","m":"Something that seems to contradict itself but may be true","e":"It is a paradox that the more you learn, the less you feel you know.","s":"contradiction"},{"w":"PERSEVERANCE","p":"noun","m":"Continuing to try despite difficulties","e":"Perseverance helped her clear the exam.","s":"persistence"},{"w":"SERENDIPITY","p":"noun","m":"Finding something good by chance","e":"Meeting my best friend on a train was pure serendipity.","s":"happy accident"},{"w":"CONUNDRUM","p":"noun","m":"A confusing and difficult problem","e":"Finding parking in Mumbai is a daily conundrum.","s":"puzzle"},{"w":"EPIPHANY","p":"noun","m":"A sudden moment of understanding","e":"She had an epiphany while washing the dishes.","s":"realisation"},{"w":"FACADE","p":"noun","m":"The front of a building, or a false appearance","e":"The old palace has a beautiful facade.","s":"front"},{"w":"INNATE","p":"adjective","m":"Present from birth; natural","e":"She has an innate talent for music.","s":"inborn"},{"w":"ARDUOUS","p":"adjective","m":"Needing a lot of effort and energy","e":"The trek to the summit was arduous.","s":"gruelling"},{"w":"MEANDER","p":"verb","m":"To follow a winding, turning course","e":"Rivers often meander across flat plains.","s":"wind"}],"groups":[["CALM","TRANQUIL","QUIET"],["BRIEF","EPHEMERAL"],["HUMBLE","MODEST"],["TIRED","LETHARGIC"],["EVIDENT","LUCID"],["VAGUE","AMBIGUOUS"],["CAREFUL","CAUTIOUS","PRUDENT","METICULOUS","CONSCIENTIOUS","SCRUPULOUS"],["HONEST","SINCERE","CANDID","GENUINE"],["ENORMOUS","IMMENSE","TINY"],["NERVOUS","ANXIOUS","SCARED"],["WISE","PRUDENT"],["TENACIOUS","RESILIENT","PERSEVERANCE"],["FLEXIBLE","VERSATILE"],["POSTPONE","PROCRASTINATE","HESITATE"],["RELUCTANT","OBSTINATE"],["FRAGILE","SUBTLE"],["ABUNDANT","ADEQUATE"],["RAPID","SUDDEN"],["WEALTHY","FRUGAL"],["ACHIEVE","RESOLVE"],["ESSENTIAL","INEVITABLE"],["ALLEVIATE","EXACERBATE"],["ADMIRE","ENCOURAGE"],["DECLINE","WITHDRAW"],["ANCIENT","PERMANENT","DURABLE"],["CURIOUS","GREGARIOUS"],["EUPHORIA","NOSTALGIA","CHEERFUL"],["DILEMMA","CONUNDRUM","PARADOX"],["DISCERN","SCRUTINISE"],["FABRICATE","IMPROVISE"]]};
+  var WORDS = DATA.words, PER = 5, LEVELS = Math.ceil(WORDS.length / PER);
+  var TIERS = [{ name: 'Beginner', from: 0 }, { name: 'Intermediate', from: 10 }, { name: 'Advanced', from: 20 }];
+  var $ = function (id) { return document.getElementById(id); };
+  var similar = {};
+  DATA.groups.forEach(function (g) { g.forEach(function (a) { g.forEach(function (b) { if (a !== b) (similar[a] = similar[a] || {})[b] = 1; }); }); });
+
+  /* storage */
+  var mem = {};
+  function load(k, d) { try { var v = localStorage.getItem(k); if (v) return Object.assign(d, JSON.parse(v)); } catch (e) { if (mem[k]) return Object.assign(d, mem[k]); } return d; }
+  function save(k, v) { mem[k] = v; try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function day(d) { d = d || new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  var studio = load('proto-studio', { coins: 0, streak: 0, lastDay: '' });
+  var gift = 0;
+  if (studio.lastDay !== day()) {
+    studio.streak = studio.lastDay === day(new Date(Date.now() - 864e5)) ? studio.streak + 1 : 1;
+    gift = [10, 15, 20, 25, 35, 45, 100][(studio.streak - 1) % 7];
+    studio.coins += gift; studio.lastDay = day(); save('proto-studio', studio);
+  }
+  var prog = load('word-wise-v1', { stars: {}, miss: {} });
+  function unlocked() { var n = 0; while (n < LEVELS && prog.stars[n]) n++; return Math.min(n, LEVELS - 1); }
+
+  /* sound */
+  var KEY = 'stack-tap-music', soundOn = true, ac = null;
+  try { soundOn = localStorage.getItem(KEY) !== 'off'; } catch (e) {}
+  function tone(f, t, d, type, v) { var o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.value = f; g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + d); o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + d + 0.05); }
+  function sfx(kind) {
+    if (!soundOn) return;
+    try {
+      if (!ac) { var A = window.AudioContext || window.webkitAudioContext; if (!A) return; ac = new A(); }
+      if (ac.state === 'suspended') ac.resume();
+      var t = ac.currentTime + 0.01;
+      if (kind === 'good') { tone(659.25, t, 0.15, 'triangle', 0.2); tone(987.77, t + 0.09, 0.25, 'triangle', 0.18); }
+      else if (kind === 'bad') { tone(246.94, t, 0.22, 'sine', 0.2); tone(196, t + 0.12, 0.3, 'sine', 0.18); }
+      else if (kind === 'flip') { tone(880, t, 0.06, 'sine', 0.08); }
+      else if (kind === 'win') { [523.25, 659.25, 783.99, 1046.5].forEach(function (f, i) { tone(f, t + i * 0.12, 0.4, 'triangle', 0.2); }); }
+    } catch (e) {}
+  }
+  function paintMute() { $('mute').classList.toggle('is-off', !soundOn); $('mute').setAttribute('aria-label', soundOn ? 'Sound on' : 'Sound off'); }
+  $('mute').addEventListener('click', function () { soundOn = !soundOn; try { localStorage.setItem(KEY, soundOn ? 'on' : 'off'); } catch (e) {} paintMute(); });
+  paintMute();
+  function speak(w) {
+    try {
+      if (!window.speechSynthesis) { toast('Your browser cannot read words aloud'); return; }
+      speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(w.toLowerCase());
+      var vs = speechSynthesis.getVoices(), v = vs.find(function (x) { return /en-IN/i.test(x.lang); }) || vs.find(function (x) { return /en-GB/i.test(x.lang); }) || vs.find(function (x) { return /^en/i.test(x.lang); });
+      if (v) u.voice = v; u.lang = v ? v.lang : 'en-GB'; u.rate = 0.85;
+      speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+
+  /* helpers */
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function cap(w) { return w.charAt(0) + w.slice(1).toLowerCase(); }
+  function show(id) { ['home', 'lesson', 'result'].forEach(function (s) { $(s).hidden = s !== id; }); window.scrollTo(0, 0); }
+  var toastT;
+  function toast(m) { var t = $('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('show'); }, 2200); }
+  var SPEAK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+  var LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+  function starStr(n) { var s = ''; for (var i = 0; i < 3; i++) s += i < n ? '★' : '<span class="e">★</span>'; return s; }
+
+  /* home */
+  function renderHome() {
+    $('streak').textContent = studio.streak; $('coins').textContent = studio.coins;
+    var u = unlocked(), learnedCount = Object.keys(prog.stars).length * PER;
+    var tier = TIERS.filter(function (t) { return u >= t.from; }).pop();
+    $('helloTitle').textContent = learnedCount ? 'Level ' + (u + 1) + ' is ready' : 'Learn 5 new words a day';
+    $('helloSub').textContent = learnedCount ? learnedCount + ' of ' + WORDS.length + ' words learned · ' + tier.name : 'Short levels with real example sentences. Start with level 1.';
+    $('homeBar').style.width = Math.round(learnedCount / WORDS.length * 100) + '%';
+    $('giftNote').textContent = gift ? 'Day ' + studio.streak + ' streak bonus: +' + gift + ' coins' : '';
+    var root = $('path'); root.innerHTML = '';
+    var path = null;
+    for (var i = 0; i < LEVELS; i++) {
+      var t = TIERS.find(function (x) { return x.from === i; });
+      if (t) { root.appendChild(el('div', 'tier', t.name)); path = el('div', 'path'); root.appendChild(path); }
+      var b = el('button', 'node');
+      var stars = prog.stars[i] || 0;
+      var offset = [0, 54, 80, 54, 0, -54, -80, -54][i % 8];
+      b.style.translate = offset + 'px 0';
+      if (i < u || (i === u && stars)) { b.classList.add('done'); b.textContent = i + 1; }
+      else if (i === u) { b.classList.add('cur'); b.textContent = i + 1; var tag = el('span', 'start-tag', stars ? 'Replay' : 'Start'); b.appendChild(tag); }
+      else { b.classList.add('locked'); b.innerHTML = LOCK; b.setAttribute('aria-label', 'Level ' + (i + 1) + ', locked'); }
+      if (i <= u) {
+        b.setAttribute('aria-label', 'Level ' + (i + 1) + (stars ? ', ' + stars + ' stars' : ''));
+        if (stars || i < u) { var s = el('span', 'stars'); s.innerHTML = starStr(stars); b.appendChild(s); }
+        (function (lv) { b.addEventListener('click', function () { startLevel(lv); }); })(i);
+      } else {
+        b.addEventListener('click', function () { toast('Finish the level before it to unlock this one'); });
+      }
+      path.appendChild(b);
+    }
+    show('home');
+    var cur = root.querySelector('.node.cur'); if (cur) setTimeout(function () { cur.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 60);
+    installUi();
+  }
+
+  /* lesson */
+  var L = null;
+  function startLevel(lv) {
+    var words = WORDS.slice(lv * PER, lv * PER + PER);
+    var qs = [];
+    var types = shuffle(['meaning', 'word', 'blank', 'meaning', 'word']);
+    words.forEach(function (w, i) { qs.push({ w: w, type: types[i] }); });
+    // review: earlier words, missed first
+    var earlier = WORDS.slice(0, lv * PER);
+    var missed = earlier.filter(function (w) { return prog.miss[w.w]; });
+    var pool = shuffle(missed).concat(shuffle(earlier.filter(function (w) { return !prog.miss[w.w]; })));
+    var extra = pool.slice(0, 3);
+    while (extra.length < 3) extra.push(words[extra.length]);
+    extra.forEach(function (w) { qs.push({ w: w, type: ['blank', 'word', 'meaning'][Math.floor(Math.random() * 3)], review: earlier.indexOf(w) >= 0 }); });
+    qs = shuffle(qs.slice(0, 5)).concat(shuffle(qs.slice(5)));
+    L = { lv: lv, words: words, qs: qs, step: 0, card: 0, correct: 0, phase: 'learn' };
+    show('lesson'); renderLearn();
+  }
+  function total() { return L.words.length + L.qs.length; }
+  function setProg(n) { $('prog').style.width = Math.round(n / total() * 100) + '%'; }
+  function exampleHtml(w) {
+    var re = new RegExp('\\b(' + w.w + ')\\b', 'i');
+    var parts = w.e.split(re), box = el('div', 'example');
+    parts.forEach(function (p, i) { box.appendChild(i % 2 ? el('b', null, p) : document.createTextNode(p)); });
+    return box;
+  }
+  function renderLearn() {
+    var w = L.words[L.card], st = $('stage'); st.innerHTML = '';
+    setProg(L.card);
+    var dots = el('div', 'dots'); L.words.forEach(function (_, i) { dots.appendChild(el('i', i === L.card ? 'on' : '')); });
+    st.appendChild(dots);
+    st.appendChild(el('div', 'kicker', 'New word ' + (L.card + 1) + ' of ' + L.words.length));
+    var row = el('div', 'wordrow'); row.appendChild(el('div', 'word', cap(w.w)));
+    var say = el('button', 'say'); say.innerHTML = SPEAK; say.setAttribute('aria-label', 'Hear ' + w.w.toLowerCase()); say.addEventListener('click', function () { speak(w.w); });
+    row.appendChild(say); st.appendChild(row);
+    st.appendChild(el('div', 'pos', w.p));
+    st.appendChild(el('p', 'meaning', w.m));
+    st.appendChild(exampleHtml(w));
+    var syn = el('div', 'syn', 'Similar: '); syn.appendChild(el('span', null, w.s)); st.appendChild(syn);
+    var bottom = $('bottom'); bottom.innerHTML = '';
+    var last = L.card === L.words.length - 1;
+    var b = el('button', 'main', last ? 'Start practice' : 'Next word');
+    b.addEventListener('click', function () { sfx('flip'); if (last) { L.phase = 'quiz'; renderQ(); } else { L.card++; renderLearn(); } });
+    bottom.appendChild(b);
+  }
+  function distractors(w, field, pool) {
+    var out = [], seen = {}; seen[w[field]] = 1;
+    var cands = shuffle(pool.slice()).concat(shuffle(WORDS.slice()));
+    for (var i = 0; i < cands.length && out.length < 3; i++) {
+      var c = cands[i];
+      if (c.w === w.w || seen[c[field]] || (similar[w.w] && similar[w.w][c.w])) continue;
+      if (field === 'w' && w.p !== c.p && out.length < 2 && cands.slice(i).some(function (x) { return x.p === w.p && !seen[x.w] && x.w !== w.w; })) continue;
+      seen[c[field]] = 1; out.push(c);
+    }
+    return out;
+  }
+  function renderQ() {
+    var q = L.qs[L.step], w = q.w, st = $('stage'); st.innerHTML = '';
+    setProg(L.words.length + L.step);
+    var tierPool = WORDS.slice(Math.max(0, L.lv * PER - 15), L.lv * PER + 15);
+    st.appendChild(el('div', 'kicker', q.review ? 'Review' : 'Practice'));
+    var pr = el('div', 'prompt'), opts, field;
+    if (q.type === 'meaning') {
+      pr.appendChild(document.createTextNode('What does this word mean?'));
+      pr.appendChild(el('span', 'q', cap(w.w)));
+      field = 'm';
+    } else if (q.type === 'word') {
+      pr.appendChild(document.createTextNode('Which word means'));
+      pr.appendChild(el('span', 'sent', '“' + w.m + '”'));
+      field = 'w';
+    } else {
+      pr.appendChild(document.createTextNode('Fill in the blank'));
+      var sent = el('span', 'sent');
+      var parts = w.e.split(new RegExp('\\b' + w.w + '\\b', 'i'));
+      sent.appendChild(document.createTextNode(parts[0])); sent.appendChild(el('span', 'blank', ' ')); sent.appendChild(document.createTextNode(parts.slice(1).join(w.w.toLowerCase())));
+      pr.appendChild(sent);
+      field = 'w';
+    }
+    st.appendChild(pr);
+    var choices = shuffle([w].concat(distractors(w, field, tierPool)));
+    var box = el('div', 'opts');
+    choices.forEach(function (c) {
+      var b = el('button', 'opt', field === 'm' ? c.m : c.w.toLowerCase());
+      b.addEventListener('click', function () { answer(c === w, b, box, w); });
+      box.appendChild(b);
+    });
+    st.appendChild(box);
+    $('bottom').innerHTML = '';
+  }
+  function answer(ok, btn, box, w) {
+    Array.prototype.forEach.call(box.children, function (b) { b.disabled = true; });
+    var right = Array.prototype.find.call(box.children, function (b) { return b.textContent === w.m || b.textContent === w.w.toLowerCase(); });
+    if (ok) { btn.classList.add('good'); L.correct++; sfx('good'); delete prog.miss[w.w]; }
+    else { btn.classList.add('bad'); if (right) right.classList.add('good'); sfx('bad'); prog.miss[w.w] = 1; }
+    Array.prototype.forEach.call(box.children, function (b) { if (!b.classList.contains('good') && !b.classList.contains('bad')) b.classList.add('dim'); });
+    save('word-wise-v1', prog);
+    var fb = el('div', 'feedback ' + (ok ? 'good' : 'bad'));
+    fb.appendChild(el('h3', null, ok ? ['Correct!', 'Nice one!', 'Well done!', 'Spot on!'][Math.floor(Math.random() * 4)] : 'Not quite'));
+    var p = el('p'); var b = el('b', null, cap(w.w)); p.appendChild(b); p.appendChild(document.createTextNode(' means ' + w.m.charAt(0).toLowerCase() + w.m.slice(1) + '.'));
+    fb.appendChild(p);
+    var c = el('button', 'main', 'Continue');
+    c.addEventListener('click', next);
+    fb.appendChild(c);
+    $('bottom').innerHTML = ''; $('bottom').appendChild(fb);
+    c.focus({ preventScroll: true });
+  }
+  function next() {
+    L.step++;
+    if (L.step < L.qs.length) renderQ(); else finish();
+  }
+  function finish() {
+    setProg(total());
+    var n = L.qs.length, c = L.correct;
+    var stars = c >= n ? 3 : c >= n - 1 ? 2 : c >= n - 2 ? 1 : 0;
+    var prev = prog.stars[L.lv] || 0;
+    var earned = c * 2 + (stars === 3 ? 10 : 0);
+    if (stars > prev) prog.stars[L.lv] = stars;
+    studio.coins += earned; save('proto-studio', studio); save('word-wise-v1', prog);
+    $('rStars').innerHTML = starStr(stars);
+    $('rTitle').textContent = stars === 3 ? 'Perfect!' : stars ? 'Level ' + (L.lv + 1) + ' complete' : 'So close!';
+    $('rInfo').textContent = c + ' of ' + n + ' correct · +' + earned + ' coins' + (stars ? '' : '. Get ' + (n - 2) + ' right to pass.');
+    var lw = $('rWords'); lw.innerHTML = '';
+    L.words.forEach(function (w) { lw.appendChild(el('span', null, cap(w.w))); });
+    var nextLv = L.lv + 1;
+    $('rNext').hidden = !stars || nextLv >= LEVELS;
+    $('rNext').textContent = 'Level ' + (nextLv + 1);
+    $('rAgain').textContent = stars ? 'Practise again' : 'Try again';
+    if (stars) sfx('win'); else sfx('bad');
+    show('result');
+  }
+  $('rNext').addEventListener('click', function () { startLevel(L.lv + 1); });
+  $('rAgain').addEventListener('click', function () { startLevel(L.lv); });
+  $('rHome').addEventListener('click', renderHome);
+  $('quit').addEventListener('click', renderHome);
+  document.addEventListener('keydown', function (e) {
+    if ($('lesson').hidden) return;
+    if (e.key === 'Enter') { var m = $('bottom').querySelector('.main'); if (m && document.activeElement !== m) { m.click(); e.preventDefault(); } }
+    if (/^[1-4]$/.test(e.key)) { var o = $('stage').querySelectorAll('.opt')[+e.key - 1]; if (o && !o.disabled) o.click(); }
+  });
+
+  /* install */
+  var deferred = null;
+  function standalone() { return (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true; }
+  function installUi() {
+    if (standalone()) { $('installBtn').hidden = true; $('installHint').hidden = true; return; }
+    if (deferred) { $('installBtn').hidden = false; $('installHint').hidden = true; return; }
+    $('installBtn').hidden = true; $('installHint').hidden = false;
+    $('installHint').textContent = /iphone|ipad|ipod/i.test(navigator.userAgent) ? 'To install: tap Share, then "Add to Home Screen".' : 'To install: open your browser menu and choose "Install app".';
+  }
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; installUi(); });
+  $('installBtn').addEventListener('click', function () { if (!deferred) return; deferred.prompt(); deferred.userChoice.then(function () { deferred = null; installUi(); }); });
+
+  window.__ww = { get L() { return L; } };
+  renderHome();
+  if ('serviceWorker' in navigator) window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+})();
+</script>
+<script data-goatcounter="https://auro.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

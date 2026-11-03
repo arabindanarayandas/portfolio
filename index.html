@@ -291,6 +291,12 @@
   .cwart .g i.s { background: #FFC53D; animation: caret 1.2s steps(2) infinite; }
   @keyframes caret { 50% { background: #FFE39A; } }
   @media (prefers-reduced-motion: reduce) { .cwart .g i.s { animation: none; } }
+  .wwart { background: #4F46E5 !important; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; gap: 4px; }
+  .wwart b { font: 700 30px/1 Georgia, serif; letter-spacing: -0.01em; }
+  .wwart span { font-size: 13px; opacity: .85; font-style: italic; }
+  .wwart i { display: block; width: 46px; height: 5px; border-radius: 3px; background: #F5A524; margin-top: 6px; animation: grow 2.4s ease-in-out infinite; }
+  @keyframes grow { 0%, 100% { width: 18px; } 50% { width: 64px; } }
+  @media (prefers-reduced-motion: reduce) { .wwart i { animation: none; } }
   .games li:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .games li:last-child:nth-child(odd) .game.next { min-height: 110px; }
   @media (prefers-reduced-motion: reduce) { .fitart i.pop { animation: none; background: #FF8A3D; } }
@@ -410,6 +416,10 @@
       <li><a class="game" href="/games/crossword/">
         <div class="art cwart" aria-hidden="true"><div class="g"><i class="y">C</i><i class="y">H</i><i class="y">A</i><i class="s"></i><i class="b"></i><i>U</i><i class="b"></i><i>N</i><i class="b"></i><i class="b"></i><i>R</i><i>A</i><i>G</i><i>A</i><i class="b"></i><i>R</i><i class="b"></i><i>L</i><i class="b"></i><i class="b"></i><i>Y</i><i class="b"></i><i>E</i><i class="b"></i><i class="b"></i></div></div>
         <div class="info"><b>Desi Crossword</b><span>Classic 13 by 13 puzzles about chai, cricket, cinema and more. New one daily.</span><span class="cta">Play now →</span></div>
+      </a></li>
+      <li><a class="game" href="/games/word-wise/">
+        <div class="art wwart" aria-hidden="true"><b>Serendipity</b><span>finding something good by chance</span><i></i></div>
+        <div class="info"><b>Word Wise</b><span>Learn five new English words a level, from everyday to advanced.</span><span class="cta">Play now →</span></div>
       </a></li>
     </ul>
     <p class="sub" style="margin: 18px 0 0;"><a href="/games/"><strong>See all games and how to install them →</strong></a></p>
