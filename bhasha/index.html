@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bhasha Kit: learn any Indian language from any other</title>
+<meta name="description" content="Free and open source. Learn everyday phrases in 11 Indian languages, from whichever language you already speak. 132 language pairs, checked by native speakers.">
+<meta property="og:title" content="Bhasha Kit: learn any Indian language from any other">
+<meta property="og:description" content="Assamese to Marathi, Tamil to Hindi, Bengali to Kannada. 132 language pairs, free and open source.">
+<meta name="theme-color" content="#FFF6E9">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Baloo+Bhai+2:wght@500;700&family=Baloo+Bhaina+2:wght@500;700&family=Baloo+Chettan+2:wght@500;700&family=Baloo+Da+2:wght@500;700&family=Baloo+Paaji+2:wght@500;700&family=Baloo+Tamma+2:wght@500;700&family=Baloo+Tammudu+2:wght@500;700&family=Baloo+Thambi+2:wght@500;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Layout: a single 560px phone-shaped column; screens swap inside <main>, a bottom tab bar on top-level screens. */
+  :root {
+    --paper: #FFF6E9; --card: #FFFFFF; --ink: #1E1940; --muted: #6D6782; --line: #EADFCB;
+    --accent: #E5533C; --accent-ink: #FFFFFF; --good: #1F8A62; --good-soft: #E1F4EA; --bad: #C2402E; --bad-soft: #FCE6E1; --gold: #F4B740;
+    --scr: "Baloo 2", "Baloo Da 2", "Baloo Bhai 2", "Baloo Bhaina 2", "Baloo Chettan 2", "Baloo Paaji 2", "Baloo Tamma 2", "Baloo Tammudu 2", "Baloo Thambi 2", sans-serif;
+    --ui: "Figtree", system-ui, -apple-system, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --paper: #15122B; --card: #201C3B; --ink: #F5EEFF; --muted: #A9A2C2; --line: #352F58; --good-soft: #143326; --bad-soft: #3A1A16; color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --paper: #15122B; --card: #201C3B; --ink: #F5EEFF; --muted: #A9A2C2; --line: #352F58; --good-soft: #143326; --bad-soft: #3A1A16; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.5 var(--ui); min-height: 100dvh; }
+  button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .s { font-family: var(--scr); }
+  main { max-width: 560px; margin: 0 auto; padding: calc(env(safe-area-inset-top, 0px) + 14px) max(16px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 96px) max(16px, env(safe-area-inset-left, 0px)); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 16px; padding: 14px 20px; font-weight: 700; font-size: 1.05rem; background: var(--accent); color: var(--accent-ink); box-shadow: 0 4px 0 color-mix(in srgb, var(--accent) 60%, #000); transition: transform .08s; width: 100%; }
+  .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 60%, #000); }
+  .btn.ghost { background: var(--card); color: var(--ink); box-shadow: 0 3px 0 var(--line); border: 2px solid var(--line); }
+  .btn:disabled { opacity: .45; pointer-events: none; }
+  .row { display: flex; gap: 10px; align-items: center; }
+  .muted { color: var(--muted); }
+  .eyebrow { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  h1, h2 { font-family: var(--scr); line-height: 1.1; margin: 0; text-wrap: balance; }
+  /* welcome */
+  .hero { text-align: center; padding: 26px 0 18px; }
+  .hello { height: 84px; display: grid; place-items: center; font: 800 clamp(2.6rem, 11vw, 3.6rem)/1 var(--scr); color: var(--accent); }
+  .hello span { animation: pop .5s ease both; }
+  @keyframes pop { from { opacity: 0; transform: translateY(10px) scale(.96); } to { opacity: 1; transform: none; } }
+  .hero h1 { font-size: clamp(1.7rem, 7vw, 2.2rem); margin-top: 4px; }
+  .hero p { margin: 10px auto 0; max-width: 36ch; color: var(--muted); }
+  .pairs { display: inline-flex; gap: 6px; align-items: center; margin-top: 14px; padding: 6px 12px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); font-size: .86rem; font-weight: 600; }
+  .langs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 14px 0 18px; }
+  .lang { border: 2px solid var(--line); background: var(--card); border-radius: 16px; padding: 12px 6px; text-align: center; box-shadow: 0 3px 0 var(--line); }
+  .lang b { display: block; font: 700 1.25rem/1.2 var(--scr); }
+  .lang span { font-size: .76rem; color: var(--muted); }
+  .lang[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 3px 0 var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--card)); }
+  .lang:disabled { opacity: .3; }
+  /* home */
+  .top { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .pairchip { display: flex; align-items: center; gap: 8px; border: 2px solid var(--line); background: var(--card); border-radius: 999px; padding: 6px 14px; font: 700 1rem/1.2 var(--scr); }
+  .stat { margin-left: auto; display: flex; gap: 12px; font-weight: 700; font-size: .95rem; }
+  .goal { display: grid; grid-template-columns: 54px 1fr; gap: 12px; align-items: center; background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 12px 14px; margin-bottom: 18px; }
+  .ring { width: 54px; height: 54px; }
+  .path { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .unit { width: 100%; text-align: left; display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center; border: 2px solid var(--line); background: var(--card); border-radius: 20px; padding: 12px 14px; box-shadow: 0 4px 0 var(--line); }
+  .unit .ic { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-size: 1.7rem; background: color-mix(in srgb, var(--gold) 25%, var(--card)); }
+  .unit.locked { opacity: .5; }
+  .unit.locked .ic { filter: grayscale(1); }
+  .unit b { display: block; font-size: 1.05rem; }
+  .unit .tgt { font: 600 .95rem/1.3 var(--scr); color: var(--muted); }
+  .stars { font-size: .95rem; letter-spacing: 1px; white-space: nowrap; }
+  .review { margin-top: 16px; }
+  /* tab bar */
+  nav.tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; background: color-mix(in srgb, var(--paper) 94%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 6px) max(8px, env(safe-area-inset-left, 0px)); }
+  nav.tabs .in { max-width: 560px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+  nav.tabs button { border: 0; background: none; display: grid; justify-items: center; gap: 2px; padding: 6px 0; font-size: .74rem; font-weight: 700; color: var(--muted); border-radius: 12px; }
+  nav.tabs button svg { width: 24px; height: 24px; }
+  nav.tabs button[aria-current="page"] { color: var(--accent); }
+  /* lesson */
+  .lhead { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .x { width: 40px; height: 40px; border-radius: 50%; border: 0; background: none; font-size: 1.5rem; color: var(--muted); flex: none; }
+  .bar { flex: 1; height: 14px; border-radius: 10px; background: var(--line); overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--good); border-radius: 10px; transition: width .3s; }
+  .card { background: var(--card); border: 2px solid var(--line); border-radius: 22px; padding: 22px 18px; text-align: center; }
+  .card .big { font: 800 clamp(1.9rem, 8vw, 2.5rem)/1.2 var(--scr); margin: 6px 0 4px; overflow-wrap: anywhere; }
+  .card .rom { font-weight: 600; color: var(--accent); font-size: 1.1rem; }
+  .card .mean { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); font: 600 1.15rem/1.35 var(--scr); }
+  .card .en { color: var(--muted); font-size: .9rem; margin-top: 2px; }
+  .card .note { margin-top: 12px; font-size: .9rem; background: color-mix(in srgb, var(--gold) 18%, var(--card)); border-radius: 12px; padding: 8px 10px; text-align: left; }
+  .say { width: 52px; height: 52px; border-radius: 50%; border: 0; background: color-mix(in srgb, var(--accent) 14%, var(--card)); color: var(--accent); display: inline-grid; place-items: center; margin-top: 8px; }
+  .say svg { width: 26px; height: 26px; }
+  .q { font: 700 1.35rem/1.3 var(--scr); margin: 6px 0 16px; }
+  .qsub { color: var(--muted); font-size: .92rem; }
+  .opts { display: grid; gap: 10px; }
+  .opt { text-align: left; border: 2px solid var(--line); background: var(--card); border-radius: 16px; padding: 12px 14px; box-shadow: 0 3px 0 var(--line); font: 600 1.15rem/1.3 var(--scr); }
+  .opt small { display: block; font: 500 .85rem/1.3 var(--ui); color: var(--muted); }
+  .opt[aria-pressed="true"] { border-color: #5B8DEF; box-shadow: 0 3px 0 #5B8DEF; }
+  .opt.right { border-color: var(--good); background: var(--good-soft); box-shadow: 0 3px 0 var(--good); }
+  .opt.wrong { border-color: var(--bad); background: var(--bad-soft); box-shadow: 0 3px 0 var(--bad); }
+  .answer { min-height: 62px; border-bottom: 2px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; padding: 8px 0; margin-bottom: 16px; }
+  .tiles { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .tile { border: 2px solid var(--line); background: var(--card); border-radius: 12px; padding: 8px 12px; font-weight: 700; box-shadow: 0 3px 0 var(--line); }
+  .tile.used { visibility: hidden; }
+  .foot { position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; padding: 14px max(16px, env(safe-area-inset-right, 0px)) calc(env(safe-area-inset-bottom, 0px) + 14px) max(16px, env(safe-area-inset-left, 0px)); background: var(--paper); border-top: 2px solid var(--line); }
+  .foot .in { max-width: 560px; margin: 0 auto; display: grid; gap: 10px; }
+  .foot.ok { background: var(--good-soft); border-color: var(--good); }
+  .foot.no { background: var(--bad-soft); border-color: var(--bad); }
+  .foot .msg { font-weight: 800; font-size: 1.1rem; }
+  .foot.ok .msg { color: var(--good); } .foot.no .msg { color: var(--bad); }
+  .foot .sol { font: 600 1rem/1.3 var(--scr); }
+  .foot.ok .btn { background: var(--good); box-shadow: 0 4px 0 color-mix(in srgb, var(--good) 60%, #000); }
+  .foot.no .btn { background: var(--bad); box-shadow: 0 4px 0 color-mix(in srgb, var(--bad) 60%, #000); }
+  .done { text-align: center; padding-top: 30px; }
+  .done .big { font-size: 4rem; }
+  .done h2 { font-size: 2rem; margin: 6px 0; }
+  .chips { display: flex; justify-content: center; gap: 10px; margin: 18px 0 24px; flex-wrap: wrap; }
+  .chips div { border: 2px solid var(--line); border-radius: 16px; padding: 10px 14px; background: var(--card); min-width: 92px; }
+  .chips b { display: block; font-size: 1.4rem; }
+  .chips span { font-size: .78rem; color: var(--muted); font-weight: 600; }
+  /* phrasebook, check */
+  .search { width: 100%; border: 2px solid var(--line); border-radius: 14px; padding: 12px 14px; background: var(--card); color: var(--ink); font: inherit; margin: 12px 0; }
+  .ph { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .ph .t { font: 700 1.2rem/1.3 var(--scr); }
+  .ph .r { color: var(--accent); font-weight: 600; font-size: .92rem; }
+  .ph .m { grid-column: 1 / -1; font: 500 .95rem/1.3 var(--scr); color: var(--muted); }
+  .ph .say { width: 40px; height: 40px; margin: 0; grid-row: 1 / 3; grid-column: 2; }
+  .ph .say svg { width: 20px; height: 20px; }
+  h3.u { margin: 22px 0 0; font-size: 1rem; }
+  .chk { border: 2px solid var(--line); background: var(--card); border-radius: 18px; padding: 14px; margin-top: 10px; }
+  .chk .en { font-weight: 700; }
+  .chk .t { font: 700 1.35rem/1.3 var(--scr); margin: 4px 0 0; }
+  .chk .r { color: var(--accent); font-weight: 600; font-size: .92rem; }
+  .chk .acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .chk .acts button, .chk .acts a { text-align: center; text-decoration: none; border: 2px solid var(--line); background: var(--paper); border-radius: 12px; padding: 9px; font-weight: 700; font-size: .92rem; }
+  .chk .acts button.yes[aria-pressed="true"] { background: var(--good-soft); border-color: var(--good); color: var(--good); }
+  .banner { border-radius: 18px; padding: 14px 16px; background: color-mix(in srgb, var(--gold) 22%, var(--card)); border: 2px solid color-mix(in srgb, var(--gold) 60%, var(--line)); margin: 12px 0; font-size: .95rem; }
+  .banner b { display: block; margin-bottom: 2px; }
+  select.pick { width: 100%; border: 2px solid var(--line); border-radius: 14px; padding: 12px; background: var(--card); color: var(--ink); font: 600 1rem var(--scr); }
+  .meg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 16px 0; }
+  .meg div { background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 14px; }
+  .meg b { display: block; font-size: 1.6rem; }
+  .meg span { color: var(--muted); font-size: .85rem; font-weight: 600; }
+  .list { list-style: none; padding: 0; margin: 8px 0; }
+  .list li { padding: 10px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 10px; }
+  .toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 90px); transform: translateX(-50%); background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 12px; font-weight: 600; font-size: .92rem; z-index: 20; max-width: calc(100% - 32px); text-align: center; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<main id="app" aria-live="polite"></main>
+<nav class="tabs" id="tabs" hidden aria-label="Sections"><div class="in">
+  <button data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-6h4v6"/></svg>Learn</button>
+  <button data-tab="book"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h11"/></svg>Phrasebook</button>
+  <button data-tab="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>Check</button>
+  <button data-tab="me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Me</button>
+</div></nav>
+
+<script>
+(function () {
+  'use strict';
+  var COURSE = {"units":[{"id":"hello","title":"Say hello","icon":"👋","phrases":[{"id":"hello","en":"Hello","context":"A polite greeting for anyone, any time of day."},{"id":"how_are_you","en":"How are you?","context":"Polite form, as you'd say to an elder or a stranger."},{"id":"im_fine","en":"I'm fine."},{"id":"thank_you","en":"Thank you"},{"id":"sorry","en":"Sorry / Excuse me"},{"id":"yes","en":"Yes"},{"id":"no","en":"No"},{"id":"bye","en":"See you again","context":"The usual way to say goodbye."}]},{"id":"about","title":"About you","icon":"🙂","phrases":[{"id":"my_name","en":"My name is Ravi.","context":"Swap Ravi for your own name."},{"id":"your_name","en":"What is your name?"},{"id":"where_from","en":"Where are you from?"},{"id":"i_live_here","en":"I live here."},{"id":"dont_understand","en":"I didn't understand."},{"id":"speak_slowly","en":"Please speak slowly."},{"id":"speak_english","en":"Do you speak English?"},{"id":"nice_to_meet","en":"Nice to meet you."}]},{"id":"numbers","title":"Numbers and time","icon":"🔢","phrases":[{"id":"one","en":"One"},{"id":"two","en":"Two"},{"id":"three","en":"Three"},{"id":"five","en":"Five"},{"id":"ten","en":"Ten"},{"id":"today","en":"Today"},{"id":"tomorrow","en":"Tomorrow"},{"id":"now","en":"Now"}]},{"id":"food","title":"Food","icon":"🍛","phrases":[{"id":"water","en":"Water"},{"id":"food","en":"Food / a meal"},{"id":"tea","en":"Tea"},{"id":"tasty","en":"It's very tasty."},{"id":"hungry","en":"I'm hungry."},{"id":"less_spicy","en":"Less spicy, please."},{"id":"bill","en":"The bill, please."},{"id":"vegetarian","en":"I'm vegetarian."}]},{"id":"travel","title":"Getting around","icon":"🛺","phrases":[{"id":"where_station","en":"Where is the station?"},{"id":"go_left","en":"Go left."},{"id":"go_right","en":"Go right."},{"id":"go_straight","en":"Go straight."},{"id":"stop_here","en":"Stop here."},{"id":"how_far","en":"How far is it?"},{"id":"take_me","en":"Please take me there."},{"id":"lost","en":"I'm lost."}]},{"id":"shop","title":"Shopping and help","icon":"🛍️","phrases":[{"id":"how_much","en":"How much is this?"},{"id":"expensive","en":"It's too expensive."},{"id":"reduce","en":"Please reduce it a little.","context":"Bargaining, when asking for a lower price."},{"id":"want_this","en":"I want this."},{"id":"no_thanks","en":"No, thank you."},{"id":"help","en":"Help!"},{"id":"call_doctor","en":"Please call a doctor."},{"id":"toilet","en":"Where is the toilet?"}]}],"languages":[{"code":"en","name":"English","native":"English","script":"Latin","tts":"en-IN","status":"draft","hello":"Hello","contributors":[],"phrases":{"hello":{"text":"Hello","roman":"hello"},"how_are_you":{"text":"How are you?","roman":"how are you?"},"im_fine":{"text":"I'm fine.","roman":"I'm fine."},"thank_you":{"text":"Thank you","roman":"thank you"},"sorry":{"text":"Sorry / Excuse me","roman":"sorry"},"yes":{"text":"Yes","roman":"yes"},"no":{"text":"No","roman":"no"},"bye":{"text":"See you again","roman":"see you again"},"my_name":{"text":"My name is Ravi.","roman":"my name is Ravi."},"your_name":{"text":"What is your name?","roman":"what is your name?"},"where_from":{"text":"Where are you from?","roman":"where are you from?"},"i_live_here":{"text":"I live here.","roman":"I live here."},"dont_understand":{"text":"I didn't understand.","roman":"I didn't understand."},"speak_slowly":{"text":"Please speak slowly.","roman":"please speak slowly."},"speak_english":{"text":"Do you speak English?","roman":"do you speak English?"},"nice_to_meet":{"text":"Nice to meet you.","roman":"nice to meet you."},"one":{"text":"One","roman":"one"},"two":{"text":"Two","roman":"two"},"three":{"text":"Three","roman":"three"},"five":{"text":"Five","roman":"five"},"ten":{"text":"Ten","roman":"ten"},"today":{"text":"Today","roman":"today"},"tomorrow":{"text":"Tomorrow","roman":"tomorrow"},"now":{"text":"Now","roman":"now"},"water":{"text":"Water","roman":"water"},"food":{"text":"Food / a meal","roman":"food"},"tea":{"text":"Tea","roman":"tea"},"tasty":{"text":"It's very tasty.","roman":"it's very tasty."},"hungry":{"text":"I'm hungry.","roman":"I'm hungry."},"less_spicy":{"text":"Less spicy, please.","roman":"less spicy, please."},"bill":{"text":"The bill, please.","roman":"the bill, please."},"vegetarian":{"text":"I'm vegetarian.","roman":"I'm vegetarian."},"where_station":{"text":"Where is the station?","roman":"where is the station?"},"go_left":{"text":"Go left.","roman":"go left."},"go_right":{"text":"Go right.","roman":"go right."},"go_straight":{"text":"Go straight.","roman":"go straight."},"stop_here":{"text":"Stop here.","roman":"stop here."},"how_far":{"text":"How far is it?","roman":"how far is it?"},"take_me":{"text":"Please take me there.","roman":"please take me there."},"lost":{"text":"I'm lost.","roman":"I'm lost."},"how_much":{"text":"How much is this?","roman":"how much is this?"},"expensive":{"text":"It's too expensive.","roman":"it's too expensive."},"reduce":{"text":"Please reduce it a little.","roman":"please reduce it a little."},"want_this":{"text":"I want this.","roman":"I want this."},"no_thanks":{"text":"No, thank you.","roman":"no, thank you."},"help":{"text":"Help!","roman":"help!"},"call_doctor":{"text":"Please call a doctor.","roman":"please call a doctor."},"toilet":{"text":"Where is the toilet?","roman":"where is the toilet?"}}},{"code":"hi","name":"Hindi","native":"हिन्दी","script":"Devanagari","tts":"hi-IN","status":"draft","hello":"नमस्ते","contributors":[],"phrases":{"hello":{"text":"नमस्ते","roman":"namaste"},"how_are_you":{"text":"आप कैसे हैं?","roman":"aap kaise hain?","note":"To a woman: aap kaisi hain?"},"im_fine":{"text":"मैं ठीक हूँ।","roman":"main theek hoon."},"thank_you":{"text":"धन्यवाद","roman":"dhanyavaad","note":"Shukriya is just as common in everyday speech."},"sorry":{"text":"माफ़ कीजिए","roman":"maaf kijiye"},"yes":{"text":"हाँ","roman":"haan"},"no":{"text":"नहीं","roman":"nahin"},"bye":{"text":"फिर मिलेंगे","roman":"phir milenge"},"my_name":{"text":"मेरा नाम रवि है।","roman":"mera naam Ravi hai."},"your_name":{"text":"आपका नाम क्या है?","roman":"aapka naam kya hai?"},"where_from":{"text":"आप कहाँ से हैं?","roman":"aap kahaan se hain?"},"i_live_here":{"text":"मैं यहाँ रहता हूँ।","roman":"main yahaan rehta hoon.","note":"A woman says rehti hoon."},"dont_understand":{"text":"मुझे समझ नहीं आया।","roman":"mujhe samajh nahin aaya."},"speak_slowly":{"text":"धीरे बोलिए।","roman":"dheere boliye."},"speak_english":{"text":"क्या आप अंग्रेज़ी बोलते हैं?","roman":"kya aap angrezi bolte hain?"},"nice_to_meet":{"text":"आपसे मिलकर अच्छा लगा।","roman":"aapse milkar achchha laga."},"one":{"text":"एक","roman":"ek"},"two":{"text":"दो","roman":"do"},"three":{"text":"तीन","roman":"teen"},"five":{"text":"पाँच","roman":"paanch"},"ten":{"text":"दस","roman":"das"},"today":{"text":"आज","roman":"aaj"},"tomorrow":{"text":"कल","roman":"kal","note":"Kal also means yesterday; context tells you which."},"now":{"text":"अभी","roman":"abhi"},"water":{"text":"पानी","roman":"paani"},"food":{"text":"खाना","roman":"khaana"},"tea":{"text":"चाय","roman":"chaay"},"tasty":{"text":"यह बहुत स्वादिष्ट है।","roman":"yeh bahut swaadisht hai."},"hungry":{"text":"मुझे भूख लगी है।","roman":"mujhe bhookh lagi hai."},"less_spicy":{"text":"कम तीखा, प्लीज़।","roman":"kam teekha, please."},"bill":{"text":"बिल दीजिए।","roman":"bill dijiye."},"vegetarian":{"text":"मैं शाकाहारी हूँ।","roman":"main shaakaahaari hoon."},"where_station":{"text":"स्टेशन कहाँ है?","roman":"station kahaan hai?"},"go_left":{"text":"बाएँ जाइए।","roman":"baayen jaaiye."},"go_right":{"text":"दाएँ जाइए।","roman":"daayen jaaiye."},"go_straight":{"text":"सीधे जाइए।","roman":"seedhe jaaiye."},"stop_here":{"text":"यहाँ रोकिए।","roman":"yahaan rokiye."},"how_far":{"text":"कितनी दूर है?","roman":"kitni door hai?"},"take_me":{"text":"मुझे वहाँ ले चलिए।","roman":"mujhe wahaan le chaliye."},"lost":{"text":"मैं रास्ता भूल गया हूँ।","roman":"main raasta bhool gaya hoon.","note":"A woman says bhool gayi hoon."},"how_much":{"text":"यह कितने का है?","roman":"yeh kitne ka hai?"},"expensive":{"text":"बहुत महँगा है।","roman":"bahut mehnga hai."},"reduce":{"text":"थोड़ा कम कीजिए।","roman":"thoda kam kijiye."},"want_this":{"text":"मुझे यह चाहिए।","roman":"mujhe yeh chaahiye."},"no_thanks":{"text":"नहीं, धन्यवाद।","roman":"nahin, dhanyavaad."},"help":{"text":"बचाओ!","roman":"bachaao!"},"call_doctor":{"text":"डॉक्टर को बुलाइए।","roman":"doctor ko bulaaiye."},"toilet":{"text":"टॉयलेट कहाँ है?","roman":"toilet kahaan hai?"}}},{"code":"bn","name":"Bengali","native":"বাংলা","script":"Bengali","tts":"bn-IN","status":"draft","hello":"নমস্কার","contributors":[],"phrases":{"hello":{"text":"নমস্কার","roman":"nomoshkar"},"how_are_you":{"text":"আপনি কেমন আছেন?","roman":"apni kemon achhen?"},"im_fine":{"text":"আমি ভালো আছি।","roman":"ami bhalo achhi."},"thank_you":{"text":"ধন্যবাদ","roman":"dhonnobad"},"sorry":{"text":"দুঃখিত","roman":"dukkhito"},"yes":{"text":"হ্যাঁ","roman":"hyan"},"no":{"text":"না","roman":"na"},"bye":{"text":"আবার দেখা হবে","roman":"abar dekha hobe"},"my_name":{"text":"আমার নাম রবি।","roman":"amar naam Robi."},"your_name":{"text":"আপনার নাম কী?","roman":"apnar naam ki?"},"where_from":{"text":"আপনি কোথা থেকে এসেছেন?","roman":"apni kotha theke eshechhen?"},"i_live_here":{"text":"আমি এখানে থাকি।","roman":"ami ekhane thaki."},"dont_understand":{"text":"আমি বুঝতে পারছি না।","roman":"ami bujhte parchhi na."},"speak_slowly":{"text":"একটু আস্তে বলুন।","roman":"ektu aste bolun."},"speak_english":{"text":"আপনি কি ইংরেজি বলেন?","roman":"apni ki ingreji bolen?"},"nice_to_meet":{"text":"আপনার সাথে দেখা হয়ে ভালো লাগল।","roman":"apnar sathe dekha hoye bhalo laglo."},"one":{"text":"এক","roman":"ek"},"two":{"text":"দুই","roman":"dui"},"three":{"text":"তিন","roman":"tin"},"five":{"text":"পাঁচ","roman":"panch"},"ten":{"text":"দশ","roman":"dosh"},"today":{"text":"আজ","roman":"aaj"},"tomorrow":{"text":"কাল","roman":"kaal","note":"Agamikal is the unambiguous word for tomorrow."},"now":{"text":"এখন","roman":"ekhon"},"water":{"text":"জল","roman":"jol","note":"In Bangladesh, pani."},"food":{"text":"খাবার","roman":"khabar"},"tea":{"text":"চা","roman":"cha"},"tasty":{"text":"খুব সুস্বাদু হয়েছে।","roman":"khub shushadu hoyechhe."},"hungry":{"text":"আমার খিদে পেয়েছে।","roman":"amar khide peyechhe."},"less_spicy":{"text":"ঝাল একটু কম দেবেন।","roman":"jhal ektu kom deben."},"bill":{"text":"বিলটা দিন।","roman":"bill-ta din."},"vegetarian":{"text":"আমি নিরামিষ খাই।","roman":"ami niramish khai."},"where_station":{"text":"স্টেশন কোথায়?","roman":"station kothay?"},"go_left":{"text":"বাঁদিকে যান।","roman":"bandike jan."},"go_right":{"text":"ডানদিকে যান।","roman":"dandike jan."},"go_straight":{"text":"সোজা যান।","roman":"shoja jan."},"stop_here":{"text":"এখানে থামুন।","roman":"ekhane thamun."},"how_far":{"text":"কত দূর?","roman":"koto dur?"},"take_me":{"text":"আমাকে ওখানে নিয়ে চলুন।","roman":"amake okhane niye cholun."},"lost":{"text":"আমি পথ হারিয়ে ফেলেছি।","roman":"ami poth hariye phelechhi."},"how_much":{"text":"এটার দাম কত?","roman":"etar dam koto?"},"expensive":{"text":"অনেক দাম।","roman":"onek dam."},"reduce":{"text":"একটু কম করুন।","roman":"ektu kom korun."},"want_this":{"text":"আমার এটা চাই।","roman":"amar eta chai."},"no_thanks":{"text":"না, ধন্যবাদ।","roman":"na, dhonnobad."},"help":{"text":"বাঁচাও!","roman":"bachao!"},"call_doctor":{"text":"ডাক্তার ডাকুন।","roman":"daktar dakun."},"toilet":{"text":"বাথরুম কোথায়?","roman":"bathroom kothay?"}}},{"code":"mr","name":"Marathi","native":"मराठी","script":"Devanagari","tts":"mr-IN","status":"draft","hello":"नमस्कार","contributors":[],"phrases":{"hello":{"text":"नमस्कार","roman":"namaskar"},"how_are_you":{"text":"तुम्ही कसे आहात?","roman":"tumhi kase aahat?","note":"To a woman: kashya aahat?"},"im_fine":{"text":"मी ठीक आहे.","roman":"mee theek aahe."},"thank_you":{"text":"धन्यवाद","roman":"dhanyavaad"},"sorry":{"text":"माफ करा","roman":"maaf kara"},"yes":{"text":"हो","roman":"ho"},"no":{"text":"नाही","roman":"naahi"},"bye":{"text":"पुन्हा भेटू","roman":"punha bhetu"},"my_name":{"text":"माझं नाव रवी आहे.","roman":"maajha naav Ravi aahe."},"your_name":{"text":"तुमचं नाव काय आहे?","roman":"tumcha naav kaay aahe?"},"where_from":{"text":"तुम्ही कुठले आहात?","roman":"tumhi kuthle aahat?"},"i_live_here":{"text":"मी इथे राहतो.","roman":"mee ithe raahto.","note":"A woman says raahte."},"dont_understand":{"text":"मला समजलं नाही.","roman":"mala samajla naahi."},"speak_slowly":{"text":"हळू बोला.","roman":"halu bola."},"speak_english":{"text":"तुम्ही इंग्रजी बोलता का?","roman":"tumhi ingraji bolta ka?"},"nice_to_meet":{"text":"तुम्हाला भेटून आनंद झाला.","roman":"tumhala bhetun aanand jhaala."},"one":{"text":"एक","roman":"ek"},"two":{"text":"दोन","roman":"don"},"three":{"text":"तीन","roman":"teen"},"five":{"text":"पाच","roman":"paach"},"ten":{"text":"दहा","roman":"daha"},"today":{"text":"आज","roman":"aaj"},"tomorrow":{"text":"उद्या","roman":"udya"},"now":{"text":"आता","roman":"aata"},"water":{"text":"पाणी","roman":"paani"},"food":{"text":"जेवण","roman":"jevan"},"tea":{"text":"चहा","roman":"chaha"},"tasty":{"text":"खूप चविष्ट आहे.","roman":"khoop chavishta aahe."},"hungry":{"text":"मला भूक लागली आहे.","roman":"mala bhook laagli aahe."},"less_spicy":{"text":"कमी तिखट द्या.","roman":"kami tikhat dya."},"bill":{"text":"बिल द्या.","roman":"bill dya."},"vegetarian":{"text":"मी शाकाहारी आहे.","roman":"mee shaakaahaari aahe."},"where_station":{"text":"स्टेशन कुठे आहे?","roman":"station kuthe aahe?"},"go_left":{"text":"डावीकडे जा.","roman":"daavikade ja."},"go_right":{"text":"उजवीकडे जा.","roman":"ujavikade ja."},"go_straight":{"text":"सरळ जा.","roman":"saral ja."},"stop_here":{"text":"इथे थांबा.","roman":"ithe thaamba."},"how_far":{"text":"किती लांब आहे?","roman":"kiti laamb aahe?"},"take_me":{"text":"मला तिथे घेऊन चला.","roman":"mala tithe gheun chala."},"lost":{"text":"मी रस्ता चुकलो आहे.","roman":"mee rasta chuklo aahe.","note":"A woman says chukle aahe."},"how_much":{"text":"हे कितीला आहे?","roman":"he kitila aahe?"},"expensive":{"text":"खूप महाग आहे.","roman":"khoop mahaag aahe."},"reduce":{"text":"थोडं कमी करा.","roman":"thoda kami kara."},"want_this":{"text":"मला हे हवं आहे.","roman":"mala he hava aahe."},"no_thanks":{"text":"नको, धन्यवाद.","roman":"nako, dhanyavaad."},"help":{"text":"वाचवा!","roman":"vaachva!"},"call_doctor":{"text":"डॉक्टरला बोलवा.","roman":"doctorla bolva."},"toilet":{"text":"टॉयलेट कुठे आहे?","roman":"toilet kuthe aahe?"}}},{"code":"te","name":"Telugu","native":"తెలుగు","script":"Telugu","tts":"te-IN","status":"draft","hello":"నమస్కారం","contributors":[],"phrases":{"hello":{"text":"నమస్కారం","roman":"namaskaaram"},"how_are_you":{"text":"మీరు ఎలా ఉన్నారు?","roman":"meeru ela unnaaru?"},"im_fine":{"text":"నేను బాగున్నాను.","roman":"nenu baagunnaanu."},"thank_you":{"text":"ధన్యవాదాలు","roman":"dhanyavaadaalu"},"sorry":{"text":"క్షమించండి","roman":"kshaminchandi"},"yes":{"text":"అవును","roman":"avunu"},"no":{"text":"కాదు","roman":"kaadu","note":"For \"I don't want it\", say vaddu."},"bye":{"text":"మళ్ళీ కలుద్దాం","roman":"malli kaluddaam"},"my_name":{"text":"నా పేరు రవి.","roman":"naa peru Ravi."},"your_name":{"text":"మీ పేరు ఏమిటి?","roman":"mee peru emiti?"},"where_from":{"text":"మీది ఏ ఊరు?","roman":"meedi e ooru?"},"i_live_here":{"text":"నేను ఇక్కడ ఉంటాను.","roman":"nenu ikkada untaanu."},"dont_understand":{"text":"నాకు అర్థం కాలేదు.","roman":"naaku artham kaaledu."},"speak_slowly":{"text":"నెమ్మదిగా మాట్లాడండి.","roman":"nemmadiga maatlaadandi."},"speak_english":{"text":"మీకు ఇంగ్లీష్ వచ్చా?","roman":"meeku English vachchaa?"},"nice_to_meet":{"text":"మిమ్మల్ని కలవడం సంతోషం.","roman":"mimmalni kalavadam santosham."},"one":{"text":"ఒకటి","roman":"okati"},"two":{"text":"రెండు","roman":"rendu"},"three":{"text":"మూడు","roman":"moodu"},"five":{"text":"ఐదు","roman":"aidu"},"ten":{"text":"పది","roman":"padi"},"today":{"text":"ఈరోజు","roman":"eeroju"},"tomorrow":{"text":"రేపు","roman":"repu"},"now":{"text":"ఇప్పుడు","roman":"ippudu"},"water":{"text":"నీళ్ళు","roman":"neellu"},"food":{"text":"భోజనం","roman":"bhojanam"},"tea":{"text":"టీ","roman":"tee"},"tasty":{"text":"చాలా రుచిగా ఉంది.","roman":"chaala ruchiga undi."},"hungry":{"text":"నాకు ఆకలిగా ఉంది.","roman":"naaku aakaliga undi."},"less_spicy":{"text":"కారం తక్కువ వేయండి.","roman":"kaaram takkuva veyandi."},"bill":{"text":"బిల్ ఇవ్వండి.","roman":"bill ivvandi."},"vegetarian":{"text":"నేను శాకాహారిని.","roman":"nenu shaakaahaarini."},"where_station":{"text":"స్టేషన్ ఎక్కడ ఉంది?","roman":"station ekkada undi?"},"go_left":{"text":"ఎడమ వైపు వెళ్ళండి.","roman":"edama vaipu vellandi."},"go_right":{"text":"కుడి వైపు వెళ్ళండి.","roman":"kudi vaipu vellandi."},"go_straight":{"text":"నేరుగా వెళ్ళండి.","roman":"neruga vellandi."},"stop_here":{"text":"ఇక్కడ ఆపండి.","roman":"ikkada aapandi."},"how_far":{"text":"ఎంత దూరం?","roman":"entha dooram?"},"take_me":{"text":"నన్ను అక్కడికి తీసుకెళ్ళండి.","roman":"nannu akkadiki teesukellandi."},"lost":{"text":"నేను దారి తప్పిపోయాను.","roman":"nenu daari tappipoyaanu."},"how_much":{"text":"ఇది ఎంత?","roman":"idi entha?"},"expensive":{"text":"చాలా ఖరీదు.","roman":"chaala khareedu."},"reduce":{"text":"కొంచెం తగ్గించండి.","roman":"konchem tagginchandi."},"want_this":{"text":"నాకు ఇది కావాలి.","roman":"naaku idi kaavaali."},"no_thanks":{"text":"వద్దు, ధన్యవాదాలు.","roman":"vaddu, dhanyavaadaalu."},"help":{"text":"కాపాడండి!","roman":"kaapaadandi!"},"call_doctor":{"text":"డాక్టర్‌ని పిలవండి.","roman":"doctor-ni pilavandi."},"toilet":{"text":"టాయిలెట్ ఎక్కడ?","roman":"toilet ekkada?"}}},{"code":"ta","name":"Tamil","native":"தமிழ்","script":"Tamil","tts":"ta-IN","status":"draft","hello":"வணக்கம்","contributors":[],"phrases":{"hello":{"text":"வணக்கம்","roman":"vanakkam"},"how_are_you":{"text":"எப்படி இருக்கீங்க?","roman":"eppadi irukkeenga?","note":"Spoken Tamil. The written form is eppadi irukkireergal?"},"im_fine":{"text":"நான் நல்லா இருக்கேன்.","roman":"naan nallaa irukken."},"thank_you":{"text":"நன்றி","roman":"nandri"},"sorry":{"text":"மன்னிக்கவும்","roman":"mannikkavum"},"yes":{"text":"ஆமா","roman":"aamaa"},"no":{"text":"இல்லை","roman":"illai"},"bye":{"text":"அப்புறம் பார்க்கலாம்","roman":"appuram paarkkalaam"},"my_name":{"text":"என் பெயர் ரவி.","roman":"en peyar Ravi."},"your_name":{"text":"உங்க பேர் என்ன?","roman":"unga per enna?"},"where_from":{"text":"நீங்க எந்த ஊரு?","roman":"neenga endha ooru?"},"i_live_here":{"text":"நான் இங்கதான் இருக்கேன்.","roman":"naan ingadhaan irukken."},"dont_understand":{"text":"எனக்குப் புரியல.","roman":"enakku puriyala."},"speak_slowly":{"text":"மெதுவா பேசுங்க.","roman":"medhuvaa pesunga."},"speak_english":{"text":"உங்களுக்கு இங்கிலீஷ் தெரியுமா?","roman":"ungalukku English theriyumaa?"},"nice_to_meet":{"text":"உங்களைச் சந்திச்சதுல சந்தோஷம்.","roman":"ungalai sandhichadhula sandhosham."},"one":{"text":"ஒன்று","roman":"ondru"},"two":{"text":"இரண்டு","roman":"irandu"},"three":{"text":"மூன்று","roman":"moondru"},"five":{"text":"ஐந்து","roman":"aindhu"},"ten":{"text":"பத்து","roman":"pathu"},"today":{"text":"இன்னைக்கு","roman":"innaikku"},"tomorrow":{"text":"நாளைக்கு","roman":"naalaikku"},"now":{"text":"இப்போ","roman":"ippo"},"water":{"text":"தண்ணீர்","roman":"thanneer"},"food":{"text":"சாப்பாடு","roman":"saappaadu"},"tea":{"text":"டீ","roman":"tea"},"tasty":{"text":"ரொம்ப ருசியா இருக்கு.","roman":"romba rusiyaa irukku."},"hungry":{"text":"எனக்குப் பசிக்குது.","roman":"enakku pasikkudhu."},"less_spicy":{"text":"காரம் கம்மியா போடுங்க.","roman":"kaaram kammiyaa podunga."},"bill":{"text":"பில் கொடுங்க.","roman":"bill kodunga."},"vegetarian":{"text":"நான் சைவம்.","roman":"naan saivam."},"where_station":{"text":"ஸ்டேஷன் எங்கே இருக்கு?","roman":"station enge irukku?"},"go_left":{"text":"இடது பக்கம் போங்க.","roman":"idadhu pakkam ponga."},"go_right":{"text":"வலது பக்கம் போங்க.","roman":"valadhu pakkam ponga."},"go_straight":{"text":"நேரா போங்க.","roman":"neraa ponga."},"stop_here":{"text":"இங்கே நிறுத்துங்க.","roman":"inge niruthunga."},"how_far":{"text":"எவ்வளவு தூரம்?","roman":"evvalavu dhooram?"},"take_me":{"text":"என்னை அங்கே கூட்டிட்டுப் போங்க.","roman":"ennai ange koottittu ponga."},"lost":{"text":"நான் வழி தவறிட்டேன்.","roman":"naan vazhi thavarittaen."},"how_much":{"text":"இது எவ்வளவு?","roman":"idhu evvalavu?"},"expensive":{"text":"ரொம்ப விலை அதிகம்.","roman":"romba vilai adhigam."},"reduce":{"text":"கொஞ்சம் குறைச்சுக் கொடுங்க.","roman":"konjam kuraichu kodunga."},"want_this":{"text":"எனக்கு இது வேணும்.","roman":"enakku idhu venum."},"no_thanks":{"text":"வேண்டாம், நன்றி.","roman":"vendaam, nandri."},"help":{"text":"காப்பாத்துங்க!","roman":"kaappaathunga!"},"call_doctor":{"text":"டாக்டரைக் கூப்பிடுங்க.","roman":"doctorai koopidunga."},"toilet":{"text":"டாய்லெட் எங்கே?","roman":"toilet enge?"}}},{"code":"gu","name":"Gujarati","native":"ગુજરાતી","script":"Gujarati","tts":"gu-IN","status":"draft","hello":"નમસ્તે","contributors":[],"phrases":{"hello":{"text":"નમસ્તે","roman":"namaste","note":"Kem chho? (how are you?) is the everyday greeting."},"how_are_you":{"text":"તમે કેમ છો?","roman":"tame kem chho?"},"im_fine":{"text":"હું મજામાં છું.","roman":"hun majaama chhun."},"thank_you":{"text":"આભાર","roman":"aabhaar"},"sorry":{"text":"માફ કરજો","roman":"maaf karjo"},"yes":{"text":"હા","roman":"haa"},"no":{"text":"ના","roman":"naa"},"bye":{"text":"આવજો","roman":"aavjo","note":"Literally \"please come again\"."},"my_name":{"text":"મારું નામ રવિ છે.","roman":"maarun naam Ravi chhe."},"your_name":{"text":"તમારું નામ શું છે?","roman":"tamaarun naam shun chhe?"},"where_from":{"text":"તમે ક્યાંના છો?","roman":"tame kyaanna chho?"},"i_live_here":{"text":"હું અહીં રહું છું.","roman":"hun ahin rahun chhun."},"dont_understand":{"text":"મને સમજાયું નહીં.","roman":"mane samjaayun nahin."},"speak_slowly":{"text":"ધીમે બોલો.","roman":"dheeme bolo."},"speak_english":{"text":"તમે અંગ્રેજી બોલો છો?","roman":"tame angreji bolo chho?"},"nice_to_meet":{"text":"તમને મળીને આનંદ થયો.","roman":"tamne maline aanand thayo."},"one":{"text":"એક","roman":"ek"},"two":{"text":"બે","roman":"be"},"three":{"text":"ત્રણ","roman":"tran"},"five":{"text":"પાંચ","roman":"paanch"},"ten":{"text":"દસ","roman":"das"},"today":{"text":"આજે","roman":"aaje"},"tomorrow":{"text":"કાલે","roman":"kaale"},"now":{"text":"હમણાં","roman":"hamnaan"},"water":{"text":"પાણી","roman":"paani"},"food":{"text":"જમવાનું","roman":"jamvaanun"},"tea":{"text":"ચા","roman":"chaa"},"tasty":{"text":"ખૂબ સ્વાદિષ્ટ છે.","roman":"khoob swaadisht chhe."},"hungry":{"text":"મને ભૂખ લાગી છે.","roman":"mane bhookh laagi chhe."},"less_spicy":{"text":"ઓછું તીખું આપજો.","roman":"ochhun teekhun aapjo."},"bill":{"text":"બિલ આપો.","roman":"bill aapo."},"vegetarian":{"text":"હું શાકાહારી છું.","roman":"hun shaakaahaari chhun."},"where_station":{"text":"સ્ટેશન ક્યાં છે?","roman":"station kyaan chhe?"},"go_left":{"text":"ડાબી બાજુ જાઓ.","roman":"daabi baaju jao."},"go_right":{"text":"જમણી બાજુ જાઓ.","roman":"jamni baaju jao."},"go_straight":{"text":"સીધા જાઓ.","roman":"seedha jao."},"stop_here":{"text":"અહીં ઊભા રાખો.","roman":"ahin ubha raakho."},"how_far":{"text":"કેટલું દૂર છે?","roman":"ketlun door chhe?"},"take_me":{"text":"મને ત્યાં લઈ જાઓ.","roman":"mane tyaan lai jao."},"lost":{"text":"હું રસ્તો ભૂલી ગયો છું.","roman":"hun rasto bhooli gayo chhun.","note":"A woman says bhooli gai chhun."},"how_much":{"text":"આ કેટલાનું છે?","roman":"aa ketlaanun chhe?"},"expensive":{"text":"બહુ મોંઘું છે.","roman":"bahu monghun chhe."},"reduce":{"text":"થોડું ઓછું કરો.","roman":"thodun ochhun karo."},"want_this":{"text":"મને આ જોઈએ છે.","roman":"mane aa joie chhe."},"no_thanks":{"text":"ના, આભાર.","roman":"naa, aabhaar."},"help":{"text":"બચાવો!","roman":"bachaavo!"},"call_doctor":{"text":"ડૉક્ટરને બોલાવો.","roman":"doctorne bolaavo."},"toilet":{"text":"ટોઇલેટ ક્યાં છે?","roman":"toilet kyaan chhe?"}}},{"code":"kn","name":"Kannada","native":"ಕನ್ನಡ","script":"Kannada","tts":"kn-IN","status":"draft","hello":"ನಮಸ್ಕಾರ","contributors":[],"phrases":{"hello":{"text":"ನಮಸ್ಕಾರ","roman":"namaskaara"},"how_are_you":{"text":"ಹೇಗಿದ್ದೀರಾ?","roman":"hegiddeeraa?"},"im_fine":{"text":"ನಾನು ಚೆನ್ನಾಗಿದ್ದೀನಿ.","roman":"naanu chennaagiddeeni."},"thank_you":{"text":"ಧನ್ಯವಾದಗಳು","roman":"dhanyavaadagalu"},"sorry":{"text":"ಕ್ಷಮಿಸಿ","roman":"kshamisi"},"yes":{"text":"ಹೌದು","roman":"haudu"},"no":{"text":"ಇಲ್ಲ","roman":"illa","note":"For \"I don't want it\", say beda."},"bye":{"text":"ಮತ್ತೆ ಸಿಗೋಣ","roman":"matte sigona"},"my_name":{"text":"ನನ್ನ ಹೆಸರು ರವಿ.","roman":"nanna hesaru Ravi."},"your_name":{"text":"ನಿಮ್ಮ ಹೆಸರೇನು?","roman":"nimma hesarenu?"},"where_from":{"text":"ನೀವು ಯಾವ ಊರಿನವರು?","roman":"neevu yaava oorinavaru?"},"i_live_here":{"text":"ನಾನು ಇಲ್ಲೇ ಇರೋದು.","roman":"naanu ille irodu."},"dont_understand":{"text":"ನನಗೆ ಅರ್ಥ ಆಗಲಿಲ್ಲ.","roman":"nanage artha aagalilla."},"speak_slowly":{"text":"ನಿಧಾನವಾಗಿ ಮಾತಾಡಿ.","roman":"nidhaanavaagi maataadi."},"speak_english":{"text":"ನಿಮಗೆ ಇಂಗ್ಲಿಷ್ ಬರುತ್ತಾ?","roman":"nimage English baruttaa?"},"nice_to_meet":{"text":"ನಿಮ್ಮನ್ನು ಭೇಟಿಯಾಗಿ ಖುಷಿ ಆಯ್ತು.","roman":"nimmannu bhetiyaagi khushi aaytu."},"one":{"text":"ಒಂದು","roman":"ondu"},"two":{"text":"ಎರಡು","roman":"eradu"},"three":{"text":"ಮೂರು","roman":"mooru"},"five":{"text":"ಐದು","roman":"aidu"},"ten":{"text":"ಹತ್ತು","roman":"hattu"},"today":{"text":"ಇವತ್ತು","roman":"ivattu"},"tomorrow":{"text":"ನಾಳೆ","roman":"naale"},"now":{"text":"ಈಗ","roman":"eega"},"water":{"text":"ನೀರು","roman":"neeru"},"food":{"text":"ಊಟ","roman":"oota"},"tea":{"text":"ಟೀ","roman":"tea","note":"Chaha is also used."},"tasty":{"text":"ತುಂಬಾ ರುಚಿಯಾಗಿದೆ.","roman":"tumbaa ruchiyaagide."},"hungry":{"text":"ನನಗೆ ಹಸಿವಾಗ್ತಿದೆ.","roman":"nanage hasivaagtide."},"less_spicy":{"text":"ಖಾರ ಕಮ್ಮಿ ಹಾಕಿ.","roman":"khaara kammi haaki."},"bill":{"text":"ಬಿಲ್ ಕೊಡಿ.","roman":"bill kodi."},"vegetarian":{"text":"ನಾನು ಸಸ್ಯಾಹಾರಿ.","roman":"naanu sasyaahaari."},"where_station":{"text":"ಸ್ಟೇಷನ್ ಎಲ್ಲಿದೆ?","roman":"station ellide?"},"go_left":{"text":"ಎಡಕ್ಕೆ ಹೋಗಿ.","roman":"edakke hogi."},"go_right":{"text":"ಬಲಕ್ಕೆ ಹೋಗಿ.","roman":"balakke hogi."},"go_straight":{"text":"ನೇರವಾಗಿ ಹೋಗಿ.","roman":"neravaagi hogi.","note":"In Bengaluru, \"straight hogi\" is common."},"stop_here":{"text":"ಇಲ್ಲೇ ನಿಲ್ಲಿಸಿ.","roman":"ille nillisi."},"how_far":{"text":"ಎಷ್ಟು ದೂರ?","roman":"eshtu doora?"},"take_me":{"text":"ನನ್ನನ್ನು ಅಲ್ಲಿಗೆ ಕರ್ಕೊಂಡು ಹೋಗಿ.","roman":"nannannu allige karkondu hogi."},"lost":{"text":"ನಾನು ದಾರಿ ತಪ್ಪಿದ್ದೀನಿ.","roman":"naanu daari tappiddeeni."},"how_much":{"text":"ಇದು ಎಷ್ಟು?","roman":"idu eshtu?"},"expensive":{"text":"ತುಂಬಾ ಜಾಸ್ತಿ ಆಯ್ತು.","roman":"tumbaa jaasti aaytu."},"reduce":{"text":"ಸ್ವಲ್ಪ ಕಮ್ಮಿ ಮಾಡಿ.","roman":"swalpa kammi maadi."},"want_this":{"text":"ನನಗೆ ಇದು ಬೇಕು.","roman":"nanage idu beku."},"no_thanks":{"text":"ಬೇಡ, ಧನ್ಯವಾದಗಳು.","roman":"beda, dhanyavaadagalu."},"help":{"text":"ಕಾಪಾಡಿ!","roman":"kaapaadi!"},"call_doctor":{"text":"ಡಾಕ್ಟರ್‌ನ ಕರೆಯಿರಿ.","roman":"doctorna kareyiri."},"toilet":{"text":"ಟಾಯ್ಲೆಟ್ ಎಲ್ಲಿದೆ?","roman":"toilet ellide?"}}},{"code":"ml","name":"Malayalam","native":"മലയാളം","script":"Malayalam","tts":"ml-IN","status":"draft","hello":"നമസ്കാരം","contributors":[],"phrases":{"hello":{"text":"നമസ്കാരം","roman":"namaskaaram"},"how_are_you":{"text":"സുഖമാണോ?","roman":"sukhamaano?"},"im_fine":{"text":"എനിക്ക് സുഖമാണ്.","roman":"enikku sukhamaanu."},"thank_you":{"text":"നന്ദി","roman":"nandi"},"sorry":{"text":"ക്ഷമിക്കണം","roman":"kshamikkanam"},"yes":{"text":"അതെ","roman":"athe"},"no":{"text":"അല്ല","roman":"alla","note":"For \"I don't want it\", say venda."},"bye":{"text":"പിന്നെ കാണാം","roman":"pinne kaanaam"},"my_name":{"text":"എന്റെ പേര് രവി.","roman":"ente peru Ravi."},"your_name":{"text":"നിങ്ങളുടെ പേരെന്താ?","roman":"ningalude perentha?"},"where_from":{"text":"നിങ്ങൾ എവിടെ നിന്നാണ്?","roman":"ningal evide ninnaanu?"},"i_live_here":{"text":"ഞാൻ ഇവിടെയാണ് താമസം.","roman":"njaan ivideyaanu thaamasam."},"dont_understand":{"text":"എനിക്ക് മനസ്സിലായില്ല.","roman":"enikku manassilaayilla."},"speak_slowly":{"text":"പതുക്കെ പറയൂ.","roman":"pathukke parayoo."},"speak_english":{"text":"നിങ്ങൾക്ക് ഇംഗ്ലീഷ് അറിയാമോ?","roman":"ningalkku English ariyaamo?"},"nice_to_meet":{"text":"നിങ്ങളെ കണ്ടതിൽ സന്തോഷം.","roman":"ningale kandathil santhosham."},"one":{"text":"ഒന്ന്","roman":"onnu"},"two":{"text":"രണ്ട്","roman":"randu"},"three":{"text":"മൂന്ന്","roman":"moonnu"},"five":{"text":"അഞ്ച്","roman":"anchu"},"ten":{"text":"പത്ത്","roman":"pathu"},"today":{"text":"ഇന്ന്","roman":"innu"},"tomorrow":{"text":"നാളെ","roman":"naale"},"now":{"text":"ഇപ്പോൾ","roman":"ippol"},"water":{"text":"വെള്ളം","roman":"vellam"},"food":{"text":"ഭക്ഷണം","roman":"bhakshanam"},"tea":{"text":"ചായ","roman":"chaaya"},"tasty":{"text":"നല്ല രുചിയുണ്ട്.","roman":"nalla ruchiyundu."},"hungry":{"text":"എനിക്ക് വിശക്കുന്നു.","roman":"enikku vishakkunnu."},"less_spicy":{"text":"എരിവ് കുറച്ച് മതി.","roman":"erivu kurachu mathi."},"bill":{"text":"ബിൽ തരൂ.","roman":"bill tharoo."},"vegetarian":{"text":"ഞാൻ സസ്യാഹാരിയാണ്.","roman":"njaan sasyaahaariyaanu.","note":"\"Vegetarian\" in English is widely understood too."},"where_station":{"text":"സ്റ്റേഷൻ എവിടെയാണ്?","roman":"station evideyaanu?"},"go_left":{"text":"ഇടത്തോട്ട് പോകൂ.","roman":"idathottu pokoo."},"go_right":{"text":"വലത്തോട്ട് പോകൂ.","roman":"valathottu pokoo."},"go_straight":{"text":"നേരെ പോകൂ.","roman":"nere pokoo."},"stop_here":{"text":"ഇവിടെ നിർത്തൂ.","roman":"ivide nirthoo."},"how_far":{"text":"എത്ര ദൂരമുണ്ട്?","roman":"ethra dooramundu?"},"take_me":{"text":"എന്നെ അവിടെ കൊണ്ടുപോകൂ.","roman":"enne avide kondupokoo."},"lost":{"text":"എനിക്ക് വഴി തെറ്റി.","roman":"enikku vazhi thetti."},"how_much":{"text":"ഇതിന് എത്രയാണ്?","roman":"ithinu ethrayaanu?"},"expensive":{"text":"വളരെ കൂടുതലാണ്.","roman":"valare kooduthalaanu."},"reduce":{"text":"കുറച്ച് കുറയ്ക്കൂ.","roman":"kurachu kuraykkoo."},"want_this":{"text":"എനിക്ക് ഇത് വേണം.","roman":"enikku ithu venam."},"no_thanks":{"text":"വേണ്ട, നന്ദി.","roman":"venda, nandi."},"help":{"text":"രക്ഷിക്കണേ!","roman":"rakshikkane!"},"call_doctor":{"text":"ഡോക്ടറെ വിളിക്കൂ.","roman":"doctore vilikkoo."},"toilet":{"text":"ടോയ്‌ലറ്റ് എവിടെയാണ്?","roman":"toilet evideyaanu?"}}},{"code":"or","name":"Odia","native":"ଓଡ଼ିଆ","script":"Odia","tts":"or-IN","status":"draft","hello":"ନମସ୍କାର","contributors":[],"phrases":{"hello":{"text":"ନମସ୍କାର","roman":"namaskaara"},"how_are_you":{"text":"ଆପଣ କେମିତି ଅଛନ୍ତି?","roman":"apana kemiti achhanti?"},"im_fine":{"text":"ମୁଁ ଭଲ ଅଛି।","roman":"mun bhala achhi."},"thank_you":{"text":"ଧନ୍ୟବାଦ","roman":"dhanyabaada"},"sorry":{"text":"କ୍ଷମା କରନ୍ତୁ","roman":"kshyama karantu"},"yes":{"text":"ହଁ","roman":"han"},"no":{"text":"ନା","roman":"naa"},"bye":{"text":"ପୁଣି ଦେଖା ହେବ","roman":"puni dekha heba"},"my_name":{"text":"ମୋ ନାଁ ରବି।","roman":"mo naan Rabi."},"your_name":{"text":"ଆପଣଙ୍କ ନାଁ କ'ଣ?","roman":"apananka naan kana?"},"where_from":{"text":"ଆପଣ କେଉଁଠୁ ଆସିଛନ୍ତି?","roman":"apana keunthu asichhanti?"},"i_live_here":{"text":"ମୁଁ ଏଠି ରହେ।","roman":"mun ethi rahe."},"dont_understand":{"text":"ମୁଁ ବୁଝିପାରିଲି ନାହିଁ।","roman":"mun bujhipaarili naahin."},"speak_slowly":{"text":"ଧୀରେ କୁହନ୍ତୁ।","roman":"dhire kuhantu."},"speak_english":{"text":"ଆପଣ ଇଂରାଜୀ କହନ୍ତି କି?","roman":"apana ingraaji kahanti ki?"},"nice_to_meet":{"text":"ଆପଣଙ୍କୁ ଭେଟି ଭଲ ଲାଗିଲା।","roman":"apananku bheti bhala laagila."},"one":{"text":"ଏକ","roman":"eka"},"two":{"text":"ଦୁଇ","roman":"dui"},"three":{"text":"ତିନି","roman":"tini"},"five":{"text":"ପାଞ୍ଚ","roman":"paancha"},"ten":{"text":"ଦଶ","roman":"dasha"},"today":{"text":"ଆଜି","roman":"aaji"},"tomorrow":{"text":"କାଲି","roman":"kaali"},"now":{"text":"ଏବେ","roman":"ebe"},"water":{"text":"ପାଣି","roman":"paani"},"food":{"text":"ଖାଇବା","roman":"khaiba"},"tea":{"text":"ଚା","roman":"chaa"},"tasty":{"text":"ବହୁତ ସୁଆଦିଆ।","roman":"bahuta suaadia."},"hungry":{"text":"ମୋତେ ଭୋକ ଲାଗୁଛି।","roman":"mote bhoka laaguchhi."},"less_spicy":{"text":"ରାଗ କମ୍ ଦିଅନ୍ତୁ।","roman":"raaga kam diantu."},"bill":{"text":"ବିଲ୍ ଦିଅନ୍ତୁ।","roman":"bill diantu."},"vegetarian":{"text":"ମୁଁ ନିରାମିଷ ଖାଏ।","roman":"mun niraamisha khaae."},"where_station":{"text":"ଷ୍ଟେସନ କେଉଁଠି?","roman":"station keunthi?"},"go_left":{"text":"ବାଁ ପଟକୁ ଯାଆନ୍ତୁ।","roman":"baan pataku jaantu."},"go_right":{"text":"ଡାହାଣ ପଟକୁ ଯାଆନ୍ତୁ।","roman":"daahaana pataku jaantu."},"go_straight":{"text":"ସିଧା ଯାଆନ୍ତୁ।","roman":"sidha jaantu."},"stop_here":{"text":"ଏଠି ରଖନ୍ତୁ।","roman":"ethi rakhantu."},"how_far":{"text":"କେତେ ଦୂର?","roman":"kete dura?"},"take_me":{"text":"ମୋତେ ସେଠିକି ନେଇଚାଲନ୍ତୁ।","roman":"mote sethiki neichaalantu."},"lost":{"text":"ମୁଁ ବାଟ ହଜେଇ ଦେଇଛି।","roman":"mun baata hajei deichhi."},"how_much":{"text":"ଏହାର ଦାମ କେତେ?","roman":"ehaara daama kete?"},"expensive":{"text":"ବହୁତ ମହଙ୍ଗା।","roman":"bahuta mahanga."},"reduce":{"text":"ଟିକେ କମ୍ କରନ୍ତୁ।","roman":"tike kam karantu."},"want_this":{"text":"ମୋତେ ଏହା ଦରକାର।","roman":"mote eha darakaara."},"no_thanks":{"text":"ନା, ଧନ୍ୟବାଦ।","roman":"naa, dhanyabaada."},"help":{"text":"ବଞ୍ଚାଅ!","roman":"banchaa!"},"call_doctor":{"text":"ଡାକ୍ତରଙ୍କୁ ଡାକନ୍ତୁ।","roman":"daaktaranku daakantu."},"toilet":{"text":"ବାଥରୁମ୍ କେଉଁଠି?","roman":"bathroom keunthi?"}}},{"code":"pa","name":"Punjabi","native":"ਪੰਜਾਬੀ","script":"Gurmukhi","tts":"pa-IN","status":"draft","hello":"ਸਤ ਸ੍ਰੀ ਅਕਾਲ","contributors":[],"phrases":{"hello":{"text":"ਸਤ ਸ੍ਰੀ ਅਕਾਲ","roman":"sat sri akaal"},"how_are_you":{"text":"ਤੁਸੀਂ ਕਿਵੇਂ ਹੋ?","roman":"tusi kiven ho?"},"im_fine":{"text":"ਮੈਂ ਠੀਕ ਹਾਂ।","roman":"main theek haan."},"thank_you":{"text":"ਧੰਨਵਾਦ","roman":"dhannvaad"},"sorry":{"text":"ਮਾਫ਼ ਕਰਨਾ","roman":"maaf karna"},"yes":{"text":"ਹਾਂ","roman":"haan"},"no":{"text":"ਨਹੀਂ","roman":"nahin"},"bye":{"text":"ਫਿਰ ਮਿਲਾਂਗੇ","roman":"phir milaange"},"my_name":{"text":"ਮੇਰਾ ਨਾਮ ਰਵੀ ਹੈ।","roman":"mera naam Ravi hai."},"your_name":{"text":"ਤੁਹਾਡਾ ਨਾਮ ਕੀ ਹੈ?","roman":"tuhaada naam ki hai?"},"where_from":{"text":"ਤੁਸੀਂ ਕਿੱਥੋਂ ਹੋ?","roman":"tusi kitthon ho?"},"i_live_here":{"text":"ਮੈਂ ਇੱਥੇ ਰਹਿੰਦਾ ਹਾਂ।","roman":"main itthe rehnda haan.","note":"A woman says rehndi haan."},"dont_understand":{"text":"ਮੈਨੂੰ ਸਮਝ ਨਹੀਂ ਆਈ।","roman":"mainu samajh nahin aayi."},"speak_slowly":{"text":"ਹੌਲੀ ਬੋਲੋ।","roman":"hauli bolo."},"speak_english":{"text":"ਕੀ ਤੁਸੀਂ ਅੰਗਰੇਜ਼ੀ ਬੋਲਦੇ ਹੋ?","roman":"ki tusi angrezi bolde ho?"},"nice_to_meet":{"text":"ਤੁਹਾਨੂੰ ਮਿਲ ਕੇ ਖੁਸ਼ੀ ਹੋਈ।","roman":"tuhaanu mil ke khushi hoyi."},"one":{"text":"ਇੱਕ","roman":"ikk"},"two":{"text":"ਦੋ","roman":"do"},"three":{"text":"ਤਿੰਨ","roman":"tinn"},"five":{"text":"ਪੰਜ","roman":"panj"},"ten":{"text":"ਦਸ","roman":"das"},"today":{"text":"ਅੱਜ","roman":"ajj"},"tomorrow":{"text":"ਕੱਲ੍ਹ","roman":"kallh","note":"Also means yesterday; context tells you which."},"now":{"text":"ਹੁਣ","roman":"hun"},"water":{"text":"ਪਾਣੀ","roman":"paani"},"food":{"text":"ਖਾਣਾ","roman":"khaana"},"tea":{"text":"ਚਾਹ","roman":"chaah"},"tasty":{"text":"ਬਹੁਤ ਸਵਾਦ ਹੈ।","roman":"bahut swaad hai."},"hungry":{"text":"ਮੈਨੂੰ ਭੁੱਖ ਲੱਗੀ ਹੈ।","roman":"mainu bhukkh laggi hai."},"less_spicy":{"text":"ਮਿਰਚ ਘੱਟ ਪਾਓ।","roman":"mirch ghatt paao."},"bill":{"text":"ਬਿੱਲ ਦਿਓ।","roman":"bill dio."},"vegetarian":{"text":"ਮੈਂ ਸ਼ਾਕਾਹਾਰੀ ਹਾਂ।","roman":"main shaakaahaari haan."},"where_station":{"text":"ਸਟੇਸ਼ਨ ਕਿੱਥੇ ਹੈ?","roman":"station kitthe hai?"},"go_left":{"text":"ਖੱਬੇ ਜਾਓ।","roman":"khabbe jaao."},"go_right":{"text":"ਸੱਜੇ ਜਾਓ।","roman":"sajje jaao."},"go_straight":{"text":"ਸਿੱਧੇ ਜਾਓ।","roman":"siddhe jaao."},"stop_here":{"text":"ਇੱਥੇ ਰੋਕੋ।","roman":"itthe roko."},"how_far":{"text":"ਕਿੰਨੀ ਦੂਰ ਹੈ?","roman":"kinni door hai?"},"take_me":{"text":"ਮੈਨੂੰ ਉੱਥੇ ਲੈ ਚੱਲੋ।","roman":"mainu utthe lai challo."},"lost":{"text":"ਮੈਂ ਰਾਹ ਭੁੱਲ ਗਿਆ ਹਾਂ।","roman":"main raah bhull gaya haan.","note":"A woman says bhull gayi haan."},"how_much":{"text":"ਇਹ ਕਿੰਨੇ ਦਾ ਹੈ?","roman":"eh kinne da hai?"},"expensive":{"text":"ਬਹੁਤ ਮਹਿੰਗਾ ਹੈ।","roman":"bahut mehnga hai."},"reduce":{"text":"ਥੋੜ੍ਹਾ ਘੱਟ ਕਰੋ।","roman":"thoda ghatt karo."},"want_this":{"text":"ਮੈਨੂੰ ਇਹ ਚਾਹੀਦਾ ਹੈ।","roman":"mainu eh chaahida hai."},"no_thanks":{"text":"ਨਹੀਂ, ਧੰਨਵਾਦ।","roman":"nahin, dhannvaad."},"help":{"text":"ਬਚਾਓ!","roman":"bachaao!"},"call_doctor":{"text":"ਡਾਕਟਰ ਨੂੰ ਬੁਲਾਓ।","roman":"doctor nu bulaao."},"toilet":{"text":"ਟਾਇਲਟ ਕਿੱਥੇ ਹੈ?","roman":"toilet kitthe hai?"}}},{"code":"as","name":"Assamese","native":"অসমীয়া","script":"Bengali-Assamese","tts":"as-IN","status":"draft","hello":"নমস্কাৰ","contributors":[],"phrases":{"hello":{"text":"নমস্কাৰ","roman":"nomoskar"},"how_are_you":{"text":"আপুনি কেনে আছে?","roman":"apuni kene ase?"},"im_fine":{"text":"মই ভালে আছোঁ।","roman":"moi bhale asu."},"thank_you":{"text":"ধন্যবাদ","roman":"dhonyobad"},"sorry":{"text":"ক্ষমা কৰিব","roman":"khyoma koribo"},"yes":{"text":"হয়","roman":"hoy"},"no":{"text":"নহয়","roman":"nohoy","note":"For \"I don't want it\", say nalage."},"bye":{"text":"পিছত লগ পাম","roman":"pisot log pam"},"my_name":{"text":"মোৰ নাম ৰবি।","roman":"mor nam Robi."},"your_name":{"text":"আপোনাৰ নাম কি?","roman":"aponar nam ki?"},"where_from":{"text":"আপুনি ক'ৰ পৰা আহিছে?","roman":"apuni kor pora ahise?"},"i_live_here":{"text":"মই ইয়াতে থাকোঁ।","roman":"moi iyate thaku."},"dont_understand":{"text":"মই বুজি পোৱা নাই।","roman":"moi buji puwa nai."},"speak_slowly":{"text":"লাহে লাহে কওক।","roman":"lahe lahe kowok."},"speak_english":{"text":"আপুনি ইংৰাজী কয় নেকি?","roman":"apuni ingraji koy neki?"},"nice_to_meet":{"text":"আপোনাক লগ পাই ভাল লাগিল।","roman":"aponak log pai bhal lagil."},"one":{"text":"এক","roman":"ek"},"two":{"text":"দুই","roman":"dui"},"three":{"text":"তিনি","roman":"tini"},"five":{"text":"পাঁচ","roman":"pas"},"ten":{"text":"দহ","roman":"doh"},"today":{"text":"আজি","roman":"aji"},"tomorrow":{"text":"কাইলৈ","roman":"kailoi"},"now":{"text":"এতিয়া","roman":"etiya"},"water":{"text":"পানী","roman":"pani"},"food":{"text":"ভাত","roman":"bhat","note":"Literally rice; used to mean a meal."},"tea":{"text":"চাহ","roman":"sah"},"tasty":{"text":"বৰ সোৱাদ লাগিছে।","roman":"bor xuwad lagise.","note":"In Assamese, x sounds like a soft h or kh."},"hungry":{"text":"মোৰ ভোক লাগিছে।","roman":"mor bhok lagise."},"less_spicy":{"text":"জলকীয়া কমকৈ দিব।","roman":"jolokiya komkoi dibo."},"bill":{"text":"বিলখন দিয়ক।","roman":"bilkhon diyok."},"vegetarian":{"text":"মই নিৰামিষ খাওঁ।","roman":"moi niramix khau."},"where_station":{"text":"ষ্টেচন ক'ত?","roman":"station kot?"},"go_left":{"text":"বাওঁফালে যাওক।","roman":"baufale jaok."},"go_right":{"text":"সোঁফালে যাওক।","roman":"xufale jaok."},"go_straight":{"text":"পোনে পোনে যাওক।","roman":"pone pone jaok."},"stop_here":{"text":"ইয়াতে ৰখাওক।","roman":"iyate rokhaok."},"how_far":{"text":"কিমান দূৰ?","roman":"kiman dur?"},"take_me":{"text":"মোক তালৈ লৈ যাওক।","roman":"mok taloi loi jaok."},"lost":{"text":"মই বাট হেৰুৱাইছোঁ।","roman":"moi bat heruwaisu."},"how_much":{"text":"এইটোৰ দাম কিমান?","roman":"eitur dam kiman?"},"expensive":{"text":"বৰ দাম।","roman":"bor dam."},"reduce":{"text":"অলপ কম কৰক।","roman":"olop kom korok."},"want_this":{"text":"মোক এইটো লাগে।","roman":"mok eitu lage."},"no_thanks":{"text":"নালাগে, ধন্যবাদ।","roman":"nalage, dhonyobad."},"help":{"text":"বচাওক!","roman":"bosaok!"},"call_doctor":{"text":"ডাক্তৰ মাতক।","roman":"daktor matok."},"toilet":{"text":"বাথৰুম ক'ত?","roman":"bathroom kot?"}}}],"count":48};
+  var REPO = 'https://github.com/arabindanarayandas/bhasha-kit';
+  var LANGS = COURSE.languages, UNITS = COURSE.units, BY = {};
+  LANGS.forEach(function (l) { BY[l.code] = l; });
+  var app = document.getElementById('app'), tabs = document.getElementById('tabs');
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function today() { var d = new Date(); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+  function count(path, title) { try { if (window.goatcounter && goatcounter.count) goatcounter.count({ path: path, title: title || path, event: true }); } catch (e) {} }
+
+  /* ---------- saved state ---------- */
+  var KEY = 'bhasha-kit-v1';
+  var S = { from: null, to: null, xp: 0, days: {}, streak: 0, last: null, goal: 30, prog: {}, ok: {} };
+  try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved) for (var k in saved) S[k] = saved[k]; } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+  function pairKey() { return S.from + '>' + S.to; }
+  function P() { return S.prog[pairKey()] || (S.prog[pairKey()] = {}); }
+  function addXP(n) {
+    var t = today();
+    if (S.last !== t) {
+      var y = new Date(); y.setDate(y.getDate() - 1);
+      var yk = y.getFullYear() + '-' + (y.getMonth() + 1) + '-' + y.getDate();
+      S.streak = S.last === yk ? S.streak + 1 : 1; S.last = t;
+    }
+    S.xp += n; S.days[t] = (S.days[t] || 0) + n; save();
+  }
+  function todayXP() { return S.days[today()] || 0; }
+
+  /* ---------- text helpers ---------- */
+  function ph(code, id) { return BY[code].phrases[id]; }
+  function meaning(id) { return ph(S.from, id).text; }
+  function enOf(id) { return BY.en.phrases[id].text; }
+
+  /* ---------- speech ---------- */
+  var voices = [];
+  function loadVoices() { try { voices = speechSynthesis.getVoices() || []; } catch (e) { voices = []; } }
+  if ('speechSynthesis' in window) { loadVoices(); speechSynthesis.onvoiceschanged = function () { loadVoices(); if (route.name !== 'lesson') render(); }; }
+  function voiceFor(code) { var tag = BY[code].tts.toLowerCase(), base = tag.split('-')[0]; return voices.find(function (v) { return v.lang.toLowerCase().replace('_', '-') === tag; }) || voices.find(function (v) { return v.lang.toLowerCase().indexOf(base) === 0; }); }
+  function canSay(code) { return !!voiceFor(code); }
+  function say(code, id) {
+    var v = voiceFor(code); if (!v) return;
+    try { speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(ph(code, id).text); u.voice = v; u.lang = v.lang; u.rate = 0.85; speechSynthesis.speak(u); } catch (e) {}
+  }
+  var SPK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 010 6M18.5 6.5a8 8 0 010 11"/></svg>';
+  function sayBtn(code, id, label) { return canSay(code) ? '<button class="say" data-say="' + id + '" data-code="' + code + '" aria-label="' + esc(label || 'Play sound') + '">' + SPK + '</button>' : ''; }
+  app.addEventListener('click', function (e) { var b = e.target.closest('[data-say]'); if (b) { e.stopPropagation(); say(b.dataset.code, b.dataset.say); } }, true);
+
+  function toast(t) { var d = document.createElement('div'); d.className = 'toast'; d.textContent = t; document.body.appendChild(d); setTimeout(function () { d.remove(); }, 2600); }
+
+  /* ---------- routing ---------- */
+  var route = { name: S.from && S.to ? 'home' : 'welcome' };
+  function go(name, extra) { route = Object.assign({ name: name }, extra || {}); render(); window.scrollTo(0, 0); }
+  tabs.addEventListener('click', function (e) { var b = e.target.closest('[data-tab]'); if (b) go(b.dataset.tab); });
+  function render() {
+    var top = ['home', 'book', 'check', 'me'].indexOf(route.name) >= 0;
+    tabs.hidden = !top;
+    Array.prototype.forEach.call(tabs.querySelectorAll('button'), function (b) { b.setAttribute('aria-current', b.dataset.tab === route.name ? 'page' : 'false'); });
+    ({ welcome: vWelcome, home: vHome, lesson: vLesson, book: vBook, check: vCheck, me: vMe })[route.name]();
+  }
+
+  /* ---------- welcome ---------- */
+  var helloTimer = null;
+  function vWelcome() {
+    var step = route.step || 'from', n = LANGS.length;
+    var chosen = step === 'from' ? S.from : S.to;
+    app.innerHTML = '<div class="hero"><div class="hello s" id="hello"></div><h1>Learn any Indian language from any other</h1><p>Everyday phrases for travel, work and new friends, taught from the language you already speak.</p><div class="pairs">' + n + ' languages · ' + (n * (n - 1)) + ' pairs · free and open source</div></div>' +
+      '<div class="eyebrow">' + (step === 'from' ? 'Step 1 of 2' : 'Step 2 of 2') + '</div><h2 style="font-size:1.5rem;margin-top:4px">' + (step === 'from' ? 'Which language do you speak best?' : 'Which language do you want to learn?') + '</h2>' +
+      '<div class="langs">' + LANGS.map(function (l) { return '<button class="lang" data-l="' + l.code + '" aria-pressed="' + (chosen === l.code) + '"' + (step === 'to' && l.code === S.from ? ' disabled' : '') + '><b>' + esc(l.native) + '</b><span>' + esc(l.name) + '</span></button>'; }).join('') + '</div>' +
+      '<button class="btn" id="next"' + (chosen ? '' : ' disabled') + '>' + (step === 'from' ? 'Next' : 'Start learning') + '</button>' +
+      (step === 'to' ? '<button class="btn ghost" id="back" style="margin-top:10px">Back</button>' : '') +
+      '<p class="muted" style="font-size:.85rem;text-align:center;margin-top:18px">Every phrase is a draft until native speakers check it. <a href="' + REPO + '" target="_blank" rel="noopener">See the project on GitHub</a>.</p>';
+    var hs = LANGS.map(function (l) { return l.hello; }), i = 0, el = document.getElementById('hello');
+    function tick() { el.innerHTML = '<span>' + esc(hs[i % hs.length]) + '</span>'; i++; }
+    clearInterval(helloTimer); tick(); helloTimer = setInterval(function () { if (!document.getElementById('hello')) return clearInterval(helloTimer); tick(); }, 1400);
+    app.querySelectorAll('.lang').forEach(function (b) { b.addEventListener('click', function () { if (step === 'from') { S.from = b.dataset.l; if (S.to === S.from) S.to = null; } else S.to = b.dataset.l; save(); vWelcome(); }); });
+    document.getElementById('next').addEventListener('click', function () {
+      if (step === 'from') go('welcome', { step: 'to' });
+      else { count('bhasha/pair/' + pairKey(), BY[S.from].name + ' to ' + BY[S.to].name); clearInterval(helloTimer); go('home'); }
+    });
+    var bk = document.getElementById('back'); if (bk) bk.addEventListener('click', function () { go('welcome', { step: 'from' }); });
+  }
+
+  /* ---------- home ---------- */
+  function ring(v, max) {
+    var r = 22, c = 2 * Math.PI * r, f = Math.min(1, v / max);
+    return '<svg class="ring" viewBox="0 0 54 54" aria-hidden="true"><circle cx="27" cy="27" r="' + r + '" fill="none" stroke="var(--line)" stroke-width="6"/><circle cx="27" cy="27" r="' + r + '" fill="none" stroke="' + (f >= 1 ? 'var(--good)' : 'var(--gold)') + '" stroke-width="6" stroke-linecap="round" stroke-dasharray="' + (c * f) + ' ' + c + '" transform="rotate(-90 27 27)"/><text x="27" y="32" text-anchor="middle" font-size="13" font-weight="800" fill="var(--ink)" font-family="Figtree">' + Math.round(f * 100) + '%</text></svg>';
+  }
+  function unlocked(i) { return i === 0 || !!P()[UNITS[i - 1].id]; }
+  function vHome() {
+    var f = BY[S.from], t = BY[S.to], prog = P();
+    var done = UNITS.filter(function (u) { return prog[u.id]; }).length;
+    app.innerHTML = '<div class="top"><button class="pairchip" id="pair" aria-label="Change languages">' + esc(f.native) + ' <span aria-hidden="true">→</span> ' + esc(t.native) + '</button><div class="stat"><span title="Day streak">🔥 ' + (S.streak || 0) + '</span><span title="Total XP">⭐ ' + S.xp + '</span></div></div>' +
+      '<div class="goal">' + ring(todayXP(), S.goal) + '<div><b>' + (todayXP() >= S.goal ? 'Daily goal done!' : 'Daily goal: ' + S.goal + ' XP') + '</b><div class="muted" style="font-size:.9rem">' + todayXP() + ' XP today · ' + done + ' of ' + UNITS.length + ' units finished in ' + esc(t.name) + '</div></div></div>' +
+      '<ol class="path">' + UNITS.map(function (u, i) {
+        var st = prog[u.id] || 0, lock = !unlocked(i);
+        return '<li><button class="unit' + (lock ? ' locked' : '') + '" data-u="' + i + '"' + (lock ? ' aria-disabled="true"' : '') + '><span class="ic" aria-hidden="true">' + (lock ? '🔒' : u.icon) + '</span><span><b>' + (i + 1) + '. ' + esc(u.title) + '</b><span class="tgt">' + esc(ph(S.to, u.phrases[0].id).text) + ' · ' + esc(ph(S.to, u.phrases[1].id).text) + '</span></span><span class="stars" aria-label="' + st + ' of 3 stars">' + (st ? '★★★'.slice(0, st) + '<span class="muted">' + '★★★'.slice(st) + '</span>' : (lock ? '' : '<span style="color:var(--accent);font-weight:800">Start</span>')) + '</span></button></li>';
+      }).join('') + '</ol>' +
+      (done ? '<div class="review"><button class="btn ghost" id="rev">Quick review of everything you\'ve learned</button></div>' : '') +
+      '<div class="banner" style="margin-top:22px"><b>Do you speak ' + esc(t.name) + ' natively?</b>Help make this right: check the phrases in a couple of minutes. <a href="#" id="tocheck">Check ' + esc(t.name) + '</a></div>';
+    document.getElementById('pair').addEventListener('click', function () { go('welcome', { step: 'from' }); });
+    app.querySelectorAll('.unit').forEach(function (b) { b.addEventListener('click', function () { var i = +b.dataset.u; if (!unlocked(i)) return toast('Finish unit ' + i + ' first'); startLesson(i); }); });
+    var rv = document.getElementById('rev'); if (rv) rv.addEventListener('click', function () { startLesson(-1); });
+    document.getElementById('tocheck').addEventListener('click', function (e) { e.preventDefault(); go('check', { lang: S.to }); });
+  }
+
+  /* ---------- lesson ---------- */
+  var L = null;
+  function wordsOf(r) { return r.replace(/[.,!?]/g, '').split(/\s+/).filter(Boolean); }
+  function makeQuestions(ids, pool) {
+    var types = [], speak = canSay(S.to);
+    ids.forEach(function (id, i) {
+      var opts = ['pick_target', 'pick_meaning'];
+      if (wordsOf(ph(S.to, id).roman).length >= 2) opts.push('build');
+      if (speak) opts.push('listen');
+      types.push({ id: id, type: opts[(i + Math.floor(Math.random() * opts.length)) % opts.length] });
+    });
+    return shuffle(types).map(function (q) {
+      var others = shuffle(pool.filter(function (x) { return x !== q.id; })).slice(0, 3);
+      q.choices = shuffle([q.id].concat(others));
+      if (q.type === 'build') {
+        var w = wordsOf(ph(S.to, q.id).roman), extra = shuffle(pool.filter(function (x) { return x !== q.id; }).reduce(function (a, x) { return a.concat(wordsOf(ph(S.to, x).roman)); }, []).filter(function (x) { return w.indexOf(x) < 0; })).slice(0, 2);
+        q.tiles = shuffle(w.concat(extra)); q.answer = w;
+      }
+      return q;
+    });
+  }
+  function startLesson(i) {
+    var ids, pool = UNITS.reduce(function (a, u) { return a.concat(u.phrases.map(function (p) { return p.id; })); }, []);
+    if (i < 0) {
+      var learned = UNITS.filter(function (u) { return P()[u.id]; }).reduce(function (a, u) { return a.concat(u.phrases.map(function (p) { return p.id; })); }, []);
+      ids = shuffle(learned).slice(0, 8);
+    } else ids = UNITS[i].phrases.map(function (p) { return p.id; });
+    L = { unit: i, ids: ids, phase: i < 0 ? 'quiz' : 'learn', k: 0, qs: makeQuestions(ids, pool), right: 0, combo: 0, picked: null, built: [], checked: false, missed: [] };
+    count('bhasha/lesson/' + pairKey() + '/' + (i < 0 ? 'review' : UNITS[i].id), 'Lesson started');
+    go('lesson');
+  }
+  function lessonHead(frac) { return '<div class="lhead"><button class="x" id="quit" aria-label="Leave lesson">✕</button><div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + Math.round(frac * 100) + '"><i style="width:' + (frac * 100) + '%"></i></div></div>'; }
+  function vLesson() {
+    if (!L) return go('home');
+    var total = L.unit < 0 ? L.qs.length : L.ids.length + L.qs.length;
+    if (L.phase === 'learn') {
+      var id = L.ids[L.k], t = ph(S.to, id), showEn = S.from !== 'en';
+      app.innerHTML = lessonHead(L.k / total) + '<div class="eyebrow">New phrase ' + (L.k + 1) + ' of ' + L.ids.length + '</div>' +
+        '<div class="card" style="margin-top:10px"><div class="big" lang="' + S.to + '">' + esc(t.text) + '</div><div class="rom">' + esc(t.roman) + '</div>' + sayBtn(S.to, id, 'Hear it') +
+        '<div class="mean" lang="' + S.from + '">' + esc(meaning(id)) + '</div>' + (showEn ? '<div class="en">' + esc(enOf(id)) + '</div>' : '') +
+        (t.note ? '<div class="note">💡 ' + esc(t.note) + '</div>' : '') + '</div>';
+      footer('', '', L.k === L.ids.length - 1 ? 'Start the quiz' : 'Next', function () { if (++L.k >= L.ids.length) { L.phase = 'quiz'; L.k = 0; } vLesson(); });
+      say(S.to, id);
+    } else if (L.phase === 'quiz') {
+      var q = L.qs[L.k], done = (L.unit < 0 ? 0 : L.ids.length) + L.k, body = '';
+      L.picked = null; L.built = []; L.checked = false;
+      if (q.type === 'pick_target') {
+        body = '<div class="eyebrow">Choose the right ' + esc(BY[S.to].name) + '</div><div class="q" lang="' + S.from + '">' + esc(meaning(q.id)) + '</div><div class="opts">' + q.choices.map(function (c) { return '<button class="opt" data-c="' + c + '" lang="' + S.to + '">' + esc(ph(S.to, c).text) + '<small>' + esc(ph(S.to, c).roman) + '</small></button>'; }).join('') + '</div>';
+      } else if (q.type === 'pick_meaning' || q.type === 'listen') {
+        var lis = q.type === 'listen';
+        body = '<div class="eyebrow">' + (lis ? 'Listen. What does it mean?' : 'What does this mean?') + '</div><div class="card" style="margin:10px 0 16px">' + (lis ? '' : '<div class="big" lang="' + S.to + '" style="font-size:1.8rem">' + esc(ph(S.to, q.id).text) + '</div><div class="rom">' + esc(ph(S.to, q.id).roman) + '</div>') + sayBtn(S.to, q.id, 'Play again') + '</div>' +
+          '<div class="opts">' + q.choices.map(function (c) { return '<button class="opt" data-c="' + c + '" lang="' + S.from + '">' + esc(meaning(c)) + '</button>'; }).join('') + '</div>';
+      } else {
+        body = '<div class="eyebrow">Put the words in order</div><div class="q" lang="' + S.from + '">' + esc(meaning(q.id)) + '</div><div class="answer" id="ans"></div><div class="tiles">' + q.tiles.map(function (w, i) { return '<button class="tile" data-t="' + i + '">' + esc(w) + '</button>'; }).join('') + '</div>';
+      }
+      app.innerHTML = lessonHead(done / total) + '<div class="qsub" style="margin-bottom:4px">' + (L.combo >= 3 ? '🔥 ' + L.combo + ' in a row' : '&nbsp;') + '</div>' + body;
+      if (q.type === 'listen' || q.type === 'pick_meaning') say(S.to, q.id);
+      app.querySelectorAll('.opt').forEach(function (b) { b.addEventListener('click', function () { if (L.checked) return; L.picked = b.dataset.c; app.querySelectorAll('.opt').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); }); setCheck(true); }); });
+      app.querySelectorAll('.tile').forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (L.checked) return; b.classList.add('used'); L.built.push(+b.dataset.t);
+          var ans = document.getElementById('ans'), t2 = document.createElement('button'); t2.className = 'tile'; t2.textContent = b.textContent;
+          t2.addEventListener('click', function () { if (L.checked) return; var ix = L.built.indexOf(+b.dataset.t); L.built.splice(ix, 1); t2.remove(); b.classList.remove('used'); setCheck(L.built.length > 0); });
+          ans.appendChild(t2); setCheck(true);
+        });
+      });
+      footer('', '', 'Check', check, true);
+    } else vDone();
+    document.getElementById('quit') && document.getElementById('quit').addEventListener('click', function () { if (confirmLeave()) { L = null; go('home'); } });
+  }
+  function confirmLeave() { return true; }
+  var footEl = null;
+  function footer(cls, html, label, fn, disabled) {
+    if (footEl) footEl.remove();
+    footEl = document.createElement('div'); footEl.className = 'foot ' + cls;
+    footEl.innerHTML = '<div class="in">' + html + '<button class="btn" id="fbtn"' + (disabled ? ' disabled' : '') + '>' + label + '</button></div>';
+    document.body.appendChild(footEl);
+    document.getElementById('fbtn').addEventListener('click', fn);
+  }
+  function setCheck(on) { var b = document.getElementById('fbtn'); if (b) b.disabled = !on; }
+  function check() {
+    var q = L.qs[L.k], ok;
+    if (q.type === 'build') ok = L.built.map(function (i) { return q.tiles[i]; }).join(' ') === q.answer.join(' ');
+    else ok = L.picked === q.id;
+    L.checked = true;
+    app.querySelectorAll('.opt').forEach(function (b) { if (b.dataset.c === q.id) b.classList.add('right'); else if (b.dataset.c === L.picked) b.classList.add('wrong'); });
+    if (ok) { L.right++; L.combo++; } else { L.combo = 0; L.missed.push(q.id); }
+    var t = ph(S.to, q.id);
+    var praise = ['Nice!', 'Correct!', 'Spot on!', 'Great!', 'Shabaash!'][Math.floor(Math.random() * 5)];
+    footer(ok ? 'ok' : 'no', '<div class="msg">' + (ok ? praise + (L.combo > 0 && L.combo % 3 === 0 ? ' +2 combo XP' : '') : 'Not quite. The answer:') + '</div><div class="sol" lang="' + S.to + '">' + esc(t.text) + ' · ' + esc(t.roman) + '<br><span class="muted" lang="' + S.from + '">' + esc(meaning(q.id)) + '</span></div>', 'Continue', function () { L.k++; if (L.k >= L.qs.length) L.phase = 'done'; vLesson(); });
+    if (ok && L.combo > 0 && L.combo % 3 === 0) L.bonus = (L.bonus || 0) + 2;
+    if (!ok || q.type === 'build' || q.type === 'pick_target') say(S.to, q.id);
+  }
+  function vDone() {
+    if (footEl) { footEl.remove(); footEl = null; }
+    var n = L.qs.length, r = L.right, pass = r >= Math.ceil(n * 0.75), stars = r === n ? 3 : r >= n - 1 ? 2 : pass ? 1 : 0;
+    var xp = 10 + r * 2 + (L.bonus || 0);
+    if (!L.saved) {
+      L.saved = true; addXP(xp);
+      if (L.unit >= 0 && pass) { var u = UNITS[L.unit].id; P()[u] = Math.max(P()[u] || 0, stars); save(); }
+      count('bhasha/done/' + pairKey() + '/' + (L.unit < 0 ? 'review' : UNITS[L.unit].id) + '/' + (pass ? 'pass' : 'fail'), 'Lesson finished');
+    }
+    var lastUnit = L.unit === UNITS.length - 1 && pass;
+    app.innerHTML = '<div class="done"><div class="big" aria-hidden="true">' + (lastUnit ? '🏆' : pass ? '🎉' : '💪') + '</div><h2>' + (lastUnit ? 'Course complete!' : pass ? (L.unit < 0 ? 'Review done!' : 'Unit complete!') : 'Almost there') + '</h2><p class="muted">' + (pass ? 'You got ' + r + ' of ' + n + ' right.' : 'You got ' + r + ' of ' + n + '. Get ' + Math.ceil(n * 0.75) + ' to unlock the next unit.') + '</p>' +
+      '<div class="chips"><div><b>+' + xp + '</b><span>XP</span></div><div><b>🔥 ' + S.streak + '</b><span>day streak</span></div>' + (L.unit >= 0 && pass ? '<div><b style="color:var(--gold)">' + '★★★'.slice(0, stars) + '</b><span>stars</span></div>' : '') + '</div>' +
+      (L.missed.length ? '<div class="banner" style="text-align:left"><b>Worth another look</b>' + L.missed.map(function (id) { return '<div lang="' + S.to + '" class="s" style="font-weight:700">' + esc(ph(S.to, id).text) + ' <span class="muted" style="font-weight:500">· ' + esc(meaning(id)) + '</span></div>'; }).join('') + '</div>' : '') +
+      '<button class="btn" id="cont">Continue</button>' + (pass ? '' : '<button class="btn ghost" id="again" style="margin-top:10px">Try again</button>') +
+      (lastUnit ? '<button class="btn ghost" id="share" style="margin-top:10px">Share your progress</button>' : '') + '</div>';
+    document.getElementById('cont').addEventListener('click', function () { var u = L.unit; L = null; go('home'); });
+    var ag = document.getElementById('again'); if (ag) ag.addEventListener('click', function () { startLesson(L.unit); });
+    var sh = document.getElementById('share'); if (sh) sh.addEventListener('click', share);
+  }
+
+  /* ---------- phrasebook ---------- */
+  function vBook() {
+    var t = BY[S.to], qtxt = route.q || '';
+    app.innerHTML = '<h1 style="font-size:1.8rem">Phrasebook</h1><p class="muted" style="margin:4px 0 0">All ' + COURSE.count + ' phrases in ' + esc(t.name) + ', with the meaning in ' + esc(BY[S.from].name) + '.</p><input class="search" id="q" type="search" placeholder="Search" value="' + esc(qtxt) + '" aria-label="Search phrases"><div id="list"></div>';
+    function draw(q) {
+      q = q.trim().toLowerCase();
+      document.getElementById('list').innerHTML = UNITS.map(function (u) {
+        var rows = u.phrases.filter(function (p) { if (!q) return true; var a = ph(S.to, p.id), b = ph(S.from, p.id); return (a.text + ' ' + a.roman + ' ' + b.text + ' ' + enOf(p.id)).toLowerCase().indexOf(q) >= 0; });
+        if (!rows.length) return '';
+        return '<h3 class="u">' + u.icon + ' ' + esc(u.title) + '</h3>' + rows.map(function (p) { var a = ph(S.to, p.id); return '<div class="ph"><div class="t" lang="' + S.to + '">' + esc(a.text) + '</div>' + sayBtn(S.to, p.id) + '<div class="r">' + esc(a.roman) + '</div><div class="m" lang="' + S.from + '">' + esc(meaning(p.id)) + (a.note ? ' · 💡 ' + esc(a.note) : '') + '</div></div>'; }).join('');
+      }).join('') || '<p class="muted">Nothing matches.</p>';
+    }
+    draw(qtxt);
+    document.getElementById('q').addEventListener('input', function (e) { route.q = e.target.value; draw(e.target.value); });
+  }
+
+  /* ---------- check ---------- */
+  function issueURL(code, id, kind) {
+    var l = BY[code], p = l.phrases[id];
+    var title = kind === 'fix' ? '[' + code + '] Fix: ' + enOf(id) : '[' + code + '] Add ' + l.name;
+    var body = 'Language: ' + l.name + ' (' + code + ')\nPhrase id: ' + id + '\nEnglish: ' + enOf(id) + '\nCurrent text: ' + p.text + '\nCurrent roman: ' + p.roman + '\n\nBetter text:\n\nBetter roman (how to say it in English letters):\n\nWhy (optional):\n';
+    return REPO + '/issues/new?labels=' + encodeURIComponent('translation-fix,' + code) + '&title=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(body);
+  }
+  function vCheck() {
+    var code = route.lang || (S.to !== 'en' ? S.to : 'hi'), l = BY[code];
+    var okd = S.ok[code] || {}, n = Object.keys(okd).length;
+    app.innerHTML = '<h1 style="font-size:1.8rem">Help check the phrases</h1><p class="muted" style="margin:4px 0 12px">Every phrase here started as a draft. If you speak a language natively, tap ✓ when a phrase sounds natural, or suggest a better way to say it. Fixes go straight to the open-source project on GitHub.</p>' +
+      '<label class="eyebrow" for="lc">I speak natively</label><select class="pick" id="lc" style="margin-top:6px">' + LANGS.filter(function (x) { return x.code !== 'en'; }).map(function (x) { return '<option value="' + x.code + '"' + (x.code === code ? ' selected' : '') + '>' + esc(x.native) + ' · ' + esc(x.name) + '</option>'; }).join('') + '</select>' +
+      '<div class="banner"><b>' + n + ' of ' + COURSE.count + ' checked by you</b>' + (l.contributors && l.contributors.length ? 'Reviewed by ' + l.contributors.map(esc).join(', ') + '.' : 'No native speaker has reviewed ' + esc(l.name) + ' yet. Be the first.') + '</div>' +
+      UNITS.map(function (u) { return '<h3 class="u">' + u.icon + ' ' + esc(u.title) + '</h3>' + u.phrases.map(function (p) { var x = l.phrases[p.id]; return '<div class="chk"><div class="en">' + esc(p.en) + '</div>' + (p.context ? '<div class="muted" style="font-size:.85rem">' + esc(p.context) + '</div>' : '') + '<div class="t" lang="' + code + '">' + esc(x.text) + '</div><div class="r">' + esc(x.roman) + '</div>' + (x.note ? '<div class="muted" style="font-size:.85rem">💡 ' + esc(x.note) + '</div>' : '') + '<div class="acts"><button class="yes" data-ok="' + p.id + '" aria-pressed="' + (!!okd[p.id]) + '">✓ Sounds right</button><a class="fixa" href="' + issueURL(code, p.id, 'fix') + '" target="_blank" rel="noopener" data-fix="' + p.id + '">✎ Suggest a fix</a></div></div>'; }).join(''); }).join('') +
+      '<div class="banner" style="margin-top:22px"><b>Your language isn\'t here?</b>Adding a language is one file with ' + COURSE.count + ' phrases. Every new language adds ' + (LANGS.length * 2) + ' new language pairs. <a href="' + REPO + '/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">How to add a language</a></div>';
+    document.getElementById('lc').addEventListener('change', function (e) { go('check', { lang: e.target.value }); });
+    app.querySelectorAll('[data-ok]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var m = S.ok[code] || (S.ok[code] = {}), id = b.dataset.ok;
+        if (m[id]) delete m[id]; else { m[id] = 1; count('bhasha/ok/' + code + '/' + id, 'Native check: sounds right'); }
+        save(); b.setAttribute('aria-pressed', !!m[id]);
+        app.querySelector('.banner b').textContent = Object.keys(m).length + ' of ' + COURSE.count + ' checked by you';
+      });
+    });
+    app.querySelectorAll('[data-fix]').forEach(function (a) { a.addEventListener('click', function () { count('bhasha/fix/' + code + '/' + a.dataset.fix, 'Native check: suggested fix'); }); });
+  }
+
+  /* ---------- me ---------- */
+  function share() {
+    var t = 'I\'m learning ' + BY[S.to].name + ' from ' + BY[S.from].name + ' on Bhasha Kit. ' + LANGS.length * (LANGS.length - 1) + ' Indian language pairs, free and open source.';
+    var url = location.href.split('#')[0];
+    if (navigator.share) navigator.share({ title: 'Bhasha Kit', text: t, url: url }).catch(function () {});
+    else { try { navigator.clipboard.writeText(t + ' ' + url); toast('Copied. Paste it anywhere.'); } catch (e) { toast(t); } }
+    count('bhasha/share', 'Shared');
+  }
+  function vMe() {
+    var pairs = Object.keys(S.prog).filter(function (k) { var a = k.split('>'); return BY[a[0]] && BY[a[1]]; });
+    var checked = Object.keys(S.ok).reduce(function (a, k) { return a + Object.keys(S.ok[k]).length; }, 0);
+    app.innerHTML = '<h1 style="font-size:1.8rem">Your progress</h1>' +
+      '<div class="meg"><div><b>⭐ ' + S.xp + '</b><span>total XP</span></div><div><b>🔥 ' + (S.streak || 0) + '</b><span>day streak</span></div><div><b>' + pairs.length + '</b><span>language pairs started</span></div><div><b>' + checked + '</b><span>phrases you checked</span></div></div>' +
+      '<label class="eyebrow" for="goal">Daily goal</label><select class="pick" id="goal" style="margin:6px 0 16px">' + [10, 20, 30, 50].map(function (g) { return '<option value="' + g + '"' + (S.goal === g ? ' selected' : '') + '>' + g + ' XP a day' + (g === 10 ? ' (casual)' : g === 50 ? ' (serious)' : '') + '</option>'; }).join('') + '</select>' +
+      (pairs.length ? '<div class="eyebrow">Your languages</div><ul class="list">' + pairs.map(function (k) { var a = k.split('>'), d = Object.keys(S.prog[k]).length; return '<li><span class="s" style="font-weight:700">' + esc(BY[a[0]].native) + ' → ' + esc(BY[a[1]].native) + '</span><span class="muted">' + d + ' of ' + UNITS.length + ' units</span></li>'; }).join('') + '</ul>' : '') +
+      '<button class="btn" id="share" style="margin-top:12px">Share Bhasha Kit</button>' +
+      '<button class="btn ghost" id="pair" style="margin-top:10px">Learn another language</button>' +
+      '<div class="banner" style="margin-top:22px"><b>Free and open source</b>Bhasha Kit is built in the open. The code is MIT licensed and the phrases are CC BY-SA, so anyone can use, fix and add to them. <a href="' + REPO + '" target="_blank" rel="noopener">See it on GitHub</a></div>' +
+      '<p class="muted" style="font-size:.85rem">Made by <a href="https://auronara.com" target="_blank" rel="noopener">Arabinda Narayan Das</a>. Your progress is saved on this device only.</p>' +
+      '<button class="btn ghost" id="reset" style="margin-top:6px">Reset my progress</button>';
+    document.getElementById('goal').addEventListener('change', function (e) { S.goal = +e.target.value; save(); });
+    document.getElementById('share').addEventListener('click', share);
+    document.getElementById('pair').addEventListener('click', function () { go('welcome', { step: 'from' }); });
+    var rs = document.getElementById('reset');
+    rs.addEventListener('click', function () { if (rs.dataset.sure) { S.xp = 0; S.days = {}; S.streak = 0; S.last = null; S.prog = {}; save(); toast('Progress reset'); vMe(); } else { rs.dataset.sure = 1; rs.textContent = 'Tap again to confirm'; } });
+  }
+
+  render();
+  if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(function () {});
+})();
+</script>
+<script data-goatcounter="https://auro.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,2720 @@
+{
+ "units": [
+  {
+   "id": "hello",
+   "title": "Say hello",
+   "icon": "👋",
+   "phrases": [
+    {
+     "id": "hello",
+     "en": "Hello",
+     "context": "A polite greeting for anyone, any time of day."
+    },
+    {
+     "id": "how_are_you",
+     "en": "How are you?",
+     "context": "Polite form, as you'd say to an elder or a stranger."
+    },
+    {
+     "id": "im_fine",
+     "en": "I'm fine."
+    },
+    {
+     "id": "thank_you",
+     "en": "Thank you"
+    },
+    {
+     "id": "sorry",
+     "en": "Sorry / Excuse me"
+    },
+    {
+     "id": "yes",
+     "en": "Yes"
+    },
+    {
+     "id": "no",
+     "en": "No"
+    },
+    {
+     "id": "bye",
+     "en": "See you again",
+     "context": "The usual way to say goodbye."
+    }
+   ]
+  },
+  {
+   "id": "about",
+   "title": "About you",
+   "icon": "🙂",
+   "phrases": [
+    {
+     "id": "my_name",
+     "en": "My name is Ravi.",
+     "context": "Swap Ravi for your own name."
+    },
+    {
+     "id": "your_name",
+     "en": "What is your name?"
+    },
+    {
+     "id": "where_from",
+     "en": "Where are you from?"
+    },
+    {
+     "id": "i_live_here",
+     "en": "I live here."
+    },
+    {
+     "id": "dont_understand",
+     "en": "I didn't understand."
+    },
+    {
+     "id": "speak_slowly",
+     "en": "Please speak slowly."
+    },
+    {
+     "id": "speak_english",
+     "en": "Do you speak English?"
+    },
+    {
+     "id": "nice_to_meet",
+     "en": "Nice to meet you."
+    }
+   ]
+  },
+  {
+   "id": "numbers",
+   "title": "Numbers and time",
+   "icon": "🔢",
+   "phrases": [
+    {
+     "id": "one",
+     "en": "One"
+    },
+    {
+     "id": "two",
+     "en": "Two"
+    },
+    {
+     "id": "three",
+     "en": "Three"
+    },
+    {
+     "id": "five",
+     "en": "Five"
+    },
+    {
+     "id": "ten",
+     "en": "Ten"
+    },
+    {
+     "id": "today",
+     "en": "Today"
+    },
+    {
+     "id": "tomorrow",
+     "en": "Tomorrow"
+    },
+    {
+     "id": "now",
+     "en": "Now"
+    }
+   ]
+  },
+  {
+   "id": "food",
+   "title": "Food",
+   "icon": "🍛",
+   "phrases": [
+    {
+     "id": "water",
+     "en": "Water"
+    },
+    {
+     "id": "food",
+     "en": "Food / a meal"
+    },
+    {
+     "id": "tea",
+     "en": "Tea"
+    },
+    {
+     "id": "tasty",
+     "en": "It's very tasty."
+    },
+    {
+     "id": "hungry",
+     "en": "I'm hungry."
+    },
+    {
+     "id": "less_spicy",
+     "en": "Less spicy, please."
+    },
+    {
+     "id": "bill",
+     "en": "The bill, please."
+    },
+    {
+     "id": "vegetarian",
+     "en": "I'm vegetarian."
+    }
+   ]
+  },
+  {
+   "id": "travel",
+   "title": "Getting around",
+   "icon": "🛺",
+   "phrases": [
+    {
+     "id": "where_station",
+     "en": "Where is the station?"
+    },
+    {
+     "id": "go_left",
+     "en": "Go left."
+    },
+    {
+     "id": "go_right",
+     "en": "Go right."
+    },
+    {
+     "id": "go_straight",
+     "en": "Go straight."
+    },
+    {
+     "id": "stop_here",
+     "en": "Stop here."
+    },
+    {
+     "id": "how_far",
+     "en": "How far is it?"
+    },
+    {
+     "id": "take_me",
+     "en": "Please take me there."
+    },
+    {
+     "id": "lost",
+     "en": "I'm lost."
+    }
+   ]
+  },
+  {
+   "id": "shop",
+   "title": "Shopping and help",
+   "icon": "🛍️",
+   "phrases": [
+    {
+     "id": "how_much",
+     "en": "How much is this?"
+    },
+    {
+     "id": "expensive",
+     "en": "It's too expensive."
+    },
+    {
+     "id": "reduce",
+     "en": "Please reduce it a little.",
+     "context": "Bargaining, when asking for a lower price."
+    },
+    {
+     "id": "want_this",
+     "en": "I want this."
+    },
+    {
+     "id": "no_thanks",
+     "en": "No, thank you."
+    },
+    {
+     "id": "help",
+     "en": "Help!"
+    },
+    {
+     "id": "call_doctor",
+     "en": "Please call a doctor."
+    },
+    {
+     "id": "toilet",
+     "en": "Where is the toilet?"
+    }
+   ]
+  }
+ ],
+ "languages": [
+  {
+   "code": "en",
+   "name": "English",
+   "native": "English",
+   "script": "Latin",
+   "tts": "en-IN",
+   "status": "draft",
+   "hello": "Hello",
+   "contributors": [],
+   "phrases": {
+    "hello": {
+     "text": "Hello",
+     "roman": "hello"
+    },
+    "how_are_you": {
+     "text": "How are you?",
+     "roman": "how are you?"
+    },
+    "im_fine": {
+     "text": "I'm fine.",
+     "roman": "I'm fine."
+    },
+    "thank_you": {
+     "text": "Thank you",
+     "roman": "thank you"
+    },
+    "sorry": {
+     "text": "Sorry / Excuse me",
+     "roman": "sorry"
+    },
+    "yes": {
+     "text": "Yes",
+     "roman": "yes"
+    },
+    "no": {
+     "text": "No",
+     "roman": "no"
+    },
+    "bye": {
+     "text": "See you again",
+     "roman": "see you again"
+    },
+    "my_name": {
+     "text": "My name is Ravi.",
+     "roman": "my name is Ravi."
+    },
+    "your_name": {
+     "text": "What is your name?",
+     "roman": "what is your name?"
+    },
+    "where_from": {
+     "text": "Where are you from?",
+     "roman": "where are you from?"
+    },
+    "i_live_here": {
+     "text": "I live here.",
+     "roman": "I live here."
+    },
+    "dont_understand": {
+     "text": "I didn't understand.",
+     "roman": "I didn't understand."
+    },
+    "speak_slowly": {
+     "text": "Please speak slowly.",
+     "roman": "please speak slowly."
+    },
+    "speak_english": {
+     "text": "Do you speak English?",
+     "roman": "do you speak English?"
+    },
+    "nice_to_meet": {
+     "text": "Nice to meet you.",
+     "roman": "nice to meet you."
+    },
+    "one": {
+     "text": "One",
+     "roman": "one"
+    },
+    "two": {
+     "text": "Two",
+     "roman": "two"
+    },
+    "three": {
+     "text": "Three",
+     "roman": "three"
+    },
+    "five": {
+     "text": "Five",
+     "roman": "five"
+    },
+    "ten": {
+     "text": "Ten",
+     "roman": "ten"
+    },
+    "today": {
+     "text": "Today",
+     "roman": "today"
+    },
+    "tomorrow": {
+     "text": "Tomorrow",
+     "roman": "tomorrow"
+    },
+    "now": {
+     "text": "Now",
+     "roman": "now"
+    },
+    "water": {
+     "text": "Water",
+     "roman": "water"
+    },
+    "food": {
+     "text": "Food / a meal",
+     "roman": "food"
+    },
+    "tea": {
+     "text": "Tea",
+     "roman": "tea"
+    },
+    "tasty": {
+     "text": "It's very tasty.",
+     "roman": "it's very tasty."
+    },
+    "hungry": {
+     "text": "I'm hungry.",
+     "roman": "I'm hungry."
+    },
+    "less_spicy": {
+     "text": "Less spicy, please.",
+     "roman": "less spicy, please."
+    },
+    "bill": {
+     "text": "The bill, please.",
+     "roman": "the bill, please."
+    },
+    "vegetarian": {
+     "text": "I'm vegetarian.",
+     "roman": "I'm vegetarian."
+    },
+    "where_station": {
+     "text": "Where is the station?",
+     "roman": "where is the station?"
+    },
+    "go_left": {
+     "text": "Go left.",
+     "roman": "go left."
+    },
+    "go_right": {
+     "text": "Go right.",
+     "roman": "go right."
+    },
+    "go_straight": {
+     "text": "Go straight.",
+     "roman": "go straight."
+    },
+    "stop_here": {
+     "text": "Stop here.",
+     "roman": "stop here."
+    },
+    "how_far": {
+     "text": "How far is it?",
+     "roman": "how far is it?"
+    },
+    "take_me": {
+     "text": "Please take me there.",
+     "roman": "please take me there."
+    },
+    "lost": {
+     "text": "I'm lost.",
+     "roman": "I'm lost."
+    },
+    "how_much": {
+     "text": "How much is this?",
+     "roman": "how much is this?"
+    },
+    "expensive": {
+     "text": "It's too expensive.",
+     "roman": "it's too expensive."
+    },
+    "reduce": {
+     "text": "Please reduce it a little.",
+     "roman": "please reduce it a little."
+    },
+    "want_this": {
+     "text": "I want this.",
+     "roman": "I want this."
+    },
+    "no_thanks": {
+     "text": "No, thank you.",
+     "roman": "no, thank you."
+    },
+    "help": {
+     "text": "Help!",
+     "roman": "help!"
+    },
+    "call_doctor": {
+     "text": "Please call a doctor.",
+     "roman": "please call a doctor."
+    },
+    "toilet": {
+     "text": "Where is the toilet?",
+     "roman": "where is the toilet?"
+    }
+   }
+  },
+  {
+   "code": "hi",
+   "name": "Hindi",
+   "native": "हिन्दी",
+   "script": "Devanagari",
+   "tts": "hi-IN",
+   "status": "draft",
+   "hello": "नमस्ते",
+   "contributors": [],
+   "phrases": {
+    "hello": {
+     "text": "नमस्ते",
+     "roman": "namaste"
+    },
+    "how_are_you": {
+     "text": "आप कैसे हैं?",
+     "roman": "aap kaise hain?",
+     "note": "To a woman: aap kaisi hain?"
+    },
+    "im_fine": {
+     "text": "मैं ठीक हूँ।",
+     "roman": "main theek hoon."
+    },
+    "thank_you": {
+     "text": "धन्यवाद",
+     "roman": "dhanyavaad",
+     "note": "Shukriya is just as common in everyday speech."
+    },
+    "sorry": {
+     "text": "माफ़ कीजिए",
+     "roman": "maaf kijiye"
+    },
+    "yes": {
+     "text": "हाँ",
+     "roman": "haan"
+    },
+    "no": {
+     "text": "नहीं",
+     "roman": "nahin"
+    },
+    "bye": {
+     "text": "फिर मिलेंगे",
+     "roman": "phir milenge"
+    },
+    "my_name": {
+     "text": "मेरा नाम रवि है।",
+     "roman": "mera naam Ravi hai."
+    },
+    "your_name": {
+     "text": "आपका नाम क्या है?",
+     "roman": "aapka naam kya hai?"
+    },
+    "where_from": {
+     "text": "आप कहाँ से हैं?",
+     "roman": "aap kahaan se hain?"
+    },
+    "i_live_here": {
+     "text": "मैं यहाँ रहता हूँ।",
+     "roman": "main yahaan rehta hoon.",
+     "note": "A woman says rehti hoon."
+    },
+    "dont_understand": {
+     "text": "मुझे समझ नहीं आया।",
+     "roman": "mujhe samajh nahin aaya."
+    },
+    "speak_slowly": {
+     "text": "धीरे बोलिए।",
+     "roman": "dheere boliye."
+    },
+    "speak_english": {
+     "text": "क्या आप अंग्रेज़ी बोलते हैं?",
+     "roman": "kya aap angrezi bolte hain?"
+    },
+    "nice_to_meet": {
+     "text": "आपसे मिलकर अच्छा लगा।",
+     "roman": "aapse milkar achchha laga."
+    },
+    "one": {
+     "text": "एक",
+     "roman": "ek"
+    },
+    "two": {
+     "text": "दो",
+     "roman": "do"
+    },
+    "three": {
+     "text": "तीन",
+     "roman": "teen"
+    },
+    "five": {
+     "text": "पाँच",
+     "roman": "paanch"
+    },
+    "ten": {
+     "text": "दस",
+     "roman": "das"
+    },
+    "today": {
+     "text": "आज",
+     "roman": "aaj"
+    },
+    "tomorrow": {
+     "text": "कल",
+     "roman": "kal",
+     "note": "Kal also means yesterday; context tells you which."
+    },
+    "now": {
+     "text": "अभी",
+     "roman": "abhi"
+    },
+    "water": {
+     "text": "पानी",
+     "roman": "paani"
+    },
+    "food": {
+     "text": "खाना",
+     "roman": "khaana"
+    },
+    "tea": {
+     "text": "चाय",
+     "roman": "chaay"
+    },
+    "tasty": {
+     "text": "यह बहुत स्वादिष्ट है।",
+     "roman": "yeh bahut swaadisht hai."
+    },
+    "hungry": {
+     "text": "मुझे भूख लगी है।",
+     "roman": "mujhe bhookh lagi hai."
+    },
+    "less_spicy": {
+     "text": "कम तीखा, प्लीज़।",
+     "roman": "kam teekha, please."
+    },
+    "bill": {
+     "text": "बिल दीजिए।",
+     "roman": "bill dijiye."
+    },
+    "vegetarian": {
+     "text": "मैं शाकाहारी हूँ।",
+     "roman": "main shaakaahaari hoon."
+    },
+    "where_station": {
+     "text": "स्टेशन कहाँ है?",
+     "roman": "station kahaan hai?"
+    },
+    "go_left": {
+     "text": "बाएँ जाइए।",
+     "roman": "baayen jaaiye."
+    },
+    "go_right": {
+     "text": "दाएँ जाइए।",
+     "roman": "daayen jaaiye."
+    },
+    "go_straight": {
+     "text": "सीधे जाइए।",
+     "roman": "seedhe jaaiye."
+    },
+    "stop_here": {
+     "text": "यहाँ रोकिए।",
+     "roman": "yahaan rokiye."
+    },
+    "how_far": {
+     "text": "कितनी दूर है?",
+     "roman": "kitni door hai?"
+    },
+    "take_me": {
+     "text": "मुझे वहाँ ले चलिए।",
+     "roman": "mujhe wahaan le chaliye."
+    },
+    "lost": {
+     "text": "मैं रास्ता भूल गया हूँ।",
+     "roman": "main raasta bhool gaya hoon.",
+     "note": "A woman says bhool gayi hoon."
+    },
+    "how_much": {
+     "text": "यह कितने का है?",
+     "roman": "yeh kitne ka hai?"
+    },
+    "expensive": {
+     "text": "बहुत महँगा है।",
+     "roman": "bahut mehnga hai."
+    },
+    "reduce": {
+     "text": "थोड़ा कम कीजिए।",
+     "roman": "thoda kam kijiye."
+    },
+    "want_this": {
+     "text": "मुझे यह चाहिए।",
+     "roman": "mujhe yeh chaahiye."
+    },
+    "no_thanks": {
+     "text": "नहीं, धन्यवाद।",
+     "roman": "nahin, dhanyavaad."
+    },
+    "help": {
+     "text": "बचाओ!",
+     "roman": "bachaao!"
+    },
+    "call_doctor": {
+     "text": "डॉक्टर को बुलाइए।",
+     "roman": "doctor ko bulaaiye."
+    },
+    "toilet": {
+     "text": "टॉयलेट कहाँ है?",
+     "roman": "toilet kahaan hai?"
+    }
+   }
+  },
+  {
+   "code": "bn",
+   "name": "Bengali",
+   "native": "বাংলা",
+   "script": "Bengali",
+   "tts": "bn-IN",
+   "status": "draft",
+   "hello": "নমস্কার",
+   "contributors": [],
+   "phrases": {
+    "hello": {
+     "text": "নমস্কার",
+     "roman": "nomoshkar"
+    },
+    "how_are_you": {
+     "text": "আপনি কেমন আছেন?",
+     "roman": "apni kemon achhen?"
+    },
+    "im_fine": {
+     "text": "আমি ভালো আছি।",
+     "roman": "ami bhalo achhi."
+    },
+    "thank_you": {
+     "text": "ধন্যবাদ",
+     "roman": "dhonnobad"
+    },
+    "sorry": {
+     "text": "দুঃখিত",
+     "roman": "dukkhito"
+    },
+    "yes": {
+     "text": "হ্যাঁ",
+     "roman": "hyan"
+    },
+    "no": {
+     "text": "না",
+     "roman": "na"
+    },
+    "bye": {
+     "text": "আবার দেখা হবে",
+     "roman": "abar dekha hobe"
+    },
+    "my_name": {
+     "text": "আমার নাম রবি।",
+     "roman": "amar naam Robi."
+    },
+    "your_name": {
+     "text": "আপনার নাম কী?",
+     "roman": "apnar naam ki?"
+    },
+    "where_from": {
+     "text": "আপনি কোথা থেকে এসেছেন?",
+     "roman": "apni kotha theke eshechhen?"
+    },
+    "i_live_here": {
+     "text": "আমি এখানে থাকি।",
+     "roman": "ami ekhane thaki."
+    },
+    "dont_understand": {
+     "text": "আমি বুঝতে পারছি না।",
+     "roman": "ami bujhte parchhi na."
+    },
+    "speak_slowly": {
+     "text": "একটু আস্তে বলুন।",
+     "roman": "ektu aste bolun."
+    },
+    "speak_english": {
+     "text": "আপনি কি ইংরেজি বলেন?",
+     "roman": "apni ki ingreji bolen?"
+    },
+    "nice_to_meet": {
+     "text": "আপনার সাথে দেখা হয়ে ভালো লাগল।",
+     "roman": "apnar sathe dekha hoye bhalo laglo."
+    },
+    "one": {
+     "text": "এক",
+     "roman": "ek"
+    },
+    "two": {
+     "text": "দুই",
+     "roman": "dui"
+    },
+    "three": {
+     "text": "তিন",
+     "roman": "tin"
+    },
+    "five": {
+     "text": "পাঁচ",
+     "roman": "panch"
+    },
+    "ten": {
+     "text": "দশ",
+     "roman": "dosh"
+    },
+    "today": {
+     "text": "আজ",
+     "roman": "aaj"
+    },
+    "tomorrow": {
+     "text": "কাল",
+     "roman": "kaal",
+     "note": "Agamikal is the unambiguous word for tomorrow."
+    },
+    "now": {
+     "text": "এখন",
+     "roman": "ekhon"
+    },
+    "water": {
+     "text": "জল",
+     "roman": "jol",
+     "note": "In Bangladesh, pani."
+    },
+    "food": {
+     "text": "খাবার",
+     "roman": "khabar"
+    },
+    "tea": {
+     "text": "চা",
+     "roman": "cha"
+    },
+    "tasty": {
+     "text": "খুব সুস্বাদু হয়েছে।",
+     "roman": "khub shushadu hoyechhe."
+    },
+    "hungry": {
+     "text": "আমার খিদে পেয়েছে।",
+     "roman": "amar khide peyechhe."
+    },
+    "less_spicy": {
+     "text": "ঝাল একটু কম দেবেন।",
+     "roman": "jhal ektu kom deben."
+    },
+    "bill": {
+     "text": "বিলটা দিন।",
+     "roman": "bill-ta din."
+    },
+    "vegetarian": {
+     "text": "আমি নিরামিষ খাই।",
+     "roman": "ami niramish khai."
+    },
+    "where_station": {
+     "text": "স্টেশন কোথায়?",
+     "roman": "station kothay?"
+    },
+    "go_left": {
+     "text": "বাঁদিকে যান।",
+     "roman": "bandike jan."
+    },
+    "go_right": {
+     "text": "ডানদিকে যান।",
+     "roman": "dandike jan."
+    },
+    "go_straight": {
+     "text": "সোজা যান।",
+     "roman": "shoja jan."
+    },
+    "stop_here": {
+     "text": "এখানে থামুন।",
+     "roman": "ekhane thamun."
+    },
+    "how_far": {
+     "text": "কত দূর?",
+     "roman": "koto dur?"
+    },
+    "take_me": {
+     "text": "আমাকে ওখানে নিয়ে চলুন।",
+     "roman": "amake okhane niye cholun."
+    },
+    "lost": {
+     "text": "আমি পথ হারিয়ে ফেলেছি।",
+     "roman": "ami poth hariye phelechhi."
+    },
+    "how_much": {
+     "text": "এটার দাম কত?",
+     "roman": "etar dam koto?"
+    },
+    "expensive": {
+     "text": "অনেক দাম।",
+     "roman": "onek dam."
+    },
+    "reduce": {
+     "text": "একটু কম করুন।",
+     "roman": "ektu kom korun."
+    },
+    "want_this": {
+     "text": "আমার এটা চাই।",
+     "roman": "amar eta chai."
+    },
+    "no_thanks": {
+     "text": "না, ধন্যবাদ।",
+     "roman": "na, dhonnobad."
+    },
+    "help": {
+     "text": "বাঁচাও!",
+     "roman": "bachao!"
+    },
+    "call_doctor": {
+     "text": "ডাক্তার ডাকুন।",
+     "roman": "daktar dakun."
+    },
+    "toilet": {
+     "text": "বাথরুম কোথায়?",
+     "roman": "bathroom kothay?"
+    }
+   }
+  },
+  {
+   "code": "mr",
+   "name": "Marathi",
+   "native": "मराठी",
+   "script": "Devanagari",
+   "tts": "mr-IN",
+   "status": "draft",
+   "hello": "नमस्कार",
+   "contributors": [],
+   "phrases": {
+    "hello": {
+     "text": "नमस्कार",
+     "roman": "namaskar"
+    },
+    "how_are_you": {
+     "text": "तुम्ही कसे आहात?",
+     "roman": "tumhi kase aahat?",
+     "note": "To a woman: kashya aahat?"
+    },
+    "im_fine": {
+     "text": "मी ठीक आहे.",
+     "roman": "mee theek aahe."
+    },
+    "thank_you": {
+     "text": "धन्यवाद",
+     "roman": "dhanyavaad"
+    },
+    "sorry": {
+     "text": "माफ करा",
+     "roman": "maaf kara"
+    },
+    "yes": {
+     "text": "हो",
+     "roman": "ho"
+    },
+    "no": {
+     "text": "नाही",
+     "roman": "naahi"
+    },
+    "bye": {
+     "text": "पुन्हा भेटू",
+     "roman": "punha bhetu"
+    },
+    "my_name": {
+     "text": "माझं नाव रवी आहे.",
+     "roman": "maajha naav Ravi aahe."
+    },
+    "your_name": {
+     "text": "तुमचं नाव काय आहे?",
+     "roman": "tumcha naav kaay aahe?"
+    },
+    "where_from": {
+     "text": "तुम्ही कुठले आहात?",
+     "roman": "tumhi kuthle aahat?"
+    },
+    "i_live_here": {
+     "text": "मी इथे राहतो.",
+     "roman": "mee ithe raahto.",
+     "note": "A woman says raahte."
+    },
+    "dont_understand": {
+     "text": "मला समजलं नाही.",
+     "roman": "mala samajla naahi."
+    },
+    "speak_slowly": {
+     "text": "हळू बोला.",
+     "roman": "halu bola."
+    },
+    "speak_english": {
+     "text": "तुम्ही इंग्रजी बोलता का?",
+     "roman": "tumhi ingraji bolta ka?"
+    },
+    "nice_to_meet": {
+     "text": "तुम्हाला भेटून आनंद झाला.",
+     "roman": "tumhala bhetun aanand jhaala."
+    },
+    "one": {
+     "text": "एक",
+     "roman": "ek"
+    },
+    "two": {
+     "text": "दोन",
+     "roman": "don"
+    },
+    "three": {
+     "text": "तीन",
+     "roman": "teen"
+    },
+    "five": {
+     "text": "पाच",
+     "roman": "paach"
+    },
+    "ten": {
+     "text": "दहा",
+     "roman": "daha"
+    },
+    "today": {
+     "text": "आज",
+     "roman": "aaj"
+    },
+    "tomorrow": {
+     "text": "उद्या",
+     "roman": "udya"
+    },
+    "now": {
+     "text": "आता",
+     "roman": "aata"
+    },
+    "water": {
+     "text": "पाणी",
+     "roman": "paani"
+    },
+    "food": {
+     "text": "जेवण",
+     "roman": "jevan"
+    },
+    "tea": {
+     "text": "चहा",
+     "roman": "chaha"
+    },
+    "tasty": {
+     "text": "खूप चविष्ट आहे.",
+     "roman": "khoop chavishta aahe."
+    },
+    "hungry": {
+     "text": "मला भूक लागली आहे.",
+     "roman": "mala bhook laagli aahe."
+    },
+    "less_spicy": {
+     "text": "कमी तिखट द्या.",
+     "roman": "kami tikhat dya."
+    },
+    "bill": {
+     "text": "बिल द्या.",
+     "roman": "bill dya."
+    },
+    "vegetarian": {
+     "text": "मी शाकाहारी आहे.",
+     "roman": "mee shaakaahaari aahe."
+    },
+    "where_station": {
+     "text": "स्टेशन कुठे आहे?",
+     "roman": "station kuthe aahe?"
+    },
+    "go_left": {
+     "text": "डावीकडे जा.",
+     "roman": "daavikade ja."
+    },
+    "go_right": {
+     "text": "उजवीकडे जा.",
+     "roman": "ujavikade ja."
+    },
+    "go_straight": {
+     "text": "सरळ जा.",
+     "roman": "saral ja."
+    },
+    "stop_here": {
+     "text": "इथे थांबा.",
+     "roman": "ithe thaamba."
+    },
+    "how_far": {
+     "text": "किती लांब आहे?",
+     "roman": "kiti laamb aahe?"
+    },
+    "take_me": {
+     "text": "मला तिथे घेऊन चला.",
+     "roman": "mala tithe gheun chala."
+    },
+    "lost": {
+     "text": "मी रस्ता चुकलो आहे.",
+     "roman": "mee rasta chuklo aahe.",
+     "note": "A woman says chukle aahe."
+    },
+    "how_much": {
+     "text": "हे कितीला आहे?",
+     "roman": "he kitila aahe?"
+    },
+    "expensive": {
+     "text": "खूप महाग आहे.",
+     "roman": "khoop mahaag aahe."
+    },
+    "reduce": {
+     "text": "थोडं कमी करा.",
+     "roman": "thoda kami kara."
+    },
+    "want_this": {
+     "text": "मला हे हवं आहे.",
+     "roman": "mala he hava aahe."
+    },
+    "no_thanks": {
+     "text": "नको, धन्यवाद.",
+     "roman": "nako, dhanyavaad."
+    },
+    "help": {
+     "text": "वाचवा!",
+     "roman": "vaachva!"
+    },
+    "call_doctor": {
+     "text": "डॉक्टरला बोलवा.",
+     "roman": "doctorla bolva."
+    },
+    "toilet": {
+     "text": "टॉयलेट कुठे आहे?",
+     "roman": "toilet kuthe aahe?"
+    }
+   }
+  },
+  {
+   "code": "te",
+   "name": "Telugu",
+   "native": "తెలుగు",
+   "script": "Telugu",
+   "tts": "te-IN",
+   "status": "draft",
+   "hello": "నమస్కారం",
+   "contributors": [],
+   "phrases": {
+    "hello": {
+     "text": "నమస్కారం",
+     "roman": "namaskaaram"
+    },
+    "how_are_you": {
+     "text": "మీరు ఎలా ఉన్నారు?",
+     "roman": "meeru ela unnaaru?"
+    },
+    "im_fine": {
+     "text": "నేను బాగున్నాను.",
+     "roman": "nenu baagunnaanu."
+    },
+    "thank_you": {
+     "text": "ధన్యవాదాలు",
+     "roman": "dhanyavaadaalu"
+    },
+    "sorry": {
+     "text": "క్షమించండి",
+     "roman": "kshaminchandi"
+    },
+    "yes": {
+     "text": "అవును",
+     "roman": "avunu"
+    },
+    "no": {
+     "text": "కాదు",
+     "roman": "kaadu",
+     "note": "For \"I don't want it\", say vaddu."
+    },
+    "bye": {
+     "text": "మళ్ళీ కలుద్దాం",
+     "roman": "malli kaluddaam"
+    },
+    "my_name": {
+     "text": "నా పేరు రవి.",
+     "roman": "naa peru Ravi."
+    },
+    "your_name": {
+     "text": "మీ పేరు ఏమిటి?",
+     "roman": "mee peru emiti?"
+    },
+    "where_from": {
+     "text": "మీది ఏ ఊరు?",
+     "roman": "meedi e ooru?"
+    },
+    "i_live_here": {
+     "text": "నేను ఇక్కడ ఉంటాను.",
+     "roman": "nenu ikkada untaanu."
+    },
+    "dont_understand": {
+     "text": "నాకు అర్థం కాలేదు.",
+     "roman": "naaku artham kaaledu."
+    },
+    "speak_slowly": {
+     "text": "నెమ్మదిగా మాట్లాడండి.",
+     "roman": "nemmadiga maatlaadandi."
+    },
+    "speak_english": {
+     "text": "మీకు ఇంగ్లీష్ వచ్చా?",
+     "roman": "meeku English vachchaa?"
+    },
+    "nice_to_meet": {
+     "text": "మిమ్మల్ని కలవడం సంతోషం.",
+     "roman": "mimmalni kalavadam santosham."
+    },
+    "one": {
+     "text": "ఒకటి",
+     "roman": "okati"
+    },
+    "two": {
+     "text": "రెండు",
+     "roman": "rendu"
+    },
+    "three": {
+     "text": "మూడు",
+     "roman": "moodu"
+    },
+    "five": {
+     "text": "ఐదు",
+     "roman": "aidu"
+    },
+    "ten": {
+     "text": "పది",
+     "roman": "padi"
+    },
+    "today": {
+     "text": "ఈరోజు",
+     "roman": "eeroju"
+    },
+    "tomorrow": {
+     "text": "రేపు",
+     "roman": "repu"
+    },
+    "now": {
+     "text": "ఇప్పుడు",
+     "roman": "ippudu"
+    },
+    "water": {
+     "text": "నీళ్ళు",
+     "roman": "neellu"
+    },
+    "food": {
+     "text": "భోజనం",
+     "roman": "bhojanam"
+    },
+    "tea": {
+     "text": "టీ",
+     "roman": "tee"
+    },
+    "tasty": {
+     "text": "చాలా రుచిగా ఉంది.",
+     "roman": "chaala ruchiga undi."
+    },
+    "hungry": {
+     "text": "నాకు ఆకలిగా ఉంది.",
+     "roman": "naaku aakaliga undi."
+    },
+    "less_spicy": {
+     "text": "కారం తక్కువ వేయండి.",
+     "roman": "kaaram takkuva veyandi."
+    },
+    "bill": {
+     "text": "బిల్ ఇవ్వండి.",
+     "roman": "bill ivvandi."
+    },
+    "vegetarian": {
+     "text": "నేను శాకాహారిని.",
+     "roman": "nenu shaakaahaarini."
+    },
+    "where_station": {
+     "text": "స్టేషన్ ఎక్కడ ఉంది?",
+     "roman": "station ekkada undi?"
+    },
+    "go_left": {
+     "text": "ఎడమ వైపు వెళ్ళండి.",
+     "roman": "edama vaipu vellandi."
+    },
+    "go_right": {
+     "text": "కుడి వైపు వెళ్ళండి.",
+     "roman": "kudi vaipu vellandi."
+    },
+    "go_straight": {
+     "text": "నేరుగా వెళ్ళండి.",
+     "roman": "neruga vellandi."
+    },
+    "stop_here": {
+     "text": "ఇక్కడ ఆపండి.",
+     "roman": "ikkada aapandi."
+    },
+    "how_far": {
+     "text": "ఎంత దూరం?",
+     "roman": "entha dooram?"
+    },
+    "take_me": {
+     "text": "నన్ను అక్కడికి తీసుకెళ్ళండి.",
+     "roman": "nannu akkadiki teesukellandi."
+    },
+    "lost": {
+     "text": "నేను దారి తప్పిపోయాను.",
+     "roman": "nenu daari tappipoyaanu."
+    },
+    "how_much": {
+     "text": "ఇది ఎంత?",
+     "roman": "idi entha?"
+    },
+    "expensive": {
+     "text": "చాలా ఖరీదు.",
+     "roman": "chaala khareedu."
+    },
+    "reduce": {
+     "text": "కొంచెం తగ్గించండి.",
+     "roman": "konchem tagginchandi."
+    },
+    "want_this": {
+     "text": "నాకు ఇది కావాలి.",
+     "roman": "naaku idi kaavaali."
+    },
+    "no_thanks": {
+     "text": "వద్దు, ధన్యవాదాలు.",
+     "roman": "vaddu, dhanyavaadaalu."
+    },
+    "help": {
+     "text": "కాపాడండి!",
+     "roman": "kaapaadandi!"
+    },
+    "call_doctor": {
+     "text": "డాక్టర్‌ని పిలవండి.",
+     "roman": "doctor-ni pilavandi."
+    },
+    "toilet": {
+     "text": "టాయిలెట్ ఎక్కడ?",
+     "roman": "toilet ekkada?"
+    }
+   }
+  },
+  {
+   "code": "ta",
+   "name": "Tamil",
+   "native": "தமிழ்",
+   "script": "Tamil",
+   "tts": "ta-IN",
+   "status": "draft",
+   "hello": "வணக்கம்",
+   "contributors": [],
+   "phrases": {
+    "hello": {
+     "text": "வணக்கம்",
+     "roman": "vanakkam"
+    },
+    "how_are_you": {
+     "text": "எப்படி இருக்கீங்க?",
+     "roman": "eppadi irukkeenga?",
+     "note": "Spoken Tamil. The written form is eppadi irukkireergal?"
+    },
+    "im_fine": {
+     "text": "நான் நல்லா இருக்கேன்.",
+     "roman": "naan nallaa irukken."
+    },
+    "thank_you": {
+     "text": "நன்றி",
+     "roman": "nandri"
+    },
+    "sorry": {
+     "text": "மன்னிக்கவும்",
+     "roman": "mannikkavum"
+    },
+    "yes": {
+     "text": "ஆமா",
+     "roman": "aamaa"
+    },
+    "no": {
+     "text": "இல்லை",
+     "roman": "illai"
+    },
+    "bye": {
+     "text": "அப்புறம் பார்க்கலாம்",
+     "roman": "appuram paarkkalaam"
+    },
+    "my_name": {
+     "text": "என் பெயர் ரவி.",
+     "roman": "en peyar Ravi."
+    },
+    "your_name": {
+     "text": "உங்க பேர் என்ன?",
+     "roman": "unga per enna?"
+    },
+    "where_from": {
+     "text": "நீங்க எந்த ஊரு?",
+     "roman": "neenga endha ooru?"
+    },
+    "i_live_here": {
+     "text": "நான் இங்கதான் இருக்கேன்.",
+     "roman": "naan ingadhaan irukken."
+    },
+    "dont_understand": {
+     "text": "எனக்குப் புரியல.",
+     "roman": "enakku puriyala."
+    },
+    "speak_slowly": {
+     "text": "மெதுவா பேசுங்க.",
+     "roman": "medhuvaa pesunga."
+    },
+    "speak_english": {
+     "text": "உங்களுக்கு இங்கிலீஷ் தெரியுமா?",
+     "roman": "ungalukku English theriyumaa?"
+    },
+    "nice_to_meet": {
+     "text": "உங்களைச் சந்திச்சதுல சந்தோஷம்.",
+     "roman": "ungalai sandhichadhula sandhosham."
+    },
+    "one": {
+     "text": "ஒன்று",
+     "roman": "ondru"
+    },
+    "two": {
+     "text": "இரண்டு",
+     "roman": "irandu"
+    },
+    "three": {
+     "text": "மூன்று",
+     "roman": "moondru"
+    },
+    "five": {
+     "text": "ஐந்து",
+     "roman": "aindhu"
+    },
+    "ten": {
+     "text": "பத்து",
+     "roman": "pathu"
+    },
+    "today": {
+     "text": "இன்னைக்கு",
+     "roman": "innaikku"
+    },
+    "tomorrow": {
+     "text": "நாளைக்கு",
+     "roman": "naalaikku"
+    },
+    "now": {
+     "text": "இப்போ",
+     "roman": "ippo"
+    },
+    "water": {
+     "text": "தண்ணீர்",
+     "roman": "thanneer"
+    },
+    "food": {
+     "text": "சாப்பாடு",
+     "roman": "saappaadu"
+    },
+    "tea": {
+     "text": "டீ",
+     "roman": "tea"
+    },
+    "tasty": {
+     "text": "ரொம்ப ருசியா இருக்கு.",
+     "roman": "romba rusiyaa irukku."
+    },
+    "hungry": {
+     "text": "எனக்குப் பசிக்குது.",
+     "roman": "enakku pasikkudhu."
+    },
+    "less_spicy": {
+     "text": "காரம் கம்மியா போடுங்க.",
+     "roman": "kaaram kammiyaa podunga."
+    },
+    "bill": {
+     "text": "பில் கொடுங்க.",
+     "roman": "bill kodunga."
+    },
+    "vegetarian": {
+     "text": "நான் சைவம்.",
+     "roman": "naan saivam."
+    },
+    "where_station": {
+     "text": "ஸ்டேஷன் எங்கே இருக்கு?",
+     "roman": "station enge irukku?"
+    },
+    "go_left": {
+     "text": "இடது பக்கம் போங்க.",
+     "roman": "idadhu pakkam ponga."
+    },
+    "go_right": {
+     "text": "வலது பக்கம் போங்க.",
+     "roman": "valadhu pakkam ponga."
+    },
+    "go_straight": {
+     "text": "நேரா போங்க.",
+     "roman": "neraa ponga."
+    },
+    "stop_here": {
+     "text": "இங்கே நிறுத்துங்க.",
+     "roman": "inge niruthunga."
+    },
+    "how_far": {
+     "text": "எவ்வளவு தூரம்?",
+     "roman": "evvalavu dhooram?"
+    },
+    "take_me": {
+     "text": "என்னை அங்கே கூட்டிட்டுப் போங்க.",
+     "roman": "ennai ange koottittu ponga."
+    },
+    "lost": {
+     "text": "நான் வழி தவறிட்டேன்.",
+     "roman": "naan vazhi thavarittaen."
+    },
+    "how_much": {
+     "text": "இது எவ்வளவு?",
+     "roman": "idhu evvalavu?"
+    },
+    "expensive": {
+     "text": "ரொம்ப விலை அதிகம்.",
+     "roman": "romba vilai adhigam."
+    },
+    "reduce": {
+     "text": "கொஞ்சம் குறைச்சுக் கொடுங்க.",
+     "roman": "konjam kuraichu kodunga."
+    },
+    "want_this": {
+     "text": "எனக்கு இது வேணும்.",
+     "roman": "enakku idhu venum."
+    },
+    "no_thanks": {
+     "text": "வேண்டாம், நன்றி.",
+     "roman": "vendaam, nandri."
+    },
+    "help": {
+     "text": "காப்பாத்துங்க!",
+     "roman": "kaappaathunga!"
+    },
+    "call_doctor": {
+     "text": "டாக்டரைக் கூப்பிடுங்க.",
+     "roman": "doctorai koopidunga."
+    },
+    "toilet": {
+     "text": "டாய்லெட் எங்கே?",
+     "roman": "toilet enge?"
+    }
+   }
+  },
+  {
+   "code": "gu",
+   "name": "Gujarati",
+   "native": "ગુજરાતી",
+   "script": "Gujarati",
+   "tts": "gu-IN",
+   "status": "draft",
+   "hello": "નમસ્તે",
+   "contributors": [],
+   "phrases": {
+    "hello": {
+     "text": "નમસ્તે",
+     "roman": "namaste",
+     "note": "Kem chho? (how are you?) is the everyday greeting."
+    },
+    "how_are_you": {
+     "text": "તમે કેમ છો?",
+     "roman": "tame kem chho?"
+    },
+    "im_fine": {
+     "text": "હું મજામાં છું.",
+     "roman": "hun majaama chhun."
+    },
+    "thank_you": {
+     "text": "આભાર",
+     "roman": "aabhaar"
+    },
+    "sorry": {
+     "text": "માફ કરજો",
+     "roman": "maaf karjo"
+    },
+    "yes": {
+     "text": "હા",
+     "roman": "haa"
+    },
+    "no": {
+     "text": "ના",
+     "roman": "naa"
+    },
+    "bye": {
+     "text": "આવજો",
+     "roman": "aavjo",
+     "note": "Literally \"please come again\"."
+    },
+    "my_name": {
+     "text": "મારું નામ રવિ છે.",
+     "roman": "maarun naam Ravi chhe."
+    },
+    "your_name": {
+     "text": "તમારું નામ શું છે?",
+     "roman": "tamaarun naam shun chhe?"
+    },
+    "where_from": {
+     "text": "તમે ક્યાંના છો?",
+     "roman": "tame kyaanna chho?"
+    },
+    "i_live_here": {
+     "text": "હું અહીં રહું છું.",
+     "roman": "hun ahin rahun chhun."
+    },
+    "dont_understand": {
+     "text": "મને સમજાયું નહીં.",
+     "roman": "mane samjaayun nahin."
+    },
+    "speak_slowly": {
+     "text": "ધીમે બોલો.",
+     "roman": "dheeme bolo."
+    },
+    "speak_english": {
+     "text": "તમે અંગ્રેજી બોલો છો?",
+     "roman": "tame angreji bolo chho?"
+    },
+    "nice_to_meet": {
+     "text": "તમને મળીને આનંદ થયો.",
+     "roman": "tamne maline aanand thayo."
+    },
+    "one": {
+     "text": "એક",
+     "roman": "ek"
+    },
+    "two": {
+     "text": "બે",
+     "roman": "be"
+    },
+    "three": {
+     "text": "ત્રણ",
+     "roman": "tran"
+    },
+    "five": {
+     "text": "પાંચ",
+     "roman": "paanch"
+    },
+    "ten": {
+     "text": "દસ",
+     "roman": "das"
+    },
+    "today": {
+     "text": "આજે",
+     "roman": "aaje"
+    },
+    "tomorrow": {
+     "text": "કાલે",
+     "roman": "kaale"
+    },
+    "now": {
+     "text": "હમણાં",
+     "roman": "hamnaan"
+    },
+    "water": {
+     "text": "પાણી",
+     "roman": "paani"
+    },
+    "food": {
+     "text": "જમવાનું",
+     "roman": "jamvaanun"
+    },
+    "tea": {
+     "text": "ચા",
+     "roman": "chaa"
+    },
+    "tasty": {
+     "text": "ખૂબ સ્વાદિષ્ટ છે.",
+     "roman": "khoob swaadisht chhe."
+    },
+    "hungry": {
+     "text": "મને ભૂખ લાગી છે.",
+     "roman": "mane bhookh laagi chhe."
+    },
+    "less_spicy": {
+     "text": "ઓછું તીખું આપજો.",
+     "roman": "ochhun teekhun aapjo."
+    },
+    "bill": {
+     "text": "બિલ આપો.",
+     "roman": "bill aapo."
+    },
+    "vegetarian": {
+     "text": "હું શાકાહારી છું.",
+     "roman": "hun shaakaahaari chhun."
+    },
+    "where_station": {
+     "text": "સ્ટેશન ક્યાં છે?",
+     "roman": "station kyaan chhe?"
+    },
+    "go_left": {
+     "text": "ડાબી બાજુ જાઓ.",
+     "roman": "daabi baaju jao."
+    },
+    "go_right": {
+     "text": "જમણી બાજુ જાઓ.",
+     "roman": "jamni baaju jao."
+    },
+    "go_straight": {
+     "text": "સીધા જાઓ.",
+     "roman": "seedha jao."
+    },
+    "stop_here": {
+     "text": "અહીં ઊભા રાખો.",
+     "roman": "ahin ubha raakho."
+    },
+    "how_far": {
+     "text": "કેટલું દૂર છે?",
+     "roman": "ketlun door chhe?"
+    },
+    "take_me": {
+     "text": "મને ત્યાં લઈ જાઓ.",
+     "roman": "mane tyaan lai jao."
+    },
+    "lost": {
+     "text": "હું રસ્તો ભૂલી ગયો છું.",
+     "roman": "hun rasto bhooli gayo chhun.",
+     "note": "A woman says bhooli gai chhun."
+    },
+    "how_much": {
+     "text": "આ કેટલાનું છે?",
+     "roman": "aa ketlaanun chhe?"
+    },
+    "expensive": {
+     "text": "બહુ મોંઘું છે.",
+     "roman": "bahu monghun chhe."
+    },
+    "reduce": {
+     "text": "થોડું ઓછું કરો.",
+     "roman": "thodun ochhun karo."
+    },
+    "want_this": {
+     "text": "મને આ જોઈએ છે.",
+     "roman": "mane aa joie chhe."
+    },
+    "no_thanks": {
+     "text": "ના, આભાર.",
+     "roman": "naa, aabhaar."
+    },
+    "help": {
+     "text": "બચાવો!",
+     "roman": "bachaavo!"
+    },
+    "call_doctor": {
+     "text": "ડૉક્ટરને બોલાવો.",
+     "roman": "doctorne bolaavo."
+    },
+    "toilet": {
+     "text": "ટોઇલેટ ક્યાં છે?",
+     "roman": "toilet kyaan chhe?"
+    }
+   }
+  },
+  {
+   "code": "kn",
+   "name": "Kannada",
+   "native": "ಕನ್ನಡ",
+   "script": "Kannada",
+   "tts": "kn-IN",
+   "status": "draft",
+   "hello": "ನಮಸ್ಕಾರ",
+   "contributors": [],
+   "phrases": {
+    "hello": {
+     "text": "ನಮಸ್ಕಾರ",
+     "roman": "namaskaara"
+    },
+    "how_are_you": {
+     "text": "ಹೇಗಿದ್ದೀರಾ?",
+     "roman": "hegiddeeraa?"
+    },
+    "im_fine": {
+     "text": "ನಾನು ಚೆನ್ನಾಗಿದ್ದೀನಿ.",
+     "roman": "naanu chennaagiddeeni."
+    },
+    "thank_you": {
+     "text": "ಧನ್ಯವಾದಗಳು",
+     "roman": "dhanyavaadagalu"
+    },
+    "sorry": {
+     "text": "ಕ್ಷಮಿಸಿ",
+     "roman": "kshamisi"
+    },
+    "yes": {
+     "text": "ಹೌದು",
+     "roman": "haudu"
+    },
+    "no": {
+     "text": "ಇಲ್ಲ",
+     "roman": "illa",
+     "note": "For \"I don't want it\", say beda."
+    },
+    "bye": {
+     "text": "ಮತ್ತೆ ಸಿಗೋಣ",
+     "roman": "matte sigona"
+    },
+    "my_name": {
+     "text": "ನನ್ನ ಹೆಸರು ರವಿ.",
+     "roman": "nanna hesaru Ravi."
+    },
+    "your_name": {
+     "text": "ನಿಮ್ಮ ಹೆಸರೇನು?",
+     "roman": "nimma hesarenu?"
+    },
+    "where_from": {
+     "text": "ನೀವು ಯಾವ ಊರಿನವರು?",
+     "roman": "neevu yaava oorinavaru?"
+    },
+    "i_live_here": {
+     "text": "ನಾನು ಇಲ್ಲೇ ಇರೋದು.",
+     "roman": "naanu ille irodu."
+    },
+    "dont_understand": {
+     "text": "ನನಗೆ ಅರ್ಥ ಆಗಲಿಲ್ಲ.",
+     "roman": "nanage artha aagalilla."
+    },
+    "speak_slowly": {
+     "text": "ನಿಧಾನವಾಗಿ ಮಾತಾಡಿ.",
+     "roman": "nidhaanavaagi maataadi."
+    },
+    "speak_english": {
+     "text": "ನಿಮಗೆ ಇಂಗ್ಲಿಷ್ ಬರುತ್ತಾ?",
+     "roman": "nimage English baruttaa?"
+    },
+    "nice_to_meet": {
+     "text": "ನಿಮ್ಮನ್ನು ಭೇಟಿಯಾಗಿ ಖುಷಿ ಆಯ್ತು.",
+     "roman": "nimmannu bhetiyaagi khushi aaytu."
+    },
+    "one": {
+     "text": "ಒಂದು",
+     "roman": "ondu"
+    },
+    "two": {
+     "text": "ಎರಡು",
+     "roman": "eradu"
+    },
+    "three": {
+     "text": "ಮೂರು",
+     "roman": "mooru"
+    },
+    "five": {
+     "text": "ಐದು",
+     "roman": "aidu"
+    },
+    "ten": {
+     "text": "ಹತ್ತು",
+     "roman": "hattu"
+    },
+    "today": {
+     "text": "ಇವತ್ತು",
+     "roman": "ivattu"
+    },
+    "tomorrow": {
+     "text": "ನಾಳೆ",
+     "roman": "naale"
+    },
+    "now": {
+     "text": "ಈಗ",
+     "roman": "eega"
+    },
+    "water": {
+     "text": "ನೀರು",
+     "roman": "neeru"
+    },
+    "food": {
+     "text": "ಊಟ",
+     "roman": "oota"
+    },
+    "tea": {
+     "text": "ಟೀ",
+     "roman": "tea",
+     "note": "Chaha is also used."
+    },
+    "tasty": {
+     "text": "ತುಂಬಾ ರುಚಿಯಾಗಿದೆ.",
+     "roman": "tumbaa ruchiyaagide."
+    },
+    "hungry": {
+     "text": "ನನಗೆ ಹಸಿವಾಗ್ತಿದೆ.",
+     "roman": "nanage hasivaagtide."
+    },
+    "less_spicy": {
+     "text": "ಖಾರ ಕಮ್ಮಿ ಹಾಕಿ.",
+     "roman": "khaara kammi haaki."
+    },
+    "bill": {
+     "text": "ಬಿಲ್ ಕೊಡಿ.",
+     "roman": "bill kodi."
+    },
+    "vegetarian": {
+     "text": "ನಾನು ಸಸ್ಯಾಹಾರಿ.",
+     "roman": "naanu sasyaahaari."
+    },
+    "where_station": {
+     "text": "ಸ್ಟೇಷನ್ ಎಲ್ಲಿದೆ?",
+     "roman": "station ellide?"
+    },
+    "go_left": {
+     "text": "ಎಡಕ್ಕೆ ಹೋಗಿ.",
+     "roman": "edakke hogi."
+    },
+    "go_right": {
+     "text": "ಬಲಕ್ಕೆ ಹೋಗಿ.",
+     "roman": "balakke hogi."
+    },
+    "go_straight": {
+     "text": "ನೇರವಾಗಿ ಹೋಗಿ.",
+     "roman": "neravaagi hogi.",
+     "note": "In Bengaluru, \"straight hogi\" is common."
+    },
+    "stop_here": {
+     "text": "ಇಲ್ಲೇ ನಿಲ್ಲಿಸಿ.",
+     "roman": "ille nillisi."
+    },
+    "how_far": {
+     "text": "ಎಷ್ಟು ದೂರ?",
+     "roman": "eshtu doora?"
+    },
+    "take_me": {
+     "text": "ನನ್ನನ್ನು ಅಲ್ಲಿಗೆ ಕರ್ಕೊಂಡು ಹೋಗಿ.",
+     "roman": "nannannu allige karkondu hogi."
+    },
+    "lost": {
+     "text": "ನಾನು ದಾರಿ ತಪ್ಪಿದ್ದೀನಿ.",
+     "roman": "naanu daari tappiddeeni."
+    },
+    "how_much": {
+     "text": "ಇದು ಎಷ್ಟು?",
+     "roman": "idu eshtu?"
+    },
+    "expensive": {
+     "text": "ತುಂಬಾ ಜಾಸ್ತಿ ಆಯ್ತು.",
+     "roman": "tumbaa jaasti aaytu."
+    },
+    "reduce": {
+     "text": "ಸ್ವಲ್ಪ ಕಮ್ಮಿ ಮಾಡಿ.",
+     "roman": "swalpa kammi maadi."
+    },
+    "want_this": {
+     "text": "ನನಗೆ ಇದು ಬೇಕು.",
+     "roman": "nanage idu beku."
+    },
+    "no_thanks": {
+     "text": "ಬೇಡ, ಧನ್ಯವಾದಗಳು.",
+     "roman": "beda, dhanyavaadagalu."
+    },
+    "help": {
+     "text": "ಕಾಪಾಡಿ!",
+     "roman": "kaapaadi!"
+    },
+    "call_doctor": {
+     "text": "ಡಾಕ್ಟರ್‌ನ ಕರೆಯಿರಿ.",
+     "roman": "doctorna kareyiri."
+    },
+    "toilet": {
+     "text": "ಟಾಯ್ಲೆಟ್ ಎಲ್ಲಿದೆ?",
+     "roman": "toilet ellide?"
+    }
+   }
+  },
+  {
+   "code": "ml",
+   "name": "Malayalam",
+   "native": "മലയാളം",
+   "script": "Malayalam",
+   "tts": "ml-IN",
+   "status": "draft",
+   "hello": "നമസ്കാരം",
+   "contributors": [],
+   "phrases": {
+    "hello": {
+     "text": "നമസ്കാരം",
+     "roman": "namaskaaram"
+    },
+    "how_are_you": {
+     "text": "സുഖമാണോ?",
+     "roman": "sukhamaano?"
+    },
+    "im_fine": {
+     "text": "എനിക്ക് സുഖമാണ്.",
+     "roman": "enikku sukhamaanu."
+    },
+    "thank_you": {
+     "text": "നന്ദി",
+     "roman": "nandi"
+    },
+    "sorry": {
+     "text": "ക്ഷമിക്കണം",
+     "roman": "kshamikkanam"
+    },
+    "yes": {
+     "text": "അതെ",
+     "roman": "athe"
+    },
+    "no": {
+     "text": "അല്ല",
+     "roman": "alla",
+     "note": "For \"I don't want it\", say venda."
+    },
+    "bye": {
+     "text": "പിന്നെ കാണാം",
+     "roman": "pinne kaanaam"
+    },
+    "my_name": {
+     "text": "എന്റെ പേര് രവി.",
+     "roman": "ente peru Ravi."
+    },
+    "your_name": {
+     "text": "നിങ്ങളുടെ പേരെന്താ?",
+     "roman": "ningalude perentha?"
+    },
+    "where_from": {
+     "text": "നിങ്ങൾ എവിടെ നിന്നാണ്?",
+     "roman": "ningal evide ninnaanu?"
+    },
+    "i_live_here": {
+     "text": "ഞാൻ ഇവിടെയാണ് താമസം.",
+     "roman": "njaan ivideyaanu thaamasam."
+    },
+    "dont_understand": {
+     "text": "എനിക്ക് മനസ്സിലായില്ല.",
+     "roman": "enikku manassilaayilla."
+    },
+    "speak_slowly": {
+     "text": "പതുക്കെ പറയൂ.",
+     "roman": "pathukke parayoo."
+    },
+    "speak_english": {
+     "text": "നിങ്ങൾക്ക് ഇംഗ്ലീഷ് അറിയാമോ?",
+     "roman": "ningalkku English ariyaamo?"
+    },
+    "nice_to_meet": {
+     "text": "നിങ്ങളെ കണ്ടതിൽ സന്തോഷം.",
+     "roman": "ningale kandathil santhosham."
+    },
+    "one": {
+     "text": "ഒന്ന്",
+     "roman": "onnu"
+    },
+    "two": {
+     "text": "രണ്ട്",
+     "roman": "randu"
+    },
+    "three": {
+     "text": "മൂന്ന്",
+     "roman": "moonnu"
+    },
+    "five": {
+     "text": "അഞ്ച്",
+     "roman": "anchu"
+    },
+    "ten": {
+     "text": "പത്ത്",
+     "roman": "pathu"
+    },
+    "today": {
+     "text": "ഇന്ന്",
+     "roman": "innu"
+    },
+    "tomorrow": {
+     "text": "നാളെ",
+     "roman": "naale"
+    },
+    "now": {
+     "text": "ഇപ്പോൾ",
+     "roman": "ippol"
+    },
+    "water": {
+     "text": "വെള്ളം",
+     "roman": "vellam"
+    },
+    "food": {
+     "text": "ഭക്ഷണം",
+     "roman": "bhakshanam"
+    },
+    "tea": {
+     "text": "ചായ",
+     "roman": "chaaya"
+    },
+    "tasty": {
+     "text": "നല്ല രുചിയുണ്ട്.",
+     "roman": "nalla ruchiyundu."
+    },
+    "hungry": {
+     "text": "എനിക്ക് വിശക്കുന്നു.",
+     "roman": "enikku vishakkunnu."
+    },
+    "less_spicy": {
+     "text": "എരിവ് കുറച്ച് മതി.",
+     "roman": "erivu kurachu mathi."
+    },
+    "bill": {
+     "text": "ബിൽ തരൂ.",
+     "roman": "bill tharoo."
+    },
+    "vegetarian": {
+     "text": "ഞാൻ സസ്യാഹാരിയാണ്.",
+     "roman": "njaan sasyaahaariyaanu.",
+     "note": "\"Vegetarian\" in English is widely understood too."
+    },
+    "where_station": {
+     "text": "സ്റ്റേഷൻ എവിടെയാണ്?",
+     "roman": "station evideyaanu?"
+    },
+    "go_left": {
+     "text": "ഇടത്തോട്ട് പോകൂ.",
+     "roman": "idathottu pokoo."
+    },
+    "go_right": {
+     "text": "വലത്തോട്ട് പോകൂ.",
+     "roman": "valathottu pokoo."
+    },
+    "go_straight": {
+     "text": "നേരെ പോകൂ.",
+     "roman": "nere pokoo."
+    },
+    "stop_here": {
+     "text": "ഇവിടെ നിർത്തൂ.",
+     "roman": "ivide nirthoo."
+    },
+    "how_far": {
+     "text": "എത്ര ദൂരമുണ്ട്?",
+     "roman": "ethra dooramundu?"
+    },
+    "take_me": {
+     "text": "എന്നെ അവിടെ കൊണ്ടുപോകൂ.",
+     "roman": "enne avide kondupokoo."
+    },
+    "lost": {
+     "text": "എനിക്ക് വഴി തെറ്റി.",
+     "roman": "enikku vazhi thetti."
+    },
+    "how_much": {
+     "text": "ഇതിന് എത്രയാണ്?",
+     "roman": "ithinu ethrayaanu?"
+    },
+    "expensive": {
+     "text": "വളരെ കൂടുതലാണ്.",
+     "roman": "valare kooduthalaanu."
+    },
+    "reduce": {
+     "text": "കുറച്ച് കുറയ്ക്കൂ.",
+     "roman": "kurachu kuraykkoo."
+    },
+    "want_this": {
+     "text": "എനിക്ക് ഇത് വേണം.",
+     "roman": "enikku ithu venam."
+    },
+    "no_thanks": {
+     "text": "വേണ്ട, നന്ദി.",
+     "roman": "venda, nandi."
+    },
+    "help": {
+     "text": "രക്ഷിക്കണേ!",
+     "roman": "rakshikkane!"
+    },
+    "call_doctor": {
+     "text": "ഡോക്ടറെ വിളിക്കൂ.",
+     "roman": "doctore vilikkoo."
+    },
+    "toilet": {
+     "text": "ടോയ്‌ലറ്റ് എവിടെയാണ്?",
+     "roman": "toilet evideyaanu?"
+    }
+   }
+  },
+  {
+   "code": "or",
+   "name": "Odia",
+   "native": "ଓଡ଼ିଆ",
+   "script": "Odia",
+   "tts": "or-IN",
+   "status": "draft",
+   "hello": "ନମସ୍କାର",
+   "contributors": [],
+   "phrases": {
+    "hello": {
+     "text": "ନମସ୍କାର",
+     "roman": "namaskaara"
+    },
+    "how_are_you": {
+     "text": "ଆପଣ କେମିତି ଅଛନ୍ତି?",
+     "roman": "apana kemiti achhanti?"
+    },
+    "im_fine": {
+     "text": "ମୁଁ ଭଲ ଅଛି।",
+     "roman": "mun bhala achhi."
+    },
+    "thank_you": {
+     "text": "ଧନ୍ୟବାଦ",
+     "roman": "dhanyabaada"
+    },
+    "sorry": {
+     "text": "କ୍ଷମା କରନ୍ତୁ",
+     "roman": "kshyama karantu"
+    },
+    "yes": {
+     "text": "ହଁ",
+     "roman": "han"
+    },
+    "no": {
+     "text": "ନା",
+     "roman": "naa"
+    },
+    "bye": {
+     "text": "ପୁଣି ଦେଖା ହେବ",
+     "roman": "puni dekha heba"
+    },
+    "my_name": {
+     "text": "ମୋ ନାଁ ରବି।",
+     "roman": "mo naan Rabi."
+    },
+    "your_name": {
+     "text": "ଆପଣଙ୍କ ନାଁ କ'ଣ?",
+     "roman": "apananka naan kana?"
+    },
+    "where_from": {
+     "text": "ଆପଣ କେଉଁଠୁ ଆସିଛନ୍ତି?",
+     "roman": "apana keunthu asichhanti?"
+    },
+    "i_live_here": {
+     "text": "ମୁଁ ଏଠି ରହେ।",
+     "roman": "mun ethi rahe."
+    },
+    "dont_understand": {
+     "text": "ମୁଁ ବୁଝିପାରିଲି ନାହିଁ।",
+     "roman": "mun bujhipaarili naahin."
+    },
+    "speak_slowly": {
+     "text": "ଧୀରେ କୁହନ୍ତୁ।",
+     "roman": "dhire kuhantu."
+    },
+    "speak_english": {
+     "text": "ଆପଣ ଇଂରାଜୀ କହନ୍ତି କି?",
+     "roman": "apana ingraaji kahanti ki?"
+    },
+    "nice_to_meet": {
+     "text": "ଆପଣଙ୍କୁ ଭେଟି ଭଲ ଲାଗିଲା।",
+     "roman": "apananku bheti bhala laagila."
+    },
+    "one": {
+     "text": "ଏକ",
+     "roman": "eka"
+    },
+    "two": {
+     "text": "ଦୁଇ",
+     "roman": "dui"
+    },
+    "three": {
+     "text": "ତିନି",
+     "roman": "tini"
+    },
+    "five": {
+     "text": "ପାଞ୍ଚ",
+     "roman": "paancha"
+    },
+    "ten": {
+     "text": "ଦଶ",
+     "roman": "dasha"
+    },
+    "today": {
+     "text": "ଆଜି",
+     "roman": "aaji"
+    },
+    "tomorrow": {
+     "text": "କାଲି",
+     "roman": "kaali"
+    },
+    "now": {
+     "text": "ଏବେ",
+     "roman": "ebe"
+    },
+    "water": {
+     "text": "ପାଣି",
+     "roman": "paani"
+    },
+    "food": {
+     "text": "ଖାଇବା",
+     "roman": "khaiba"
+    },
+    "tea": {
+     "text": "ଚା",
+     "roman": "chaa"
+    },
+    "tasty": {
+     "text": "ବହୁତ ସୁଆଦିଆ।",
+     "roman": "bahuta suaadia."
+    },
+    "hungry": {
+     "text": "ମୋତେ ଭୋକ ଲାଗୁଛି।",
+     "roman": "mote bhoka laaguchhi."
+    },
+    "less_spicy": {
+     "text": "ରାଗ କମ୍ ଦିଅନ୍ତୁ।",
+     "roman": "raaga kam diantu."
+    },
+    "bill": {
+     "text": "ବିଲ୍ ଦିଅନ୍ତୁ।",
+     "roman": "bill diantu."
+    },
+    "vegetarian": {
+     "text": "ମୁଁ ନିରାମିଷ ଖାଏ।",
+     "roman": "mun niraamisha khaae."
+    },
+    "where_station": {
+     "text": "ଷ୍ଟେସନ କେଉଁଠି?",
+     "roman": "station keunthi?"
+    },
+    "go_left": {
+     "text": "ବାଁ ପଟକୁ ଯାଆନ୍ତୁ।",
+     "roman": "baan pataku jaantu."
+    },
+    "go_right": {
+     "text": "ଡାହାଣ ପଟକୁ ଯାଆନ୍ତୁ।",
+     "roman": "daahaana pataku jaantu."
+    },
+    "go_straight": {
+     "text": "ସିଧା ଯାଆନ୍ତୁ।",
+     "roman": "sidha jaantu."
+    },
+    "stop_here": {
+     "text": "ଏଠି ରଖନ୍ତୁ।",
+     "roman": "ethi rakhantu."
+    },
+    "how_far": {
+     "text": "କେତେ ଦୂର?",
+     "roman": "kete dura?"
+    },
+    "take_me": {
+     "text": "ମୋତେ ସେଠିକି ନେଇଚାଲନ୍ତୁ।",
+     "roman": "mote sethiki neichaalantu."
+    },
+    "lost": {
+     "text": "ମୁଁ ବାଟ ହଜେଇ ଦେଇଛି।",
+     "roman": "mun baata hajei deichhi."
+    },
+    "how_much": {
+     "text": "ଏହାର ଦାମ କେତେ?",
+     "roman": "ehaara daama kete?"
+    },
+    "expensive": {
+     "text": "ବହୁତ ମହଙ୍ଗା।",
+     "roman": "bahuta mahanga."
+    },
+    "reduce": {
+     "text": "ଟିକେ କମ୍ କରନ୍ତୁ।",
+     "roman": "tike kam karantu."
+    },
+    "want_this": {
+     "text": "ମୋତେ ଏହା ଦରକାର।",
+     "roman": "mote eha darakaara."
+    },
+    "no_thanks": {
+     "text": "ନା, ଧନ୍ୟବାଦ।",
+     "roman": "naa, dhanyabaada."
+    },
+    "help": {
+     "text": "ବଞ୍ଚାଅ!",
+     "roman": "banchaa!"
+    },
+    "call_doctor": {
+     "text": "ଡାକ୍ତରଙ୍କୁ ଡାକନ୍ତୁ।",
+     "roman": "daaktaranku daakantu."
+    },
+    "toilet": {
+     "text": "ବାଥରୁମ୍ କେଉଁଠି?",
+     "roman": "bathroom keunthi?"
+    }
+   }
+  },
+  {
+   "code": "pa",
+   "name": "Punjabi",
+   "native": "ਪੰਜਾਬੀ",
+   "script": "Gurmukhi",
+   "tts": "pa-IN",
+   "status": "draft",
+   "hello": "ਸਤ ਸ੍ਰੀ ਅਕਾਲ",
+   "contributors": [],
+   "phrases": {
+    "hello": {
+     "text": "ਸਤ ਸ੍ਰੀ ਅਕਾਲ",
+     "roman": "sat sri akaal"
+    },
+    "how_are_you": {
+     "text": "ਤੁਸੀਂ ਕਿਵੇਂ ਹੋ?",
+     "roman": "tusi kiven ho?"
+    },
+    "im_fine": {
+     "text": "ਮੈਂ ਠੀਕ ਹਾਂ।",
+     "roman": "main theek haan."
+    },
+    "thank_you": {
+     "text": "ਧੰਨਵਾਦ",
+     "roman": "dhannvaad"
+    },
+    "sorry": {
+     "text": "ਮਾਫ਼ ਕਰਨਾ",
+     "roman": "maaf karna"
+    },
+    "yes": {
+     "text": "ਹਾਂ",
+     "roman": "haan"
+    },
+    "no": {
+     "text": "ਨਹੀਂ",
+     "roman": "nahin"
+    },
+    "bye": {
+     "text": "ਫਿਰ ਮਿਲਾਂਗੇ",
+     "roman": "phir milaange"
+    },
+    "my_name": {
+     "text": "ਮੇਰਾ ਨਾਮ ਰਵੀ ਹੈ।",
+     "roman": "mera naam Ravi hai."
+    },
+    "your_name": {
+     "text": "ਤੁਹਾਡਾ ਨਾਮ ਕੀ ਹੈ?",
+     "roman": "tuhaada naam ki hai?"
+    },
+    "where_from": {
+     "text": "ਤੁਸੀਂ ਕਿੱਥੋਂ ਹੋ?",
+     "roman": "tusi kitthon ho?"
+    },
+    "i_live_here": {
+     "text": "ਮੈਂ ਇੱਥੇ ਰਹਿੰਦਾ ਹਾਂ।",
+     "roman": "main itthe rehnda haan.",
+     "note": "A woman says rehndi haan."
+    },
+    "dont_understand": {
+     "text": "ਮੈਨੂੰ ਸਮਝ ਨਹੀਂ ਆਈ।",
+     "roman": "mainu samajh nahin aayi."
+    },
+    "speak_slowly": {
+     "text": "ਹੌਲੀ ਬੋਲੋ।",
+     "roman": "hauli bolo."
+    },
+    "speak_english": {
+     "text": "ਕੀ ਤੁਸੀਂ ਅੰਗਰੇਜ਼ੀ ਬੋਲਦੇ ਹੋ?",
+     "roman": "ki tusi angrezi bolde ho?"
+    },
+    "nice_to_meet": {
+     "text": "ਤੁਹਾਨੂੰ ਮਿਲ ਕੇ ਖੁਸ਼ੀ ਹੋਈ।",
+     "roman": "tuhaanu mil ke khushi hoyi."
+    },
+    "one": {
+     "text": "ਇੱਕ",
+     "roman": "ikk"
+    },
+    "two": {
+     "text": "ਦੋ",
+     "roman": "do"
+    },
+    "three": {
+     "text": "ਤਿੰਨ",
+     "roman": "tinn"
+    },
+    "five": {
+     "text": "ਪੰਜ",
+     "roman": "panj"
+    },
+    "ten": {
+     "text": "ਦਸ",
+     "roman": "das"
+    },
+    "today": {
+     "text": "ਅੱਜ",
+     "roman": "ajj"
+    },
+    "tomorrow": {
+     "text": "ਕੱਲ੍ਹ",
+     "roman": "kallh",
+     "note": "Also means yesterday; context tells you which."
+    },
+    "now": {
+     "text": "ਹੁਣ",
+     "roman": "hun"
+    },
+    "water": {
+     "text": "ਪਾਣੀ",
+     "roman": "paani"
+    },
+    "food": {
+     "text": "ਖਾਣਾ",
+     "roman": "khaana"
+    },
+    "tea": {
+     "text": "ਚਾਹ",
+     "roman": "chaah"
+    },
+    "tasty": {
+     "text": "ਬਹੁਤ ਸਵਾਦ ਹੈ।",
+     "roman": "bahut swaad hai."
+    },
+    "hungry": {
+     "text": "ਮੈਨੂੰ ਭੁੱਖ ਲੱਗੀ ਹੈ।",
+     "roman": "mainu bhukkh laggi hai."
+    },
+    "less_spicy": {
+     "text": "ਮਿਰਚ ਘੱਟ ਪਾਓ।",
+     "roman": "mirch ghatt paao."
+    },
+    "bill": {
+     "text": "ਬਿੱਲ ਦਿਓ।",
+     "roman": "bill dio."
+    },
+    "vegetarian": {
+     "text": "ਮੈਂ ਸ਼ਾਕਾਹਾਰੀ ਹਾਂ।",
+     "roman": "main shaakaahaari haan."
+    },
+    "where_station": {
+     "text": "ਸਟੇਸ਼ਨ ਕਿੱਥੇ ਹੈ?",
+     "roman": "station kitthe hai?"
+    },
+    "go_left": {
+     "text": "ਖੱਬੇ ਜਾਓ।",
+     "roman": "khabbe jaao."
+    },
+    "go_right": {
+     "text": "ਸੱਜੇ ਜਾਓ।",
+     "roman": "sajje jaao."
+    },
+    "go_straight": {
+     "text": "ਸਿੱਧੇ ਜਾਓ।",
+     "roman": "siddhe jaao."
+    },
+    "stop_here": {
+     "text": "ਇੱਥੇ ਰੋਕੋ।",
+     "roman": "itthe roko."
+    },
+    "how_far": {
+     "text": "ਕਿੰਨੀ ਦੂਰ ਹੈ?",
+     "roman": "kinni door hai?"
+    },
+    "take_me": {
+     "text": "ਮੈਨੂੰ ਉੱਥੇ ਲੈ ਚੱਲੋ।",
+     "roman": "mainu utthe lai challo."
+    },
+    "lost": {
+     "text": "ਮੈਂ ਰਾਹ ਭੁੱਲ ਗਿਆ ਹਾਂ।",
+     "roman": "main raah bhull gaya haan.",
+     "note": "A woman says bhull gayi haan."
+    },
+    "how_much": {
+     "text": "ਇਹ ਕਿੰਨੇ ਦਾ ਹੈ?",
+     "roman": "eh kinne da hai?"
+    },
+    "expensive": {
+     "text": "ਬਹੁਤ ਮਹਿੰਗਾ ਹੈ।",
+     "roman": "bahut mehnga hai."
+    },
+    "reduce": {
+     "text": "ਥੋੜ੍ਹਾ ਘੱਟ ਕਰੋ।",
+     "roman": "thoda ghatt karo."
+    },
+    "want_this": {
+     "text": "ਮੈਨੂੰ ਇਹ ਚਾਹੀਦਾ ਹੈ।",
+     "roman": "mainu eh chaahida hai."
+    },
+    "no_thanks": {
+     "text": "ਨਹੀਂ, ਧੰਨਵਾਦ।",
+     "roman": "nahin, dhannvaad."
+    },
+    "help": {
+     "text": "ਬਚਾਓ!",
+     "roman": "bachaao!"
+    },
+    "call_doctor": {
+     "text": "ਡਾਕਟਰ ਨੂੰ ਬੁਲਾਓ।",
+     "roman": "doctor nu bulaao."
+    },
+    "toilet": {
+     "text": "ਟਾਇਲਟ ਕਿੱਥੇ ਹੈ?",
+     "roman": "toilet kitthe hai?"
+    }
+   }
+  },
+  {
+   "code": "as",
+   "name": "Assamese",
+   "native": "অসমীয়া",
+   "script": "Bengali-Assamese",
+   "tts": "as-IN",
+   "status": "draft",
+   "hello": "নমস্কাৰ",
+   "contributors": [],
+   "phrases": {
+    "hello": {
+     "text": "নমস্কাৰ",
+     "roman": "nomoskar"
+    },
+    "how_are_you": {
+     "text": "আপুনি কেনে আছে?",
+     "roman": "apuni kene ase?"
+    },
+    "im_fine": {
+     "text": "মই ভালে আছোঁ।",
+     "roman": "moi bhale asu."
+    },
+    "thank_you": {
+     "text": "ধন্যবাদ",
+     "roman": "dhonyobad"
+    },
+    "sorry": {
+     "text": "ক্ষমা কৰিব",
+     "roman": "khyoma koribo"
+    },
+    "yes": {
+     "text": "হয়",
+     "roman": "hoy"
+    },
+    "no": {
+     "text": "নহয়",
+     "roman": "nohoy",
+     "note": "For \"I don't want it\", say nalage."
+    },
+    "bye": {
+     "text": "পিছত লগ পাম",
+     "roman": "pisot log pam"
+    },
+    "my_name": {
+     "text": "মোৰ নাম ৰবি।",
+     "roman": "mor nam Robi."
+    },
+    "your_name": {
+     "text": "আপোনাৰ নাম কি?",
+     "roman": "aponar nam ki?"
+    },
+    "where_from": {
+     "text": "আপুনি ক'ৰ পৰা আহিছে?",
+     "roman": "apuni kor pora ahise?"
+    },
+    "i_live_here": {
+     "text": "মই ইয়াতে থাকোঁ।",
+     "roman": "moi iyate thaku."
+    },
+    "dont_understand": {
+     "text": "মই বুজি পোৱা নাই।",
+     "roman": "moi buji puwa nai."
+    },
+    "speak_slowly": {
+     "text": "লাহে লাহে কওক।",
+     "roman": "lahe lahe kowok."
+    },
+    "speak_english": {
+     "text": "আপুনি ইংৰাজী কয় নেকি?",
+     "roman": "apuni ingraji koy neki?"
+    },
+    "nice_to_meet": {
+     "text": "আপোনাক লগ পাই ভাল লাগিল।",
+     "roman": "aponak log pai bhal lagil."
+    },
+    "one": {
+     "text": "এক",
+     "roman": "ek"
+    },
+    "two": {
+     "text": "দুই",
+     "roman": "dui"
+    },
+    "three": {
+     "text": "তিনি",
+     "roman": "tini"
+    },
+    "five": {
+     "text": "পাঁচ",
+     "roman": "pas"
+    },
+    "ten": {
+     "text": "দহ",
+     "roman": "doh"
+    },
+    "today": {
+     "text": "আজি",
+     "roman": "aji"
+    },
+    "tomorrow": {
+     "text": "কাইলৈ",
+     "roman": "kailoi"
+    },
+    "now": {
+     "text": "এতিয়া",
+     "roman": "etiya"
+    },
+    "water": {
+     "text": "পানী",
+     "roman": "pani"
+    },
+    "food": {
+     "text": "ভাত",
+     "roman": "bhat",
+     "note": "Literally rice; used to mean a meal."
+    },
+    "tea": {
+     "text": "চাহ",
+     "roman": "sah"
+    },
+    "tasty": {
+     "text": "বৰ সোৱাদ লাগিছে।",
+     "roman": "bor xuwad lagise.",
+     "note": "In Assamese, x sounds like a soft h or kh."
+    },
+    "hungry": {
+     "text": "মোৰ ভোক লাগিছে।",
+     "roman": "mor bhok lagise."
+    },
+    "less_spicy": {
+     "text": "জলকীয়া কমকৈ দিব।",
+     "roman": "jolokiya komkoi dibo."
+    },
+    "bill": {
+     "text": "বিলখন দিয়ক।",
+     "roman": "bilkhon diyok."
+    },
+    "vegetarian": {
+     "text": "মই নিৰামিষ খাওঁ।",
+     "roman": "moi niramix khau."
+    },
+    "where_station": {
+     "text": "ষ্টেচন ক'ত?",
+     "roman": "station kot?"
+    },
+    "go_left": {
+     "text": "বাওঁফালে যাওক।",
+     "roman": "baufale jaok."
+    },
+    "go_right": {
+     "text": "সোঁফালে যাওক।",
+     "roman": "xufale jaok."
+    },
+    "go_straight": {
+     "text": "পোনে পোনে যাওক।",
+     "roman": "pone pone jaok."
+    },
+    "stop_here": {
+     "text": "ইয়াতে ৰখাওক।",
+     "roman": "iyate rokhaok."
+    },
+    "how_far": {
+     "text": "কিমান দূৰ?",
+     "roman": "kiman dur?"
+    },
+    "take_me": {
+     "text": "মোক তালৈ লৈ যাওক।",
+     "roman": "mok taloi loi jaok."
+    },
+    "lost": {
+     "text": "মই বাট হেৰুৱাইছোঁ।",
+     "roman": "moi bat heruwaisu."
+    },
+    "how_much": {
+     "text": "এইটোৰ দাম কিমান?",
+     "roman": "eitur dam kiman?"
+    },
+    "expensive": {
+     "text": "বৰ দাম।",
+     "roman": "bor dam."
+    },
+    "reduce": {
+     "text": "অলপ কম কৰক।",
+     "roman": "olop kom korok."
+    },
+    "want_this": {
+     "text": "মোক এইটো লাগে।",
+     "roman": "mok eitu lage."
+    },
+    "no_thanks": {
+     "text": "নালাগে, ধন্যবাদ।",
+     "roman": "nalage, dhonyobad."
+    },
+    "help": {
+     "text": "বচাওক!",
+     "roman": "bosaok!"
+    },
+    "call_doctor": {
+     "text": "ডাক্তৰ মাতক।",
+     "roman": "daktor matok."
+    },
+    "toilet": {
+     "text": "বাথৰুম ক'ত?",
+     "roman": "bathroom kot?"
+    }
+   }
+  }
+ ],
+ "count": 48
+}
