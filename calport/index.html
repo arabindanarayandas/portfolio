@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Calport · early preview</title>
-<meta name="description" content="Calport: placement prep with seniors who got placed. Early preview.">
+<title>Calport · beta preview</title>
+<meta name="description" content="Calport: placement prep with seniors who got placed. Beta preview for testing.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -270,6 +270,46 @@
   .check { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; font-size: .9rem; align-items: start; }
   .check .tick { margin-top: 3px; }
   @media (prefers-reduced-motion: reduce) { .thinking::before { animation: none; } }
+  /* web preview: beta bar, transitions, tips */
+  .beta { position: sticky; top: 0; z-index: 60; background: #FFF8E1; border-bottom: 1px solid #F1E2B3; font-size: .82rem; }
+  .beta-in { display: flex; align-items: center; gap: 10px; padding: 7px max(16px, env(safe-area-inset-right, 0px)) 7px max(16px, env(safe-area-inset-left, 0px)); min-height: 44px; flex-wrap: wrap; }
+  .beta-tag { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 999px; background: #3D2F00; color: #FFF8E1; font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; flex-shrink: 0; }
+  .beta-txt { color: #5C4A00; min-width: 0; }
+  .beta-sp { flex: 1; }
+  .beta-nav { display: inline-flex; gap: 4px; }
+  .beta-btn { display: inline-flex; align-items: center; gap: 4px; height: 30px; padding: 0 10px; border: 1px solid #E6D69F; background: #FFFFFF; border-radius: 8px; font-size: .8rem; font-weight: 600; color: var(--ink); cursor: pointer; }
+  .beta-btn svg { width: 14px; height: 14px; }
+  .beta-btn:hover:not(:disabled) { background: #FFFDF5; border-color: #D9C47F; }
+  .beta-btn:disabled { opacity: .4; cursor: default; }
+  .beta-pick { display: inline-flex; align-items: center; gap: 8px; color: #5C4A00; font-weight: 600; white-space: nowrap; }
+  body.has-beta { margin: 0; }
+  .beta-pick select { height: 30px; border: 1px solid #E6D69F; border-radius: 8px; background: #FFFFFF; padding: 0 8px; font: inherit; font-weight: 500; color: var(--ink); max-width: 260px; }
+  .beta-login { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 10px; background: #FFF8E1; border: 1px solid #F1E2B3; color: #5C4A00; }
+  .beta-login .beta-tag { margin-top: 1px; }
+  body.has-beta .side { top: 44px; height: calc(100vh - 44px); }
+  @media (max-width: 860px) {
+    .beta-more { display: none; }
+    .beta-in { gap: 8px; row-gap: 6px; }
+    .beta-pick { order: 5; width: 100%; }
+    .beta-pick select { flex: 1; max-width: none; }
+    .beta-btn span { display: none; }
+    .beta-btn { padding: 0 8px; }
+    .beta { position: relative; }
+    body.has-beta .side { top: 0; height: auto; }
+  }
+  .vt { animation: vt-in .22s cubic-bezier(.2, .7, .2, 1) both; }
+  @keyframes vt-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .tip { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 14px 16px; border-radius: 12px; background: #EEF4FF; border: 1px solid #D6E3FB; transition: opacity .18s, transform .18s; }
+  .tip-ic { display: inline-flex; width: 30px; height: 30px; border-radius: 8px; background: #FFFFFF; color: #2F5BD3; align-items: center; justify-content: center; }
+  .tip-ic svg { width: 16px; height: 16px; }
+  .tip-b b { font-size: .9rem; }
+  .tip-b p { font-size: .84rem; color: #3B4A66; margin-top: 2px; line-height: 1.45; }
+  .tip-a { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+  .tip-a .btn.text { color: #4A5A78; }
+  .tip-out { opacity: 0; transform: translateY(-4px); }
+  @media (max-width: 560px) { .tip { grid-template-columns: auto minmax(0, 1fr); } .tip-a { grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; align-items: center; gap: 10px; } }
+  @media (prefers-reduced-motion: reduce) { .vt { animation: none; } .tip { transition: none; } }
+
 
   /* ---------- first-run journey ---------- */
   .jr { max-width: 720px; }
@@ -548,6 +588,7 @@
   function greeting() { var h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
   function on(sel, ev, fn) { root.querySelectorAll(sel).forEach(function (el) { el.addEventListener(ev, function (e) { fn(el, e); }); }); }
   var ICON = {
+    back: '<path d="M15 18l-6-6 6-6"/>', next: '<path d="M9 18l6-6-6-6"/>', info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
     pin: '<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
     bolt: '<path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/>',
     hand: '<path d="M5 12.5 9.5 17 19 7.5"/>',
@@ -741,6 +782,7 @@
   function me() { return DB.session ? DB.users[DB.session] : null; }
   function log(who, text) { DB.activity.unshift({ who: who, text: text, at: new Date().toISOString() }); DB.activity = DB.activity.slice(0, 30); }
   var UI = { view: null, sub: null, param: null };
+  var PREVIEW = true; /* true only in the shared web preview build */
 
   /* ---------- AI ---------- */
   var sample = null, sampleReady = false;
@@ -875,8 +917,9 @@
         '<div><h2 style="font-size:1.6rem">Welcome back</h2><p class="muted" style="margin-top:4px">Sign in with your email and password.</p></div>' +
         '<form id="signin" class="stack" novalidate><label class="field"><span>Email</span><input type="email" id="si-email" autocomplete="username" placeholder="you@college.edu"></label><label class="field"><span>Password</span><input type="password" id="si-pass" autocomplete="current-password" placeholder="Your password"></label>' +
         (loginErr ? '<div class="status err small">' + esc(loginErr) + '</div>' : '') + '<button class="btn lg block" type="submit">Sign in</button></form>' +
-        '<div class="stack" style="gap:8px"><div class="between"><span class="label">Demo accounts</span><span class="tiny muted">Password for all: <b class="mono" style="color:var(--ink)">calport123</b></span></div><div class="card" style="overflow:hidden">' +
-        demos.map(function (u, i) { return '<button class="demo-row" data-fill="' + esc(u.email) + '" style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;text-align:left;border:0;' + (i ? 'border-top:1px solid var(--line);' : '') + 'background:#FFFFFF;padding:10px 12px"><span class="avatar" style="width:32px;height:32px;font-size:.74rem">' + esc(initials(u.name)) + '</span><span style="min-width:0"><b style="font-size:.88rem">' + esc(u.demo) + '</b> <span class="small muted">· ' + esc(u.name) + '</span><br><span class="tiny muted mono">' + esc(u.email) + '</span><br><span class="tiny muted">' + esc(whatYouSee(u)) + '</span></span><span class="small" style="font-weight:600;text-decoration:underline">Use</span></button>'; }).join('') + '</div><p class="tiny muted">Tap an account to fill in its email and password, then sign in.</p></div>' :
+        (PREVIEW ? '<div class="beta-login"><span class="beta-tag">Beta</span><p class="small">This is an early test version of Calport. Sign in with the email and password you were sent. Once inside, use <b>Viewing as</b> at the top to see the app as a different student or mentor.</p></div>' : '') +
+        (PREVIEW ? '' : '<div class="stack" style="gap:8px"><div class="between"><span class="label">Demo accounts</span><span class="tiny muted">Password for all: <b class="mono" style="color:var(--ink)">calport123</b></span></div><div class="card" style="overflow:hidden">' +
+        demos.map(function (u, i) { return '<button class="demo-row" data-fill="' + esc(u.email) + '" style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;text-align:left;border:0;' + (i ? 'border-top:1px solid var(--line);' : '') + 'background:#FFFFFF;padding:10px 12px"><span class="avatar" style="width:32px;height:32px;font-size:.74rem">' + esc(initials(u.name)) + '</span><span style="min-width:0"><b style="font-size:.88rem">' + esc(u.demo) + '</b> <span class="small muted">· ' + esc(u.name) + '</span><br><span class="tiny muted mono">' + esc(u.email) + '</span><br><span class="tiny muted">' + esc(whatYouSee(u)) + '</span></span><span class="small" style="font-weight:600;text-decoration:underline">Use</span></button>'; }).join('') + '</div><p class="tiny muted">Tap an account to fill in its email and password, then sign in.</p></div>') :
         '<div><h2 style="font-size:1.6rem">Create your account</h2><p class="muted" style="margin-top:4px">Takes about a minute.</p></div>' +
         '<div class="seg" role="group" aria-label="Account type" style="width:100%"><button style="flex:1" data-sr="learner" aria-pressed="' + (signupRole === 'learner') + '">I\'m a student</button><button style="flex:1" data-sr="expert" aria-pressed="' + (signupRole === 'expert') + '">I want to mentor</button></div>' +
         '<form id="signup" class="stack" novalidate><label class="field"><span>Full name</span><input type="text" id="su-name" autocomplete="name"></label><label class="field"><span>Email</span><input type="email" id="su-email" autocomplete="email" placeholder="you@college.edu"></label><label class="field"><span>Password</span><input type="password" id="su-pass" autocomplete="new-password" placeholder="At least 6 characters"></label>' +
@@ -890,7 +933,7 @@
       var em = $('si-email').value.trim().toLowerCase(), pw = $('si-pass').value;
       var u = Object.keys(DB.users).map(function (k) { return DB.users[k]; }).find(function (x) { return (x.email || '').toLowerCase() === em; });
       if (!em || !pw) { loginErr = 'Enter your email and password.'; vLogin(); return; }
-      if (!u || u.password !== pw) { loginErr = 'That email and password don\'t match. Check for typos, or use a demo account below.'; vLogin(); $('si-email').value = em; return; }
+      if (!u || u.password !== pw) { loginErr = PREVIEW ? 'That email and password don\'t match. Check for typos.' : 'That email and password don\'t match. Check for typos, or use a demo account below.'; vLogin(); $('si-email').value = em; return; }
       loginErr = ''; if (u.fresh) { resetDemo(); ob.step = 0; } DB.session = u.id; save(); UI.view = null; render();
     });
     var su = $('signup'); if (su) su.addEventListener('submit', function (e) {
@@ -1037,7 +1080,8 @@
     expert: [['dash', 'Dashboard', 'dash'], ['requests', 'Requests', 'inbox'], ['esessions', 'Sessions', 'sessions'], ['impact', 'My impact', 'impact'], ['avail', 'Availability', 'calendar'], ['eprofile', 'Profile', 'profile']]
   };
   function go(view, param) { UI.view = view; UI.param = param || null; render(); window.scrollTo(0, 0); }
-  function render() {
+  function render() { render0(); if (PREVIEW) previewAfter(); }
+  function render0() {
     var u = me();
     if (!u) { vLogin(); return; }
     if (u.onboarded === false) { vOnboard(); return; }
@@ -1056,6 +1100,91 @@
     journeyAfter();
   }
   function view() { return $('view'); }
+  /* ---------- web preview only: beta bar, personas, history, transitions, tips ---------- */
+  var PERSONAS = [
+    ['u-demo', 'Brand-new student (starts fresh)'], ['u-y1', '1st year student'], ['u-y2', '2nd year student'], ['u-learner', '3rd year student'], ['u-y4', '4th year student'], ['u-new', 'Student signing up'],
+    ['u-senior', 'Placed senior mentor'], ['u-expert', 'Experienced mentor'], ['u-newm', 'Mentor signing up']
+  ];
+  var LEARNER_VIEWS = ['home', 'path', 'practice', 'learn', 'experts', 'sessions', 'session', 'board', 'profile', 'apps'];
+  var EXPERT_VIEWS = ['dash', 'requests', 'esessions', 'brief', 'room', 'avail', 'eprofile', 'impact'];
+  var hist = { i: 0, max: 0, popping: false, lastKey: null, lastSess: undefined };
+  function viewOk(u, v) { return !!v && (u.role === 'learner' ? LEARNER_VIEWS : EXPERT_VIEWS).indexOf(v) !== -1; }
+  function stateKey() { var u = me(); return !u ? 'login' : u.onboarded === false ? 'onboard' : (UI.view || '') + '/' + (UI.param || ''); }
+  function stateHash() { var u = me(); if (!u) return '#/signin'; if (u.onboarded === false) return '#/welcome'; return '#/' + UI.view + (UI.param ? '/' + encodeURIComponent(UI.param) : ''); }
+  function switchPersona(id) {
+    if (!DB.users[id]) return;
+    if (id === 'u-demo') resetDemo();
+    if (id === 'u-new' || id === 'u-newm') { var f = seed().users[id]; if (f) DB.users[id] = f; }
+    ob.step = 0; DB.session = id; UI.view = null; UI.param = null; save(); render(); window.scrollTo(0, 0);
+  }
+  function betaBarHTML() {
+    var u = me(), opts = PERSONAS.filter(function (p) { return DB.users[p[0]]; });
+    var mine = u && !PERSONAS.some(function (p) { return p[0] === u.id; });
+    return '<div class="beta-in"><span class="beta-tag">Beta</span><span class="beta-txt">Test version<span class="beta-more"> · nothing here is real, data stays in this browser</span></span>' +
+      '<span class="beta-sp"></span>' +
+      (u ? '<span class="beta-nav"><button class="beta-btn" id="bk-back" aria-label="Back"' + (hist.i <= 0 ? ' disabled' : '') + '>' + icon('back') + '<span>Back</span></button><button class="beta-btn" id="bk-fwd" aria-label="Forward"' + (hist.i >= hist.max ? ' disabled' : '') + '><span>Forward</span>' + icon('next') + '</button></span>' : '') +
+      (u ? '<label class="beta-pick"><span>Viewing as</span><select id="persona" aria-label="Viewing as">' + (mine ? '<option value="' + esc(u.id) + '" selected>Your account (' + esc(u.name) + ')</option>' : '') +
+        '<optgroup label="Students">' + opts.filter(function (p) { return DB.users[p[0]].role === 'learner'; }).map(function (p) { return '<option value="' + p[0] + '"' + (u.id === p[0] ? ' selected' : '') + '>' + esc(p[1]) + '</option>'; }).join('') + '</optgroup>' +
+        '<optgroup label="Mentors">' + opts.filter(function (p) { return DB.users[p[0]].role === 'expert'; }).map(function (p) { return '<option value="' + p[0] + '"' + (u.id === p[0] ? ' selected' : '') + '>' + esc(p[1]) + '</option>'; }).join('') + '</optgroup></select></label>' : '') +
+      '</div>';
+  }
+  function drawBeta() {
+    var bar = document.getElementById('beta');
+    if (!bar) { bar = document.createElement('div'); bar.id = 'beta'; bar.className = 'beta'; document.body.insertBefore(bar, document.body.firstChild); document.body.classList.add('has-beta'); }
+    bar.innerHTML = betaBarHTML();
+    var bb = $('bk-back'); if (bb) bb.addEventListener('click', function () { history.back(); });
+    var bf = $('bk-fwd'); if (bf) bf.addEventListener('click', function () { history.forward(); });
+    var ps = $('persona'); if (ps) ps.addEventListener('change', function () { switchPersona(ps.value); });
+  }
+  function previewAfter() {
+    var key = stateKey(), sess = DB.session || null, changed = key !== hist.lastKey || sess !== hist.lastSess;
+    if (!hist.popping && changed) {
+      /* Signing in or out replaces the entry, so Back never lands on the sign-in page. Switching persona or page adds one. */
+      var replace = hist.lastKey === null || !sess || !hist.lastSess;
+      try {
+        if (replace) history.replaceState({ i: hist.i, s: sess, v: UI.view, p: UI.param }, '', stateHash());
+        else { hist.i++; hist.max = hist.i; history.pushState({ i: hist.i, s: sess, v: UI.view, p: UI.param }, '', stateHash()); }
+      } catch (e) {}
+    }
+    hist.popping = false;
+    if (changed && hist.lastKey !== null) {
+      var el = $('view') || root.firstElementChild;
+      if (el) { el.classList.remove('vt'); void el.offsetWidth; el.classList.add('vt'); }
+    }
+    hist.lastKey = key; hist.lastSess = sess;
+    drawBeta();
+  }
+  window.addEventListener('popstate', function (e) {
+    if (!PREVIEW) return;
+    var st = e.state || {};
+    if (typeof st.i === 'number') hist.i = st.i;
+    if (st.s && DB.users[st.s] && st.s !== DB.session) { DB.session = st.s; ob.step = 0; save(); }
+    var u = me();
+    if (u && viewOk(u, st.v)) { UI.view = st.v; UI.param = st.p || null; }
+    hist.popping = true;
+    render(); window.scrollTo(0, 0);
+  });
+  /* On first load, open the page in the address bar if it fits the signed-in person. */
+  function previewBoot() {
+    try { if (history.state && typeof history.state.i === 'number') { hist.i = history.state.i; hist.max = hist.i; } } catch (e) {}
+    var m = (location.hash || '').match(/^#\/([a-z]+)(?:\/(.+))?$/), u = me();
+    if (m && u && u.onboarded !== false && viewOk(u, m[1])) { UI.view = m[1]; UI.param = m[2] ? decodeURIComponent(m[2]) : null; }
+  }
+  /* Tutorial cards: short, dismissible, remembered per person. */
+  function tip(id, title, text) {
+    if (!PREVIEW) return '';
+    var u = me(); if (!u || (u.tips && (u.tips[id] || u.tips._all))) return '';
+    return '<div class="tip" data-tip="' + id + '"><span class="tip-ic">' + icon('info') + '</span><div class="tip-b"><b>' + title + '</b><p>' + text + '</p></div><div class="tip-a"><button class="btn sm secondary" data-tipx="' + id + '">Got it</button><button class="btn text tiny" data-tipall="1">Hide all tips</button></div></div>';
+  }
+  document.addEventListener('click', function (e) {
+    var x = e.target.closest && e.target.closest('[data-tipx],[data-tipall]'); if (!x) return;
+    var u = me(); if (!u) return; u.tips = u.tips || {};
+    if (x.dataset.tipall) u.tips._all = true; else u.tips[x.dataset.tipx] = true;
+    save();
+    var els = x.dataset.tipall ? document.querySelectorAll('.tip') : [x.closest('.tip')];
+    Array.prototype.forEach.call(els, function (t) { if (!t) return; t.classList.add('tip-out'); setTimeout(function () { t.remove(); }, 180); });
+  });
+
   vPath = jw(vPath); vPractice = jw(vPractice); vLearn = jw(vLearn); vExperts = jw(vExperts); vSessions = jw(vSessions); vSession = jw(vSession); vProfile = jw(vProfile);
   function jw(f) { return function () { var r = f.apply(this, arguments); journeyAfter(); return r; }; }
   function head(title, sub, actions) { return '<div class="pagehead"><div><h1>' + title + '</h1>' + (sub ? '<p>' + sub + '</p>' : '') + '</div>' + (actions ? '<div class="row">' + actions + '</div>' : '') + '</div>'; }
@@ -1109,13 +1238,15 @@
     var u = L(), rd = readiness(), na = nextAction(), years = yearsFor(), cur = years[u.year - 1], doneCur = cur.items.filter(isDone).length;
     var up = myBookings().filter(function (b) { return (b.status === 'confirmed' || b.status === 'requested') && new Date(b.slot) > new Date(); }).sort(function (a, b) { return new Date(a.slot) - new Date(b.slot); });
     view().innerHTML = head(greeting() + ', ' + esc(u.name.split(' ')[0]), ORD[u.year - 1] + ' year · ' + esc(u.college) + ' · aiming for ' + esc(ROLES[u.track].name.toLowerCase())) +
+      tip('l-next', 'Start with the dark card', 'It always shows the one thing most worth doing next. Finish it and it changes to the next step.') +
       '<div class="next"><div><div class="label">' + esc(na.label) + '</div><h3>' + esc(na.title) + '</h3><p>' + esc(na.text) + '</p></div><button class="btn" id="na">' + esc(na.btn) + '</button></div>' +
       startedHTML() +
+      tip('l-tiles', 'Your numbers at a glance', 'Placement readiness goes up as you practise, finish milestones and get mentor scorecards. Answer one question a day to keep your streak.') +
       '<div class="tiles"><div><b>' + rd + '<span class="muted" style="font-size:.95rem;font-weight:500"> / 100</span></b><span>Placement readiness</span><div class="meter"><i style="width:' + rd + '%"></i></div></div><div><b>' + u.streak + '</b><span>Day streak' + (u.last === dayKey() ? ', done today' : '') + '</span></div><div><b>' + u.xp + '</b><span>XP earned</span></div><div><b>' + doneCur + '/' + cur.items.length + '</b><span>Year ' + u.year + ' milestones</span></div></div>' +
       yearModuleHTML() +
-      '<div class="grid-main"><div class="stack-lg">' + dailyHTML() +
+      '<div class="grid-main"><div class="stack-lg">' + tip('l-daily', 'Question of the day', 'A two-minute question. Type your answer and get feedback on it. It counts towards your streak.') + dailyHTML() +
       '<div class="card"><div class="card-head"><h3>Year ' + u.year + ': ' + esc(cur.title) + '</h3><button class="btn text" data-go="path">See full path</button></div><div class="card-body"><ul class="ms">' + cur.items.map(msHTML).join('') + '</ul></div></div></div>' +
-      '<div class="stack-lg"><div class="card"><div class="card-head"><h3>Upcoming sessions</h3><button class="btn text" data-go="sessions">All</button></div><div class="card-body">' + (up.length ? '<ul class="list">' + up.slice(0, 3).map(function (b) { var e = expertById(b.expert); return '<li class="row" style="flex-wrap:nowrap"><span class="avatar">' + esc(initials(e.name)) + '</span><span style="flex:1;min-width:0"><b>' + esc(e.name) + '</b><br><span class="small muted">' + fmtSlot(b.slot) + '</span></span>' + statusPill(b.status) + '</li>'; }).join('') + '</ul>' : '<p class="muted small">No sessions booked yet. A mock with an alum is the fastest way to find your blind spots.</p><button class="btn ghost sm" style="margin-top:12px" data-go="experts">Find an alum</button>') + '</div></div>' +
+      '<div class="stack-lg">' + tip('l-mentor', 'Talk to someone who has done it', 'Book a mock interview or a career chat with a senior from your college. Your first sessions are free.') + '<div class="card"><div class="card-head"><h3>Upcoming sessions</h3><button class="btn text" data-go="sessions">All</button></div><div class="card-body">' + (up.length ? '<ul class="list">' + up.slice(0, 3).map(function (b) { var e = expertById(b.expert); return '<li class="row" style="flex-wrap:nowrap"><span class="avatar">' + esc(initials(e.name)) + '</span><span style="flex:1;min-width:0"><b>' + esc(e.name) + '</b><br><span class="small muted">' + fmtSlot(b.slot) + '</span></span>' + statusPill(b.status) + '</li>'; }).join('') + '</ul>' : '<p class="muted small">No sessions booked yet. A mock with an alum is the fastest way to find your blind spots.</p><button class="btn ghost sm" style="margin-top:12px" data-go="experts">Find an alum</button>') + '</div></div>' +
       inviteBatchHTML(u) +
       '<div class="card"><div class="card-head"><h3>Your batch this week</h3><button class="btn text" data-go="board">Leaderboard</button></div><div class="card-body">' + boardHTML('batch', 5) + '</div></div></div></div>';
     $('na').addEventListener('click', function () { doGo(na.go); });
@@ -1780,14 +1911,15 @@
     var u = E(), req = eBookings(['requested']), up = eBookings(['confirmed']).sort(function (a, b) { return new Date(a.slot) - new Date(b.slot); }), done = eBookings(['completed']), cp = completeness();
     var acts = DB.activity.filter(function (a) { return a.who === u.id; }).slice(0, 6);
     view().innerHTML = head(greeting() + ', ' + esc(u.name.split(' ')[0]), 'Help students from ' + esc(u.alumCollege) + ' and beyond get interview-ready.', (u.founding ? '<span class="pill grey">\u2605 Founding mentor</span>' : '') + '<span class="pill">' + (u.tier === 'senior' ? 'Senior mentor' : 'Expert') + '</span>') +
+      tip('m-start', 'How mentoring works here', 'Students send you requests for times you have opened. Accept one, run a 45-minute call, then fill in a short scorecard so they know what to fix.') +
       '<div class="why-in"><span class="why-mark">“</span><p>' + mentorNudge(u) + '</p></div>' +
       (cp.pct < 100 ? '<div class="next"><div><div class="label">Profile ' + cp.pct + '% complete</div><h3>Finish your profile to appear at the top of search</h3><p>' + cp.items.filter(function (x) { return !x[1]; }).map(function (x) { return x[0]; }).join(' · ') + '</p></div><button class="btn" id="fix">Complete profile</button></div>' :
         req.length ? '<div class="next"><div><div class="label">Action needed</div><h3>' + req.length + ' new request' + (req.length > 1 ? 's' : '') + ' waiting for you</h3><p>Students are waiting to hear back. Accept or suggest another time.</p></div><button class="btn" id="toreq">Review requests</button></div>' : '') +
       '<div class="tiles"><div><b>' + req.length + '</b><span>New requests</span></div><div><b>' + up.length + '</b><span>Upcoming sessions</span></div><div><b>' + (u.sessionsDone || 0) + '</b><span>Sessions completed</span></div><div><b>' + (u.rating ? u.rating.toFixed(1) : '–') + '</b><span>Average rating' + (u.ratings ? ' (' + u.ratings + ')' : '') + '</span></div></div>' +
-      '<div class="grid-main"><div class="stack-lg"><div class="card"><div class="card-head"><h3>Upcoming sessions</h3><button class="btn text" data-go="esessions">All</button></div><div class="card-body">' + (up.length ? '<ul class="list">' + up.slice(0, 4).map(function (b) { return '<li class="row" style="flex-wrap:nowrap;gap:12px">' + who(b.learner.name, esc(fmtSlot(b.slot)) + ' · ' + relDay(b.slot) + ' · ' + esc(b.focus)).replace('class="dt-who"', 'class="dt-who" style="flex:1"') + '<button class="btn ghost sm" data-brief="' + b.id + '">Open brief</button></li>'; }).join('') + '</ul>' : '<p class="muted small">No sessions scheduled yet. ' + (eBookings().length ? 'Accept a request or open more slots.' : 'Share your invite link with juniors; requests usually start within a few days.') + '</p>') + '</div></div>' +
+      '<div class="grid-main"><div class="stack-lg">' + tip('m-avail', 'Open a few times first', 'Students can only book times you have opened. Go to Availability and add two or three slots this week.') + '<div class="card"><div class="card-head"><h3>Upcoming sessions</h3><button class="btn text" data-go="esessions">All</button></div><div class="card-body">' + (up.length ? '<ul class="list">' + up.slice(0, 4).map(function (b) { return '<li class="row" style="flex-wrap:nowrap;gap:12px">' + who(b.learner.name, esc(fmtSlot(b.slot)) + ' · ' + relDay(b.slot) + ' · ' + esc(b.focus)).replace('class="dt-who"', 'class="dt-who" style="flex:1"') + '<button class="btn ghost sm" data-brief="' + b.id + '">Open brief</button></li>'; }).join('') + '</ul>' : '<p class="muted small">No sessions scheduled yet. ' + (eBookings().length ? 'Accept a request or open more slots.' : 'Share your invite link with juniors; requests usually start within a few days.') + '</p>') + '</div></div>' +
       trackCard(u) + '</div>' +
       '<div class="stack-lg"><div class="card"><div class="card-head"><h3>Activity</h3></div><div class="card-body">' + (acts.length ? '<ul class="list">' + acts.map(function (a) { return '<li class="small"><span>' + esc(a.text) + '</span><br><span class="tiny muted">' + relDay(a.at) + '</span></li>'; }).join('') + '</ul>' : '<p class="small muted">Nothing yet.</p>') + '</div></div>' +
-      foundingCard(u) + inviteCard(u) + (u.tier === 'senior' ? '' : '<div class="card pad stack"><h3>Earnings</h3><p><b class="mono" style="font-size:1.4rem">' + inr((u.sessionsDone || 0) * u.rate * 0.75) + '</b> <span class="small muted">so far, at ' + inr(u.rate) + ' a session</span></p><p class="tiny muted">Example figure. Payouts aren\'t set up in this prototype.</p></div>') + '</div></div>';
+      tip('m-share', 'Bring your juniors in', 'Share your invite link with juniors you would like to help. Students you vouch for show up on your record.') + foundingCard(u) + inviteCard(u) + (u.tier === 'senior' ? '' : '<div class="card pad stack"><h3>Earnings</h3><p><b class="mono" style="font-size:1.4rem">' + inr((u.sessionsDone || 0) * u.rate * 0.75) + '</b> <span class="small muted">so far, at ' + inr(u.rate) + ' a session</span></p><p class="tiny muted">Example figure. Payouts aren\'t set up in this prototype.</p></div>') + '</div></div>';
     var fx = $('fix'); if (fx) fx.addEventListener('click', function () { go('eprofile'); });
     var tr = $('toreq'); if (tr) tr.addEventListener('click', function () { go('requests'); });
     on('[data-go]', 'click', function (b) { go(b.dataset.go, b.dataset.anchor); });
@@ -2107,6 +2239,7 @@
     if (UI.param === 'used') { var el = $('used'); if (el) el.scrollIntoView(); UI.param = null; }
   }
 
+  if (PREVIEW) previewBoot();
   render();
 })();
 
