@@ -287,6 +287,55 @@
   .room-comp:first-child { border-top: 0; padding-top: 0; }
   .check { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; font-size: .9rem; align-items: start; }
   .check .tick { margin-top: 3px; }
+
+  /* game elements */
+  .frz { display: block; margin-top: 4px; font-size: .74rem; color: #2F5BD3; font-weight: 600; }
+  .frz.off { color: var(--faint); font-weight: 500; }
+  .pill.cd { background: #FFF1E6; border-color: #F6D9C2; color: #8A4A12; }
+  .pill.cd b { font-weight: 700; }
+  .co-list { display: grid; }
+  .co-row { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) 96px; gap: 16px; align-items: center; padding: 11px 0; border-top: 1px solid var(--line); }
+  .co-row:first-child { border-top: 0; padding-top: 0; }
+  .co-n b { display: block; font-size: .92rem; }
+  .co-n small { color: var(--muted); font-size: .78rem; }
+  .co-bar { display: block; height: 8px; border-radius: 99px; background: var(--soft); overflow: hidden; }
+  .co-bar i { display: block; height: 100%; background: var(--ink); border-radius: 99px; }
+  .co-row.ok .co-bar i { background: #2E9E5B; }
+  .co-s { text-align: right; }
+  @media (max-width: 560px) { .co-row { grid-template-columns: minmax(0, 1fr) auto; row-gap: 6px; } .co-m { grid-column: 1 / -1; grid-row: 2; } }
+  .lg-consent { display: grid; gap: 12px; padding: 16px; border: 1px solid #D6E3FB; background: #F5F8FF; border-radius: 12px; }
+  .lg-consent.compact { padding: 0; border: 0; background: none; }
+  .lg-consent p { margin-top: 2px; }
+  .lg-opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .lg-opts button { text-align: left; border: 1px solid var(--line2); background: #FFFFFF; border-radius: 10px; padding: 10px 12px; cursor: pointer; min-width: 0; }
+  .lg-opts button b { display: block; font-size: .86rem; }
+  .lg-opts button span { display: block; font-size: .76rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lg-opts button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .card-body.stack > .lg-consent.compact { padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .lg-consent.compact .lg-opts { grid-template-columns: 1fr; }
+  .lg-consent.compact .lg-opts button { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+  .lg-consent.compact .lg-opts button span { white-space: normal; text-align: right; }
+  @media (max-width: 560px) { .lg-opts { grid-template-columns: 1fr; } }
+  .sq { display: grid; gap: 2px; }
+  .sq-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 7px 0; }
+  .sq-row .avatar { width: 30px; height: 30px; font-size: .72rem; }
+  .sq-row.empty .avatar { background: var(--soft); color: var(--faint); border: 1px dashed var(--line2); }
+  .sq-row.empty .sq-n { color: var(--faint); }
+  .sq-n { font-size: .9rem; font-weight: 600; }
+  .sq-d { display: inline-flex; gap: 4px; }
+  .sq-d i { width: 14px; height: 14px; border-radius: 4px; background: var(--soft); border: 1px solid var(--line); }
+  .sq-d i.on { background: #2E9E5B; border-color: #2E9E5B; }
+  .lvl-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); font-size: .9rem; }
+  .lvl-s { display: inline-flex; align-items: center; gap: 6px; color: var(--faint); }
+  .lvl-strip { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 12px 14px; border-radius: 12px; background: #EAF7EF; border: 1px solid #CBEBD7; font-size: .9rem; }
+  .sa { margin-top: 4px; padding: 14px; border-radius: 12px; background: #F7F3FF; border: 1px solid #E6DCFB; display: grid; gap: 8px; }
+  .sa-h { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .sa p { font-size: .9rem; line-height: 1.55; }
+  .sa.locked { display: flex; gap: 10px; align-items: center; background: var(--soft2); border: 1px dashed var(--line2); color: var(--muted); font-size: .86rem; padding: 12px 14px; }
+  .thx { padding: 10px 0; border-top: 1px solid var(--line); }
+  .thx:first-of-type { border-top: 0; padding-top: 0; }
+  .thx p { font-size: .9rem; }
+  .motm.me { background: #FFF8E1; border-color: #F1E2B3; }
   @media (prefers-reduced-motion: reduce) { .thinking::before { animation: none; } }
   /* web preview: beta bar, transitions, tips */
   .beta { position: sticky; top: 0; z-index: 60; background: #FFF8E1; border-bottom: 1px solid #F1E2B3; font-size: .82rem; }
@@ -659,6 +708,53 @@
     design: ['Pick an app screen you find confusing. What would you change and why?', 'How would you design a hostel room booking flow for first-year students?', 'When would you make a wireframe, and when a clickable prototype?', 'How do you test whether a design works before it is built?', 'Walk me through a design decision you made and the trade-off behind it.'],
     core: ['Explain how a heat exchanger works and where you would use one.', 'How would you cut energy use in a hostel building? Lay out your approach.', 'Explain stress and strain, and what a stress-strain curve tells you.', 'Walk me through a project or lab experiment you did and what went wrong.', 'How would you choose a material for a lightweight bicycle frame?']
   };
+
+  /* How a placed senior answered each daily question. Shown after the student answers. */
+  var SENIOR_BY = { swe: ['Ritika Bhuyan', 'Software engineer · placed 2024'], data: ['Aman Goyal', 'Data analyst · placed 2023'], pm: ['Pooja Nath', 'Associate PM · placed 2024'], consult: ['Siddharth Rao', 'Business analyst · placed 2023'], design: ['Pooja Nath', 'Associate PM · placed 2024'], core: ['Dhruv Kakoti', 'Design engineer, auto company · placed 2024'] };
+  var SENIOR_ANS = {
+    swe: ['A process is a running program with its own memory; threads live inside a process and share that memory. I’d use separate processes when isolation matters, like browser tabs, and threads when tasks share data, like a server handling many requests. Threads are cheaper but need locks.',
+      'One pass to count each character in a hash map, then a second pass to return the first one with a count of 1. That’s O(n) time and O(1) extra space, since the alphabet is fixed. I’d mention the edge case where there’s no answer and return -1.',
+      'DNS turns the name into an IP address, the browser opens a TCP connection and does the TLS handshake, then sends an HTTP request. The server sends back HTML, and the browser parses it, fetches CSS, scripts and images, and renders the page. I go one level deeper wherever the interviewer looks interested.',
+      'An API that takes a long URL and returns a short code, a database mapping code to URL, and a redirect service. I’d generate codes with base62 on a counter, put a cache in front because reads far outnumber writes, and bring up analytics only if there’s time.',
+      'Use the STAR shape, but spend most of the time on how you debugged. Mine: a crash that only happened on some phones. I reproduced it on an emulator with low memory, added logs, and found an image that wasn’t being released. End with what you do differently now.'],
+    data: ['First, is it real? Check tracking and the data pipeline. Then: did something change, like a release, pricing or an outage? Is it one segment, platform or city? Is it seasonal compared with the same week last year? And did a related metric move too?',
+      'The mean is the average; the median is the middle value. When data is skewed, like salaries or order values with a few huge ones, the median tells you what a typical person sees. I always say which one I’m using and why.',
+      'Group sales by city and product to get revenue, then use a window function: RANK() OVER (PARTITION BY city ORDER BY revenue DESC). Wrap that in a subquery and keep rank 3 or less. Mention how you’d handle ties.',
+      'If the change made no difference at all, the p-value is the chance we’d still see a result this big. A small p-value, under 5%, means luck alone is an unlikely explanation. It doesn’t tell you how big or important the effect is.',
+      'Ideally an A/B test: compare day-7 and day-30 retention between users who got the feature and a control group. If that isn’t possible, compare similar users before and after, and check nothing else changed at the same time.'],
+    pm: ['I’d pick a food app’s reorder flow. Regulars order the same thing, yet it takes five taps. I’d add a one-tap “usual order” on the home screen and measure repeat orders and time to checkout, while watching that basket size doesn’t drop.',
+      'Start with the users: students who lose things and students who find them. The core problem is matching them quickly. A simple post with photo, place and category, with alerts for people who reported something similar. Success is the share of items returned within 48 hours.',
+      'First, check it’s real: tracking, a data delay or a holiday. Then split it by platform, app version, city, and new versus returning users. Look for a release, an outage or a competitor offer. Narrow it to one segment before guessing a cause.',
+      'Score each on impact on our main goal, how confident we are in that impact, and effort. Talk to a few users if confidence is low. Pick the one that moves the goal most for the effort, and say what would change your mind.',
+      'Pick a real disagreement. Show you listened first, then used data or a small test instead of arguing. Mine: my club wanted a bigger fest budget; I showed last year’s footfall per rupee and we moved money to marketing. End with the result.'],
+    consult: ['Start from households: about 30 crore, roughly half own a two-wheeler. If a bike lasts 8 to 10 years, replacements alone are about 1.6 to 1.8 crore a year. Add first-time buyers and you land near 2 crore. Say assumptions out loud and sanity-check at the end.',
+      'Profit is revenue minus costs. On revenue: footfall, price and spend per visit, by store. On costs: rent, staff, ingredients. Find where the drop is concentrated, which stores and which line, before suggesting fixes.',
+      'Compare the cost to serve with the value of each customer. Branches build trust and reach people who aren’t online yet; digital is far cheaper. I’d look at smartphone use and transaction types in those towns, and probably suggest a mix, with branches only where demand is high.',
+      'Market size and growth, customers and what they need, competitors and how they win, regulation, and whether we have an advantage there. Then the cost of entering and how: build, partner or buy.',
+      'Tell it as a story: the problem, what made it hard, what you did as the leader, and the result with a number. Show how you got people to agree, and one thing you’d do differently.'],
+    design: ['Name the screen and what the user is trying to do, then what gets in the way. For example, a bank app that hides the balance under offers. I’d put the balance first, move offers below, and test whether five people find it in under three seconds.',
+      'Start with what first-years worry about: roommates, distance, cost. Keep it short: pick a hostel, see rooms with photos and price, choose, confirm. Show clearly what happens next, and design for slow phones and patchy Wi-Fi.',
+      'Wireframes to agree on structure and flow early and cheaply. A clickable prototype when you need to test how it feels to use, or to convince people who can’t picture it.',
+      'Put a clickable prototype in front of five real users with a task, watch without helping, and note where they hesitate. Fix the biggest problems and test again.',
+      'Pick one decision, the options, what you chose and what you gave up. Mine: hiding filters behind a button to keep the screen clean, at the cost of people finding them, so we added a hint the first time.'],
+    core: ['It moves heat from a hot fluid to a cold one without mixing them, through tubes or plates. Counter-flow is more efficient than parallel-flow. You find them in car radiators, AC units and power plant condensers.',
+      'Measure first: lights, fans, water heating, and when they run. Then quick wins: LEDs, motion sensors in corridors, solar water heaters. Then behaviour: a meter per floor with a monthly ranking. Estimate the payback for each.',
+      'Stress is force per area; strain is how much something stretches relative to its length. The curve shows the elastic region where it springs back, the yield point, and the ultimate strength before it breaks. The starting slope is Young’s modulus.',
+      'Say what you set out to do, your role, what went wrong and how you noticed, and what you changed. Interviewers care most about how you reasoned when the result didn’t match what you expected.',
+      'Look at strength, stiffness, weight, fatigue life and cost. Aluminium is light and cheap; carbon fibre is lighter and stiffer but costly; steel is tough but heavy. For most riders aluminium wins on value.']
+  };
+  /* Example readiness bars per company. In the real product these come from what seniors saw in each company's interviews. */
+  var COMPANY_BARS = {
+    swe: [['Product startups', 'SDE intern', 45], ['Razorpay', 'SDE intern', 62], ['Flipkart', 'SDE intern', 68], ['Microsoft', 'SWE intern', 75], ['Google', 'STEP intern', 85]],
+    data: [['Analytics startups', 'Analyst', 40], ['Swiggy', 'Business analyst', 60], ['PhonePe', 'Data analyst', 65], ['American Express', 'Analyst', 70], ['Google', 'Data analyst', 85]],
+    pm: [['Product startups', 'APM intern', 45], ['Meesho', 'APM', 65], ['Swiggy', 'APM', 70], ['Flipkart', 'APM', 75], ['Google', 'APM', 88]],
+    consult: [['Analytics consulting', 'Analyst', 45], ['EY', 'Consultant', 55], ['Deloitte', 'Analyst', 60], ['Bain', 'Associate', 80], ['McKinsey', 'Business analyst', 85]],
+    design: [['Design agencies', 'Design intern', 40], ['Zomato', 'Product designer', 65], ['Razorpay', 'Product designer', 70], ['CRED', 'Product designer', 75], ['Microsoft', 'Designer', 80]],
+    core: [['Core startups', 'Graduate engineer', 45], ['Tata Motors', 'Graduate engineer', 55], ['L&T', 'Graduate engineer', 58], ['Maruti Suzuki', 'Engineer', 62], ['Schlumberger', 'Field engineer', 78]]
+  };
+  var SQUAD_REWARD = { swe: 'Ritika’s recorded mock: a Flipkart SDE coding round', data: 'Aman’s recorded SQL case round', pm: 'Pooja’s recorded APM product-sense round', consult: 'Siddharth’s recorded case interview', design: 'Pooja’s recorded portfolio review', core: 'Dhruv’s recorded core technical round' };
+  var ALIAS_A = ['Swift', 'Quiet', 'Bright', 'Brave', 'Calm', 'Clever', 'Steady', 'Bold', 'Keen', 'Lucky', 'Sharp', 'Sunny'];
+  var ALIAS_B = ['Otter', 'Falcon', 'Panda', 'Tiger', 'Dolphin', 'Owl', 'Fox', 'Rhino', 'Hornbill', 'Elephant', 'Lynx', 'Yak'];
   var EXPERTS = [
     { id: 'e1', name: 'Ananya R.', bio: 'Product lead, 9 years in consumer fintech and payments', tags: ['fintech', 'growth'], rounds: 'Product sense, growth cases', price: 2500, rating: 4.9, sessions: 38, langs: 'English, Hindi' },
     { id: 'e2', name: 'Karthik M.', bio: 'Senior PM, 7 years in consumer apps and growth experiments', tags: ['growth', 'consumer'], rounds: 'Analytical cases, A/B tests', price: 1800, rating: 4.8, sessions: 52, langs: 'English, Tamil' },
@@ -749,7 +845,7 @@
         { id: 'b-y3a', learnerId: 'u-learner', learner: { name: 'Aarav Sharma', college: 'IIT Guwahati', year: 3, track: 'swe', readiness: 61 }, expert: 'u-senior', slot: future(1, '20:00'), focus: 'Problem solving', note: 'Intern interviews in 3 weeks. I jump into code too fast.', status: 'confirmed', credit: true, created: past(2, '10:00'), brief: { weak: ['Problem solving', 'Communication'], ai: { 'Data structures and algorithms': 4, 'Problem solving': 2, 'Communication': 2, 'Project depth': 3 }, role: 'Software Engineering Intern (Summer 2027)' } },
         { id: 'b-y3b', learnerId: 'u-learner', learner: { name: 'Aarav Sharma', college: 'IIT Guwahati', year: 3, track: 'swe', readiness: 52 }, expert: 's1', slot: past(8, '18:30'), focus: 'Data structures and algorithms', note: '', status: 'completed', credit: true, created: past(14, '10:00'), brief: { weak: [], ai: {} }, card: { scores: { 'Data structures and algorithms': 4, 'Problem solving': 3, 'Communication': 2, 'Project depth': 3 }, notes: { 'Communication': 'Went quiet for long stretches. Narrate your thinking.', 'Problem solving': 'Solved it, but only after a hint about using a map.' }, recommendation: 'hire', summary: 'Strong coder. Talk through your approach before writing code and you’re ready.' }, rating: 5 },
         { id: 'b-seed3', learnerId: 'u-y4', learner: { name: 'Meera Pillai', college: 'IIT Guwahati', year: 4, track: 'pm', readiness: 78 }, expert: 'u-expert', slot: past(3, '20:00'), focus: 'Analytical thinking', note: 'APM interviews start next week.', status: 'completed', created: past(8, '12:00'), brief: { weak: ['Analytical thinking'], ai: { 'Product sense': 3, 'Analytical thinking': 3, 'Execution': 3, 'Leadership and ownership': 4 }, role: 'Associate Product Manager (Campus 2027)' }, card: { scores: { 'Product sense': 3, 'Analytical thinking': 3, 'Execution': 2, 'Communication': 3, 'Leadership and ownership': 4 }, notes: { 'Execution': 'Skipped effort when prioritising; the AI was generous here.', 'Analytical thinking': 'Sized the problem well once prompted; lead with the metric next time.' }, recommendation: 'hire', summary: 'Ready for APM interviews. Lead with numbers earlier and always weigh effort.' }, rating: 5 },
-        { id: 'b-y4b', learnerId: 'u-y4', learner: { name: 'Meera Pillai', college: 'IIT Guwahati', year: 4, track: 'pm', readiness: 70 }, expert: 's3', slot: past(10, '18:30'), focus: 'Product sense', note: '', status: 'completed', credit: true, created: past(16, '10:00'), brief: { weak: [], ai: {} }, card: { scores: { 'Product sense': 3, 'Analytical thinking': 3, 'Communication': 3, 'Leadership and ownership': 4 }, notes: { 'Product sense': 'Pick one user and stay with them.' }, recommendation: 'hire', summary: 'Great leadership stories. Narrow your user earlier in product cases.' }, rating: 4 },
+        { id: 'b-y4b', learnerId: 'u-y4', learner: { name: 'Meera Pillai', college: 'IIT Guwahati', year: 4, track: 'pm', readiness: 70 }, expert: 's3', slot: past(10, '18:30'), focus: 'Product sense', note: '', status: 'completed', credit: true, created: past(16, '10:00'), brief: { weak: [], ai: {} }, card: { scores: { 'Product sense': 2, 'Analytical thinking': 3, 'Communication': 2, 'Leadership and ownership': 4 }, notes: { 'Product sense': 'Pick one user and stay with them.' }, recommendation: 'hire', summary: 'Great leadership stories. Narrow your user earlier in product cases.' }, rating: 4 },
         { id: 'b-y4c', learnerId: 'u-y4', learner: { name: 'Meera Pillai', college: 'IIT Guwahati', year: 4, track: 'pm', readiness: 82 }, expert: 'u-expert', slot: future(4, '20:00'), focus: 'Execution', note: 'Final mock before day 1 of placements.', status: 'requested', created: past(0, '11:00'), brief: { weak: ['Execution'], ai: { 'Product sense': 3, 'Analytical thinking': 3, 'Execution': 3, 'Leadership and ownership': 4 }, role: 'Associate Product Manager (Campus 2027)' } },
         { id: 'b-seed1', learner: { name: 'Ishita Roy', college: 'IIT Bombay', year: 4, track: 'pm', readiness: 58 }, expert: 'u-expert', slot: future(2, '20:00'), focus: 'Product sense', note: 'I have an APM interview at a fintech in 10 days. I freeze on open-ended design questions.', status: 'requested', created: past(0, '09:10'), brief: { weak: ['Product sense', 'Communication'], ai: { 'Product sense': 2, 'Analytical thinking': 3, 'Execution': 3, 'Communication': 2 } } },
         { id: 'b-seed2', learner: { name: 'Kabir Shah', college: 'NIT Trichy', year: 3, track: 'swe', readiness: 64 }, expert: 'u-expert', slot: future(1, '21:30'), focus: 'System design basics', note: 'Internship interviews start next month. Want practice explaining trade-offs.', status: 'confirmed', created: past(2, '18:00'), brief: { weak: ['System design basics'], ai: { 'Problem solving': 3, 'Data structures and algorithms': 3, 'System design basics': 2, 'Communication': 3 } } },
@@ -784,6 +880,22 @@
   Object.keys(SEED_PROOFS).forEach(function (id) { if (DB.users[id] && DB.users[id].proofs === undefined) DB.users[id].proofs = SEED_PROOFS[id]; });
   Object.keys(DB.users).forEach(function (k) { (DB.users[k].proofs || []).forEach(function (p) { if (p.id === 'pfs2') p.ms = ''; if (p.id === 'pfs3' || p.id === 'pfs6') p.type = 'doc'; }); });
   if (!DB.users['u-demo']) { var fresh0 = seed(); DB.users = Object.assign({ 'u-demo': fresh0.users['u-demo'] }, DB.users); }
+
+  (function () {
+    var bk = DB.bookings.find(function (b) { return b.id === 'b-y4b'; });
+    if (bk && bk.card && !DB._lv1) { bk.card.scores['Product sense'] = 2; bk.card.scores['Communication'] = 2; DB._lv1 = true; }
+    var SQ = { 'u-learner': [{ name: 'Kabir Shah', days: 4, xp: 380 }, { name: 'Sana Khan', days: 2, xp: 210 }], 'u-y4': [{ name: 'Tanvi Gupta', days: 5, xp: 520 }, { name: 'Diya Choudhury', days: 5, xp: 470 }, { name: 'Vikram Nair', days: 4, xp: 610 }], 'u-y2': [{ name: 'Rhea Iyer', days: 3, xp: 300 }] };
+    Object.keys(SQ).forEach(function (id) { if (DB.users[id] && DB.users[id].squad === undefined) DB.users[id].squad = SQ[id]; });
+    var PL = { 'u-senior': [{ name: 'Arnav Kalita', where: 'SDE intern offer, Razorpay' }, { name: 'Priya Deka', where: 'SDE offer, Flipkart' }, { name: 'Bikash Roy', where: 'SWE intern offer, Microsoft' }], 'u-expert': [{ name: 'Meera Pillai', where: 'APM offer, Swiggy' }, { name: 'Ishita Sharma', where: 'APM offer, PhonePe' }] };
+    Object.keys(PL).forEach(function (id) { if (DB.users[id] && DB.users[id].placedJuniors === undefined) DB.users[id].placedJuniors = PL[id]; });
+    if (!DB.thanks) DB.thanks = [
+      { to: 'u-senior', from: 'Arnav Kalita', text: 'Your tip to talk through my approach before coding is why I cleared the Razorpay round. Thank you!', at: new Date(Date.now() - 4 * 864e5).toISOString() },
+      { to: 'u-senior', from: 'Priya Deka', text: 'Two mocks with you and the real interview felt easy. Owe you one.', at: new Date(Date.now() - 20 * 864e5).toISOString() },
+      { to: 'u-expert', from: 'Meera Pillai', text: 'You were right about structuring product sense answers. I got the Swiggy offer!', at: new Date(Date.now() - 2 * 864e5).toISOString() },
+      { to: 'u-expert', from: 'Ishita Sharma', text: 'The scorecard was honest and exactly what I needed. Thank you for the time.', at: new Date(Date.now() - 15 * 864e5).toISOString() },
+      { to: 's1', from: 'Aarav Sharma', text: 'Thanks for the DSA scorecard. Communication is next on my list!', at: new Date(Date.now() - 7 * 864e5).toISOString() }
+    ];
+  })();
   /* The fresh demo account wipes itself every time someone signs in to it, so every demo starts from zero. */
   function resetDemo() {
     var fresh = seed(), old = DB.users['u-demo'], oldName = old && old.name;
@@ -853,7 +965,7 @@
   function addXP(n) {
     var u = L(), today = dayKey();
     if (u.last !== today) { var y = new Date(); y.setDate(y.getDate() - 1); u.streak = u.last === dayKey(y) ? u.streak + 1 : 1; u.last = today; }
-    u.xp += n; save();
+    u.xp += n; var wk = weekKey(); if (!u.wxp || u.wxp.week !== wk) u.wxp = { week: wk, xp: 0 }; u.wxp.xp += n; save();
   }
   function myBookings() { var u = me(); return DB.bookings.filter(function (b) { return u.role === 'learner' ? b.learnerId === u.id : b.expert === u.id; }); }
   function evalList() { var p = L().prep; return p ? Object.keys(p.evals || {}).map(function (k) { return +p.evals[k].score || 0; }) : []; }
@@ -900,22 +1012,154 @@
       var cs = COLLEGES.filter(function (c) { return c !== 'Another college'; }).slice(0, 10).map(function (c, i) { return { name: c, v: 74 - i * 3 + (c.length % 4), mine: c === u.college }; });
       cs.sort(function (a, b) { return b.v - a.v; }); return { rows: cs, unit: 'Average readiness' };
     }
-    var base = tab === 'batch' ? [460, 410, 375, 330, 300, 265, 230, 195, 160, 120, 85, 50] : [620, 540, 470, 455, 400, 350, 310, 280, 240, 190, 150, 110];
-    var rows = names.map(function (n, i) { return { name: n, sub: tab === 'college' ? ORD[(i + 1) % 4] + ' year' : '', v: base[i] }; });
-    rows.push({ name: u.name + ' (you)', v: u.xp, mine: true });
+    if (tab === 'squad') {
+      var sr = (u.squad || []).map(function (m) { return { name: m.name, v: m.xp || 0 }; });
+      sr.push({ name: u.name, v: weekXP(u), mine: true }); sr.sort(function (a, b) { return b.v - a.v; });
+      return { rows: sr, unit: 'XP this week' };
+    }
+    /* Your league: 12 classmates from your year. Most use nicknames; a few chose to show their first name. */
+    var base = [420, 365, 320, 290, 255, 225, 190, 160, 130, 100, 70, 40], firsts = [0, 3, 5, 8];
+    var rows = names.map(function (n, i) { return { name: firsts.indexOf(i) !== -1 ? shortName(n) : aliasFor(n), v: base[i] }; });
+    if (lbPref(u).show !== 'hidden') rows.push({ name: myLbName(u), v: weekXP(u), mine: true });
     rows.sort(function (a, b) { return b.v - a.v; });
     return { rows: rows, unit: 'XP this week' };
   }
+
+  /* ---------- game elements ---------- */
+  function keyDate(k) { var p = String(k).split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function dayGap(a, b) { return Math.round((keyDate(b) - keyDate(a)) / 864e5); }
+  function weekKey(d) { var x = new Date(d || new Date()); x.setHours(0, 0, 0, 0); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); return dayKey(x); }
+  function weekLeft() { var n = new Date(), e = keyDate(weekKey()); e.setDate(e.getDate() + 7); var h = Math.max(0, Math.floor((e - n) / 36e5)); return Math.floor(h / 24) + 'd ' + (h % 24) + 'h'; }
+  /* One free streak freeze a week. If you miss exactly one day it is used automatically. */
+  function streakCheck(u) {
+    if (!u || u.role !== 'learner') return;
+    var wk = weekKey(), today = dayKey();
+    if (u.freezeWeek !== wk) { u.freezeWeek = wk; u.freezes = 1; save(); }
+    if (!u.last || !u.streak) return;
+    var gap = dayGap(u.last, today);
+    if (gap === 2 && u.freezes > 0) { var y = new Date(); y.setDate(y.getDate() - 1); u.last = dayKey(y); u.freezes = 0; u.frozeOn = u.last; save(); setTimeout(function () { toast('Streak freeze used. Your ' + u.streak + '-day streak is safe.'); }, 300); }
+    else if (gap >= 2) { u.streak = 0; save(); }
+  }
+  function streakNote(u) { return u.freezes > 0 ? '<span class="frz" title="If you miss one day this week, your streak is kept. One freeze a week.">❄ Freeze ready</span>' : '<span class="frz off" title="You used this week’s freeze. A new one arrives on Monday.">Freeze used this week</span>'; }
+  /* Days practised this week, from the streak. */
+  /* XP earned this week: practice already done this week (from the streak) plus anything earned in this browser. */
+  function weekXP(u) { var extra = u.wxp && u.wxp.week === weekKey() ? u.wxp.xp : 0; return Math.max(extra, weekDays(u) * 80 + Math.round(extra / 2)); }
+  function weekDays(u) { var idx = (new Date().getDay() + 6) % 7; if (!u.last || !u.streak) return 0; var g = dayGap(u.last, dayKey()); return g === 0 ? Math.min(u.streak, idx + 1) : g === 1 ? Math.min(u.streak, idx) : 0; }
+  function countdownHTML(u) {
+    var n = new Date(), y = n.getFullYear(), label, target;
+    if (u.year >= 4) { target = new Date(y, 11, 1); if (n > target) return '<span class="pill solid">Placement season is on</span>'; label = 'to placement season'; }
+    else { target = new Date(y, 7, 1); if (n > target) target = new Date(y + 1, 7, 1); target.setFullYear(target.getFullYear() + (3 - u.year)); label = 'to ' + (u.year === 3 ? 'internship season' : 'your 3rd-year internship season'); }
+    var d = Math.ceil((target - n) / 864e5);
+    return '<span class="pill cd" title="Rough date. Your college\'s placement cell sets the real one."><b>' + d + ' days</b>&nbsp;' + label + '</span>';
+  }
+  function companyHTML(u) {
+    var rd = readiness(), bars = (COMPANY_BARS[u.track] || COMPANY_BARS.swe).slice().sort(function (a, b) { return a[2] - b[2]; });
+    var open = bars.filter(function (c) { return rd >= c[2]; }).length;
+    return tip('l-company', 'Readiness, company by company', 'Each company has a bar based on how hard seniors found its interviews. Clear the bar and it unlocks: you’ll see that company’s question bank and seniors who work there.') +
+      '<div class="card"><div class="card-head"><div><h3>Ready for which companies?</h3><p class="small muted" style="margin-top:2px">' + (open ? 'You’ve cleared the bar for ' + open + ' of ' + bars.length + '. ' : '') + 'Example targets for ' + esc(ROLES[u.track].name.toLowerCase()) + '.</p></div><span class="pt-pill c-blue">' + rd + ' / 100</span></div><div class="card-body"><div class="co-list">' +
+      bars.map(function (c) {
+        var pct = Math.min(100, Math.round(rd / c[2] * 100)), ok = rd >= c[2];
+        return '<div class="co-row' + (ok ? ' ok' : '') + '"><span class="co-n"><b>' + esc(c[0]) + '</b><small>' + esc(c[1]) + ' · bar ' + c[2] + '</small></span><span class="co-m"><span class="co-bar"><i style="width:' + pct + '%"></i></span></span><span class="co-s">' + (ok ? '<span class="pt-pill c-green">Unlocked</span>' : '<span class="small muted">' + (c[2] - rd) + ' to go</span>') + '</span></div>';
+      }).join('') + '</div></div></div>';
+  }
+  /* ---------- leaderboard privacy ---------- */
+  function aliasFor(id) { var h = 0; String(id).split('').forEach(function (c) { h = (h * 31 + c.charCodeAt(0)) >>> 0; }); return ALIAS_A[h % 12] + ' ' + ALIAS_B[(h >>> 4) % 12]; }
+  function lbPref(u) { if (!u.lb) u.lb = { show: 'alias', asked: false }; return u.lb; }
+  function shortName(n) { var p = String(n).split(' '); return p[0] + (p[1] ? ' ' + p[1][0] + '.' : ''); }
+  function myLbName(u) { var m = lbPref(u).show; return m === 'first' ? shortName(u.name) : aliasFor(u.id); }
+  function consentHTML(u, compact) {
+    var m = lbPref(u).show, opts = [['alias', 'Nickname', 'Shown as “' + aliasFor(u.id) + '”'], ['first', 'First name', 'Shown as “' + shortName(u.name) + '”'], ['hidden', 'Hide me', 'See your own rank only']];
+    return '<div class="lg-consent' + (compact ? ' compact' : '') + '"><div><b>How should your league see you?</b><p class="small muted">Only the ' + 12 + ' classmates in your league can see it. You can change this any time in Profile.</p></div><div class="lg-opts" role="group" aria-label="How your league sees you">' +
+      opts.map(function (o) { return '<button data-lbshow="' + o[0] + '" aria-pressed="' + (m === o[0] && lbPref(u).asked) + '"><b>' + o[1] + '</b><span>' + esc(o[2]) + '</span></button>'; }).join('') + '</div></div>';
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-lbshow]'); if (!b) return;
+    var u = me(); if (!u) return; var p = lbPref(u); p.show = b.dataset.lbshow; p.asked = true; save();
+    var y = window.scrollY; render(); window.scrollTo(0, y);
+    toast(p.show === 'hidden' ? 'You’re hidden from your league' : 'Your league sees you as ' + myLbName(u));
+  });
+  /* ---------- squad ---------- */
+  function squadHTML(u) {
+    var sq = (u.squad || []).slice(0, 3), mine = weekDays(u), all = [{ name: u.name, days: mine, me: true }].concat(sq);
+    while (all.length < 4) all.push(null);
+    var done = all.filter(function (m) { return m && m.days >= 5; }).length, unlocked = done === 4;
+    return '<div class="card pad stack"><div class="between"><h3>Squad goal this week</h3><span class="tiny muted">Ends in ' + weekLeft() + '</span></div>' +
+      '<p class="small muted">You and 3 friends each practise on 5 days this week. Do it together and you all unlock <b style="color:var(--ink)">' + esc(SQUAD_REWARD[u.track] || SQUAD_REWARD.swe) + '</b>.</p>' +
+      '<div class="sq">' + all.map(function (m) {
+        if (!m) return '<div class="sq-row empty"><span class="avatar">+</span><span class="sq-n">Open spot</span><button class="btn text tiny" id="inv-batch">Invite</button></div>';
+        return '<div class="sq-row"><span class="avatar' + (m.me ? ' ink' : '') + '">' + esc(initials(m.name)) + '</span><span class="sq-n">' + esc(m.me ? 'You' : m.name.split(' ')[0]) + '</span><span class="sq-d" aria-label="' + m.days + ' of 5 days">' + [0, 1, 2, 3, 4].map(function (i) { return '<i class="' + (i < m.days ? 'on' : '') + '"></i>'; }).join('') + '</span></div>';
+      }).join('') + '</div>' +
+      (unlocked ? '<button class="btn sm" id="sq-watch">Watch the recording</button>' : '<p class="tiny muted">' + done + ' of 4 done. Squads only see each other’s practice days, nothing else.</p>') + '</div>';
+  }
+  document.addEventListener('click', function (e) { var t = e.target.closest && e.target.closest('#sq-watch'); if (t) toast('The recording plays here in the full version.'); });
+  /* ---------- scorecard level-ups ---------- */
+  function cardsOf(u) { return DB.bookings.filter(function (b) { return b.learnerId === u.id && b.card; }).sort(function (a, b) { return new Date(a.slot) - new Date(b.slot); }); }
+  function levelUps(u) {
+    var first = {}, last = {}; cardsOf(u).forEach(function (b) { Object.keys(b.card.scores).forEach(function (k) { if (first[k] == null) first[k] = b.card.scores[k]; last[k] = b.card.scores[k]; }); });
+    return Object.keys(first).filter(function (k) { return last[k] > first[k]; }).map(function (k) { return [k, first[k], last[k]]; });
+  }
+  function levelUpHTML(u) {
+    var ups = levelUps(u); if (!ups.length) return '';
+    return '<div class="card pad stack lvl"><div class="between"><h3>Level-ups</h3><span class="pt-pill c-green">' + ups.length + ' skill' + (ups.length > 1 ? 's' : '') + ' up</span></div><p class="small muted">From your mentor scorecards, first to latest.</p>' +
+      ups.map(function (x) { return '<div class="lvl-row"><span>' + esc(x[0]) + '</span><span class="lvl-s"><span class="score s' + x[1] + '">' + x[1] + '</span>→<span class="score s' + x[2] + '">' + x[2] + '</span></span></div>'; }).join('') + '</div>';
+  }
+  function levelStrip(b) {
+    var prev = DB.bookings.filter(function (x) { return x.learnerId === b.learnerId && x.card && x.id !== b.id && new Date(x.slot) < new Date(b.slot); }).sort(function (a, c) { return new Date(c.slot) - new Date(a.slot); })[0];
+    if (!prev) return '';
+    var ups = Object.keys(b.card.scores).filter(function (k) { return prev.card.scores[k] != null && b.card.scores[k] > prev.card.scores[k]; });
+    return ups.length ? '<div class="lvl-strip"><b>Level-up!</b> ' + ups.map(function (k) { return '<span class="pt-pill c-green">' + esc(k) + ' ' + prev.card.scores[k] + ' → ' + b.card.scores[k] + '</span>'; }).join(' ') + '</div>' : '';
+  }
+  /* ---------- thank-you notes ---------- */
+  function thanksFor(id) { return (DB.thanks || []).filter(function (t) { return t.to === id; }).sort(function (a, b) { return new Date(b.at) - new Date(a.at); }); }
+  function thankCard(b) {
+    var e = expertById(b.expert), mine = (DB.thanks || []).find(function (t) { return t.booking === b.id; }), first = esc(e.name.split(' ')[0]);
+    if (mine) return '<div class="card pad stack"><h3>Your note to ' + first + '</h3><div class="why-in" style="margin:0"><span class="why-mark">“</span><p>' + esc(mine.text) + '</p></div><p class="tiny muted">' + first + ' sees this on their impact page.</p></div>';
+    return '<div class="card pad stack"><h3>Say thanks to ' + first + '</h3><p class="small muted">Mentors do this for free. A line about what helped means a lot, and it shows on their profile.</p><textarea id="thx-text" rows="2" maxlength="200" placeholder="What helped most?"></textarea><div class="row"><button class="btn sm" id="thx-send" data-b="' + esc(b.id) + '">Send thanks</button></div></div>';
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest && e.target.closest('#thx-send'); if (!t) return;
+    var txt = ($('thx-text').value || '').trim(); if (txt.length < 4) { toast('Write a few words first'); return; }
+    var b = DB.bookings.find(function (x) { return x.id === t.dataset.b; }), u = me();
+    DB.thanks = DB.thanks || []; DB.thanks.unshift({ to: b.expert, from: u.name, text: txt, at: new Date().toISOString(), booking: b.id });
+    if (DB.users[b.expert]) log(b.expert, u.name + ' sent you a thank-you note');
+    save(); toast('Thanks sent'); var y = window.scrollY; vSession(); window.scrollTo(0, y);
+  });
+  function thanksHTML(id) {
+    var list = thanksFor(id).slice(0, 4);
+    return '<div class="card pad stack"><h3>Thank-you notes</h3>' + (list.length ? list.map(function (t) { return '<div class="thx"><p>“' + esc(t.text) + '”</p><span class="tiny muted">' + esc(t.from) + ' · ' + relDay(t.at) + '</span></div>'; }).join('') : '<p class="small muted">Notes from juniors after your sessions will show here.</p>') + '</div>';
+  }
+  function placedHTML(u) {
+    var p = u.placedJuniors || [];
+    return '<div class="card pad stack"><div class="between"><h3>Juniors you helped who got placed</h3><span class="pt-pill c-green">' + p.length + '</span></div>' + (p.length ? '<ul class="list">' + p.map(function (x) { return '<li class="row" style="flex-wrap:nowrap">' + who(x.name, esc(x.where)).replace('class="dt-who"', 'class="dt-who" style="flex:1"') + '</li>'; }).join('') + '</ul><p class="tiny muted">Students tell us when they get an offer. Only students who agree are listed.</p>' : '<p class="small muted">When a junior you mentored gets an offer, they’ll show up here.</p>') + '</div>';
+  }
+  function motmHTML(u, rk, myRank) {
+    var top = rk[0];
+    return '<div class="card pad stack motm' + (myRank === 1 ? ' me' : '') + '"><span class="label">Mentor of the month · ' + esc(u.alumCollege) + '</span>' +
+      (myRank === 1 ? '<h3>That’s you 🏆</h3><p class="small muted">Shown on your profile and to juniors at your college all month.</p>' :
+        '<h3>' + esc(top.name) + '</h3><p class="small muted">' + top.v + ' sessions. You’re #' + myRank + ', ' + (top.v - rk[myRank - 1].v) + ' session' + (top.v - rk[myRank - 1].v === 1 ? '' : 's') + ' behind. Picked on the 1st of every month.</p>') + '</div>';
+  }
   function boardHTML(tab, limit) {
-    var b = board(tab), rows = b.rows, mi = rows.findIndex(function (r) { return r.mine; });
-    var show = rows.slice(0, limit); if (mi >= limit) show = rows.slice(0, limit - 1).concat([rows[mi]]);
-    var medal = ['c-yellow', 'c-grey', 'c-peach'];
-    return dtable([['#', '48px', '', 'center'], [tab === 'colleges' ? 'College' : 'Student', 'minmax(0,1fr)', 'dt-main'], [b.unit.split('.')[0].replace(/^[A-Z]/, function (c) { return c; }), '110px', '', 'right']],
+    var u = L(), b = board(tab), rows = b.rows, mi = rows.findIndex(function (r) { return r.mine; }), show;
+    if (tab === 'batch') {
+      /* Show the top of the league and the rows around you. Nobody else's low rank is ever shown. */
+      var keep = {}; rows.forEach(function (r, i) { if (i < (limit > 5 ? 5 : 3)) keep[i] = 1; });
+      if (mi >= 0) { keep[mi] = 1; if (limit > 5) { if (mi > 0) keep[mi - 1] = 1; } }
+      show = rows.filter(function (r, i) { return keep[i]; });
+    } else { show = rows.slice(0, limit); if (mi >= limit) show = rows.slice(0, limit - 1).concat([rows[mi]]); }
+    var medal = ['c-yellow', 'c-grey', 'c-peach'], gap = '';
+    var out = dtable([['#', '48px', '', 'center'], [tab === 'colleges' ? 'College' : tab === 'squad' ? 'Friend' : 'Classmate', 'minmax(0,1fr)', 'dt-main'], [b.unit, '110px', '', 'right']],
       show.map(function (r) { var rank = rows.indexOf(r) + 1; return { cls: r.mine ? 'mine' : '', cells: [
         rank <= 3 ? '<span class="dt-rank top ' + medal[rank - 1] + '">' + rank + '</span>' : '<span class="dt-rank">' + rank + '</span>',
-        who(r.name + (r.mine ? ' (you)' : ''), r.sub ? esc(r.sub) : '', r.mine ? 'ink' : null),
-        '<span class="dt-num">' + r.v + '</span>'] }; })) +
-      '<p class="tiny muted" style="margin-top:8px">' + b.unit + '. Example classmates and colleges in this prototype.</p>';
+        who(r.name + (r.mine ? ' (you)' : ''), '', r.mine ? 'ink' : null),
+        '<span class="dt-num">' + r.v + '</span>'] }; }));
+    var hidden = tab === 'batch' ? rows.length - show.length : 0;
+    var note = tab === 'batch' ? (lbPref(u).show === 'hidden' ? 'You’re hidden. Your ' + weekXP(u) + ' XP would put you at #' + (rows.filter(function (r) { return r.v > weekXP(u); }).length + 1) + ' of ' + (rows.length + 1) + '. ' : '') + (hidden ? hidden + ' more classmates in your league. ' : '') + 'Only your league sees this. Nicknames unless someone chose to show their name. Ends in ' + weekLeft() + '; the top 3 get a badge.'
+      : tab === 'squad' ? 'Only your squad sees this.' : 'Average readiness of students at each college. No names.';
+    return out + '<p class="tiny muted" style="margin-top:8px">' + note + '</p>';
+  }
+  function leagueCard(u) {
+    return '<div class="card"><div class="card-head"><div><h3>Your league this week</h3><p class="tiny muted" style="margin-top:2px">12 classmates from your year · ends in ' + weekLeft() + '</p></div><button class="btn text" data-go="board">Leaderboard</button></div><div class="card-body stack">' +
+      (lbPref(u).asked ? '' : consentHTML(u, true)) + boardHTML('batch', 4) + '</div></div>';
   }
 
 
@@ -1104,6 +1348,7 @@
     if (!u) { vLogin(); return; }
     if (u.onboarded === false) { vOnboard(); return; }
     if (!UI.view) UI.view = u.role === 'learner' ? 'home' : 'dash';
+    streakCheck(u);
     var nav = NAV[u.role].filter(function (n) { return (n[0] !== 'apps' || u.year >= 3) && journeyNav(n[0]); }), pending = DB.bookings.filter(function (b) { return b.expert === u.id && b.status === 'requested'; }).length;
     var upcoming = DB.bookings.filter(function (b) { return (u.role === 'learner' ? b.learnerId === u.id : b.expert === u.id) && b.status === 'confirmed'; }).length;
     root.innerHTML = '<div class="app"><aside class="side"><div class="brand"><i>C</i>Calport<small>' + (u.role === 'learner' ? 'Learner' : u.tier === 'senior' ? 'Senior mentor' : 'Expert') + '</small></div>' +
@@ -1225,8 +1470,14 @@
   function dailyHTML() {
     var u = L(), R = ROLES[u.track] || ROLES.swe, qs = DAILY[u.track] || DAILY.swe, qi = Math.floor((new Date() - new Date(2026, 0, 1)) / 864e5) % qs.length, dly = u.daily && u.daily.day === dayKey() ? u.daily : null;
     return '<div class="card pad stack" id="daily"><div class="between"><span class="label">Today\'s question · ' + esc(R.name) + '</span><span class="tag">+10 XP</span></div><h3 style="font-size:1.12rem;line-height:1.45">' + esc(qs[qi]) + '</h3>' +
-      (dly ? '<div class="status">' + (dly.score ? '<b>' + dly.score + '/4 · ' + SCORE[dly.score] + '.</b> ' : '<b>Practised.</b> ') + esc(dly.fb || 'A new question appears tomorrow.') + (dly.tip ? '<div class="muted small" style="margin-top:4px">Tip: ' + esc(dly.tip) + '</div>' : '') + '</div>' :
-        '<textarea id="dans" rows="5" placeholder="Answer in a few sentences, as you would out loud."></textarea><div class="row">' + (sample ? '<button class="btn" id="dgrade">Get feedback</button>' : '') + '<button class="btn ghost" id="ddone">Mark as practised</button><span class="hint">' + (sample ? 'AI gives a score out of 4 and one tip.' : 'Live AI feedback is switched off in this preview.') + '</span></div><div id="dst"></div>') + '</div>';
+      (dly ? '<div class="status">' + (dly.score ? '<b>' + dly.score + '/4 · ' + SCORE[dly.score] + '.</b> ' : '<b>Practised.</b> ') + esc(dly.fb || 'A new question appears tomorrow.') + (dly.tip ? '<div class="muted small" style="margin-top:4px">Tip: ' + esc(dly.tip) + '</div>' : '') + '</div>' + seniorAnsHTML(u, qi, true) :
+        '<textarea id="dans" rows="5" placeholder="Answer in a few sentences, as you would out loud."></textarea><div class="row">' + (sample ? '<button class="btn" id="dgrade">Get feedback</button>' : '') + '<button class="btn ghost" id="ddone">Mark as practised</button><span class="hint">' + (sample ? 'AI gives a score out of 4 and one tip.' : 'Live AI feedback is switched off in this preview.') + '</span></div><div id="dst"></div>' + seniorAnsHTML(u, qi, false)) + '</div>';
+  }
+  function seniorAnsHTML(u, qi, open) {
+    var by = SENIOR_BY[u.track] || SENIOR_BY.swe, a = (SENIOR_ANS[u.track] || SENIOR_ANS.swe)[qi];
+    if (!a) return '';
+    if (!open) return '<div class="sa locked"><span class="sa-l">🔒</span><span>Answer first to see how <b>' + esc(by[0]) + '</b>, ' + esc(by[1].split(' · ')[0].toLowerCase()) + ', answered this.</span></div>';
+    return '<div class="sa"><div class="sa-h">' + who(by[0], esc(by[1])) + '<span class="pt-pill c-purple">Senior’s answer</span></div><p>' + esc(a) + '</p><p class="tiny muted">One good answer, not the only one. Compare it with yours.</p></div>';
   }
   function bindDaily(after) {
     var u = L(), R = ROLES[u.track] || ROLES.swe, qs = DAILY[u.track] || DAILY.swe, qi = Math.floor((new Date() - new Date(2026, 0, 1)) / 864e5) % qs.length, today = dayKey();
@@ -1255,18 +1506,18 @@
     if (inJourney()) { vJourney(); return; }
     var u = L(), rd = readiness(), na = nextAction(), years = yearsFor(), cur = years[u.year - 1], doneCur = cur.items.filter(isDone).length;
     var up = myBookings().filter(function (b) { return (b.status === 'confirmed' || b.status === 'requested') && new Date(b.slot) > new Date(); }).sort(function (a, b) { return new Date(a.slot) - new Date(b.slot); });
-    view().innerHTML = head(greeting() + ', ' + esc(u.name.split(' ')[0]), ORD[u.year - 1] + ' year · ' + esc(u.college) + ' · aiming for ' + esc(ROLES[u.track].name.toLowerCase())) +
+    view().innerHTML = head(greeting() + ', ' + esc(u.name.split(' ')[0]), ORD[u.year - 1] + ' year · ' + esc(u.college) + ' · aiming for ' + esc(ROLES[u.track].name.toLowerCase()), countdownHTML(u)) +
       tip('l-next', 'Start with the dark card', 'It always shows the one thing most worth doing next. Finish it and it changes to the next step.') +
       '<div class="next"><div><div class="label">' + esc(na.label) + '</div><h3>' + esc(na.title) + '</h3><p>' + esc(na.text) + '</p></div><button class="btn" id="na">' + esc(na.btn) + '</button></div>' +
       startedHTML() +
       tip('l-tiles', 'Your numbers at a glance', 'Placement readiness goes up as you practise, finish milestones and get mentor scorecards. Answer one question a day to keep your streak.') +
-      '<div class="tiles"><div><b>' + rd + '<span class="muted" style="font-size:.95rem;font-weight:500"> / 100</span></b><span>Placement readiness</span><div class="meter"><i style="width:' + rd + '%"></i></div></div><div><b>' + u.streak + '</b><span>Day streak' + (u.last === dayKey() ? ', done today' : '') + '</span></div><div><b>' + u.xp + '</b><span>XP earned</span></div><div><b>' + doneCur + '/' + cur.items.length + '</b><span>Year ' + u.year + ' milestones</span></div></div>' +
+      '<div class="tiles"><div><b>' + rd + '<span class="muted" style="font-size:.95rem;font-weight:500"> / 100</span></b><span>Placement readiness</span><div class="meter"><i style="width:' + rd + '%"></i></div></div><div><b>' + u.streak + '</b><span>Day streak' + (u.last === dayKey() ? ', done today' : '') + '</span>' + streakNote(u) + '</div><div><b>' + u.xp + '</b><span>XP earned</span></div><div><b>' + doneCur + '/' + cur.items.length + '</b><span>Year ' + u.year + ' milestones</span></div></div>' +
+      companyHTML(u) +
       yearModuleHTML() +
       '<div class="grid-main"><div class="stack-lg">' + tip('l-daily', 'Question of the day', 'A two-minute question. Type your answer and get feedback on it. It counts towards your streak.') + dailyHTML() +
       '<div class="card"><div class="card-head"><h3>Year ' + u.year + ': ' + esc(cur.title) + '</h3><button class="btn text" data-go="path">See full path</button></div><div class="card-body"><ul class="ms">' + cur.items.map(msHTML).join('') + '</ul></div></div></div>' +
-      '<div class="stack-lg">' + tip('l-mentor', 'Talk to someone who has done it', 'Book a mock interview or a career chat with a senior from your college. Your first sessions are free.') + '<div class="card"><div class="card-head"><h3>Upcoming sessions</h3><button class="btn text" data-go="sessions">All</button></div><div class="card-body">' + (up.length ? '<ul class="list">' + up.slice(0, 3).map(function (b) { var e = expertById(b.expert); return '<li class="row" style="flex-wrap:nowrap"><span class="avatar">' + esc(initials(e.name)) + '</span><span style="flex:1;min-width:0"><b>' + esc(e.name) + '</b><br><span class="small muted">' + fmtSlot(b.slot) + '</span></span>' + statusPill(b.status) + '</li>'; }).join('') + '</ul>' : '<p class="muted small">No sessions booked yet. A mock with an alum is the fastest way to find your blind spots.</p><button class="btn ghost sm" style="margin-top:12px" data-go="experts">Find an alum</button>') + '</div></div>' +
-      inviteBatchHTML(u) +
-      '<div class="card"><div class="card-head"><h3>Your batch this week</h3><button class="btn text" data-go="board">Leaderboard</button></div><div class="card-body">' + boardHTML('batch', 5) + '</div></div></div></div>';
+      '<div class="stack-lg">' + levelUpHTML(u) + tip('l-mentor', 'Talk to someone who has done it', 'Book a mock interview or a career chat with a senior from your college. Your first sessions are free.') + '<div class="card"><div class="card-head"><h3>Upcoming sessions</h3><button class="btn text" data-go="sessions">All</button></div><div class="card-body">' + (up.length ? '<ul class="list">' + up.slice(0, 3).map(function (b) { var e = expertById(b.expert); return '<li class="row" style="flex-wrap:nowrap"><span class="avatar">' + esc(initials(e.name)) + '</span><span style="flex:1;min-width:0"><b>' + esc(e.name) + '</b><br><span class="small muted">' + fmtSlot(b.slot) + '</span></span>' + statusPill(b.status) + '</li>'; }).join('') + '</ul>' : '<p class="muted small">No sessions booked yet. A mock with an alum is the fastest way to find your blind spots.</p><button class="btn ghost sm" style="margin-top:12px" data-go="experts">Find an alum</button>') + '</div></div>' +
+      squadHTML(u) + leagueCard(u) + inviteBatchHTML(u) + '</div></div>';
     $('na').addEventListener('click', function () { doGo(na.go); });
     on('[data-go]', 'click', function (b) { go(b.dataset.go); });
     bindMs(vHome); bindDaily(vHome); bindStarted(); bindYear();
@@ -1585,8 +1836,10 @@
   /* ---------- learner: leaderboard ---------- */
   var lbTab = 'batch';
   function vBoard() {
-    view().innerHTML = head('Leaderboard', 'XP from daily questions, milestones and mock assessments. Resets every Monday.', '<div class="seg" role="group" aria-label="Leaderboard">' + [['batch', 'Your batch'], ['college', 'Your college'], ['colleges', 'Colleges']].map(function (x) { return '<button data-lb="' + x[0] + '" aria-pressed="' + (lbTab === x[0]) + '">' + x[1] + '</button>'; }).join('') + '</div>') +
-      '<div style="margin-top:18px">' + boardHTML(lbTab, 12) + '</div>';
+    var u = L(); if (lbTab === 'college') lbTab = 'batch';
+    view().innerHTML = head('Leaderboard', lbTab === 'batch' ? 'Your league: 12 classmates from your year at ' + esc(u.college) + '. It resets every Monday, so anyone can top it.' : lbTab === 'squad' ? 'You and the friends in your squad.' : 'How colleges compare. No student names.', '<div class="seg" role="group" aria-label="Leaderboard">' + [['batch', 'Your league'], ['squad', 'Your squad'], ['colleges', 'Colleges']].map(function (x) { return '<button data-lb="' + x[0] + '" aria-pressed="' + (lbTab === x[0]) + '">' + x[1] + '</button>'; }).join('') + '</div>') +
+      (lbTab === 'batch' ? '<div style="margin-top:18px">' + consentHTML(u) + '</div>' : '') +
+      '<div style="margin-top:18px">' + (lbTab === 'squad' && !(u.squad || []).length ? '<div class="card pad stack"><h3>No squad yet</h3><p class="small muted">Invite up to 3 friends. You’ll see each other’s practice days and XP, and unlock a senior’s recorded mock when you all hit the weekly goal.</p><div class="row"><button class="btn sm" id="inv-batch">Invite friends</button></div></div>' : boardHTML(lbTab, 12)) + '</div>';
     on('[data-lb]', 'click', function (b) { lbTab = b.dataset.lb; vBoard(); });
   }
 
@@ -1598,7 +1851,7 @@
       '<div class="grid2" style="gap:12px"><label class="field"><span>College</span><select id="pf-col">' + COLLEGES.map(function (c) { return '<option' + (c === u.college ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('') + '</select></label><label class="field"><span>Year</span><select id="pf-yr">' + [1, 2, 3, 4].map(function (y) { return '<option value="' + y + '"' + (y === u.year ? ' selected' : '') + '>' + ORD[y - 1] + ' year</option>'; }).join('') + '</select></label></div>' +
       '<label class="field"><span>Role you\'re aiming for</span><select id="pf-tr">' + Object.keys(ROLES).map(function (k) { return '<option value="' + k + '"' + (k === u.track ? ' selected' : '') + '>' + ROLES[k].name + '</option>'; }).join('') + '</select></label>' +
       '<div class="row"><button class="btn" type="submit">Save changes</button></div></form>' +
-      '<div class="stack-lg"><div class="card pad stack"><h3>Mock credits</h3><p>' + creditPill() + '</p><p class="small muted">You get ' + FREE_CREDITS + ' free credits a month for sessions with seniors. Missed sessions: ' + (u.noShows || 0) + ' of 2 before booking pauses for a week.</p></div><div class="card pad stack"><h3>Account</h3><p class="small muted">Member since ' + new Date(u.joined).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' }) + '. Progress is saved in this browser in the prototype.</p><button class="btn ghost" id="out">Log out</button></div>' +
+      '<div class="stack-lg"><div class="card pad stack"><h3>Leaderboard privacy</h3>' + consentHTML(u, true) + '</div><div class="card pad stack"><h3>Mock credits</h3><p>' + creditPill() + '</p><p class="small muted">You get ' + FREE_CREDITS + ' free credits a month for sessions with seniors. Missed sessions: ' + (u.noShows || 0) + ' of 2 before booking pauses for a week.</p></div><div class="card pad stack"><h3>Account</h3><p class="small muted">Member since ' + new Date(u.joined).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' }) + '. Progress is saved in this browser in the prototype.</p><button class="btn ghost" id="out">Log out</button></div>' +
       '<div class="card pad stack"><h3>Start over</h3><p class="small muted">Clears your XP, streak, milestones and practice for this account.</p><button class="btn ghost" id="reset">Reset my progress</button></div></div></div>';
     $('pf').addEventListener('submit', function (e) { e.preventDefault(); u.name = $('pf-name').value.trim() || u.name; u.email = $('pf-email').value.trim(); u.college = $('pf-col').value; u.year = +$('pf-yr').value; u.track = $('pf-tr').value; save(); render(); toast('Profile saved'); });
     $('out').addEventListener('click', function () { DB.session = null; loginTab = 'signin'; loginErr = ''; save(); UI.view = null; render(); });
@@ -1855,6 +2108,7 @@
     var u = L(), slots = slotsFor(e), comps = (u.prep && u.prep.plan ? u.prep.plan.competencies.map(function (c) { return c.name; }) : TRACK_COMPS[u.track]);
     var usedR = (e.used || []).map(catRes).filter(Boolean);
     return '<div class="stack" style="border-top:1px solid var(--line);padding-top:14px">' + (e.wish ? '<div class="why-in" style="margin:0 0 4px"><span class="why-mark">“</span><p>' + esc(e.wish) + ' <span class="muted">— ' + esc(e.name.split(' ')[0]) + '</span></p></div>' : '') +
+      (thanksFor(e.id)[0] ? '<p class="small thx-in"><span class="muted">A junior wrote:</span> “' + esc(thanksFor(e.id)[0].text) + '” <span class="muted">— ' + esc(thanksFor(e.id)[0].from.split(' ')[0]) + '</span></p>' : '') +
       (usedR.length ? '<p class="small"><span class="muted">What ' + esc(e.name.split(' ')[0]) + ' used:</span> ' + usedR.map(function (r) { return '<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.title) + '</a>'; }).join(', ') + '</p>' : '') +
       '<div class="label">1. Pick a time (IST)</div>' + (slots.length ? '<div class="slots">' + slots.map(function (s) { return '<button data-slot="' + s + '" aria-pressed="' + (booking.slot === s) + '">' + esc(fmtSlot(s)) + '</button>'; }).join('') + '</div>' : '<p class="small muted">No open slots this week.</p>') +
       '<label class="field"><span class="label" style="font-size:.72rem">2. What should they focus on?</span><select id="bk-focus">' + comps.map(function (c) { return '<option' + (c === booking.focus ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('') + '</select>' + (w ? '<span class="hint">Your weakest area so far is ' + esc(w) + '.</span>' : '') + '</label>' +
@@ -1904,8 +2158,8 @@
       (b.status === 'confirmed' ? '<div class="card pad stack"><h3>You\'re booked</h3><p class="muted">The video call link appears here 10 minutes before the start. Before the call, practise your focus area.</p><div class="row"><button class="btn" id="prac">Practise ' + esc(b.focus) + '</button>' + (e.real ? '<button class="btn ghost" id="as-expert">Sign in as ' + esc(e.name) + ' to run it</button>' : '') + '</div></div>' : '') +
       (b.status === 'noshow' ? '<div class="card pad stack"><h3>You missed this session</h3><p class="muted">' + esc(e.name.split(' ')[0]) + ' waited for you. The credit was used.' + (L().noShows >= 2 ? ' Because this is your second missed session, booking is paused for a week.' : ' One more missed session pauses booking for a week, so cancel early if plans change.') + '</p></div>' : '') +
       (b.status === 'declined' ? '<div class="card pad stack"><h3>' + esc(e.name.split(' ')[0]) + ' can\'t make this time</h3><p class="muted">Pick another slot or another expert.</p><div class="row"><button class="btn" id="rebook">Book again</button></div></div>' : '') +
-      (b.card ? '<div class="card"><div class="card-head"><div><div class="label">Expert scorecard</div><h3 style="margin-top:2px">' + esc(e.name) + '</h3></div><span class="score ' + rec[1] + '">' + rec[0] + '</span></div><div class="card-body stack"><p>' + esc(b.card.summary) + '</p>' + compareTable(b) + '<p class="small muted">Where the expert and the AI differ by a point or more, trust the expert and practise that area again.</p></div></div>' +
-        '<div class="card pad stack"><h3>' + (b.rating ? 'You rated this session' : 'How was this session?') + '</h3><div class="stars" role="group" aria-label="Rate the session">' + [1, 2, 3, 4, 5].map(function (n) { return '<button data-rate="' + n + '" class="' + (b.rating >= n ? 'on' : '') + '" aria-label="' + n + ' stars">★</button>'; }).join('') + '</div><div class="row"><button class="btn ghost sm" id="rebook">Book a follow-up</button></div></div>' : '') +
+      (b.card ? levelStrip(b) + '<div class="card"><div class="card-head"><div><div class="label">Expert scorecard</div><h3 style="margin-top:2px">' + esc(e.name) + '</h3></div><span class="score ' + rec[1] + '">' + rec[0] + '</span></div><div class="card-body stack"><p>' + esc(b.card.summary) + '</p>' + compareTable(b) + '<p class="small muted">Where the expert and the AI differ by a point or more, trust the expert and practise that area again.</p></div></div>' +
+        thankCard(b) + '<div class="card pad stack"><h3>' + (b.rating ? 'You rated this session' : 'How was this session?') + '</h3><div class="stars" role="group" aria-label="Rate the session">' + [1, 2, 3, 4, 5].map(function (n) { return '<button data-rate="' + n + '" class="' + (b.rating >= n ? 'on' : '') + '" aria-label="' + n + ' stars">★</button>'; }).join('') + '</div><div class="row"><button class="btn ghost sm" id="rebook">Book a follow-up</button></div></div>' : '') +
       '</div><div class="stack-lg"><div class="card pad stack"><div class="row" style="flex-wrap:nowrap"><span class="avatar lg">' + esc(initials(e.name)) + '</span><span><b>' + esc(e.name) + '</b><br><span class="small muted">' + esc(e.bio || '') + '</span></span></div>' + (e.alum ? '<span class="small" style="font-weight:600">' + esc(alumLabel(e, u)) + '</span>' : '') + '</div>' +
       (b.note ? '<div class="card pad stack"><div class="label">Your note</div><p class="small">' + esc(b.note) + '</p></div>' : '') +
       ((b.status === 'requested' || b.status === 'confirmed') ? '<button class="btn ghost" id="cancel">Cancel this session</button>' : '') + '</div></div>';
@@ -2112,16 +2366,16 @@
     var u = E(), s = mentorStats(u), rk = [['Aditya Baruah', 19], ['Ritika Bhuyan', 14], ['Priyam Saikia', 12], ['Ankita Deka', 8], ['Moinul Islam', 6]].map(function (x) { return { name: x[0], v: x[1] }; });
     rk.push({ name: u.name + ' (you)', v: s.sessions, mine: true }); rk.sort(function (a, b) { return b.v - a.v; });
     var myRank = rk.findIndex(function (r) { return r.mine; }) + 1;
-    var badges = [['\u2605 Founding mentor', !!u.founding], ['10 sessions', s.sessions >= 10], ['25 students mentored', s.students >= 25], ['Top rated', u.rating >= 4.8 && u.ratings >= 5], ['Top 3 at ' + u.alumCollege, myRank <= 3], ['50 sessions', s.sessions >= 50]];
+    var badges = [['\u2605 Founding mentor', !!u.founding], ['10 sessions', s.sessions >= 10], ['25 students mentored', s.students >= 25], ['Top rated', u.rating >= 4.8 && u.ratings >= 5], ['Top 3 at ' + u.alumCollege, myRank <= 3], ['Mentor of the month', myRank === 1], ['50 sessions', s.sessions >= 50]];
     var track = u.tracks.length ? u.tracks.map(function (t) { return ROLES[t].name.toLowerCase(); }).join(' and ') : 'job';
     var li = (u.founding ? 'Founding mentor' : 'Mentor') + ' at Calport. Mentored ' + s.students + ' students from ' + u.alumCollege + (s.colleges > 1 ? ' and ' + (s.colleges - 1) + ' other college' + (s.colleges > 2 ? 's' : '') : '') + ' through ' + s.sessions + ' mock interviews for ' + track + ' roles' + (u.rating ? ', rated ' + u.rating.toFixed(1) + ' out of 5' : '') + '.';
     view().innerHTML = head('My impact', 'Every session is counted and verified by Calport, so you can show it on LinkedIn and in your performance reviews.') +
       '<div class="tiles"><div><b>' + s.students + '</b><span>Students mentored</span></div><div><b>' + s.sessions + '</b><span>Sessions completed</span></div><div><b>' + s.hours + '</b><span>Hours given</span></div><div><b>' + (u.rating ? u.rating.toFixed(1) : '\u2013') + '</b><span>Average rating' + (u.ratings ? ' (' + u.ratings + ')' : '') + '</span></div></div>' +
       '<div class="grid-main"><div class="stack-lg"><div class="card pad stack"><h3>Badges</h3><div class="badges">' + badges.map(function (x) { return '<span class="badge' + (x[1] ? '' : ' off') + '">' + (x[1] ? '' : '') + esc(x[0]) + '</span>'; }).join('') + '</div><p class="tiny muted">Dashed badges are still to earn.</p></div>' +
       '<div class="card pad stack"><h3>Add it to LinkedIn</h3><p class="small muted">Paste this into the Volunteering or Experience section. Your verified mentor page backs it up.</p><div class="better" id="li-text">' + esc(li) + '</div><div class="row"><button class="btn sm" data-copy="li-text">Copy text</button><span class="small muted">Verified page: <span class="mono">calport.ai/m/' + slug(u.name) + '</span></span></div></div>' +
-      menteesHTML(u) +
+      placedHTML(u) + menteesHTML(u) +
       '<div class="card pad stack"><h3>Why seniors mentor</h3><ul class="ul" style="margin:0"><li><b>See talent early.</b> You meet strong juniors first, and many companies pay referral bonuses for good hires.</li><li><b>Build a track record.</b> Mentoring and interviewing count in many performance and promotion reviews.</li><li><b>Give back.</b> Someone helped you get here.</li></ul></div></div>' +
-      '<div class="stack-lg"><div class="card"><div class="card-head"><h3>Top mentors at ' + esc(u.alumCollege) + '</h3><span class="small muted">This month</span></div><div class="card-body"><ol class="lb">' + rk.map(function (r, i) { return '<li class="' + (r.mine ? 'mine' : '') + '"><span class="mono muted">' + (i + 1) + '</span><span class="avatar' + (r.mine ? ' ink' : '') + '">' + esc(initials(r.name)) + '</span><span>' + esc(r.name) + '</span><span class="mono">' + r.v + '</span></li>'; }).join('') + '</ol><p class="tiny muted" style="margin-top:8px">Sessions completed. Other mentors are examples.</p></div></div>' + inviteCard(u) + '</div></div>';
+      '<div class="stack-lg">' + motmHTML(u, rk, myRank) + thanksHTML(u.id) + '<div class="card"><div class="card-head"><h3>Top mentors at ' + esc(u.alumCollege) + '</h3><span class="small muted">This month</span></div><div class="card-body"><ol class="lb">' + rk.map(function (r, i) { return '<li class="' + (r.mine ? 'mine' : '') + '"><span class="mono muted">' + (i + 1) + '</span><span class="avatar' + (r.mine ? ' ink' : '') + '">' + esc(initials(r.name)) + '</span><span>' + esc(r.name) + '</span><span class="mono">' + r.v + '</span></li>'; }).join('') + '</ol><p class="tiny muted" style="margin-top:8px">Sessions completed. Other mentors are examples.</p></div></div>' + inviteCard(u) + '</div></div>';
     bindCopy();
     var is = $('imp-share'); if (is) is.addEventListener('click', function () { shareImpact(u); });
     on('[data-vouch]', 'click', function (b) { UI.vouching = b.dataset.vouch; vImpact(); var t = $('vouch-t'); if (t) t.focus(); });
